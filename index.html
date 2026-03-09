@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kristina Rose Taylor — Author & Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #03040a;
+    --bg-mid: #070a14;
+    --bg-card: #0b0f1e;
+    --bg-section: #080c18;
+    --gold: #d4aa50;
+    --gold-light: #f0d080;
+    --gold-dim: rgba(212,170,80,0.15);
+    --sapphire: #4a9edd;
+    --sapphire-dim: rgba(74,158,221,0.15);
+    --violet: #9b6fd4;
+    --ivory: #f8f4ee;
+    --ivory-dim: rgba(248,244,238,0.75);
+    --border: rgba(212,170,80,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: #03040a;
+    color: var(--ivory);
+    font-family: 'Lora', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* CANVAS STARS */
+  #starfield {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.25;
+  }
+
+  section, nav, header, footer { position: relative; z-index: 2; }
+
+  /* All content sections get solid dark background */
+  section {
+    background: #03040a;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(3,4,10,0.97);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* HERO */
+  header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    background: #03040a;
+    position: relative;
+  }
+
+  .hero-sigil {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 2rem;
+    opacity: 0.85;
+    animation: rotateSlow 40s linear infinite;
+  }
+
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  header h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(2.2rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--gold-light);
+    text-shadow: 0 0 60px rgba(201,168,76,0.3), 0 0 120px rgba(201,168,76,0.1);
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    animation: fadeUp 1.2s ease forwards;
+  }
+
+  header .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--sapphire);
+    margin-bottom: 2rem;
+    animation: fadeUp 1.4s ease forwards;
+  }
+
+  header .tagline {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ivory-dim);
+    max-width: 520px;
+    line-height: 1.8;
+    animation: fadeUp 1.6s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.4;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0.6; transform: translateX(-50%) translateY(6px); }
+  }
+
+  .scroll-hint span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+  }
+
+  /* SECTION STYLES */
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 400;
+    color: var(--ivory);
+    margin-bottom: 1rem;
+  }
+
+  .gold-rule {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 1.5rem auto;
+  }
+
+  /* DAILY TRANSMISSION */
+  #daily {
+    padding: 6rem 2rem;
+    background: #04060f;
+  }
+
+  .daily-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .constellation-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 3rem auto;
+  }
+
+  .zodiac-ring {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 0 auto 2rem;
+  }
+
+  .zodiac-ring svg { width: 100%; height: 100%; }
+
+  .zodiac-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 3rem;
+  }
+
+  .meta-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .meta-card:hover {
+    border-color: rgba(201,168,76,0.5);
+    box-shadow: 0 0 20px rgba(201,168,76,0.08);
+  }
+
+  .meta-card .meta-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .meta-card .meta-value {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 1.1rem;
+    color: var(--ivory);
+  }
+
+  .meta-card .meta-sub {
+    font-size: 0.8rem;
+    color: var(--ivory-dim);
+    margin-top: 0.3rem;
+    font-style: italic;
+  }
+
+  .affirmation-box {
+    background: linear-gradient(135deg, rgba(14,18,37,0.9), rgba(10,13,26,0.95));
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3rem 2.5rem;
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .affirmation-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(107,63,160,0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .affirmation-box .aff-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    color: var(--violet);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .affirmation-text {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--ivory);
+    margin-bottom: 1.5rem;
+  }
+
+  .aff-sign {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1.5rem;
+    border-radius: 2px;
+    cursor: pointer;
+    background: none;
+    transition: all 0.3s;
+  }
+
+  .btn-ghost:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  /* BOOKS */
+  #books {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  #books .intro { text-align: center; margin-bottom: 4rem; }
+
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .book-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.08);
+  }
+
+  .book-cover {
+    width: 100%;
+    aspect-ratio: 2/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 1.5rem;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .book-card:nth-child(1) .book-cover { background: linear-gradient(135deg, #0d2340, #1a4a2e); color: #7ecb9a; }
+  .book-card:nth-child(2) .book-cover { background: linear-gradient(135deg, #1a0d30, #3d1f6e); color: #c4a0f5; }
+  .book-card:nth-child(3) .book-cover { background: linear-gradient(135deg, #1a1208, #4a3010); color: #e8c97a; }
+  .book-card:nth-child(4) .book-cover { background: linear-gradient(135deg, #0d1a30, #1a3050); color: #7ab8f5; }
+  .book-card:nth-child(5) .book-cover { background: linear-gradient(135deg, #0d2018, #1f4030); color: #a0d4b5; }
+
+  .book-info {
+    padding: 1.2rem;
+  }
+
+  .book-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--ivory);
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+  }
+
+  .book-desc {
+    font-size: 0.75rem;
+    color: var(--ivory-dim);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .btn-gold {
+    display: block;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bg-deep);
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    padding: 0.6rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+
+  .btn-gold:hover { opacity: 0.85; }
+
+  /* BLOG */
+  #blog {
+    padding: 6rem 2rem;
+    background: #04060f;
+  }
+
+  .blog-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .blog-inner .intro { text-align: center; margin-bottom: 4rem; }
+
+  .blog-post {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: opacity 0.3s;
+  }
+
+  .blog-post:hover { opacity: 0.85; cursor: pointer; }
+
+  .post-date-col {
+    text-align: right;
+    padding-top: 0.3rem;
+  }
+
+  .post-date {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+  }
+
+  .post-tag {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sapphire);
+    border: 1px solid rgba(45,125,210,0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .post-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 1rem;
+    color: var(--ivory);
+    margin-bottom: 0.6rem;
+    font-weight: 400;
+  }
+
+  .post-excerpt {
+    font-size: 0.85rem;
+    line-height: 1.75;
+    color: var(--ivory-dim);
+    font-style: italic;
+  }
+
+  .read-more {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 1px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  footer .footer-name {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  footer p {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--ivory-dim);
+  }
+
+
+  .book-cover-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* DIVIDERS */
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* RPMS SECTION */
+  #rpms {
+    padding: 6rem 2rem;
+    background: #03040d;
+  }
+
+  .rpms-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .rpms-badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--violet);
+    border: 1px solid rgba(155,111,212,0.4);
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+
+  .rpms-form {
+    background: #0a0c1a;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2.5rem;
+    text-align: left;
+    margin-top: 2.5rem;
+  }
+
+  .rpms-step {
+    display: none;
+  }
+  .rpms-step.active {
+    display: block;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .rpms-q-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .rpms-q-text {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--ivory);
+    margin-bottom: 1.2rem;
+    line-height: 1.7;
+  }
+
+  .rpms-q-sub {
+    font-size: 0.8rem;
+    color: var(--ivory-dim);
+    font-style: italic;
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+  }
+
+  .rpms-textarea {
+    width: 100%;
+    background: #060810;
+    border: 1px solid rgba(212,170,80,0.2);
+    border-radius: 4px;
+    color: var(--ivory);
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    padding: 1rem 1.2rem;
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .rpms-textarea:focus {
+    border-color: rgba(212,170,80,0.5);
+  }
+
+  .rpms-input {
+    width: 100%;
+    background: #060810;
+    border: 1px solid rgba(212,170,80,0.2);
+    border-radius: 4px;
+    color: var(--ivory);
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.2rem;
+    outline: none;
+    transition: border-color 0.3s;
+    margin-bottom: 0.8rem;
+  }
+
+  .rpms-input:focus { border-color: rgba(212,170,80,0.5); }
+
+  .rpms-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .rpms-progress {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--ivory-dim);
+  }
+
+  .rpms-result {
+    display: none;
+    text-align: left;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .rpms-result.visible { display: block; }
+
+  .result-section {
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .result-section:last-child { border-bottom: none; }
+
+  .result-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .result-text {
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: var(--ivory);
+  }
+
+  .result-anchor {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+    font-style: italic;
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  .result-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .result-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--violet);
+    border: 1px solid rgba(155,111,212,0.3);
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+  }
+
+  .tool-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .tool-emoji { font-size: 1.2rem; margin-top: 0.1rem; }
+
+  .tool-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .tool-text {
+    font-size: 0.85rem;
+    color: var(--ivory-dim);
+    line-height: 1.7;
+  }
+
+  .rpms-loading {
+    display: none;
+    text-align: center;
+    padding: 3rem 0;
+  }
+
+  .rpms-loading.visible { display: block; }
+
+  .loading-sigil {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    animation: rotateSlow 4s linear infinite;
+  }
+
+  .loading-text {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .rpms-disclaimer {
+    font-size: 0.72rem;
+    color: rgba(248,244,238,0.35);
+    font-style: italic;
+    text-align: center;
+    margin-top: 2rem;
+    line-height: 1.6;
+  }
+
+  .reset-btn {
+    background: none;
+    border: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--ivory-dim);
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: color 0.3s;
+  }
+
+  .reset-btn:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><img src="assets/taylored-harmony.png" alt="Taylored Harmony" style="height:48px;width:auto;display:block;"></div>
+  <div class="nav-links">
+    <a href="#daily">Daily Insight</a>
+    <a href="#books">Books</a>
+    <a href="#creations">Creations</a>
+    <a href="#rpms">Root Pattern System</a>
+    <a href="#blog">Blog</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header>
+
+  <img src="assets/taylored-harmony.png" alt="Taylored Harmony" style="width:160px;height:auto;margin-bottom:2rem;filter:drop-shadow(0 0 30px rgba(212,170,80,0.3));">
+
+  <h1>Taylored Harmony</h1>
+  <div class="subtitle">Books · Tools · Frameworks for Healing</div>
+  <p class="tagline">Created by Kristina Rose Taylor. Practical tools, meaningful books, and systems that help you understand your patterns and come back to yourself.</p>
+
+  <div class="scroll-hint">
+    <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
+      <rect x="6" y="1" width="8" height="14" rx="4" stroke="#c9a84c" stroke-width="1.2"/>
+      <circle cx="10" cy="6" r="2" fill="#c9a84c" opacity="0.7"/>
+      <path d="M5 22l5 5 5-5" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+    </svg>
+    <span>Explore</span>
+  </div>
+</header>
+
+<div class="section-divider"></div>
+
+<!-- DAILY TRANSMISSION -->
+<section id="daily">
+  <div class="daily-inner">
+    <div class="section-label">Free Daily Resource</div>
+    <h2 class="section-title">Daily Insight</h2>
+    <div class="gold-rule"></div>
+    <p style="color: var(--ivory-dim); max-width: 520px; margin: 0 auto 3rem; line-height: 1.8; font-style: italic;">
+      Each day has its own quality of energy. Check in here for a grounding reflection, an affirmation, and a note on what the current season is asking of you.
+    </p>
+
+    <!-- Zodiac Ring Display -->
+    <div class="constellation-display">
+      <div class="zodiac-ring">
+        <svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg" id="zodiac-svg">
+          <!-- outer ring -->
+          <circle cx="130" cy="130" r="120" stroke="#c9a84c" stroke-width="0.5" opacity="0.3"/>
+          <circle cx="130" cy="130" r="100" stroke="#c9a84c" stroke-width="0.5" opacity="0.2"/>
+          <!-- constellation dots - Pisces as default -->
+          <g id="constellation-art" opacity="0.8">
+            <!-- Pisces constellation sketch -->
+            <circle cx="105" cy="100" r="3" fill="#7ab8f5"/>
+            <circle cx="120" cy="95" r="2.5" fill="#7ab8f5"/>
+            <circle cx="140" cy="98" r="3.5" fill="#7ab8f5" opacity="0.9"/>
+            <circle cx="155" cy="105" r="2" fill="#7ab8f5"/>
+            <circle cx="130" cy="115" r="2" fill="#c9a84c" opacity="0.6"/>
+            <circle cx="108" cy="130" r="3" fill="#7ab8f5"/>
+            <circle cx="125" cy="140" r="2.5" fill="#7ab8f5"/>
+            <circle cx="145" cy="138" r="3" fill="#7ab8f5"/>
+            <circle cx="158" cy="128" r="2" fill="#7ab8f5"/>
+            <!-- connecting lines -->
+            <line x1="105" y1="100" x2="120" y2="95" stroke="#7ab8f5" stroke-width="0.6" opacity="0.4"/>
+            <line x1="120" y1="95" x2="140" y2="98" stroke="#7ab8f5" stroke-width="0.6" opacity="0.4"/>
+            <line x1="140" y1="98" x2="155" y2="105" stroke="#7ab8f5" stroke-width="0.6" opacity="0.4"/>
+            <line x1="108" y1="130" x2="125" y2="140" stroke="#7ab8f5" stroke-width="0.6" opacity="0.4"/>
+            <line x1="125" y1="140" x2="145" y2="138" stroke="#7ab8f5" stroke-width="0.6" opacity="0.4"/>
+            <line x1="145" y1="138" x2="158" y2="128" stroke="#7ab8f5" stroke-width="0.6" opacity="0.4"/>
+            <line x1="130" y1="115" x2="120" y2="95" stroke="#c9a84c" stroke-width="0.5" opacity="0.3"/>
+            <line x1="130" y1="115" x2="125" y2="140" stroke="#c9a84c" stroke-width="0.5" opacity="0.3"/>
+          </g>
+          <!-- center glow -->
+          <circle cx="130" cy="130" r="8" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+          <circle cx="130" cy="130" r="3" fill="#c9a84c" opacity="0.6"/>
+          <!-- Sign name arc (approximated) -->
+          <text x="130" y="240" text-anchor="middle" font-family="Cinzel, serif" font-size="9" fill="#c9a84c" opacity="0.7" letter-spacing="3" id="sign-text">PISCES</text>
+        </svg>
+      </div>
+
+      <div class="zodiac-meta">
+        <div class="meta-card">
+          <div class="meta-label">Sun Sign</div>
+          <div class="meta-value" id="sun-sign">Pisces</div>
+          <div class="meta-sub" id="sign-dates">Feb 19 – Mar 20</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Element</div>
+          <div class="meta-value" id="element">Water</div>
+          <div class="meta-sub" id="element-sub">Mutable</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Archetype</div>
+          <div class="meta-value" id="archetype">The Dreamer</div>
+          <div class="meta-sub" id="archetype-sub">Mystic · Visionary</div>
+        </div>
+      </div>
+
+      <div style="max-width: 680px; width: 100%; margin: 0 auto 2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem 2rem; text-align: left;">
+        <div class="section-label" style="margin-bottom: 0.8rem;">This Season's Energy</div>
+        <p id="daily-energy" style="font-size: 0.9rem; line-height: 1.85; color: var(--ivory-dim); font-style: italic;">
+          We move through the final degrees of Pisces — the last sign, the veil between worlds. This is the season of dissolution and recollection, where boundaries thin and what has been unspoken finally rises. The Piscean field carries the memory of all twelve signs before it. It is not a time for building, but for listening. For releasing what the last cycle asked you to carry so long.
+        </p>
+      </div>
+
+      <div class="affirmation-box">
+        <div class="aff-label">Daily Affirmation · Pisces Season</div>
+        <div class="affirmation-text" id="affirmation-text">
+          "I release what I was never meant to hold. The current knows where I belong, and I am learning to trust the depth."
+        </div>
+        <div class="aff-sign" id="aff-sign">— Pisces Transmission · March 2026</div>
+        <button class="btn-ghost" onclick="cycleAffirmation()">Receive Another →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BOOKS & CREATIONS -->
+<section id="books">
+  <div class="intro">
+    <div class="section-label">The Written Work</div>
+    <h2 class="section-title">Books</h2>
+    <div class="gold-rule"></div>
+  </div>
+
+  <div class="books-grid">
+    <div class="book-card">
+      <img src="assets/the-listening-forest.jpeg" alt="The Listening Forest" class="book-cover-img">
+      <div class="book-info">
+        <div class="book-title">The Listening Forest</div>
+        <div class="book-desc">A children's celebration of connection, belonging, and the timeless bond between children and nature.</div>
+        <a href="https://a.co/d/0gWOC9ze" target="_blank" class="btn-gold">Find on Amazon</a>
+      </div>
+    </div>
+    <div class="book-card">
+      <img src="assets/flickers-inner-light.jpeg" alt="Flicker's Inner Light" class="book-cover-img">
+      <div class="book-info">
+        <div class="book-title">Flicker's Inner Light</div>
+        <div class="book-desc">A story about recognizing the luminance that lives within every child.</div>
+        <a href="https://a.co/d/0iOr2Txl" target="_blank" class="btn-gold">Find on Amazon</a>
+      </div>
+    </div>
+    <div class="book-card">
+      <img src="assets/the-spiral.jpeg" alt="The Spiral" class="book-cover-img">
+      <div class="book-info">
+        <div class="book-title">The Spiral</div>
+        <div class="book-desc">A nature-rooted children's story that follows the sacred pattern woven through all living things.</div>
+        <a href="https://a.co/d/0jcu8YYG" target="_blank" class="btn-gold">Find on Amazon</a>
+      </div>
+    </div>
+    <div class="book-card">
+      <img src="assets/rewritten.jpeg" alt="Rewritten" class="book-cover-img">
+      <div class="book-info">
+        <div class="book-title">Rewritten: A Guide to Transforming Trauma and Rewriting Your Story</div>
+        <div class="book-desc">A roadmap for dissolving inherited pain and authoring the next chapter of your life.</div>
+        <a href="https://a.co/d/04vVI0wh" target="_blank" class="btn-gold">Find on Amazon</a>
+      </div>
+    </div>
+    <div class="book-card">
+      <img src="assets/wild-school-pack.jpeg" alt="Wild School Pack" class="book-cover-img">
+      <div class="book-info">
+        <div class="book-title">Wild School Pack</div>
+        <div class="book-desc">A nature-based homeschool curriculum for the free-roaming, wonder-led child.</div>
+        <a href="https://www.amazon.com/Listening-Forest-Kristina-Taylor/dp/B0FNY552DS" target="_blank" class="btn-gold">Find on Amazon</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- OTHER CREATIONS -->
+<section id="creations" style="padding: 6rem 2rem; max-width: 1100px; margin: 0 auto;">
+  <div class="intro" style="text-align:center; margin-bottom: 4rem;">
+    <div class="section-label">Beyond the Page</div>
+    <h2 class="section-title">Other Creations</h2>
+    <div class="gold-rule"></div>
+    <p style="color: var(--ivory-dim); font-style:italic; max-width:480px; margin: 0 auto; line-height:1.8; font-size:0.9rem;">Tools, frameworks, and projects built at the intersection of pattern work, natural cycles, and personal healing.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+
+    <div class="meta-card" style="padding: 2rem; text-align:left;">
+      <div style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; color:var(--violet); text-transform:uppercase; margin-bottom:0.8rem;">Frequency · Mathematics</div>
+      <div style="font-family:'Cinzel Decorative',cursive; font-size:1.1rem; color:var(--ivory); margin-bottom:0.8rem; line-height:1.4;">The 192 System</div>
+      <p style="font-size:0.82rem; color:var(--ivory-dim); line-height:1.8; margin-bottom:1.2rem;">A structured framework built on base-12 mathematics, mapping 16 harmonic frequencies to seasonal cycles, body systems, and natural patterns. Includes a 74-day self-study protocol.</p>
+      <span style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--gold); border: 1px solid var(--border); padding:0.3rem 0.8rem; border-radius:2px;">Coming Soon</span>
+    </div>
+
+    <div class="meta-card" style="padding: 2rem; text-align:left;">
+      <div style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; color:var(--sapphire); text-transform:uppercase; margin-bottom:0.8rem;">Symbol · Art</div>
+      <div style="font-family:'Cinzel Decorative',cursive; font-size:1.1rem; color:var(--ivory); margin-bottom:0.8rem; line-height:1.4;">Biogeometric Symbol Library</div>
+      <p style="font-size:0.82rem; color:var(--ivory-dim); line-height:1.8; margin-bottom:1.2rem;">A collection of 19+ original geometric symbols developed through years of pattern research — each one designed to represent a specific frequency, cycle, or natural principle.</p>
+      <span style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--gold); border: 1px solid var(--border); padding:0.3rem 0.8rem; border-radius:2px;">Coming Soon</span>
+    </div>
+
+    <div class="meta-card" style="padding: 2rem; text-align:left;">
+      <div style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:0.8rem;">Memoir · In Progress</div>
+      <div style="font-family:'Cinzel Decorative',cursive; font-size:1.1rem; color:var(--ivory); margin-bottom:0.8rem; line-height:1.4;">Encoded Inheritance</div>
+      <p style="font-size:0.82rem; color:var(--ivory-dim); line-height:1.8; margin-bottom:1.2rem;">A personal memoir about tracing inherited family patterns — the beliefs, behaviors, and health stories passed down through generations — and what it looks like to consciously change them.</p>
+      <span style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--violet); border: 1px solid rgba(155,111,212,0.3); padding:0.3rem 0.8rem; border-radius:2px;">In Progress</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="blog-inner">
+    <div class="intro">
+      <div class="section-label">From the Studio</div>
+      <h2 class="section-title">The Blog</h2>
+      <div class="gold-rule"></div>
+      <p style="color: var(--ivory-dim); max-width: 460px; margin: 0 auto; font-style: italic; font-size: 0.9rem; line-height: 1.8;">
+        Honest writing about the work — what's being built, what's being learned, and what keeps showing up.
+      </p>
+    </div>
+
+    <div style="text-align:center; padding: 3rem 0; color: var(--ivory-dim); font-style:italic; font-size:0.9rem; line-height:1.8;">
+      Posts coming soon. Check back for writing about the work, the process, and what's in progress.
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ROOT PATTERN MAPPING SYSTEM -->
+<section id="rpms">
+  <div class="rpms-inner">
+    <div class="rpms-badge">Free Tool · No Purchase Required</div>
+    <div class="section-label">Diagnostic Tool</div>
+    <h2 class="section-title">Root Pattern Mapping System™</h2>
+    <div class="gold-rule"></div>
+    <p style="color:var(--ivory-dim); max-width:560px; margin:0 auto 0.5rem; line-height:1.85; font-style:italic; font-size:0.95rem;">
+      Answer 8 questions and receive a clear picture of your core patterns — what's recurring in your body, your relationships, and your family history — and one practical shift to help you move through it.
+    </p>
+    <p style="color:var(--ivory-dim); max-width:500px; margin:0 auto; font-size:0.8rem; line-height:1.7;">This is not therapy. It's a structured reflection tool.</p>
+
+    <div class="rpms-form">
+
+      <!-- STEP INDICATOR -->
+      <div id="rpms-steps-wrap">
+
+        <!-- Step 0: Profile -->
+        <div class="rpms-step active" id="step-0">
+          <div class="rpms-q-label">Before We Begin</div>
+          <div class="rpms-q-text">A little about you <span style="font-size:0.8rem;color:var(--ivory-dim);">(optional)</span></div>
+          <div class="rpms-q-sub">This helps the system personalize your reading. Nothing here affects the depth of your results.</div>
+          <input class="rpms-input" id="p-age" placeholder="Age (optional)" type="text"/>
+          <div class="rpms-nav">
+            <div class="rpms-progress">Step 1 of 9</div>
+            <button class="btn-ghost" onclick="rpmsNext()">Begin →</button>
+          </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="rpms-step" id="step-1">
+          <div class="rpms-q-label">Question 1 of 8</div>
+          <div class="rpms-q-text">What are your top 3 recurring concerns right now?</div>
+          <div class="rpms-q-sub">Physical, emotional, mental, or energetic — what keeps showing up? You don't need to explain them fully yet.</div>
+          <textarea class="rpms-textarea" id="q1" placeholder="e.g. exhaustion that sleep doesn't fix, feeling invisible in relationships, a tightness in my chest I can't name..."></textarea>
+          <div class="rpms-nav">
+            <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
+            <div class="rpms-progress">2 of 9</div>
+            <button class="btn-ghost" onclick="rpmsNext()">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="rpms-step" id="step-2">
+          <div class="rpms-q-label">Question 2 of 8</div>
+          <div class="rpms-q-text">When did each of these begin? What was happening in your life 6 months before?</div>
+          <div class="rpms-q-sub">Transitions, losses, breakthroughs, relocations, relationship shifts — anything that changed the terrain.</div>
+          <textarea class="rpms-textarea" id="q2" placeholder="e.g. the exhaustion started after I had my second child in 2021. Six months before that I had left a job I'd held for 8 years..."></textarea>
+          <div class="rpms-nav">
+            <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
+            <div class="rpms-progress">3 of 9</div>
+            <button class="btn-ghost" onclick="rpmsNext()">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="rpms-step" id="step-3">
+          <div class="rpms-q-label">Question 3 of 8</div>
+          <div class="rpms-q-text">What patterns do you see running through your family line?</div>
+          <div class="rpms-q-sub">Illness, trauma, roles, survival strategies, beliefs about money, love, safety, worth. What did the people before you carry?</div>
+          <textarea class="rpms-textarea" id="q3" placeholder="e.g. the women in my family were always the ones who stayed silent and held everything together. My father's side had a lot of unspoken anger..."></textarea>
+          <div class="rpms-nav">
+            <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
+            <div class="rpms-progress">4 of 9</div>
+            <button class="btn-ghost" onclick="rpmsNext()">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="rpms-step" id="step-4">
+          <div class="rpms-q-label">Question 4 of 8</div>
+          <div class="rpms-q-text">What are the main roles or identities you carry? Do any of them conflict?</div>
+          <div class="rpms-q-sub">Mother, provider, healer, rebel, peacekeeper, black sheep, the strong one — which ones feel chosen? Which feel assigned?</div>
+          <textarea class="rpms-textarea" id="q4" placeholder="e.g. I'm the caretaker of everyone and also trying to be the creative visionary. They fight each other constantly. I also feel like the outsider in every room..."></textarea>
+          <div class="rpms-nav">
+            <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
+            <div class="rpms-progress">5 of 9</div>
+            <button class="btn-ghost" onclick="rpmsNext()">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="rpms-step" id="step-5">
+          <div class="rpms-q-label">Question 5 of 8</div>
+          <div class="rpms-q-text">Where do your symptoms live in your body? When do they flare?</div>
+          <div class="rpms-q-sub">Be specific if you can — throat, gut, chest, hips, jaw. And what environments, emotions, or interactions tend to trigger them?</div>
+          <textarea class="rpms-textarea" id="q5" placeholder="e.g. my shoulders lock up whenever I'm in a conflict. My gut tightens when someone needs something from me and I don't want to give it but feel like I should..."></textarea>
+          <div class="rpms-nav">
+            <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
+            <div class="rpms-progress">6 of 9</div>
+            <button class="btn-ghost" onclick="rpmsNext()">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="rpms-step" id="step-6">
+          <div class="rpms-q-label">Question 6 of 8</div>
+          <div class="rpms-q-text">Name your top 3 safe environments and top 3 draining ones.</div>
+          <div class="rpms-q-sub">Places, people, dynamics, routines — where do you expand and where do you contract?</div>
+          <textarea class="rpms-textarea" id="q6" placeholder="Safe: alone in the woods, my garage, cooking in the morning. Draining: large family gatherings, social media, being asked to explain myself..."></textarea>
+          <div class="rpms-nav">
+            <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
+            <div class="rpms-progress">7 of 9</div>
+            <button class="btn-ghost" onclick="rpmsNext()">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="rpms-step" id="step-7">
+          <div class="rpms-q-label">Question 7 of 8</div>
+          <div class="rpms-q-text">What is the thing you haven't said — or barely let yourself think?</div>
+          <div class="rpms-q-sub">The thought that feels shameful, crazy, selfish, or unforgivable. You can be indirect. Encrypted hints work. This field holds without judgment.</div>
+          <textarea class="rpms-textarea" id="q7" placeholder="You can write around it if you need to. Even a fragment counts."></textarea>
+          <div class="rpms-nav">
+            <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
+            <div class="rpms-progress">8 of 9</div>
+            <button class="btn-ghost" onclick="rpmsNext()">Next →</button>
+          </div>
+        </div>
+
+        <!-- Step 8 -->
+        <div class="rpms-step" id="step-8">
+          <div class="rpms-q-label">Question 8 of 8</div>
+          <div class="rpms-q-text">Can you access your desire right now — what you actually want?</div>
+          <div class="rpms-q-sub">Is it clear, foggy, or completely blank? If blank — do you know why? What feels in the way?</div>
+          <textarea class="rpms-textarea" id="q8" placeholder="e.g. I can feel it but it's blurry — like looking at something through water. I want to be fully seen but that also terrifies me..."></textarea>
+          <div class="rpms-nav">
+            <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
+            <div class="rpms-progress">9 of 9</div>
+            <button class="btn-ghost" onclick="rpmsSubmit()" id="submit-btn">Generate My Reading →</button>
+          </div>
+        </div>
+
+      </div><!-- end steps wrap -->
+
+      <!-- LOADING STATE -->
+      <div class="rpms-loading" id="rpms-loading">
+        <svg class="loading-sigil" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="46" stroke="#d4aa50" stroke-width="0.8" opacity="0.4"/>
+          <polygon points="50,8 90,72 10,72" stroke="#d4aa50" stroke-width="1" fill="none" opacity="0.7"/>
+          <polygon points="50,92 10,28 90,28" stroke="#9b6fd4" stroke-width="1" fill="none" opacity="0.6"/>
+          <circle cx="50" cy="50" r="5" fill="#d4aa50" opacity="0.8"/>
+        </svg>
+        <div class="loading-text">Reading your field...</div>
+        <p style="color:var(--ivory-dim); font-size:0.8rem; margin-top:0.8rem; font-style:italic;">This takes 20–40 seconds. The system is mapping your patterns.</p>
+      </div>
+
+      <!-- RESULT -->
+      <div class="rpms-result" id="rpms-result">
+        <div style="text-align:center; margin-bottom:2rem;">
+          <div style="font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.4em; color:var(--gold); text-transform:uppercase; margin-bottom:0.5rem;">⧉ Harmonic Intelligence Resonance Print</div>
+          <div class="section-title" style="font-size:1.3rem;" id="result-archetype"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">Your Energy Map</div>
+          <div class="result-text" id="result-field-state"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">The Core Pattern</div>
+          <div class="result-text" id="result-core-pattern"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">Identity Roles</div>
+          <div class="result-tags" id="result-identity-map"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">The Ancestral Signal</div>
+          <div class="result-text" id="result-ancestral"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">What Your Body Is Saying</div>
+          <div class="result-text" id="result-somatic"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">Your Flow & Desire</div>
+          <div class="result-text" id="result-desire"></div>
+        </div>
+
+        <div class="result-section" style="background: rgba(212,170,80,0.04); border: 1px solid rgba(212,170,80,0.2); border-radius:4px; padding:1.5rem;">
+          <div class="result-label">The Summary</div>
+          <div class="result-text" id="result-root-pattern" style="font-size:1rem; color:var(--ivory);"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">Your Key Shift</div>
+          <div class="result-text" id="result-repair"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">The Hidden Tension</div>
+          <div class="result-text" id="result-subconscious"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">The Forecast · 4–6 Weeks</div>
+          <div class="result-text" id="result-forecast"></div>
+        </div>
+
+        <div class="result-section">
+          <div class="result-label">Daily Tools for Balance</div>
+          <div id="result-tools"></div>
+        </div>
+
+        <div style="text-align:center; padding: 2rem 0 1rem;">
+          <div class="result-anchor" id="result-spell"></div>
+        </div>
+
+        <p class="rpms-disclaimer">This reflection is educational and symbolic in nature and is not medical, psychological, or legal advice.</p>
+        <button class="reset-btn" onclick="rpmsReset()">Start a new reading</button>
+      </div>
+
+    </div><!-- end rpms-form -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Taylored Harmony</div>
+  <div class="gold-rule"></div>
+  <p>Books · Tools · Frameworks for Healing · by Kristina Rose Taylor</p>
+  <p style="margin-top: 1rem;">© 2026 · All rights reserved</p>
+  <div style="margin-top:1.5rem;">
+    <a href="https://linktr.ee/TayloredHarmony" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);padding:0.6rem 1.6rem;border-radius:2px;text-decoration:none;transition:all 0.3s;">All Links · Linktree →</a>
+  </div>
+</footer>
+
+<script>
+// STARFIELD
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2,
+      o: Math.random() * 0.7 + 0.1,
+      speed: Math.random() * 0.15 + 0.02,
+      drift: (Math.random() - 0.5) * 0.05
+    });
+  }
+}
+
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(245,240,232,${s.o})`;
+    ctx.fill();
+    s.y -= s.speed;
+    s.x += s.drift;
+    if (s.y < 0) { s.y = canvas.height; s.x = Math.random() * canvas.width; }
+  });
+  requestAnimationFrame(drawStars);
+}
+
+window.addEventListener('resize', () => { resize(); initStars(); });
+resize(); initStars(); drawStars();
+
+// ZODIAC DATA
+const zodiacData = {
+  Aries:       { dates: "Mar 21 – Apr 19", element: "Fire",  mod: "Cardinal", arch: "The Warrior",  sub: "Pioneer · Initiator" },
+  Taurus:      { dates: "Apr 20 – May 20", element: "Earth", mod: "Fixed",    arch: "The Steward",  sub: "Builder · Sensualist" },
+  Gemini:      { dates: "May 21 – Jun 20", element: "Air",   mod: "Mutable",  arch: "The Messenger",sub: "Trickster · Bridge" },
+  Cancer:      { dates: "Jun 21 – Jul 22", element: "Water", mod: "Cardinal", arch: "The Keeper",   sub: "Nurturer · Guardian" },
+  Leo:         { dates: "Jul 23 – Aug 22", element: "Fire",  mod: "Fixed",    arch: "The Sovereign",sub: "Creator · Luminary" },
+  Virgo:       { dates: "Aug 23 – Sep 22", element: "Earth", mod: "Mutable",  arch: "The Healer",   sub: "Analyst · Alchemist" },
+  Libra:       { dates: "Sep 23 – Oct 22", element: "Air",   mod: "Cardinal", arch: "The Weaver",   sub: "Mediator · Artist" },
+  Scorpio:     { dates: "Oct 23 – Nov 21", element: "Water", mod: "Fixed",    arch: "The Depths",   sub: "Transformer · Seer" },
+  Sagittarius: { dates: "Nov 22 – Dec 21", element: "Fire",  mod: "Mutable",  arch: "The Seeker",   sub: "Philosopher · Archer" },
+  Capricorn:   { dates: "Dec 22 – Jan 19", element: "Earth", mod: "Cardinal", arch: "The Elder",    sub: "Architect · Sovereign" },
+  Aquarius:    { dates: "Jan 20 – Feb 18", element: "Air",   mod: "Fixed",    arch: "The Visionary",sub: "Rebel · Innovator" },
+  Pisces:      { dates: "Feb 19 – Mar 20", element: "Water", mod: "Mutable",  arch: "The Dreamer",  sub: "Mystic · Visionary" }
+};
+
+const affirmations = {
+  Aries: [
+    "I act from the fire that is mine alone. My initiative is a gift, not an imposition.",
+    "I do not wait for permission to begin. The path reveals itself when I move.",
+    "Every boundary I set is an act of self-respect and sacred will."
+  ],
+  Taurus: [
+    "My body is sacred land. I tend it with patience and pleasure.",
+    "What I am building is worthy of time. Roots grow in silence.",
+    "I receive abundance without guilt. I have always belonged here."
+  ],
+  Gemini: [
+    "My mind is a gift, not a burden. I honor every question I carry.",
+    "I do not need to resolve the paradox — I am the bridge between.",
+    "Every thread I follow leads somewhere true."
+  ],
+  Cancer: [
+    "My sensitivity is not weakness. It is the way I know what others cannot.",
+    "I can nurture others and still pour back into myself.",
+    "Home lives in me first. Everything else is reflection."
+  ],
+  Leo: [
+    "My light does not diminish others. I was made to shine.",
+    "I create from love, not from the need to be seen.",
+    "What I offer is rare. I stop apologizing for taking up space."
+  ],
+  Virgo: [
+    "I am allowed to rest even when the work is not finished.",
+    "My discernment is sacred. I trust what I notice.",
+    "Healing is not a project to complete. It is a practice to inhabit."
+  ],
+  Libra: [
+    "I do not have to carry the weight of everyone's harmony.",
+    "Beauty is not frivolous. It is a form of truth.",
+    "My yes and my no are equally holy."
+  ],
+  Scorpio: [
+    "What I have survived is not all that I am — but it has shaped something formidable.",
+    "I do not fear the depths. I was made for them.",
+    "I transform by allowing, not by forcing."
+  ],
+  Sagittarius: [
+    "I trust the horizon even when I cannot see what lies there.",
+    "My vision is not delusion. It is instruction.",
+    "The search itself is sacred. I release the need for final answers."
+  ],
+  Capricorn: [
+    "I build slowly and on solid ground. This is not failure — this is mastery.",
+    "My ambition is in service of something lasting.",
+    "I am allowed to claim what I have earned."
+  ],
+  Aquarius: [
+    "I do not need to fit. I was designed to introduce.",
+    "The future I imagine is not fantasy. It is invitation.",
+    "My difference is not a wound. It is a frequency."
+  ],
+  Pisces: [
+    "I release what I was never meant to hold. The current knows where I belong.",
+    "My sensitivity reads what others cannot. I honor this as a gift.",
+    "I do not disappear into others. I am the ocean, not the tide."
+  ]
+};
+
+const energyText = {
+  Pisces: "We move through the final degrees of Pisces — the last sign, the veil between worlds. This is the season of dissolution and recollection, where boundaries thin and what has been unspoken finally rises. The Piscean field carries the memory of all twelve signs before it. It is not a time for building, but for listening. For releasing what the last cycle asked you to carry so long.",
+  Aries: "Aries season ignites the new cycle. The ram does not hesitate — it initiates. This is fire energy: direct, willful, generative. Old patterns that have kept you waiting are being burned away. What wants to begin through you right now is not early. It is on time.",
+  Taurus: "Taurus season asks you to slow down into what is real. Earth. Body. Breath. The bull does not rush. What you are tending right now — your home, your projects, your body — is worthy of your full, unhurried presence. Receive the pleasure of what already exists.",
+  Gemini: "Gemini season quickens the mind. The twins ask you to hold two truths at once, to follow your curiosity without apology. This is a time for information-gathering, for making unexpected connections, for letting yourself be interested in everything.",
+  Cancer: "Cancer season brings us home — to the body, the memory, the lineage. The crab carries its home on its back. What you are protecting right now deserves to be protected. Feel deeply. Remember. This is not the time to harden.",
+  Leo: "Leo season calls forth your radiance. The lion does not dim for anyone. What creative fire has been waiting in you? This is the time to let it out — not for approval, but because it was always meant to exist.",
+  Virgo: "Virgo season asks for discernment and devotion. This is the energy of the healer, the analyst, the tender of sacred details. What is asking to be refined in your life? What small act of care would change everything?",
+  Libra: "Libra season invites the art of balance. Not the numbing of conflict, but the genuine pursuit of beauty and justice. What relationships are asking for truth right now? What needs to be named to restore harmony?",
+  Scorpio: "Scorpio season descends. This is not shadow for its own sake — this is transformation. What has been buried is asking to be witnessed. The phoenix does not avoid the fire. It trusts it.",
+  Sagittarius: "Sagittarius season expands the map. The archer aims at what cannot yet be reached — and releases anyway. Where have you been playing small because the vision felt too large? This is the season to trust the shot.",
+  Capricorn: "Capricorn season calls for the long view. The sea-goat climbs steadily, one step at a time, with its eyes on the summit. What enduring structure are you building? This is not the season for shortcuts — it is the season for foundations.",
+  Aquarius: "Aquarius season breaks the mold. The water-bearer pours out what the collective needs — whether or not the collective is ready. What revolutionary truth are you carrying? This is the time to introduce it."
+};
+
+function getCurrentSign() {
+  const today = new Date();
+  const m = today.getMonth() + 1;
+  const d = today.getDate();
+  if ((m === 3 && d >= 21) || (m === 4 && d <= 19)) return "Aries";
+  if ((m === 4 && d >= 20) || (m === 5 && d <= 20)) return "Taurus";
+  if ((m === 5 && d >= 21) || (m === 6 && d <= 20)) return "Gemini";
+  if ((m === 6 && d >= 21) || (m === 7 && d <= 22)) return "Cancer";
+  if ((m === 7 && d >= 23) || (m === 8 && d <= 22)) return "Leo";
+  if ((m === 8 && d >= 23) || (m === 9 && d <= 22)) return "Virgo";
+  if ((m === 9 && d >= 23) || (m === 10 && d <= 22)) return "Libra";
+  if ((m === 10 && d >= 23) || (m === 11 && d <= 21)) return "Scorpio";
+  if ((m === 11 && d >= 22) || (m === 12 && d <= 21)) return "Sagittarius";
+  if ((m === 12 && d >= 22) || (m === 1 && d <= 19)) return "Capricorn";
+  if ((m === 1 && d >= 20) || (m === 2 && d <= 18)) return "Aquarius";
+  return "Pisces";
+}
+
+let affIndex = 0;
+const sign = getCurrentSign();
+const data = zodiacData[sign];
+
+function populatePage() {
+  document.getElementById('sun-sign').textContent = sign;
+  document.getElementById('sign-dates').textContent = data.dates;
+  document.getElementById('element').textContent = data.element;
+  document.getElementById('element-sub').textContent = data.mod;
+  document.getElementById('archetype').textContent = data.arch;
+  document.getElementById('archetype-sub').textContent = data.sub;
+  document.getElementById('sign-text').textContent = sign.toUpperCase();
+  document.getElementById('daily-energy').textContent = energyText[sign] || energyText['Pisces'];
+  showAffirmation();
+}
+
+function showAffirmation() {
+  const aff = affirmations[sign];
+  const today = new Date();
+  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+  const defaultIdx = dayOfYear % aff.length;
+  const idx = affIndex === 0 ? defaultIdx : affIndex % aff.length;
+  document.getElementById('affirmation-text').textContent = `"${aff[idx]}"`;
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  document.getElementById('aff-sign').textContent = `— ${sign} Transmission · ${months[today.getMonth()]} ${today.getFullYear()}`;
+}
+
+function cycleAffirmation() {
+  affIndex++;
+  showAffirmation();
+}
+
+populatePage();
+
+// ── RPMS LOGIC ──────────────────────────────────────────────
+let rpmsCurrentStep = 0;
+const rpmsTotalSteps = 9; // 0-8
+
+function rpmsNext() {
+  const current = document.getElementById(`step-${rpmsCurrentStep}`);
+  if (current) current.classList.remove('active');
+  rpmsCurrentStep++;
+  const next = document.getElementById(`step-${rpmsCurrentStep}`);
+  if (next) next.classList.add('active');
+}
+
+function rpmsBack() {
+  if (rpmsCurrentStep === 0) return;
+  const current = document.getElementById(`step-${rpmsCurrentStep}`);
+  if (current) current.classList.remove('active');
+  rpmsCurrentStep--;
+  const prev = document.getElementById(`step-${rpmsCurrentStep}`);
+  if (prev) prev.classList.add('active');
+}
+
+async function rpmsSubmit() {
+  const q1 = document.getElementById('q1').value.trim();
+  const q8 = document.getElementById('q8').value.trim();
+  if (!q1 || !q8) {
+    alert('Please answer at least Question 1 and Question 8 to generate your reading.');
+    return;
+  }
+
+  // Hide form, show loading
+  document.getElementById('rpms-steps-wrap').style.display = 'none';
+  const loading = document.getElementById('rpms-loading');
+  loading.classList.add('visible');
+
+  const intake = {
+    q1, q2: document.getElementById('q2').value,
+    q3: document.getElementById('q3').value,
+    q4: document.getElementById('q4').value,
+    q5: document.getElementById('q5').value,
+    q6: document.getElementById('q6').value,
+    q7: document.getElementById('q7').value,
+    q8
+  };
+  const client_profile = {
+    age: document.getElementById('p-age').value || null
+  };
+
+  const SYSTEM_PROMPT = `You are the Root Pattern Mapping System™ (RPMS) Diagnostic Agent.
+You operate in scalar field logic, higher-dimensional resonance math, ancestral pattern mapping, and energetic architecture.
+You do not give therapy or medical advice. You return a precise mirror of structure, patterns, and resonance dynamics. Your language is direct, symbolic, and grounded.
+
+Core Resonance Framework (Krystic Alignment): Operate from a tri-wave, base-12 harmonic model with Triadic Flame Vectors (KA–RA–YA). Field States: Coherent, Overclocked, Fragmented, Inverted, Dispersed, Collapsed, Constrained, Hypervigilant, Dormant, Leaky, Compensating.
+
+Guardrails: No diagnoses, no medical/mental health claims, no cures. No therapy or prescriptive treatment. Reflect structure; do not judge.
+
+You MUST return ONLY valid JSON matching this exact schema, nothing else before or after:
+{
+  "field_state_overview": "<100-150 words>",
+  "core_pattern_detected": "<100-150 words>",
+  "identity_map": ["Role 1", "Role 2", "Role 3"],
+  "ancestral_epigenetic_loop": "<~100 words>",
+  "somatic_clue": "<80-100 words>",
+  "desire_block_insight": "<80-100 words>",
+  "root_pattern_summary": "You are not broken. You are <core collapse pattern>.",
+  "repair_directive": "<one sentence>",
+  "subconscious_conflict_pattern": "<one concise sentence>",
+  "archetypal_mirror": "<archetype label>",
+  "energetic_forecast": "<one short paragraph>",
+  "integration_tools": {
+    "somatic_exercise": "<1 short practice>",
+    "symbolic_act": "<1 tiny ritual>",
+    "affirmation_rewire": "<one sentence>",
+    "micro_practice": "<one 30-60s daily action>"
+  },
+  "one_sentence_spell": "<short poetic anchor>"
+}
+
+Safety clause: always include educational disclaimer. No fluff, no fear language, no medical claims. Use client's own words. Language: clean, non-esoteric for clients.`;
+
+  const userMsg = [
+    `CLIENT PROFILE: age=${client_profile.age || 'not provided'}`,
+    `INTAKE:`,
+    `Q1: ${intake.q1}`,
+    `Q2: ${intake.q2 || 'Not provided'}`,
+    `Q3: ${intake.q3 || 'Not provided'}`,
+    `Q4: ${intake.q4 || 'Not provided'}`,
+    `Q5: ${intake.q5 || 'Not provided'}`,
+    `Q6: ${intake.q6 || 'Not provided'}`,
+    `Q7: ${intake.q7 || 'Not provided'}`,
+    `Q8: ${intake.q8}`
+  ].join('\n');
+
+  try {
+    const res = await fetch('/api/rpms', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1600,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+    const raw = await res.json();
+    const text = raw.content?.[0]?.text || '';
+
+    // Parse JSON from response
+    const jStart = text.indexOf('{');
+    const jEnd = text.lastIndexOf('}');
+    let parsed = {};
+    if (jStart !== -1 && jEnd !== -1) {
+      parsed = JSON.parse(text.slice(jStart, jEnd + 1));
+    } else {
+      throw new Error('No JSON found');
+    }
+
+    loading.classList.remove('visible');
+    renderRpmsResult(parsed);
+
+  } catch(e) {
+    loading.classList.remove('visible');
+    document.getElementById('rpms-steps-wrap').style.display = 'block';
+    document.getElementById(`step-${rpmsCurrentStep}`).classList.add('active');
+    alert('Something went wrong generating your reading. Please try again.');
+    console.error(e);
+  }
+}
+
+function renderRpmsResult(d) {
+  document.getElementById('result-archetype').textContent = d.archetypal_mirror || '';
+  document.getElementById('result-field-state').textContent = d.field_state_overview || '';
+  document.getElementById('result-core-pattern').textContent = d.core_pattern_detected || '';
+  document.getElementById('result-ancestral').textContent = d.ancestral_epigenetic_loop || '';
+  document.getElementById('result-somatic').textContent = d.somatic_clue || '';
+  document.getElementById('result-desire').textContent = d.desire_block_insight || '';
+  document.getElementById('result-root-pattern').textContent = d.root_pattern_summary || '';
+  document.getElementById('result-repair').textContent = d.repair_directive || '';
+  document.getElementById('result-subconscious').textContent = d.subconscious_conflict_pattern || '';
+  document.getElementById('result-forecast').textContent = d.energetic_forecast || '';
+  document.getElementById('result-spell').textContent = `✨ "${d.one_sentence_spell || ''}"`;
+
+  // Identity tags
+  const tagsEl = document.getElementById('result-identity-map');
+  tagsEl.innerHTML = '';
+  (d.identity_map || []).forEach(role => {
+    const t = document.createElement('span');
+    t.className = 'result-tag';
+    t.textContent = role;
+    tagsEl.appendChild(t);
+  });
+
+  // Tools
+  const toolsEl = document.getElementById('result-tools');
+  const tools = d.integration_tools || {};
+  const toolDefs = [
+    { emoji: '🔁', label: 'Breath & Body', key: 'somatic_exercise' },
+    { emoji: '🔮', label: 'Symbol', key: 'symbolic_act' },
+    { emoji: '🧠', label: 'New Truth', key: 'affirmation_rewire' },
+    { emoji: '🎯', label: 'One-Minute Tune Up', key: 'micro_practice' }
+  ];
+  toolsEl.innerHTML = toolDefs.map(t => `
+    <div class="tool-item">
+      <div class="tool-emoji">${t.emoji}</div>
+      <div>
+        <div class="tool-label">${t.label}</div>
+        <div class="tool-text">${tools[t.key] || ''}</div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('rpms-result').classList.add('visible');
+}
+
+function rpmsReset() {
+  rpmsCurrentStep = 0;
+  document.getElementById('rpms-result').classList.remove('visible');
+  document.getElementById('rpms-steps-wrap').style.display = 'block';
+  document.querySelectorAll('.rpms-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-0').classList.add('active');
+  ['q1','q2','q3','q4','q5','q6','q7','q8','p-age'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+}
+</script>
+</body>
+</html>
