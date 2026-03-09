@@ -507,6 +507,126 @@
     padding-bottom: 1px;
   }
 
+  /* BLOG GRID */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .blog-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .blog-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-2px);
+  }
+
+  .blog-img-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .blog-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+
+  .blog-card:hover .blog-img { transform: scale(1.03); }
+
+  .blog-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sapphire);
+    margin-bottom: 0.7rem;
+  }
+
+  .blog-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 0.95rem;
+    color: var(--ivory);
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
+
+  .blog-excerpt {
+    font-size: 0.82rem;
+    line-height: 1.75;
+    color: var(--ivory-dim);
+    font-style: italic;
+    margin-bottom: 1.2rem;
+    flex: 1;
+  }
+
+  .blog-full {
+    font-size: 0.85rem;
+    line-height: 1.85;
+    color: var(--ivory-dim);
+    margin-top: 1rem;
+  }
+
+  .blog-full p { margin-bottom: 1rem; }
+
+  .blog-subhead {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 1.2rem 0 0.6rem;
+    font-weight: 400;
+  }
+
+  .blog-list {
+    padding-left: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .blog-list li {
+    margin-bottom: 0.4rem;
+    color: var(--ivory-dim);
+  }
+
+  .blog-question {
+    font-style: italic;
+    color: var(--ivory);
+    border-left: 2px solid var(--gold);
+    padding-left: 1rem;
+    margin: 1.2rem 0;
+  }
+
+  .blog-cta-text { margin-top: 1rem; }
+
+  .blog-link {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,168,76,0.4);
+  }
+
+  .blog-link:hover { border-bottom-color: var(--gold); }
+
   /* FOOTER */
   footer {
     padding: 4rem 2rem 3rem;
@@ -1024,10 +1144,159 @@
       </p>
     </div>
 
-    <div style="text-align:center; padding: 3rem 0; color: var(--ivory-dim); font-style:italic; font-size:0.9rem; line-height:1.8;">
-      Posts coming soon. Check back for writing about the work, the process, and what's in progress.
-    </div>
+    <div class="blog-grid">
 
+      <!-- Post 1: Archetypes -->
+      <article class="blog-card">
+        <div class="blog-img-wrap">
+          <img src="assets/blog-archetypes.png" alt="Archetypes" class="blog-img">
+        </div>
+        <div class="blog-content">
+          <div class="blog-tag">Identity · Pattern Work</div>
+          <h3 class="blog-title">Who Are You Showing Up As Today?</h3>
+          <p class="blog-excerpt">The Lover. The Rebel. The Healer. The Sage. These aren't just characters in myths — they're universal energies that live within you. Archetypes are ancient blueprints of being.</p>
+          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
+          <div class="blog-full" style="display:none;">
+            <p>The Lover. The Rebel. The Healer. The Sage.</p>
+            <p>These aren't just characters in myths; they're universal energies that live within you. Archetypes are ancient blueprints of being. They're not your fixed identity — they're facets of your soul.</p>
+            <h4 class="blog-subhead">How We Box Ourselves In</h4>
+            <p>It's easy to pick one and say, "This is me."<br>
+            "I'm the creative one," we claim, forgetting our inner strategist.<br>
+            "She's the Nurturer," we decide, overlooking her fierce Warrior.</p>
+            <p>But when we cling to a single archetype, we build a cage. We limit our responses, our growth, our wholeness.</p>
+            <h4 class="blog-subhead">The Dance of Wholeness</h4>
+            <p>The real journey is dancing with them all. Notice which energy is present right now. Notice which ones you project onto the world.</p>
+            <p>Allow the paradox:</p>
+            <ul class="blog-list">
+              <li>Be the Sage who can also play the Fool.</li>
+              <li>Be the Nurturer who can also draw boundaries like a King or Queen.</li>
+              <li>Be the Creator who understands the necessity of the Destroyer.</li>
+            </ul>
+            <p>Embracing all your archetypes doesn't confuse your identity — it completes it. You contain multitudes.</p>
+            <p class="blog-question">Which archetypal energy do you feel most connected to right now?</p>
+            <p class="blog-cta-text">If you want to see which archetypal loops you may be stuck in — and how to break free — <a href="#rpms" class="blog-link">explore the Root Pattern Mapping System below →</a></p>
+            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Post 2: House of Mirrors -->
+      <article class="blog-card">
+        <div class="blog-img-wrap">
+          <img src="assets/blog-house-of-mirrors.jpeg" alt="House of Mirrors" class="blog-img">
+        </div>
+        <div class="blog-content">
+          <div class="blog-tag">Perception · Integration</div>
+          <h3 class="blog-title">Get Control of Your Environment</h3>
+          <p class="blog-excerpt">I keep getting the same message: get control of your environment. At first that sounded like "fix everything out there." But I think it's actually something quieter, and way more powerful.</p>
+          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
+          <div class="blog-full" style="display:none;">
+            <p>I keep getting the same message over and over: <em>get control of your environment.</em></p>
+            <p>At first that sounded like "fix everything out there." But I think it's actually something quieter, and way more powerful: Stop letting the outside world decide who you are. Because the moment we identify with anything external — a role, a diagnosis, a relationship dynamic, a past version of ourselves, a fear — it's like we hand our perception over to it. And then we wonder why we feel stuck. We're not stuck in life… we're stuck in an identity.</p>
+            <p>I've been thinking of reality like a house of mirrors — not in a paranoid way, but in a pattern way. Everything reflects something back. If I think every reflection is "me," it becomes fractal confusion. I'm reacting to reactions to reactions.</p>
+            <p>But if I remember: <em>I'm not the reflection, I'm the one looking</em> — then the mirrors turn into maps.</p>
+            <ul class="blog-list">
+              <li>A trigger becomes information.</li>
+              <li>A repeated pattern becomes a message.</li>
+              <li>An old story becomes something I can finally witness without being swallowed by it.</li>
+            </ul>
+            <p>And here's the part that's hard to explain until you feel it: when you integrate what you've been splitting off — grief, anger, truth, softness, power — your whole frequency and perception changes. You choose differently. You move differently. You stop attracting the same loops. It's like new doors appear, not because the world magically changed, but because you did.</p>
+            <p class="blog-question">What am I identifying with that I don't actually have to be? And what happens if I step back far enough to see it, without becoming it?</p>
+            <p>If you're in a season where everything feels heavy or confusing — sometimes the breakthrough isn't doing more. Sometimes it's remembering who's holding the light.</p>
+            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Post 3: Brain Patterns -->
+      <article class="blog-card">
+        <div class="blog-img-wrap">
+          <img src="assets/blog-brain-patterns.png" alt="Brain Patterns" class="blog-img">
+        </div>
+        <div class="blog-content">
+          <div class="blog-tag">Neuroscience · Healing</div>
+          <h3 class="blog-title">Your Brain Isn't Stuck. It's Just Patterned.</h3>
+          <p class="blog-excerpt">Every thought, reaction, or emotion travels a neural pathway — and the more you repeat it, the stronger it gets. That's how synapses form. But the good news is: repetition rewires.</p>
+          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
+          <div class="blog-full" style="display:none;">
+            <p>Every thought, reaction, or emotion travels a neural pathway — and the more you repeat it, the stronger it gets.</p>
+            <p>That's how synapses form: repetition, emotional charge, subconscious reinforcement.</p>
+            <p>By age 7, most of your core pathways are already wired. Not by truth — but by what was repeated in your environment. Which means that anxious thought? That shutdown pattern? That people-pleasing loop? It's not you. It's just a well-worn trail.</p>
+            <p>But the good news is:</p>
+            <ul class="blog-list">
+              <li>Repetition rewires.</li>
+              <li>Frequency accelerates.</li>
+              <li>Safety makes it stick.</li>
+            </ul>
+            <p>When you combine intention + coherent frequency + a regulated nervous system, you give your brain a new map.</p>
+            <p>Healing = building new synapses that hold peace, clarity, and presence. Over and over, until that becomes the new default.</p>
+            <p class="blog-question">Your brain is always listening. What are you teaching it to expect?</p>
+            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Post 4: Humming -->
+      <article class="blog-card">
+        <div class="blog-img-wrap">
+          <img src="assets/blog-humming.png" alt="Humming" class="blog-img">
+        </div>
+        <div class="blog-content">
+          <div class="blog-tag">Nervous System · Somatic Tools</div>
+          <h3 class="blog-title">If You're Anxious or Overwhelmed, Try This: Hum.</h3>
+          <p class="blog-excerpt">Seriously. It sounds small, but it's powerful. Humming increases nitric oxide by up to 15x, activates the vagus nerve, and shifts your brainwaves from stress into calm.</p>
+          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
+          <div class="blog-full" style="display:none;">
+            <p>If you're anxious, overwhelmed, or struggling to regulate your nervous system — try this: <strong>Hum.</strong></p>
+            <p>Seriously. It sounds small, but it's powerful. Here's why:</p>
+            <h4 class="blog-subhead">What the Research Shows</h4>
+            <ul class="blog-list">
+              <li><strong>Nitric Oxide Production:</strong> Humming increases nitric oxide in the nasal passages by up to 15x — anti-viral, anti-inflammatory, and improves oxygen flow.</li>
+              <li><strong>Vagus Nerve Stimulation:</strong> Activates the parasympathetic system — lowers cortisol, slows heart rate, improves digestion, reduces anxiety.</li>
+              <li><strong>Brain &amp; Body Coherence:</strong> The vibration travels through bone, fascia, and fluid — like an internal massage, reducing tension and inflammation.</li>
+              <li><strong>Brainwave Shifts:</strong> Slow, steady humming moves brainwaves from beta (stress) into alpha and theta — states linked to healing, clarity, and calm.</li>
+            </ul>
+            <h4 class="blog-subhead">It's Been Used for Centuries</h4>
+            <p>Tibetan monks. Vedic healers. Mystics in Egypt, Sufi, and Taoist traditions. They all used forms of humming, toning, or vowel sound practices — not as "ritual," but as vibrational medicine. They knew what science is now catching up to: your voice changes your physiology.</p>
+            <h4 class="blog-subhead">How To Use It (Anywhere)</h4>
+            <ol class="blog-list">
+              <li>Sit or lie down.</li>
+              <li>Inhale slowly through the nose.</li>
+              <li>Hum gently on the exhale — "mmm," "ohhh," or "ahhh."</li>
+              <li>Feel where the sound vibrates in your body.</li>
+              <li>Repeat for 2–5 minutes. No need for perfection — just presence.</li>
+            </ol>
+            <p>Do this before sleep, during stress, or when your child is dysregulated. It helps both of you return to a state where healing can happen.</p>
+            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Post 5: Manifestation / Becoming -->
+      <article class="blog-card">
+        <div class="blog-img-wrap">
+          <img src="assets/blog-becoming.jpeg" alt="You Are Becoming" class="blog-img">
+        </div>
+        <div class="blog-content">
+          <div class="blog-tag">Manifestation · Personal Story</div>
+          <h3 class="blog-title">Manifestation Isn't About Getting What You Want.</h3>
+          <p class="blog-excerpt">It's about becoming aligned with what you truly want beneath the surface. For most of my life, the deepest desire I carried was to be a mother. Life didn't hand me that dream easily.</p>
+          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
+          <div class="blog-full" style="display:none;">
+            <p>Manifestation isn't about "getting what you want." It's about becoming aligned with what you truly want beneath the surface.</p>
+            <p>For most of my life, the deepest desire I carried was to be a mother. Not just a passing wish — it was the strongest want I've ever had. The kind of ache that sits in your bones. I pictured myself with a big family, surrounded by kids, overflowing with the unconditional love I thought motherhood would give me.</p>
+            <p>But life didn't hand me that dream easily. I walked through multiple miscarriages, years of infertility, and the kind of heartbreak that forces you to question everything.</p>
+            <p>What I eventually had to face was this: It wasn't just about having children. It was about the wound underneath — the part of me that was seeking unconditional love outside of myself. Motherhood was the mirror showing me where I still felt empty, where I hadn't yet learned to love myself fully.</p>
+            <p>And here's the thing — your subconscious knows. It will play out every "delay," every "failure," every painful loop, not to punish you, but to press you closer to the lesson. To peel back the layers of what you think you want, until you can finally see what's real.</p>
+            <p>When I finally healed that wound — when I stopped seeking outside of myself to fill the hole — I conceived. Today, I have two children. Not because I "manifested hard enough" or repeated affirmations every night, but because I faced the part of me that believed love had to come from somewhere else.</p>
+            <p>So no, this journey isn't simple. It's messy. It's brutal. It's the kind of path that breaks you down before it rebuilds you. But if you let it, every heartbreak is a doorway. Every loss is shaping you into the person who is ready to receive the life you're actually asking for — whether you realize it yet or not.</p>
+            <p class="blog-question">You are not a victim. You are becoming.</p>
+            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- end blog-grid -->
   </div>
 </section>
 
@@ -1630,6 +1899,24 @@ function renderRpmsResult(d) {
   `).join('');
 
   document.getElementById('rpms-result').classList.add('visible');
+}
+
+function togglePost(btn) {
+  const card = btn.closest('.blog-card');
+  const full = card.querySelector('.blog-full');
+  const excerpt = card.querySelector('.blog-excerpt');
+  const readMoreBtn = card.querySelector('.blog-read-more');
+  const isOpen = full.style.display !== 'none';
+  if (isOpen) {
+    full.style.display = 'none';
+    if (excerpt) excerpt.style.display = '';
+    if (readMoreBtn) readMoreBtn.style.display = '';
+  } else {
+    full.style.display = 'block';
+    if (excerpt) excerpt.style.display = 'none';
+    if (readMoreBtn) readMoreBtn.style.display = 'none';
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 function rpmsReset() {
