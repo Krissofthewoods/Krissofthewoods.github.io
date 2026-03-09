@@ -1431,8 +1431,29 @@ function populatePage() {
   document.getElementById('archetype').textContent = data.arch;
   document.getElementById('archetype-sub').textContent = data.sub;
   document.getElementById('sign-text').textContent = sign.toUpperCase();
+  // Show static fallback immediately, then upgrade with AI
   document.getElementById('daily-energy').textContent = energyText[sign] || energyText['Pisces'];
   showAffirmation();
+  loadAIDailyInsight();
+}
+
+async function loadAIDailyInsight() {
+  try {
+    const res = await fetch('https://taylored-harmony.tayloredharmony.workers.dev/daily');
+    if (!res.ok) return;
+    const d = await res.json();
+    if (d.affirmation) {
+      document.getElementById('affirmation-text').textContent = `"${d.affirmation}"`;
+    }
+    if (d.seasonal_note) {
+      document.getElementById('daily-energy').textContent = d.seasonal_note;
+    }
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const today = new Date();
+    document.getElementById('aff-sign').textContent = `— ${sign} Transmission · ${months[today.getMonth()]} ${today.getFullYear()}`;
+  } catch(e) {
+    // Silently fall back to static content already shown
+  }
 }
 
 function showAffirmation() {
@@ -1546,28 +1567,13 @@ Safety clause: always include educational disclaimer. No fluff, no fear language
   ].join('\n');
 
   try {
-    const res = await fetch('/api/rpms', {
+    const res = await fetch('https://taylored-harmony.tayloredharmony.workers.dev/rpms', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1600,
-        system: SYSTEM_PROMPT,
-        messages: [{ role: 'user', content: userMsg }]
-      })
+      body: JSON.stringify({ intake, client_profile })
     });
-    const raw = await res.json();
-    const text = raw.content?.[0]?.text || '';
-
-    // Parse JSON from response
-    const jStart = text.indexOf('{');
-    const jEnd = text.lastIndexOf('}');
-    let parsed = {};
-    if (jStart !== -1 && jEnd !== -1) {
-      parsed = JSON.parse(text.slice(jStart, jEnd + 1));
-    } else {
-      throw new Error('No JSON found');
-    }
+    const parsed = await res.json();
+    if (!res.ok || parsed.error) throw new Error(parsed.error || 'API error');
 
     loading.classList.remove('visible');
     renderRpmsResult(parsed);
