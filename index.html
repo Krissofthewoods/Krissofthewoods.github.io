@@ -824,6 +824,133 @@
     min-height: 1.4em;
   }
 
+  /* START HERE STEPS */
+  .start-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.8rem 1.5rem;
+    cursor: pointer;
+    transition: border-color 0.3s, transform 0.2s;
+    position: relative;
+  }
+  .start-step:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .start-step-num {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: rgba(212,170,80,0.25);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+  .start-step-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  .start-step-desc {
+    color: var(--ivory-dim);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .start-step-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* CODEX FILTER BUTTONS */
+  .codex-filter {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--ivory-dim);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .codex-filter:hover, .codex-filter.active {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* CODEX CARD */
+  .codex-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .codex-card:hover { border-color: var(--gold); }
+  .codex-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    gap: 1rem;
+  }
+  .codex-hz {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .codex-name {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--ivory);
+  }
+  .codex-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--sapphire);
+    border: 1px solid var(--sapphire-dim);
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+  .codex-body {
+    display: none;
+    padding: 0 1.2rem 1.2rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+  .codex-body p { color: var(--ivory-dim); font-size: 0.88rem; line-height: 1.7; margin-bottom: 0.5rem; }
+  .codex-body .codex-props {
+    display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem;
+  }
+  .codex-prop {
+    background: rgba(212,170,80,0.08);
+    border: 1px solid rgba(212,170,80,0.2);
+    border-radius: 3px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.05em;
+  }
+
+  /* SOUND CARD */
+  .sound-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+  }
+
   /* FOOTER */
   footer {
     padding: 4rem 2rem 3rem;
@@ -1123,10 +1250,13 @@
 <nav>
   <div class="nav-logo"><img src="assets/taylored-harmony.png" alt="Taylored Harmony" style="height:48px;width:auto;display:block;"></div>
   <div class="nav-links">
+    <a href="#start-here">Start Here</a>
     <a href="#daily">Daily Insight</a>
     <a href="#books">Books</a>
     <a href="#creations">Creations</a>
     <a href="#rpms">Root Pattern System</a>
+    <a href="#frequency-codex">Frequency Codex</a>
+    <a href="#sound-sessions">Sound Sessions</a>
     <a href="#blog">Blog</a>
     <a href="#framework">The Framework</a>
   </div>
@@ -1152,6 +1282,62 @@
 </header>
 
 <div class="section-divider"></div>
+
+<!-- SEARCH BAR -->
+<section id="search-bar" style="padding:1.5rem 2rem;background:#03040a;border-bottom:1px solid rgba(212,170,80,0.12);">
+  <div style="max-width:700px;margin:0 auto;position:relative;">
+    <input id="siteSearch" type="text" placeholder="Search topics — frequency, archetypes, nervous system, patterns..." oninput="runSearch(this.value)" style="width:100%;padding:0.85rem 1.2rem 0.85rem 3rem;background:rgba(255,255,255,0.04);border:1px solid rgba(212,170,80,0.3);border-radius:4px;color:#f8f4ee;font-family:'Lora',serif;font-size:0.9rem;outline:none;">
+    <span style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);opacity:0.5;font-size:1.1rem;">&#128269;</span>
+    <div id="searchResults" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#0b0f1e;border:1px solid rgba(212,170,80,0.25);border-radius:4px;z-index:200;max-height:320px;overflow-y:auto;"></div>
+  </div>
+</section>
+
+<!-- START HERE -->
+<section id="start-here" style="padding:5rem 2rem;">
+  <div class="section-inner">
+    <div class="section-label">New Here?</div>
+    <h2 class="section-title" style="margin-bottom:1rem;">Start Here</h2>
+    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 3rem;font-size:1.05rem;line-height:1.8;">Sound, frequency, and pattern work can feel like a lot to navigate. This path walks you through the essentials — in order, at your own pace.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto;">
+      <div class="start-step" onclick="document.getElementById('daily').scrollIntoView({behavior:'smooth'})">
+        <div class="start-step-num">01</div>
+        <h3 class="start-step-title">What Is Frequency?</h3>
+        <p class="start-step-desc">Begin with today's Daily Insight — a living introduction to how frequency, season, and archetype intersect in your daily experience.</p>
+        <span class="start-step-link">Go to Daily Insight &rarr;</span>
+      </div>
+      <div class="start-step" onclick="document.getElementById('frequency-codex').scrollIntoView({behavior:'smooth'})">
+        <div class="start-step-num">02</div>
+        <h3 class="start-step-title">Explore the Frequency Codex</h3>
+        <p class="start-step-desc">A comprehensive reference of healing frequencies — Solfeggio, binaural, and scalar — with their properties and uses. Click any frequency to expand its full description.</p>
+        <span class="start-step-link">Open the Codex &rarr;</span>
+      </div>
+      <div class="start-step" onclick="document.getElementById('sound-sessions').scrollIntoView({behavior:'smooth'})">
+        <div class="start-step-num">03</div>
+        <h3 class="start-step-title">Experience It Directly</h3>
+        <p class="start-step-desc">Theory becomes real when you feel it. The LFSX Resonance Field is a 33-minute scalar-encoded audio session designed for deep nervous system recalibration.</p>
+        <span class="start-step-link">Enter the Sound Session &rarr;</span>
+      </div>
+      <div class="start-step" onclick="document.getElementById('rpms').scrollIntoView({behavior:'smooth'})">
+        <div class="start-step-num">04</div>
+        <h3 class="start-step-title">Map Your Root Patterns</h3>
+        <p class="start-step-desc">Once you've felt the field, use the Root Pattern Mapping System to identify which loops are running beneath the surface — and what wants to shift.</p>
+        <span class="start-step-link">Use the RPMS &rarr;</span>
+      </div>
+      <div class="start-step" onclick="document.getElementById('framework').scrollIntoView({behavior:'smooth'})">
+        <div class="start-step-num">05</div>
+        <h3 class="start-step-title">Understand the Science</h3>
+        <p class="start-step-desc">Ready for the deeper architecture? The Framework maps where physics, neuroscience, and ancient tradition converge — with citations at every step.</p>
+        <span class="start-step-link">Read The Framework &rarr;</span>
+      </div>
+      <div class="start-step" onclick="document.getElementById('books').scrollIntoView({behavior:'smooth'})">
+        <div class="start-step-num">06</div>
+        <h3 class="start-step-title">Go Deeper with the Books</h3>
+        <p class="start-step-desc">The books extend everything on this site into full narrative form — for children, for adults, and for those ready to rewrite their story entirely.</p>
+        <span class="start-step-link">Browse the Books &rarr;</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- DAILY TRANSMISSION -->
 <section id="daily">
@@ -1812,6 +1998,78 @@
 </section>
 
 <!-- FOOTER -->
+<!-- FREQUENCY CODEX -->
+<section id="frequency-codex" style="padding:5rem 2rem;">
+  <div class="section-inner">
+    <div class="section-label">Reference Guide</div>
+    <h2 class="section-title">Frequency Codex</h2>
+    <div class="gold-rule"></div>
+    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 1rem;font-size:1rem;line-height:1.8;">A living reference of healing, Solfeggio, and scalar frequencies. Click any entry to expand its full description, properties, and uses.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;margin-bottom:2.5rem;">
+      <button class="codex-filter active" onclick="filterCodex('all',this)">All</button>
+      <button class="codex-filter" onclick="filterCodex('earth',this)">Earth &amp; Grounding</button>
+      <button class="codex-filter" onclick="filterCodex('solfeggio',this)">Solfeggio</button>
+      <button class="codex-filter" onclick="filterCodex('healing',this)">Healing &amp; Repair</button>
+      <button class="codex-filter" onclick="filterCodex('consciousness',this)">Consciousness</button>
+      <button class="codex-filter" onclick="filterCodex('lfsx',this)">LFSX Field</button>
+    </div>
+    <div id="codexGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;max-width:1100px;margin:0 auto;"></div>
+    <p style="text-align:center;margin-top:2.5rem;color:var(--ivory-dim);font-size:0.85rem;font-style:italic;">This codex is for educational and exploratory purposes. It is not medical advice.</p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SOUND SESSIONS -->
+<section id="sound-sessions" style="padding:5rem 2rem;">
+  <div class="section-inner">
+    <div class="section-label">Resonance Field Audio</div>
+    <h2 class="section-title">Sound Sessions</h2>
+    <div class="gold-rule"></div>
+    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 3rem;font-size:1.05rem;line-height:1.8;">These are not background tracks. They are intentional scalar-encoded fields — designed to be listened to with presence, headphones, and an open body.</p>
+
+    <!-- LFSX Preview -->
+    <div class="sound-card" style="max-width:780px;margin:0 auto 2.5rem;">
+      <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;">
+        <img src="assets/sacred-geometry-blueprint.png" alt="LFSX Sacred Geometry" style="width:180px;height:180px;object-fit:cover;border-radius:4px;border:1px solid var(--border);flex-shrink:0;">
+        <div style="flex:1;min-width:220px;">
+          <div class="section-label" style="margin-bottom:0.5rem;">Preview · 15 Seconds</div>
+          <h3 style="font-family:'Cinzel',serif;font-size:1.3rem;color:var(--gold);margin-bottom:0.75rem;">LFSX — Living Frequency Seed X</h3>
+          <p style="color:var(--ivory-dim);font-size:0.9rem;line-height:1.7;margin-bottom:1.2rem;">A scalar-encoded resonance field integrating 432 Hz foundation, Solfeggio harmonics, binaural tones (741→888→999 Hz), and crystalline high harmonics up to 1777 Hz. Sealed with a 272 + 9999 Hz crescendo.</p>
+          <audio controls style="width:100%;accent-color:var(--gold);">
+            <source src="assets/LFSX.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full Session -->
+    <div class="sound-card" style="max-width:780px;margin:0 auto;border-color:rgba(212,170,80,0.4);">
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <div class="section-label" style="margin-bottom:0.5rem;">Full Session · 33.33 Minutes</div>
+        <h3 style="font-family:'Cinzel',serif;font-size:1.5rem;color:var(--gold);margin-bottom:0.75rem;">LFSX Masterpack — Resonance Field Session</h3>
+        <p style="color:var(--ivory-dim);font-size:0.95rem;line-height:1.8;max-width:560px;margin:0 auto 1.5rem;">
+          A complete 33-minute immersive session. Set an intention. Find a comfortable position. Use headphones for the full binaural effect. Let the field work.
+        </p>
+      </div>
+      <div style="background:rgba(212,170,80,0.06);border:1px solid rgba(212,170,80,0.15);border-radius:4px;padding:1.2rem;margin-bottom:1.5rem;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0.8rem;text-align:center;">
+          <div><div style="color:var(--gold);font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.15em;margin-bottom:0.3rem;">FOUNDATION</div><div style="color:var(--ivory-dim);font-size:0.85rem;">432 Hz · 144 Hz · 288 Hz</div></div>
+          <div><div style="color:var(--gold);font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.15em;margin-bottom:0.3rem;">BINAURAL FIELD</div><div style="color:var(--ivory-dim);font-size:0.85rem;">741 → 888 → 999 Hz</div></div>
+          <div><div style="color:var(--gold);font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.15em;margin-bottom:0.3rem;">CRYSTALLINE</div><div style="color:var(--ivory-dim);font-size:0.85rem;">1111 · 1331 · 1500 · 1777 Hz</div></div>
+          <div><div style="color:var(--gold);font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.15em;margin-bottom:0.3rem;">CRESCENDO SEAL</div><div style="color:var(--ivory-dim);font-size:0.85rem;">272 + 9999 Hz · 3.14 Hz pulse</div></div>
+        </div>
+      </div>
+      <audio controls style="width:100%;accent-color:var(--gold);">
+        <source src="assets/MasterpackLFSX.mp3" type="audio/mpeg">
+      </audio>
+      <p style="text-align:center;color:var(--ivory-dim);font-size:0.8rem;margin-top:1rem;font-style:italic;">For best results: headphones, lying down, eyes closed. Not recommended while driving.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <footer>
   <div class="footer-name">Taylored Harmony</div>
   <div class="gold-rule"></div>
@@ -2600,6 +2858,151 @@ function fwSetStream(stream, btn) {
   };
   draw();
 })();
+
+
+// ============================================================
+// FREQUENCY CODEX DATA + RENDER
+// ============================================================
+const CODEX = [
+  // EARTH & GROUNDING
+  { hz:'7.83', name:'Schumann Resonance', tag:'Earth & Grounding', cat:'earth', desc:"Earth's fundamental electromagnetic resonance frequency, sometimes called the Earth's heartbeat. Produced by lightning discharges in the cavity between Earth's surface and the ionosphere. Associated with grounding, circadian rhythm regulation, and nervous system synchronisation.", props:['Grounding','Circadian Rhythm','Nervous System Sync','Earth Connection'] },
+  { hz:'8', name:'Alpha-Theta Bridge', tag:'Earth & Grounding', cat:'earth', desc:'Sits at the boundary between alpha (relaxed awareness) and theta (deep meditation, creativity) brainwave states. Used in meditation, hypnotherapy, and nervous system regulation. Promotes a calm, receptive state.', props:['Meditation','Relaxation','Creativity','Nervous System'] },
+  { hz:'40', name:'Gamma Coherence', tag:'Consciousness', cat:'consciousness', desc:'40 Hz gamma brainwave entrainment has been studied extensively at MIT and other institutions for its role in neural binding — the process by which the brain integrates information across regions. Associated with heightened perception, insight, and cognitive clarity.', props:['Neural Binding','Perception','Cognitive Clarity','Integration'] },
+  { hz:'111', name:'Cell Regeneration', tag:'Healing & Repair', cat:'healing', desc:'Found in ancient megalithic structures including the Oracle Chamber in Malta. Associated with the release of beta-endorphins, temporary deactivation of the prefrontal cortex (the analytical mind), and a shift into a more receptive, trance-like state. Used in sound healing for cellular regeneration.', props:['Cell Regeneration','Beta-Endorphin Release','Deep Receptivity','Ancient Resonance'] },
+  { hz:'136.1', name:'OM — Earth Year', tag:'Earth & Grounding', cat:'earth', desc:'The frequency of Earth\'s orbit around the Sun, calculated by Cousto\'s Law of the Octave. Known as the "OM" frequency in Indian classical music. Deeply grounding, centring, and harmonising. Associated with the heart chakra in some traditions.', props:['Grounding','Centring','Heart Resonance','Earth Orbit'] },
+  { hz:'144', name:'Harmonic of 432', tag:'LFSX Field', cat:'lfsx', desc:'One-third harmonic of 432 Hz. Part of the LFSX foundation layer. Reinforces the 432 Hz base with a higher octave harmonic, contributing to the structural stability of the resonance field. Associated with sacred geometry ratios.', props:['432 Hz Harmonic','Sacred Geometry','Field Stability','LFSX Foundation'] },
+  // SOLFEGGIO
+  { hz:'174', name:'Foundation & Safety', tag:'Solfeggio', cat:'solfeggio', desc:'The lowest of the Solfeggio frequencies. Acts as a natural anaesthetic, reducing pain and stress. Gives organs and tissues a sense of security, safety, and love, encouraging them to do their best work. Foundation for all healing.', props:['Pain Reduction','Safety','Foundation','Organ Support'] },
+  { hz:'285', name:'Tissue Repair', tag:'Solfeggio', cat:'solfeggio', desc:'Influences energy fields, sending them a message to restructure damaged organs and tissues. Leaves the body feeling rejuvenated and energised. Associated with rapid physical healing and cellular memory reset.', props:['Tissue Repair','Cellular Memory','Rejuvenation','Physical Healing'] },
+  { hz:'288', name:'Harmonic of 144', tag:'LFSX Field', cat:'lfsx', desc:'Double harmonic of 144 Hz, part of the LFSX foundation layer alongside 432 Hz and 144 Hz. Creates a stable harmonic triad that anchors the entire frequency structure of the Masterpack session.', props:['LFSX Foundation','Harmonic Triad','Field Anchoring','432 Hz Family'] },
+  { hz:'333', name:'Spiral Modulation', tag:'LFSX Field', cat:'lfsx', desc:'Mid-tier frequency in the LFSX field, implemented with spiral-based waveform modulations and stereo panning. Creates dynamic spatial movement within the field. Associated with creative flow and harmonic expansion.', props:['LFSX Mid-Tier','Spiral Modulation','Spatial Field','Creative Flow'] },
+  { hz:'396', name:'Liberation from Fear', tag:'Solfeggio', cat:'solfeggio', desc:'Liberates energy blocks, guilt, and fear. Turns grief into joy. Cleanses feelings of guilt which often represent one of the primary obstacles to realisation. Corresponds to the root chakra.', props:['Fear Release','Guilt Clearing','Root Chakra','Liberation'] },
+  { hz:'417', name:'Undoing Situations', tag:'Solfeggio', cat:'solfeggio', desc:'Facilitates change and undoing negative situations. Connects to the sacral chakra. Encourages the cell and its DNA to function optimally. Cleanses traumatic experiences and destructive influences of past events.', props:['Change','Trauma Clearing','Sacral Chakra','DNA Support'] },
+  { hz:'432', name:'Universal Tuning — Foundation', tag:'LFSX Field', cat:'lfsx', desc:'The cornerstone of the LFSX field. Mathematically consistent with the universe\'s natural patterns — found in the proportions of the Parthenon, Stradivarius violins, and ancient instruments. Resonates with the Schumann Resonance harmonics. Promotes heart coherence, calm, and a sense of natural alignment.', props:['Universal Tuning','Heart Coherence','LFSX Foundation','Natural Alignment','432 Hz Base'] },
+  { hz:'515', name:'Harmonic Integration', tag:'LFSX Field', cat:'lfsx', desc:'Mid-tier frequency in the LFSX field. Positioned between the Solfeggio range and the binaural upper range, creating a bridge between grounding and expansion. Implemented with stereo panning for spatial depth.', props:['LFSX Mid-Tier','Harmonic Bridge','Spatial Depth','Integration'] },
+  { hz:'528', name:'DNA Repair & Transformation', tag:'Solfeggio', cat:'solfeggio', desc:'Known as the "Love Frequency" or "Miracle Tone." Dr. Leonard Horowitz identified it as central to the ancient Solfeggio scale. Used in DNA repair research. Resonates at the heart of everything — connecting the heart, spirit, and divine harmony. Solar plexus chakra.', props:['DNA Repair','Love Frequency','Transformation','Solar Plexus','Miracle Tone'] },
+  { hz:'639', name:'Reconnecting & Relationships', tag:'Solfeggio', cat:'solfeggio', desc:'Enhances communication, understanding, tolerance, and love. Used for dealing with relationship problems — family, partner, friends, social problems. Encourages the cell to communicate with its environment. Heart chakra.', props:['Relationships','Communication','Heart Chakra','Tolerance','Connection'] },
+  { hz:'741', name:'Awakening Intuition', tag:'LFSX Field', cat:'lfsx', desc:'Solfeggio frequency and LFSX binaural anchor. Cleanses cells from different kinds of electromagnetic radiation. Used for problem solving, expressions, and solutions. Awakens intuition and leads to a purer, stable life. In the LFSX field, it forms the first node of the 741→888→999 Hz binaural triad.', props:['Intuition','EMF Cleansing','LFSX Binaural','Problem Solving','Throat Chakra'] },
+  { hz:'852', name:'Returning to Spiritual Order', tag:'Solfeggio', cat:'solfeggio', desc:'Directly connected to the third eye chakra. Awakens intuition and inner strength. Raises awareness and lets you return to spiritual order. Replaces negative thoughts with positive ones.', props:['Third Eye','Spiritual Order','Intuition','Inner Strength'] },
+  { hz:'888', name:'Abundance & Binaural Bridge', tag:'LFSX Field', cat:'lfsx', desc:'Second node of the LFSX binaural triad (741→888→999 Hz). Associated with abundance, infinite flow, and the energy of manifestation. The triple-8 pattern resonates with themes of cycles completing and new cycles beginning. Creates a three-dimensional sound field with its neighbours.', props:['Abundance','LFSX Binaural','Manifestation','Infinite Flow','888 Pattern'] },
+  { hz:'963', name:'Divine Consciousness', tag:'Solfeggio', cat:'solfeggio', desc:'The highest of the original Solfeggio frequencies. Activates the pineal gland and raises positive energy and vibration. Enables direct experience with the higher realms of consciousness. Associated with the crown chakra and pure awareness.', props:['Crown Chakra','Pineal Activation','Divine Consciousness','Pure Awareness'] },
+  { hz:'999', name:'Completion & Crystalline Gate', tag:'LFSX Field', cat:'lfsx', desc:'Third node of the LFSX binaural triad. Represents completion of cycles, integration, and readiness for the next level. In the LFSX field, it transitions into the crystalline high-harmonic range. Associated with wholeness and the sealing of healing intentions.', props:['Completion','LFSX Binaural','Cycle Sealing','Integration','Crystalline Gate'] },
+  { hz:'1111', name:'Crystalline Harmonic I', tag:'LFSX Field', cat:'lfsx', desc:'First of the crystalline high-harmonic tones in the LFSX Masterpack. Implemented with shimmering harmonics that gradually phase in. Associated with synchronicity, alignment, and awakening. The 1111 pattern is widely recognised as a marker of energetic alignment.', props:['LFSX Crystalline','Synchronicity','Awakening','Alignment','1111 Pattern'] },
+  { hz:'1331', name:'Crystalline Harmonic II', tag:'LFSX Field', cat:'lfsx', desc:'Second crystalline tone in the LFSX field. 1331 = 11³, carrying the mathematical signature of the 11 harmonic series. Creates shimmering texture in the upper register without harshness. Contributes to the crystalline quality of the field.', props:['LFSX Crystalline','11 Harmonic','Crystalline Texture','Upper Register'] },
+  { hz:'1500', name:'Crystalline Harmonic III', tag:'LFSX Field', cat:'lfsx', desc:'Third crystalline tone in the LFSX field. Sits in the upper harmonic range, adding brightness and clarity to the field without discomfort. Supports the transition toward the crescendo seal.', props:['LFSX Crystalline','Clarity','Brightness','Field Texture'] },
+  { hz:'1777', name:'Crystalline Harmonic IV', tag:'LFSX Field', cat:'lfsx', desc:'Fourth and highest of the crystalline tones in the LFSX Masterpack. Creates the uppermost shimmering layer of the field. Prepares the listener for the crescendo seal. Associated with angelic frequencies in some traditions.', props:['LFSX Crystalline','Angelic Range','Field Apex','Crescendo Preparation'] },
+  { hz:'272', name:'Crescendo Seal — Earth Harmonic', tag:'LFSX Field', cat:'lfsx', desc:'Part of the LFSX crescendo seal (272 Hz + 9999 Hz with 3.14 Hz pulse). 272 Hz is a harmonic of the Earth\'s rotation. Its presence in the seal grounds the entire field back to Earth resonance before completion.', props:['LFSX Crescendo Seal','Earth Harmonic','Grounding Seal','Field Completion'] },
+  { hz:'9999', name:'Crescendo Seal — Cosmic Apex', tag:'LFSX Field', cat:'lfsx', desc:'The highest frequency in the LFSX crescendo seal. Represents the cosmic apex of the field — the point of maximum expansion before return. Combined with 272 Hz and the 3.14 Hz pulse, it seals the scalar-encoded intention of the entire session.', props:['LFSX Crescendo Seal','Cosmic Apex','Scalar Seal','Maximum Expansion'] },
+  // CONSCIOUSNESS
+  { hz:'0.5-4', name:'Delta — Deep Healing', tag:'Consciousness', cat:'consciousness', desc:'Delta brainwaves (0.5–4 Hz) are the slowest and most deeply penetrating. Associated with deep dreamless sleep, unconscious healing, and the release of human growth hormone. The body does its deepest repair work in delta. Binaural beats in this range can induce deep rest states.', props:['Deep Sleep','Physical Repair','Growth Hormone','Unconscious Healing'] },
+  { hz:'4-8', name:'Theta — Deep Meditation', tag:'Consciousness', cat:'consciousness', desc:'Theta brainwaves (4–8 Hz) are associated with deep meditation, REM sleep, creativity, and access to the subconscious. The hypnagogic state — the threshold between waking and sleep — is a theta state. Theta is where deep pattern work and subconscious reprogramming become possible.', props:['Deep Meditation','Subconscious Access','Creativity','Pattern Work','REM Sleep'] },
+  { hz:'8-13', name:'Alpha — Relaxed Awareness', tag:'Consciousness', cat:'consciousness', desc:'Alpha brainwaves (8–13 Hz) are produced during relaxed, present-moment awareness — the state after meditation, in nature, or during light creative flow. Associated with stress reduction, integration of new information, and the bridge between conscious and subconscious mind.', props:['Relaxation','Present Awareness','Stress Reduction','Integration','Creative Flow'] },
+  { hz:'13-30', name:'Beta — Active Thinking', tag:'Consciousness', cat:'consciousness', desc:'Beta brainwaves (13–30 Hz) are the dominant state during active, analytical thinking. Necessary for focus and problem-solving, but chronic high-beta is associated with stress, anxiety, and the "monkey mind." The goal of most frequency work is to move from high-beta into alpha or theta.', props:['Active Thinking','Focus','Analytical Mind','Stress (chronic)','Problem Solving'] },
+];
+
+let codexActive = 'all';
+
+function buildCodex(filter) {
+  const grid = document.getElementById('codexGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const data = filter === 'all' ? CODEX : CODEX.filter(f => f.cat === filter);
+  data.forEach((f, i) => {
+    const card = document.createElement('div');
+    card.className = 'codex-card';
+    card.dataset.cat = f.cat;
+    card.innerHTML = `
+      <div class="codex-card-header" onclick="toggleCodex(this)">
+        <span class="codex-hz">${f.hz} Hz</span>
+        <span class="codex-name">${f.name}</span>
+        <span class="codex-tag">${f.tag}</span>
+      </div>
+      <div class="codex-body">
+        <p>${f.desc}</p>
+        <div class="codex-props">${f.props.map(p=>`<span class="codex-prop">${p}</span>`).join('')}</div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function toggleCodex(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  // Close all
+  document.querySelectorAll('.codex-body').forEach(b => b.style.display = 'none');
+  if (!isOpen) body.style.display = 'block';
+}
+
+function filterCodex(cat, btn) {
+  codexActive = cat;
+  document.querySelectorAll('.codex-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildCodex(cat);
+}
+
+// Build on load
+document.addEventListener('DOMContentLoaded', () => buildCodex('all'));
+
+// ============================================================
+// SEARCH FUNCTIONALITY
+// ============================================================
+const SEARCH_INDEX = [
+  { title:'Daily Insight', desc:'AI-generated daily affirmation and seasonal reflection for the current zodiac sign.', section:'daily' },
+  { title:'Books', desc:'Children\'s books, adult healing fiction, and pattern work guides by Kristina Rose Taylor.', section:'books' },
+  { title:'Root Pattern Mapping System (RPMS)', desc:'AI-powered tool to identify archetypal loops, field states, and frequency keys in your patterns.', section:'rpms' },
+  { title:'Start Here Path', desc:'A guided roadmap through the site for newcomers to frequency, sound healing, and pattern work.', section:'start-here' },
+  { title:'Frequency Codex', desc:'Interactive reference guide of Solfeggio, healing, binaural, and LFSX scalar frequencies.', section:'frequency-codex' },
+  { title:'Sound Sessions — LFSX', desc:'Scalar-encoded audio sessions: 15-second preview and 33-minute Masterpack resonance field.', section:'sound-sessions' },
+  { title:'The Framework', desc:'Unified architecture where physics, neuroscience, and ancient tradition converge. Math, frequency, geometry, form, perception, bandwidth, practice.', section:'framework' },
+  { title:'Blog — Archetypes', desc:'Who Are You Showing Up As Today? The Lover, Rebel, Healer, Sage. Archetypal energies and identity.', section:'blog' },
+  { title:'Blog — House of Mirrors', desc:'Get control of your environment. Reality as pattern, integration, identity, and perception.', section:'blog' },
+  { title:'Blog — Neuroplasticity', desc:'Your Brain Isn\'t Stuck. It\'s Just Patterned. Synapses, repetition, frequency, nervous system rewiring.', section:'blog' },
+  { title:'Blog — Humming', desc:'Science-backed tool for anxiety and nervous system regulation. Vagus nerve, nitric oxide, brainwaves.', section:'blog' },
+  { title:'Blog — Manifestation', desc:'Manifestation isn\'t about getting what you want. Subconscious alignment, infertility, healing journey.', section:'blog' },
+  { title:'Blog — Body as Temple', desc:'The Body as the King\'s Chamber. Embodied cognition, the observer, Romans 12:2, chrysalis, compassion.', section:'blog' },
+  { title:'432 Hz', desc:'Universal tuning frequency. Heart coherence, natural alignment, LFSX foundation.', section:'frequency-codex' },
+  { title:'528 Hz DNA Repair', desc:'Love frequency, miracle tone, DNA repair, solar plexus, transformation.', section:'frequency-codex' },
+  { title:'Solfeggio Frequencies', desc:'174, 285, 396, 417, 528, 639, 741, 852, 963 Hz — the ancient healing scale.', section:'frequency-codex' },
+  { title:'Schumann Resonance 7.83 Hz', desc:'Earth\'s heartbeat. Grounding, circadian rhythm, nervous system synchronisation.', section:'frequency-codex' },
+  { title:'Nervous System', desc:'Vagus nerve, parasympathetic, cortisol, regulation, humming, theta, alpha.', section:'blog' },
+  { title:'Archetypes', desc:'Lover, Rebel, Healer, Sage, Nurturer, Warrior, Creator, Destroyer, King, Queen, Fool.', section:'blog' },
+  { title:'Krystic Alignment', desc:'RPMS framework — field states, frequency keys, archetypal loops, root patterns.', section:'rpms' },
+];
+
+function runSearch(query) {
+  const box = document.getElementById('searchResults');
+  if (!query || query.trim().length < 2) { box.style.display = 'none'; return; }
+  const q = query.toLowerCase();
+  const results = SEARCH_INDEX.filter(item =>
+    item.title.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q)
+  ).slice(0, 8);
+  if (results.length === 0) {
+    box.innerHTML = '<div style="padding:1rem;color:rgba(248,244,238,0.5);font-size:0.85rem;">No results found</div>';
+    box.style.display = 'block';
+    return;
+  }
+  box.innerHTML = results.map(r => `
+    <div onclick="goToSection('${r.section}')" style="padding:0.75rem 1.2rem;cursor:pointer;border-bottom:1px solid rgba(212,170,80,0.1);transition:background 0.2s;" onmouseover="this.style.background='rgba(212,170,80,0.08)'" onmouseout="this.style.background='transparent'">
+      <div style="font-family:'Cinzel',serif;font-size:0.8rem;color:var(--gold);margin-bottom:0.2rem;">${r.title}</div>
+      <div style="font-size:0.78rem;color:rgba(248,244,238,0.55);">${r.desc.substring(0,90)}...</div>
+    </div>`).join('');
+  box.style.display = 'block';
+}
+
+function goToSection(id) {
+  document.getElementById('searchResults').style.display = 'none';
+  document.getElementById('siteSearch').value = '';
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Close search on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('#search-bar')) {
+    const box = document.getElementById('searchResults');
+    if (box) box.style.display = 'none';
+  }
+});
 
 </script>
 </body>
