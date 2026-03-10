@@ -627,6 +627,203 @@
 
   .blog-link:hover { border-bottom-color: var(--gold); }
 
+  /* FRAMEWORK */
+  #framework { padding: 6rem 2rem; }
+
+  .fw-chain-wrap {
+    margin: 3rem 0 2.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .fw-chain-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sapphire);
+    margin-bottom: 1rem;
+  }
+
+  .fw-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+  }
+
+  .fw-chain-node {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    color: var(--ivory-dim);
+    background: transparent;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+
+  .fw-chain-node:hover, .fw-chain-node.active {
+    background: var(--gold-dim);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  .fw-chain-arrow {
+    color: rgba(212,170,80,0.35);
+    font-size: 1rem;
+    padding: 0 0.3rem;
+  }
+
+  .fw-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .fw-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+
+  .fw-card:hover { border-color: rgba(212,170,80,0.5); transform: translateY(-2px); }
+  .fw-card.open { border-color: var(--gold); }
+
+  .fw-card-top {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .fw-canvas-wrap { flex-shrink: 0; }
+
+  .fw-card-meta { flex: 1; }
+
+  .fw-card-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: var(--sapphire);
+    margin-bottom: 0.3rem;
+  }
+
+  .fw-card-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 0.85rem;
+    color: var(--ivory);
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+  }
+
+  .fw-card-anchor {
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .fw-card-body {
+    display: none;
+    padding: 0 1.4rem 1.4rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .fw-card.open .fw-card-body { display: block; }
+
+  .fw-card-text {
+    font-size: 0.85rem;
+    line-height: 1.9;
+    color: var(--ivory-dim);
+    margin-top: 1rem;
+    white-space: pre-line;
+  }
+
+  .fw-card-ref {
+    font-size: 0.72rem;
+    color: rgba(212,170,80,0.5);
+    font-style: italic;
+    margin-top: 1rem;
+    line-height: 1.6;
+    border-left: 2px solid rgba(212,170,80,0.25);
+    padding-left: 0.8rem;
+  }
+
+  .fw-diagram-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .fw-diagram-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sapphire);
+    margin-bottom: 0.8rem;
+  }
+
+  .fw-diagram-sub {
+    font-size: 0.85rem;
+    color: var(--ivory-dim);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    max-width: 560px;
+  }
+
+  .fw-stream-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .fw-stream-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--ivory-dim);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .fw-stream-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .fw-stream-btn.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold-light); }
+  .fw-stream-both.active { background: rgba(212,170,80,0.2); border-color: var(--gold-light); color: var(--gold-light); }
+
+  #fw-dual-canvas {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+
+  .fw-diagram-caption {
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-style: italic;
+    margin-top: 1rem;
+    min-height: 1.4em;
+  }
+
   /* FOOTER */
   footer {
     padding: 4rem 2rem 3rem;
@@ -931,6 +1128,7 @@
     <a href="#creations">Creations</a>
     <a href="#rpms">Root Pattern System</a>
     <a href="#blog">Blog</a>
+    <a href="#framework">The Framework</a>
   </div>
 </nav>
 
@@ -1579,6 +1777,40 @@
   </div>
 </section>
 
+<div class="section-divider"></div>
+
+<!-- THE FRAMEWORK -->
+<section id="framework">
+  <div class="section-inner">
+    <div class="section-label">A Unified Architecture</div>
+    <h2 class="section-title">The Framework</h2>
+    <p class="section-sub">Where physics, neuroscience, and ancient tradition converge. This is not a set of claims — it is a map of where the threads meet.</p>
+
+    <!-- THE CHAIN -->
+    <div class="fw-chain-wrap">
+      <div class="fw-chain-label">The Through-Line</div>
+      <div class="fw-chain" id="fw-chain"></div>
+    </div>
+
+    <!-- CHAPTER CARDS -->
+    <div class="fw-grid" id="fw-grid"></div>
+
+    <!-- DUAL STREAM DIAGRAM -->
+    <div class="fw-diagram-wrap">
+      <div class="fw-diagram-label">The Dual Stream</div>
+      <p class="fw-diagram-sub">The nervous system processes reality through two simultaneous streams. Tap each stream to activate it. Activate both to see what coherence looks like.</p>
+      <div class="fw-stream-btns">
+        <button class="fw-stream-btn" data-stream="structural" onclick="fwSetStream('structural',this)">Structural Stream</button>
+        <button class="fw-stream-btn" data-stream="semantic" onclick="fwSetStream('semantic',this)">Semantic Stream</button>
+        <button class="fw-stream-btn fw-stream-both" data-stream="both" onclick="fwSetStream('both',this)">Both — Coherence</button>
+      </div>
+      <canvas id="fw-dual-canvas" width="600" height="320"></canvas>
+      <p class="fw-diagram-caption" id="fw-dual-caption">Tap a stream above to activate it.</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-name">Taylored Harmony</div>
@@ -1986,6 +2218,389 @@ function rpmsReset() {
     if (el) el.value = '';
   });
 }
+
+// ═══════════════════════════════════════════
+// THE FRAMEWORK — Interactive Section
+// ═══════════════════════════════════════════
+
+const FW_CHAPTERS = [
+  {
+    num: 'I', node: 'Math', geo: 'mandala',
+    title: 'Everything Is Math',
+    anchor: 'The foundational position of modern physics — not mysticism.',
+    body: 'In 1960, Nobel laureate Eugene Wigner wrote about what he called "the unreasonable effectiveness of mathematics in the natural sciences" — the observation that abstract mathematical structures, developed with no physical application in mind, keep turning out to be the precise language the universe runs on. Quantum field theory, general relativity, the standard model: all of them are, at base, mathematical relationships that physical reality appears to obey with extraordinary precision.\n\nThe working assumption of this framework is the same: reality is not merely described by mathematics but is, in some deep sense, organized by it. This is not a fringe position. It is the implicit assumption of every physicist who has ever written an equation.',
+    ref: 'Wigner, E. (1960). The unreasonable effectiveness of mathematics in the natural sciences. Communications in Pure and Applied Mathematics, 13(1).'
+  },
+  {
+    num: 'II', node: 'Frequency', geo: 'cymatic',
+    title: 'Frequency Is Math in Motion',
+    anchor: 'Every physical object above absolute zero is vibrating. This is not metaphor — it is thermodynamics.',
+    body: 'At the atomic scale, particles are not billiard balls but excitations of underlying quantum fields: standing waves in an invisible medium, each with a characteristic frequency. At the biological scale, every organ, every cell membrane, every neural oscillation has a frequency signature.\n\nThe brain itself operates through frequency bands — delta, theta, alpha, beta, gamma — that correspond to distinct modes of processing and distinct states of consciousness. These are not categories imposed by neuroscientists. They are the brain\'s own operational modes, measurable in hertz.\n\nFrequency is the language in which math moves through time. It is oscillation — pattern made temporal.',
+    ref: 'Buzsáki, G. (2006). Rhythms of the Brain. Oxford University Press.'
+  },
+  {
+    num: 'III', node: 'Geometry', geo: 'honeycomb',
+    title: 'Geometry Is Math in Form',
+    anchor: 'When frequency encounters a boundary, it stops moving and starts standing.',
+    body: 'Standing waves produce nodes: fixed points of constructive and destructive interference that organize space into repeating geometric patterns. This is not theoretical. Hans Jenny\'s cymatic experiments made it visible: specific audio frequencies applied to granular media produce specific, reproducible geometric forms. Chladni demonstrated the same principle in 1787 with sand on vibrating metal plates.\n\nThe same mathematics — spherical harmonics — describes the vibrational modes of drumheads, the shapes of electron orbitals, and the proposed resonance modes of microtubules in neural tissue. Geometry is frequency resolved into form. The shape is the frequency at rest.',
+    ref: 'Jenny, H. (1967). Cymatics. Basilius Presse. | Craddock, T. et al. (2017). Microtubule vibrations. Frontiers in Molecular Biosciences.'
+  },
+  {
+    num: 'IV', node: 'Form', geo: 'nautilus',
+    title: 'Form Is the Interface',
+    anchor: 'The body encounters frequency through form — shape is the signal.',
+    body: 'A geometric form is not static information. It is a standing frequency — a pattern that was produced by oscillation and continues to carry the signature of that oscillation in its proportions and symmetries. When the eye encounters a form, it is not reading a picture. It is making contact with a frequency signature encoded in space.\n\nThis is why the same geometric forms appear across all human cultures independently — the spiral, the hexagon, the radial mandala. These are not cultural inventions. They are the natural geometric products of the frequencies that organize living systems. Nature keeps arriving at them because they are solutions.',
+    ref: 'Hameroff, S. & Penrose, R. (2014). Consciousness in the Universe: A Review of the Orch OR Theory. Physics of Life Reviews.'
+  },
+  {
+    num: 'V', node: 'Perception', geo: 'cathedral',
+    title: 'Perception Is Bandwidth-Dependent',
+    anchor: 'The nervous system does not perceive reality directly. It constructs a model — and which model it can construct depends on its current state.',
+    body: 'Daniel Siegel\'s "window of tolerance" describes this precisely: when the autonomic nervous system is in chronic activation (hyperarousal) or collapse (hypoarousal), the range of stimuli that can be meaningfully integrated narrows dramatically. The same information that is legible to a regulated nervous system is literally unprocessable by a dysregulated one.\n\nThis is what bandwidth means in biological terms: the operational range of the nervous system\'s signal-processing capacity. It is not fixed. It is state-dependent. And it is the primary determinant of what a person can perceive, integrate, and act on at any given moment.\n\nThe nervous system is not a neutral receiver. It is a tuned instrument — and its tuning determines what it can hear.',
+    ref: 'Siegel, D. (1999). The Developing Mind. Guilford Press. | Friston, K. (2010). The free-energy principle: a unified brain theory. Nature Reviews Neuroscience.'
+  },
+  {
+    num: 'VI', node: 'Bandwidth', geo: 'mandala',
+    title: 'The Toroidal Field and the Chakra Bandwidths',
+    anchor: 'The body is not a container for energy. It is a projector of it.',
+    body: 'The heart generates the largest electromagnetic field in the body — measurable several feet beyond the skin, with a torus topology documented by HeartMath Institute research. A torus does not work by containment. It works by continuous circulation: projecting outward, curving back through, projecting again. Transformation requires throughput, not hoarding.\n\nThe traditional chakra system maps, with striking anatomical consistency, onto clusters of autonomic nerve ganglia along the spinal axis. Each major center corresponds to a vertebral level where dense concentrations of autonomic fibers integrate a specific category of physiological signaling.\n\nWhat contemplative traditions called "chakra lessons" — the psychological themes associated with each center — map coherently onto the physiological functions those nerve plexuses actually regulate. Each chakra is a frequency lens: a bandwidth of the nervous system through which a specific range of experience is processed, metabolized, or retained as unresolved activation.',
+    ref: 'McCraty, R. (2015). Science of the Heart. HeartMath Institute. | Tortora, G. & Derrickson, B. (2017). Principles of Anatomy and Physiology.'
+  },
+  {
+    num: 'VII', node: 'Bandwidth', geo: 'cymatic',
+    title: 'Transformation, Not Recycling',
+    anchor: 'Energy is not meant to be hoarded. Open systems sustain themselves by transforming energy — not conserving it unchanged.',
+    body: 'Ilya Prigogine won the Nobel Prize in Chemistry in 1977 for his work on dissipative structures — open thermodynamic systems that maintain their organization by continuously exchanging energy with their environment. Life is the paradigmatic example: it sustains its improbable order precisely by transforming energy, not conserving it.\n\nA closed system tends toward equilibrium — maximum entropy, minimum structure. Loops form when energy is recycled rather than transformed: a traumatic response that keeps activating the same neural pathway, depleting the same resources, producing the same output. The energy goes around but doesn\'t go through. Nothing new emerges.\n\nTransformation requires throughput. The system must be open — receiving new input, processing it through a changing medium, producing output that is genuinely different from what entered.',
+    ref: 'Prigogine, I. & Stengers, I. (1984). Order Out of Chaos. Bantam Books.'
+  },
+  {
+    num: 'VIII', node: 'Bandwidth', geo: 'honeycomb',
+    title: 'The Ancestral Loop: Epigenetic Transmission',
+    anchor: 'A family line subjected to sustained threat may transmit a calibrated threat-detection system — a nervous system tuned by history.',
+    body: 'Epigenetic research has established that stress responses transmit across generations. The HPA axis — governing cortisol and stress hormone production — can be dysregulated by sustained threat exposure, and that dysregulation transmits to offspring through multiple mechanisms: maternal cortisol levels during pregnancy that shape fetal nervous system development, altered methylation patterns that change gene expression without changing the underlying DNA sequence, and behavioral transmission through early attachment patterns.\n\nWhat this means: a family line subjected to generations of persecution, displacement, or chronic threat may pass forward a nervous system primed for danger — one that metabolizes ordinary experience through a high-alert filter. The bandwidth has been set by history.\n\nThis is not metaphor. It is measurable. The loop persists not because the threat continues but because the configuration has never had a transformer — a point in the system where the inherited signal is genuinely processed rather than passed on unchanged. The loop is not fate. It is a configuration. Configurations can be changed.',
+    ref: 'Yehuda, R. et al. (2016). Holocaust Exposure Induced Intergenerational Effects on FKBP5 Methylation. Biological Psychiatry. | Ornish, D. et al. (2008). Changes in prostate gene expression. PNAS.'
+  },
+  {
+    num: 'IX', node: 'Practice', geo: 'cathedral',
+    title: 'The Geometric Semantic Driver as Loop Interrupter',
+    anchor: 'The symbol doesn\'t push the loop. It changes the terrain so the loop has nowhere to go.',
+    body: 'Loops persist because the nervous system\'s predictions match its outputs — it keeps expecting threat, perceiving threat, producing threat-responses, which confirm the expectation. Karl Friston\'s free energy principle describes this as a high-entropy attractor state: the system is trapped in a narrow probability basin with steep walls, sampling the same region of possible states because the transition cost to any other region exceeds the energy available.\n\nA properly constructed geometric semantic driver reduces that transition cost by collapsing prediction error bidirectionally. The geometry (structural stream) reduces bottom-up sensory noise. The meaning (semantic stream) reduces top-down predictive uncertainty. When both streams simultaneously align on a signal meaning coherence, safety, integration — the probability landscape reshapes. The walls of the attractor basin flatten. New states become accessible without requiring the energy to climb the barrier.\n\nThis is not relaxation. It is not distraction. It is a topological shift in the state-space of the nervous system — achieved through precisely constructed sensory input that reorganizes the system\'s probabilistic model of what is real.',
+    ref: 'Friston, K. (2010). The free-energy principle. Nature Reviews Neuroscience, 11, 127–138.'
+  },
+  {
+    num: 'X', node: 'Practice', geo: 'nautilus',
+    title: 'The Layers of an Effective Driver',
+    anchor: 'Because the loop operates at multiple levels simultaneously, an effective driver must be layered — a signal that moves through the system rather than addressing one level in isolation.',
+    body: 'FORM: The base geometry — symmetry, proportions, structural coherence. The structural stream processes this first, before any meaning is applied. It must be genuinely low-entropy: predictable, resolvable, stable.\n\nMEANING: The symbolic layer — what the form encodes about reality. For the driver to be potent, the meaning must resonate in both individual and collective semantic memory. It must align with something the nervous system already knows.\n\nMOVEMENT: How the driver animates — its temporal signature. Static geometry activates only the spatial stream. Movement adds entrainment: the nervous system begins synchronizing its rhythms to the driver\'s rhythm.\n\nTRANSITION: How the driver moves through states. An effective sequence doesn\'t hold one frequency — it moves through a progression that shifts the nervous system from one attractor state toward another.\n\nENTRAINMENT: The process by which the nervous system\'s oscillations begin matching the driver\'s frequency. Neural entrainment is measurable via EEG. Rhythmic sensory input with sufficient coherence will, over time, synchronize neural oscillation to match it.\n\nEVOLUTION: The long-term arc across repeated sessions. Each repetition strengthens the semantic prior — Bayesian updating in the direction of coherence. The first session opens a possibility. Sustained practice consolidates it into a new attractor state.',
+    ref: 'Thaut, M. (2005). Rhythm, Music, and the Brain. Routledge. | Friston, K. (2019). A free energy principle for a particular physics. arXiv.'
+  }
+];
+
+const FW_CHAIN_NODES = ['Math','Frequency','Geometry','Form','Perception','Bandwidth','Practice'];
+
+// Build chain
+(function buildChain() {
+  const wrap = document.getElementById('fw-chain');
+  if (!wrap) return;
+  FW_CHAIN_NODES.forEach((node, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'fw-chain-node';
+    btn.textContent = node;
+    btn.onclick = () => {
+      document.querySelectorAll('.fw-chain-node').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.fw-card').forEach(card => {
+        card.style.display = card.dataset.node === node ? '' : 'none';
+      });
+    };
+    wrap.appendChild(btn);
+    if (i < FW_CHAIN_NODES.length - 1) {
+      const arr = document.createElement('span');
+      arr.className = 'fw-chain-arrow';
+      arr.textContent = '→';
+      wrap.appendChild(arr);
+    }
+  });
+})();
+
+// Geometry canvas drawing
+function fwDrawGeo(canvas, type, active, t) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height, cx = W/2, cy = H/2;
+  ctx.clearRect(0, 0, W, H);
+  // Dark background matching site
+  ctx.fillStyle = '#0b0f1e';
+  ctx.fillRect(0, 0, W, H);
+  const a = active ? 0.9 : 0.35;
+  const gold = `rgba(212,170,80,${a})`;
+  const goldDim = `rgba(212,170,80,${a * 0.4})`;
+  const sapphire = `rgba(74,158,221,${a * 0.7})`;
+  const violet = `rgba(155,111,212,${a * 0.6})`;
+
+  if (type === 'nautilus') {
+    ctx.beginPath();
+    for (let i = 0; i < 680; i++) {
+      const ang = (i * Math.PI) / 180;
+      const r = 1.8 * Math.pow(1.053, i * 0.15) + (active ? Math.sin(t * 1.8 + i * 0.04) * 1.2 : 0);
+      const x = cx + r * Math.cos(ang + t * 0.18), y = cy + r * Math.sin(ang + t * 0.18);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = gold; ctx.lineWidth = 1.2; ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI*2);
+    ctx.fillStyle = gold; ctx.fill();
+  }
+
+  if (type === 'honeycomb') {
+    const hR = 16;
+    for (let row = -3; row <= 3; row++) for (let col = -4; col <= 4; col++) {
+      const x = cx + col * hR * 1.732 + (row % 2) * hR * 0.866, y = cy + row * hR * 1.5;
+      const idx = (row+3)*9+(col+4);
+      const pulse = active ? 0.3 + Math.sin(t * 1.4 + idx * 0.38) * 0.25 : 0.2;
+      ctx.beginPath();
+      for (let s = 0; s < 6; s++) {
+        const ang = (s/6)*Math.PI*2 - Math.PI/6;
+        const px = x + hR * 0.88 * Math.cos(ang), py = y + hR * 0.88 * Math.sin(ang);
+        s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = `rgba(74,158,221,${a * pulse * 1.8})`; ctx.lineWidth = 0.8; ctx.stroke();
+    }
+  }
+
+  if (type === 'mandala') {
+    const rings = [{r:14,p:6},{r:28,p:8},{r:42,p:10},{r:56,p:12}];
+    rings.forEach(({r, p}, ri) => {
+      const rot = active ? t * (ri%2===0 ? 0.18 : -0.12) : 0;
+      for (let i = 0; i < p; i++) {
+        const a1 = (i/p)*Math.PI*2+rot, a2 = ((i+1)/p)*Math.PI*2+rot, mid = (a1+a2)/2;
+        ctx.beginPath(); ctx.moveTo(cx, cy);
+        ctx.quadraticCurveTo(cx+r*0.75*Math.cos(a1), cy+r*0.75*Math.sin(a1), cx+r*0.48*Math.cos(mid), cy+r*0.48*Math.sin(mid));
+        ctx.quadraticCurveTo(cx+r*0.75*Math.cos(a2), cy+r*0.75*Math.sin(a2), cx, cy);
+        const pulse = active ? 0.07 + Math.sin(t*1.6+ri*0.8)*0.04 : 0.04;
+        ctx.fillStyle = `rgba(155,111,212,${pulse})`; ctx.fill();
+        ctx.strokeStyle = `rgba(155,111,212,${a*0.35})`; ctx.lineWidth = 0.6; ctx.stroke();
+      }
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(155,111,212,${a*0.2})`; ctx.lineWidth = 0.5; ctx.stroke();
+    });
+    ctx.beginPath(); ctx.arc(cx, cy, 4, 0, Math.PI*2);
+    ctx.fillStyle = violet; ctx.fill();
+  }
+
+  if (type === 'cymatic') {
+    const step = 5;
+    for (let gx = step; gx < W-step; gx += step) for (let gy = step; gy < H-step; gy += step) {
+      const dx = gx-cx, dy = gy-cy, dist = Math.sqrt(dx*dx+dy*dy);
+      const w1 = Math.sin(dist*0.18 - t*2.5), w2 = Math.sin(dx*0.18+t*1.8)*Math.sin(dy*0.18+t*1.3);
+      const combined = (w1+w2)/2;
+      if (Math.abs(combined) > 0.5) {
+        ctx.beginPath(); ctx.arc(gx, gy, 1, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(74,158,221,${active ? Math.abs(combined)*0.7 : Math.abs(combined)*0.2})`; ctx.fill();
+      }
+    }
+  }
+
+  if (type === 'cathedral') {
+    const spokes = 12, rot = active ? t * 0.12 : 0;
+    for (let s = 0; s < spokes; s++) {
+      const ang = (s/spokes)*Math.PI*2+rot;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx+60*Math.cos(ang), cy+60*Math.sin(ang));
+      ctx.strokeStyle = `rgba(212,170,80,${a*0.25})`; ctx.lineWidth = 0.7; ctx.stroke();
+    }
+    [16,30,46,60].forEach((r, ri) => {
+      for (let s = 0; s < spokes; s++) {
+        const a1 = (s/spokes)*Math.PI*2+rot, a2 = ((s+0.5)/spokes)*Math.PI*2+rot;
+        const pulse = active ? 0.12 + Math.sin(t*1.3+s*0.5+ri)*0.08 : 0.07;
+        if (ri < 3) {
+          ctx.beginPath(); ctx.arc(cx, cy, [30,46,60][ri], a1, a2); ctx.arc(cx, cy, [16,30,46][ri], a2, a1, true);
+          ctx.closePath(); ctx.fillStyle = `rgba(212,170,80,${pulse*0.7})`; ctx.fill();
+        }
+        ctx.beginPath(); ctx.arc(cx, cy, r, a1, a2);
+        ctx.strokeStyle = `rgba(212,170,80,${a*pulse*2})`; ctx.lineWidth = 0.9; ctx.stroke();
+      }
+    });
+    ctx.beginPath(); ctx.arc(cx, cy, 6, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(212,170,80,${a*0.5})`; ctx.fill();
+  }
+}
+
+// Build chapter cards
+(function buildCards() {
+  const grid = document.getElementById('fw-grid');
+  if (!grid) return;
+  FW_CHAPTERS.forEach((ch, idx) => {
+    const card = document.createElement('div');
+    card.className = 'fw-card';
+    card.dataset.node = ch.node;
+    const canvasId = `fw-geo-${idx}`;
+    card.innerHTML = `
+      <div class="fw-card-top" onclick="fwToggleCard(this.closest('.fw-card'), ${idx})">
+        <div class="fw-canvas-wrap"><canvas id="${canvasId}" width="90" height="90" style="display:block;border-radius:3px;"></canvas></div>
+        <div class="fw-card-meta">
+          <div class="fw-card-num">${ch.num} · ${ch.node.toUpperCase()}</div>
+          <div class="fw-card-title">${ch.title}</div>
+          <div class="fw-card-anchor">${ch.anchor}</div>
+        </div>
+      </div>
+      <div class="fw-card-body">
+        <p class="fw-card-text">${ch.body.replace(/\n/g, '<br><br>')}</p>
+        <p class="fw-card-ref">${ch.ref}</p>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Start animations
+  const fwAnims = {};
+  FW_CHAPTERS.forEach((ch, idx) => {
+    const canvas = document.getElementById(`fw-geo-${idx}`);
+    if (!canvas) return;
+    let t = 0;
+    let active = false;
+    const card = canvas.closest('.fw-card');
+    const obs = new IntersectionObserver(([e]) => { active = e.isIntersecting; }, { threshold: 0.1 });
+    obs.observe(card);
+    const draw = () => {
+      t += active ? 0.009 : 0.003;
+      fwDrawGeo(canvas, ch.geo, active, t);
+      fwAnims[idx] = requestAnimationFrame(draw);
+    };
+    draw();
+  });
+})();
+
+function fwToggleCard(card, idx) {
+  const isOpen = card.classList.contains('open');
+  card.classList.toggle('open', !isOpen);
+}
+
+// Dual stream diagram
+let fwStreamActive = null;
+let fwDualT = 0;
+let fwDualAnim = null;
+
+function fwSetStream(stream, btn) {
+  document.querySelectorAll('.fw-stream-btn').forEach(b => b.classList.remove('active'));
+  if (fwStreamActive === stream) {
+    fwStreamActive = null;
+  } else {
+    fwStreamActive = stream;
+    btn.classList.add('active');
+  }
+  const captions = {
+    structural: 'Brain reduces noise — building a stable platform from the bottom up.',
+    semantic: 'Brain retrieves meaning — activating prior associations from the top down.',
+    both: 'Structure and meaning aligned — prediction error collapses. This is coherence.',
+    null: 'Tap a stream above to activate it.'
+  };
+  document.getElementById('fw-dual-caption').textContent = captions[stream] || captions['null'];
+}
+
+(function startDualDiagram() {
+  const canvas = document.getElementById('fw-dual-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const draw = () => {
+    fwDualT += 0.01;
+    const t = fwDualT;
+    const W = canvas.width, H = canvas.height, cx = W/2, cy = H/2;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#0b0f1e'; ctx.fillRect(0, 0, W, H);
+
+    const stream = fwStreamActive;
+    const sA = stream === 'structural' || stream === 'both';
+    const smA = stream === 'semantic' || stream === 'both';
+    const both = stream === 'both';
+    const sa = sA ? 1 : 0.2, sma = smA ? 1 : 0.2;
+    const sx = cx - 130, smx = cx + 130;
+
+    const structYs = [0,1,2,3].map(i => H - 55 - i * (H - 130) / 3);
+    const semYs = [0,1,2,3].map(i => 45 + i * (H - 130) / 3);
+    const structLabels = ['Pattern','Symmetry','Regularity','Order'];
+    const semLabels = ['Memory','Meaning','Emotion','Belief'];
+
+    // Draw structural stream (green, bottom-up)
+    for (let i = 0; i < 3; i++) {
+      const pulse = sa > 0.5 ? 0.4 + Math.sin(t*2 - i*0.7)*0.4 : 0.15;
+      ctx.beginPath(); ctx.moveTo(sx, structYs[i]); ctx.lineTo(sx, structYs[i+1]);
+      ctx.strokeStyle = `rgba(60,160,90,${sa*pulse})`; ctx.lineWidth = 1.5; ctx.stroke();
+    }
+    structLabels.forEach((label, i) => {
+      const pulse = sa > 0.5 ? 0.5 + Math.sin(t*1.5 - i*0.5)*0.35 : 0.15;
+      ctx.beginPath(); ctx.arc(sx, structYs[i], 4, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(60,160,90,${sa*pulse})`; ctx.fill();
+      ctx.font = '10px Georgia'; ctx.fillStyle = `rgba(248,244,238,${sa*0.8})`;
+      ctx.textAlign = 'right';
+      ctx.fillText(label, sx - 10, structYs[i] + 4);
+    });
+    ctx.font = 'bold 9px Courier New'; ctx.fillStyle = `rgba(60,160,90,${sa})`; ctx.textAlign = 'center';
+    ctx.fillText('STRUCTURAL', sx, H - 22);
+    ctx.fillText('bottom-up ↑', sx, H - 10);
+
+    // Draw semantic stream (violet, top-down)
+    for (let i = 0; i < 3; i++) {
+      const pulse = sma > 0.5 ? 0.4 + Math.sin(t*2 - i*0.7)*0.4 : 0.15;
+      ctx.beginPath(); ctx.moveTo(smx, semYs[i]); ctx.lineTo(smx, semYs[i+1]);
+      ctx.strokeStyle = `rgba(155,111,212,${sma*pulse})`; ctx.lineWidth = 1.5; ctx.stroke();
+    }
+    semLabels.forEach((label, i) => {
+      const pulse = sma > 0.5 ? 0.5 + Math.sin(t*1.5 - i*0.5)*0.35 : 0.15;
+      ctx.beginPath(); ctx.arc(smx, semYs[i], 4, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(155,111,212,${sma*pulse})`; ctx.fill();
+      ctx.font = '10px Georgia'; ctx.fillStyle = `rgba(248,244,238,${sma*0.8})`;
+      ctx.textAlign = 'left';
+      ctx.fillText(label, smx + 10, semYs[i] + 4);
+    });
+    ctx.font = 'bold 9px Courier New'; ctx.fillStyle = `rgba(155,111,212,${sma})`; ctx.textAlign = 'center';
+    ctx.fillText('SEMANTIC', smx, 14);
+    ctx.fillText('top-down ↓', smx, 26);
+
+    // Center resonance symbol
+    const rP = both ? 0.7 + Math.sin(t*2.5)*0.25 : 0.25;
+    const r = 36 + (both ? Math.sin(t*2)*3 : 0);
+    if (both) {
+      const glow = ctx.createRadialGradient(cx, cy, r*0.3, cx, cy, r*2);
+      glow.addColorStop(0, `rgba(212,170,80,${rP*0.2})`); glow.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(cx, cy, r*2, 0, Math.PI*2); ctx.fill();
+    }
+    for (let p = 0; p < 6; p++) {
+      const ang = (p/6)*Math.PI*2 + t*(both ? 0.15 : 0.03);
+      const nAng = ((p+1)/6)*Math.PI*2 + t*(both ? 0.15 : 0.03);
+      const pr = r*0.85, mid = (ang+nAng)/2;
+      ctx.beginPath(); ctx.moveTo(cx, cy);
+      ctx.quadraticCurveTo(cx+pr*0.72*Math.cos(ang), cy+pr*0.72*Math.sin(ang), cx+pr*0.5*Math.cos(mid), cy+pr*0.5*Math.sin(mid));
+      ctx.quadraticCurveTo(cx+pr*0.72*Math.cos(nAng), cy+pr*0.72*Math.sin(nAng), cx, cy);
+      ctx.fillStyle = `rgba(212,170,80,${rP*0.1})`; ctx.fill();
+      ctx.strokeStyle = `rgba(212,170,80,${rP*0.45})`; ctx.lineWidth = 0.8; ctx.stroke();
+    }
+    [0.33, 0.66, 1].forEach(s => {
+      ctx.beginPath(); ctx.arc(cx, cy, r*s, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(212,170,80,${rP*0.3})`; ctx.lineWidth = 0.6; ctx.stroke();
+    });
+    ctx.beginPath(); ctx.arc(cx, cy, 4, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(212,170,80,${rP})`; ctx.fill();
+
+    // Connection lines when both active
+    if (both) {
+      const da = 0.25 + Math.sin(t*3)*0.12;
+      ctx.setLineDash([3, 5]);
+      ctx.beginPath(); ctx.moveTo(sx+8, cy); ctx.lineTo(cx-r-3, cy);
+      ctx.strokeStyle = `rgba(60,160,90,${da})`; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(smx-8, cy); ctx.lineTo(cx+r+3, cy);
+      ctx.strokeStyle = `rgba(155,111,212,${da})`; ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    ctx.font = 'bold 9px Courier New'; ctx.fillStyle = `rgba(212,170,80,${both ? rP : 0.3})`; ctx.textAlign = 'center';
+    ctx.fillText(both ? 'RESONANCE' : 'GEOMETRIC', cx, cy - 5);
+    ctx.fillText(both ? 'FIELD' : 'DRIVER', cx, cy + 9);
+
+    fwDualAnim = requestAnimationFrame(draw);
+  };
+  draw();
+})();
+
 </script>
 </body>
 </html>
