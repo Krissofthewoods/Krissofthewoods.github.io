@@ -1020,13 +1020,24 @@
   .codex-card-header {
     flex-wrap: wrap;
   }
+  .codex-chevron {
+    font-size: 0.9rem;
+    color: var(--gold);
+    opacity: 0.6;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .codex-card-header.open .codex-chevron {
+    transform: rotate(180deg);
+  }
   .codex-cymatic-wrap {
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    padding: 0.8rem 1.2rem;
+    padding: 0.8rem 0 0.8rem 0;
+    margin-bottom: 0.8rem;
     border-bottom: 1px solid rgba(212,170,80,0.1);
-    background: rgba(0,0,0,0.2);
+    background: transparent;
   }
   .codex-cymatic-canvas {
     border-radius: 4px;
@@ -3282,7 +3293,6 @@ function getCymaAudioCtx() {
 function playCodexTone(hzStr, btn) {
   const hz = parseFloat(hzStr);
   if (isNaN(hz) || hz <= 0 || hz > 20000) {
-    // Binaural or out-of-range: show message
     btn.textContent = '⚠ Binaural / Sub-audio';
     setTimeout(() => { btn.textContent = '▶ Play Tone'; btn.classList.remove('playing'); }, 2000);
     return;
@@ -3308,32 +3318,38 @@ function playCodexTone(hzStr, btn) {
     return;
   }
 
-  // Create oscillator with gentle fade in/out envelope
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.type = 'sine';
-  osc.frequency.setValueAtTime(hz, ctx.currentTime);
-  gain.gain.setValueAtTime(0, ctx.currentTime);
-  gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 0.08);
-  gain.gain.setValueAtTime(0.18, ctx.currentTime + 4.92);
-  gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 5.0);
-  osc.start(ctx.currentTime);
-  osc.stop(ctx.currentTime + 5.0);
-
-  cymaActiveNode = osc;
-  cymaActiveBtn = btn;
-  btn.textContent = '■ Stop';
-  btn.classList.add('playing');
-
-  osc.onended = () => {
-    if (cymaActiveBtn === btn) {
-      btn.textContent = '▶ Play Tone';
-      btn.classList.remove('playing');
-      cymaActiveBtn = null;
-    }
+  // Resume context if suspended (required by browser autoplay policy)
+  const startTone = () => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(hz, ctx.currentTime);
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.18, ctx.currentTime + 4.92);
+    gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 5.0);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 5.0);
+    cymaActiveNode = osc;
+    cymaActiveBtn = btn;
+    btn.textContent = '■ Stop';
+    btn.classList.add('playing');
+    osc.onended = () => {
+      if (cymaActiveBtn === btn) {
+        btn.textContent = '▶ Play Tone';
+        btn.classList.remove('playing');
+        cymaActiveBtn = null;
+      }
+    };
   };
+
+  if (ctx.state === 'suspended') {
+    ctx.resume().then(startTone);
+  } else {
+    startTone();
+  }
 }
 
 // ============================================================
@@ -3478,8 +3494,8 @@ function addCodexFreqToGSD(hz, btn) {
     gsdSelected.delete(freq.hz);
     btn.textContent = '+ Add to Symbol';
     btn.classList.remove('added');
-    // Deselect in GSD grid too
     document.querySelectorAll(`.gsd-freq-chip[data-hz="${freq.hz}"]`).forEach(c => c.classList.remove('selected'));
+    updateGSDSelectedDisplay();
   } else {
     if (gsdSelected.size >= 7) {
       btn.textContent = '✗ Max 7 selected';
@@ -3487,11 +3503,29 @@ function addCodexFreqToGSD(hz, btn) {
       return;
     }
     gsdSelected.add(freq.hz);
-    btn.textContent = '✓ Added';
+    btn.textContent = '✓ Added — Go to Builder ↓';
     btn.classList.add('added');
-    // Select in GSD grid too
+    // Select chip in GSD grid
     document.querySelectorAll(`.gsd-freq-chip[data-hz="${freq.hz}"]`).forEach(c => c.classList.add('selected'));
+    updateGSDSelectedDisplay();
+    // Scroll to GSD section after short delay
+    setTimeout(() => {
+      document.getElementById('gsd').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 600);
+    setTimeout(() => { btn.textContent = '✓ Added'; }, 3000);
   }
+}
+
+function updateGSDSelectedDisplay() {
+  // Refresh the selected count label if it exists
+  const countEl = document.getElementById('gsd-selected-count');
+  if (countEl) countEl.textContent = gsdSelected.size;
+  // Sync all chip selected states with gsdSelected
+  document.querySelectorAll('.gsd-freq-chip').forEach(chip => {
+    const chipHz = chip.dataset.hz;
+    if (gsdSelected.has(chipHz)) chip.classList.add('selected');
+    else chip.classList.remove('selected');
+  });
 }
 
 function buildCodex(filter) {
@@ -3516,20 +3550,20 @@ function buildCodex(filter) {
         <span class="codex-hz">${f.hz} Hz</span>
         <span class="codex-name">${f.name}</span>
         <span class="codex-tag">${f.tag}</span>
-      </div>
-      <div class="codex-cymatic-wrap">
-        <canvas id="${canvasId}" class="codex-cymatic-canvas" width="72" height="72"></canvas>
-        <div class="codex-cymatic-info">
-          <div class="codex-cymatic-note">${f.note}</div>
-          <div class="codex-cymatic-geo">${geoDesc}</div>
-        </div>
-      </div>
-      <div class="codex-card-actions">
-        <button class="codex-tone-btn" onclick="event.stopPropagation(); playCodexTone('${f.hz}', this)">▶ Play Tone</button>
-        ${canAddToGSD ? `<button class="codex-add-btn" onclick="event.stopPropagation(); addCodexFreqToGSD('${f.hz}', this)">+ Add to Symbol</button>` : ''}
-        ${canAddToGSD ? `<button class="codex-add-btn" style="background:rgba(155,111,212,0.1);border-color:rgba(155,111,212,0.3);color:var(--violet);" onclick="event.stopPropagation(); addCodexFreqToGSD('${f.hz}', this.previousElementSibling); document.getElementById('gsd').scrollIntoView({behavior:'smooth'});">→ Go to Builder</button>` : ''}
+        <span class="codex-chevron">▾</span>
       </div>
       <div class="codex-body">
+        <div class="codex-cymatic-wrap">
+          <canvas id="${canvasId}" class="codex-cymatic-canvas" width="72" height="72"></canvas>
+          <div class="codex-cymatic-info">
+            <div class="codex-cymatic-note">${f.note}</div>
+            <div class="codex-cymatic-geo">${geoDesc}</div>
+          </div>
+        </div>
+        <div class="codex-card-actions">
+          <button class="codex-tone-btn" onclick="event.stopPropagation(); playCodexTone('${f.hz}', this)">▶ Play Tone</button>
+          ${canAddToGSD ? `<button class="codex-add-btn" onclick="event.stopPropagation(); addCodexFreqToGSD('${f.hz}', this)">+ Add to Symbol</button>` : ''}
+        </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem 1.5rem;margin-bottom:1.2rem;padding:0.9rem;background:rgba(212,170,80,0.05);border:1px solid rgba(212,170,80,0.12);border-radius:4px;">
           <div><span style="color:var(--gold);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.12em;display:block;margin-bottom:0.2rem;">MUSICAL NOTE</span><span style="color:var(--ivory);font-size:0.88rem;">${f.note}</span></div>
           <div><span style="color:var(--gold);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.12em;display:block;margin-bottom:0.2rem;">CHAKRA</span><span style="color:var(--ivory);font-size:0.88rem;">${f.chakra}</span></div>
@@ -3560,10 +3594,29 @@ function buildCodex(filter) {
 }
 
 function toggleCodex(header) {
-  const body = header.parentElement.querySelector('.codex-body');
+  const card = header.parentElement;
+  const body = card.querySelector('.codex-body');
   const isOpen = body.style.display === 'block';
+
+  // Close all others
   document.querySelectorAll('.codex-body').forEach(b => b.style.display = 'none');
-  if (!isOpen) body.style.display = 'block';
+  document.querySelectorAll('.codex-card-header').forEach(h => h.classList.remove('open'));
+
+  if (!isOpen) {
+    body.style.display = 'block';
+    header.classList.add('open');
+
+    // Render cymatic canvas now that it's visible (lazy render)
+    const canvas = body.querySelector('.codex-cymatic-canvas');
+    if (canvas && !canvas.dataset.rendered) {
+      const hz = canvas.id.split('-').slice(2).join('-'); // extract hz from id like cyma-0-7.83
+      const hzVal = canvas.id.replace(/^cyma-\d+-/, '');
+      const gsdFreq = GSD_FREQS.find(gf => String(gf.hz) === hzVal);
+      const color = gsdFreq ? gsdFreq.color : '#d4aa50';
+      drawCymaticPattern(canvas, hzVal, color);
+      canvas.dataset.rendered = '1';
+    }
+  }
 }
 
 function filterCodex(cat, btn) {
