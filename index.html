@@ -3327,198 +3327,496 @@ function renderTemplatePreviews() {
 }
 
 // __ Drawing primitives ______________________________________________________
-function drawFlowerOfLife(ctx, cx, cy, r, mini=false) {
-  const alpha = mini ? 0.7 : 0.25;
-  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
-  ctx.lineWidth = mini ? 0.8 : 0.5;
-  const positions = [[0,0]];
-  for (let i=0;i<6;i++) positions.push([Math.cos(i*GSD_TAU/6)*r, Math.sin(i*GSD_TAU/6)*r]);
-  for (let ring=2;ring<=3;ring++) {
-    for (let i=0;i<6;i++) positions.push([Math.cos(i*GSD_TAU/6)*r*ring*0.5, Math.sin(i*GSD_TAU/6)*r*ring*0.5]);
-  }
-  positions.forEach(([x,y]) => {
-    ctx.beginPath();
-    ctx.arc(cx+x, cy+y, r, 0, GSD_TAU);
-    ctx.stroke();
-  });
-}
+// ============================================================
+// TAYLORED HARMONY — GSD GENERATOR ENGINE (REBUILT)
+// Mathematically precise sacred geometry rendering
+// All geometry based on 432 Hz scale, phi ratio = 1.6180339887
+// ============================================================
 
-function drawSeedOfLife(ctx, cx, cy, r, mini=false) {
-  const alpha = mini ? 0.7 : 0.3;
+
+// ── BASE TEMPLATE RENDERERS ──────────────────────────────────
+
+// Flower of Life: 19-circle construction
+// Center circle + ring of 6 + ring of 12 = 19 circles total
+// Each circle has radius r, centers placed at exact intersection nodes
+function drawFlowerOfLife(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.9 : 0.35;
+  const lw = mini ? 0.8 : 0.7;
   ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
-  ctx.lineWidth = mini ? 0.8 : 0.6;
+  ctx.lineWidth = lw;
+
+  // Center circle
   ctx.beginPath(); ctx.arc(cx, cy, r, 0, GSD_TAU); ctx.stroke();
-  for (let i=0;i<6;i++) {
-    const x = cx + Math.cos(i*GSD_TAU/6)*r;
-    const y = cy + Math.sin(i*GSD_TAU/6)*r;
+
+  // Ring 1: 6 circles, each center at distance r from center
+  const ring1 = [];
+  for (let i = 0; i < 6; i++) {
+    const angle = i * GSD_TAU / 6;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    ring1.push({x, y});
     ctx.beginPath(); ctx.arc(x, y, r, 0, GSD_TAU); ctx.stroke();
   }
-}
 
-function drawPhiSpiral(ctx, cx, cy, r, mini=false) {
-  const alpha = mini ? 0.8 : 0.6;
-  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
-  ctx.lineWidth = mini ? 1 : 1.5;
-  ctx.beginPath();
-  for (let t=0; t<GSD_TAU*3; t+=0.05) {
-    const rad = (r * 0.15) * Math.pow(GSD_PHI, t / GSD_TAU);
-    const x = cx + rad * Math.cos(t);
-    const y = cy + rad * Math.sin(t);
-    t === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  // Ring 2: 6 circles at distance 2r from center (at 30-degree offsets)
+  for (let i = 0; i < 6; i++) {
+    const angle = i * GSD_TAU / 6 + GSD_TAU / 12;
+    const x = cx + r * Math.sqrt(3) * Math.cos(angle);
+    const y = cy + r * Math.sqrt(3) * Math.sin(angle);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, GSD_TAU); ctx.stroke();
   }
-  ctx.stroke();
+
+  // Ring 2 continued: 6 more at distance 2r (aligned with ring 1)
+  for (let i = 0; i < 6; i++) {
+    const angle = i * GSD_TAU / 6;
+    const x = cx + 2 * r * Math.cos(angle);
+    const y = cy + 2 * r * Math.sin(angle);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, GSD_TAU); ctx.stroke();
+  }
+
+  // Outer bounding circle
+  ctx.globalAlpha = (ctx.globalAlpha || 1) * 0.4;
+  ctx.beginPath(); ctx.arc(cx, cy, 3 * r, 0, GSD_TAU); ctx.stroke();
+  ctx.globalAlpha = 1;
 }
 
-function drawTorusField(ctx, cx, cy, r, mini=false) {
-  const alpha = mini ? 0.7 : 0.4;
+// Seed of Life: 7-circle construction
+// 1 center + 6 surrounding, each center on circumference of center circle
+function drawSeedOfLife(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.9 : 0.4;
   ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
-  ctx.lineWidth = mini ? 0.7 : 0.8;
-  const rings = mini ? 6 : 12;
-  for (let i=0;i<rings;i++) {
-    const angle = i * GSD_TAU / rings;
-    const rx = r * 0.6, ry = r * 0.25;
+  ctx.lineWidth = mini ? 0.8 : 0.8;
+
+  // Center
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, GSD_TAU); ctx.stroke();
+
+  // 6 petals
+  for (let i = 0; i < 6; i++) {
+    const angle = i * GSD_TAU / 6;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, GSD_TAU); ctx.stroke();
+  }
+
+  // Outer bounding circle
+  ctx.strokeStyle = `rgba(212,175,55,${alpha * 0.4})`;
+  ctx.beginPath(); ctx.arc(cx, cy, 2 * r, 0, GSD_TAU); ctx.stroke();
+}
+
+// Phi Spiral: true logarithmic spiral r(t) = a * phi^(t/pi)
+// Drawn as 3 full rotations, mirrored for symmetry
+function drawPhiSpiral(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.9 : 0.5;
+  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+  ctx.lineWidth = mini ? 0.8 : 1;
+
+  const a = r * 0.04; // starting radius
+  const b = Math.log(GSD_PHI) / Math.PI; // growth rate
+
+  // Draw 4 mirrored spirals for symmetry
+  for (let mirror = 0; mirror < 4; mirror++) {
     ctx.save();
     ctx.translate(cx, cy);
-    ctx.rotate(angle);
+    ctx.rotate(mirror * GSD_TAU / 4);
     ctx.beginPath();
-    ctx.ellipse(0, 0, rx, ry, 0, 0, GSD_TAU);
+    let first = true;
+    for (let t = 0; t <= GSD_TAU * 3; t += 0.03) {
+      const rad = a * Math.exp(b * t);
+      if (rad > r * 1.1) break;
+      const x = rad * Math.cos(t);
+      const y = rad * Math.sin(t);
+      first ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      first = false;
+    }
     ctx.stroke();
     ctx.restore();
   }
-  ctx.beginPath(); ctx.arc(cx, cy, r, 0, GSD_TAU); ctx.stroke();
-  ctx.beginPath(); ctx.arc(cx, cy, r*0.3, 0, GSD_TAU); ctx.stroke();
+
+  // Phi-ratio concentric circles
+  ctx.strokeStyle = `rgba(212,175,55,${alpha * 0.3})`;
+  ctx.lineWidth = 0.5;
+  let rr = r;
+  for (let i = 0; i < 6; i++) {
+    ctx.beginPath(); ctx.arc(cx, cy, rr, 0, GSD_TAU); ctx.stroke();
+    rr /= GSD_PHI;
+    if (rr < 5) break;
+  }
 }
 
+// Torus Field: parametric cross-section projection
+// Shows the torus as seen from the side (donut cross-section) with field lines
+function drawTorusField(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.9 : 0.45;
+  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+  ctx.lineWidth = mini ? 0.7 : 0.8;
+
+  const R = r * 0.6;  // major radius (center of tube to center of torus)
+  const rr = r * 0.3; // minor radius (radius of tube)
+
+  // Outer and inner circles of torus cross-section
+  ctx.beginPath(); ctx.arc(cx, cy, R + rr, 0, GSD_TAU); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, R - rr, 0, GSD_TAU); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, rr, 0, GSD_TAU); ctx.stroke(); // center hole
+
+  // Field lines: parametric torus surface lines
+  ctx.strokeStyle = `rgba(212,175,55,${alpha * 0.5})`;
+  ctx.lineWidth = 0.5;
+  const numLines = mini ? 6 : 12;
+  for (let i = 0; i < numLines; i++) {
+    const phi0 = i * GSD_TAU / numLines;
+    ctx.beginPath();
+    let first = true;
+    for (let theta = 0; theta <= GSD_TAU; theta += 0.05) {
+      // Project 3D torus onto 2D: x = (R + r*cos(phi))*cos(theta), y = (R + r*cos(phi))*sin(theta)
+      const x = cx + (R + rr * Math.cos(phi0)) * Math.cos(theta);
+      const y = cy + (R + rr * Math.cos(phi0)) * Math.sin(theta);
+      first ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      first = false;
+    }
+    ctx.stroke();
+  }
+
+  // Radial spokes
+  ctx.strokeStyle = `rgba(212,175,55,${alpha * 0.25})`;
+  for (let i = 0; i < 8; i++) {
+    const angle = i * GSD_TAU / 8;
+    ctx.beginPath();
+    ctx.moveTo(cx + rr * Math.cos(angle), cy + rr * Math.sin(angle));
+    ctx.lineTo(cx + (R + rr) * Math.cos(angle), cy + (R + rr) * Math.sin(angle));
+    ctx.stroke();
+  }
+}
+
+// Vesica Piscis: two circles where each center lies on the other's circumference
+// The vesica region is the intersection lens
 function drawVesicaPiscis(ctx, cx, cy, r, mini=false) {
-  const alpha = mini ? 0.8 : 0.5;
+  const alpha = mini ? 0.9 : 0.45;
   ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
-  ctx.lineWidth = mini ? 1 : 1.2;
-  const off = r * 0.5;
-  ctx.beginPath(); ctx.arc(cx-off, cy, r, 0, GSD_TAU); ctx.stroke();
-  ctx.beginPath(); ctx.arc(cx+off, cy, r, 0, GSD_TAU); ctx.stroke();
-  // outer ring
-  ctx.beginPath(); ctx.arc(cx, cy, r*1.2, 0, GSD_TAU);
-  ctx.strokeStyle = `rgba(212,175,55,${alpha*0.4})`; ctx.stroke();
+  ctx.lineWidth = mini ? 0.8 : 0.9;
+
+  const offset = r; // distance between centers = r (defines the vesica)
+  const lx = cx - offset / 2;
+  const rx = cx + offset / 2;
+
+  ctx.beginPath(); ctx.arc(lx, cy, r, 0, GSD_TAU); ctx.stroke();
+  ctx.beginPath(); ctx.arc(rx, cy, r, 0, GSD_TAU); ctx.stroke();
+
+  // Highlight the vesica lens region
+  ctx.strokeStyle = `rgba(212,175,55,${alpha * 0.7})`;
+  ctx.lineWidth = 1.2;
+  // Left arc of lens (from right circle)
+  const halfAngle = Math.acos(offset / (2 * r));
+  ctx.beginPath();
+  ctx.arc(lx, cy, r, -halfAngle, halfAngle);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(rx, cy, r, Math.PI - halfAngle, Math.PI + halfAngle);
+  ctx.stroke();
+
+  // Vesica height lines
+  const vesicaH = r * Math.sqrt(3); // height of vesica = r*sqrt(3)
+  ctx.strokeStyle = `rgba(212,175,55,${alpha * 0.3})`;
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - vesicaH / 2);
+  ctx.lineTo(cx, cy + vesicaH / 2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(lx, cy);
+  ctx.lineTo(rx, cy);
+  ctx.stroke();
+
+  // Outer bounding circle
+  ctx.strokeStyle = `rgba(212,175,55,${alpha * 0.2})`;
+  ctx.beginPath(); ctx.arc(cx, cy, r * 1.5, 0, GSD_TAU); ctx.stroke();
 }
 
+// Quasicrystal: Penrose-inspired 5-fold (decagonal) tiling
+// Uses the pentagrid method for authentic quasicrystal appearance
 function drawQuasicrystal(ctx, cx, cy, r, mini=false) {
-  const alpha = mini ? 0.7 : 0.4;
+  const alpha = mini ? 0.8 : 0.4;
   ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
-  ctx.lineWidth = mini ? 0.6 : 0.7;
-  const n = 5; // pentagonal quasicrystal
-  for (let ring=1; ring<=3; ring++) {
-    for (let i=0;i<n*ring;i++) {
-      const angle = i * GSD_TAU / (n*ring);
-      const rr = r * ring / 3;
+  ctx.lineWidth = mini ? 0.6 : 0.6;
+
+  // Draw 5-fold symmetric star pattern (basis of Penrose tiling)
+  const n = 5;
+  const rings = mini ? 2 : 4;
+
+  for (let ring = 1; ring <= rings; ring++) {
+    const rr = r * ring / rings;
+    // Pentagon at each ring
+    ctx.beginPath();
+    for (let i = 0; i <= n; i++) {
+      const angle = i * GSD_TAU / n - Math.PI / 2;
       const x = cx + rr * Math.cos(angle);
       const y = cy + rr * Math.sin(angle);
-      for (let j=0;j<n*ring;j++) {
-        const a2 = j * GSD_TAU / (n*ring);
-        const x2 = cx + rr * Math.cos(a2);
-        const y2 = cy + rr * Math.sin(a2);
-        if (Math.abs(i-j) === 1 || Math.abs(i-j) === n*ring-1) {
-          ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x2,y2); ctx.stroke();
-        }
-      }
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     }
+    ctx.stroke();
+
+    // Pentagram (star) at each ring
+    ctx.beginPath();
+    for (let i = 0; i <= n * 2; i++) {
+      const angle = i * GSD_TAU / n * 2 - Math.PI / 2;
+      const x = cx + rr * Math.cos(angle);
+      const y = cy + rr * Math.sin(angle);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+
+  // 10-fold radial lines
+  ctx.strokeStyle = `rgba(212,175,55,${alpha * 0.4})`;
+  for (let i = 0; i < 10; i++) {
+    const angle = i * GSD_TAU / 10;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + r * Math.cos(angle), cy + r * Math.sin(angle));
+    ctx.stroke();
+  }
+
+  // Concentric decagonal rings
+  ctx.strokeStyle = `rgba(212,175,55,${alpha * 0.25})`;
+  for (let ring = 1; ring <= rings; ring++) {
+    const rr = r * ring / rings;
+    ctx.beginPath();
+    for (let i = 0; i <= 10; i++) {
+      const angle = i * GSD_TAU / 10 - Math.PI / 10;
+      const x = cx + rr * Math.cos(angle);
+      const y = cy + rr * Math.sin(angle);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
   }
 }
 
-// __ Shape drawers for frequency layers _____________________________________
-function drawShape(ctx, shape, cx, cy, r, color, alpha, rotation=0) {
-  ctx.save();
-  ctx.globalAlpha = alpha;
-  ctx.strokeStyle = color;
-  ctx.shadowColor = color;
-  ctx.shadowBlur = 12;
-  ctx.lineWidth = 1.2;
-  ctx.translate(cx, cy);
-  ctx.rotate(rotation);
+// ── FREQUENCY SHAPE DRAWERS ──────────────────────────────────
+// Each shape is drawn precisely at the given center (cx,cy) and radius r
+// Shapes correspond to the frequency-to-geometry mapping
 
-  switch(shape) {
-    case 'circle':
-      ctx.beginPath(); ctx.arc(0, 0, r, 0, GSD_TAU); ctx.stroke();
-      ctx.beginPath(); ctx.arc(0, 0, r*0.618, 0, GSD_TAU);
-      ctx.globalAlpha = alpha * 0.4; ctx.stroke();
-      break;
-    case 'triangle':
-      drawPolygon(ctx, 0, 0, r, 3); ctx.stroke();
-      drawPolygon(ctx, 0, 0, r*0.618, 3); ctx.globalAlpha = alpha*0.4; ctx.stroke();
-      break;
-    case 'square':
-      drawPolygon(ctx, 0, 0, r, 4); ctx.stroke();
-      drawPolygon(ctx, 0, 0, r*0.618, 4); ctx.globalAlpha = alpha*0.4; ctx.stroke();
-      break;
-    case 'pentagon':
-      drawPolygon(ctx, 0, 0, r, 5); ctx.stroke();
-      break;
-    case 'hexagon':
-      drawPolygon(ctx, 0, 0, r, 6); ctx.stroke();
-      drawPolygon(ctx, 0, 0, r*0.618, 6); ctx.globalAlpha = alpha*0.4; ctx.stroke();
-      break;
-    case 'star':
-      drawStar(ctx, 0, 0, r, r*0.45, 6); ctx.stroke();
-      break;
-    case 'spiral':
-      ctx.beginPath();
-      for (let t=0; t<GSD_TAU*2.5; t+=0.04) {
-        const rad = r * 0.15 * Math.pow(GSD_PHI, t/GSD_TAU);
-        const x = rad * Math.cos(t), y = rad * Math.sin(t);
-        t < 0.04 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-      }
-      ctx.stroke();
-      // mirror
-      ctx.globalAlpha = alpha * 0.5;
-      ctx.beginPath();
-      for (let t=0; t<GSD_TAU*2.5; t+=0.04) {
-        const rad = r * 0.15 * Math.pow(GSD_PHI, t/GSD_TAU);
-        const x = -rad * Math.cos(t), y = rad * Math.sin(t);
-        t < 0.04 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-      }
-      ctx.stroke();
-      break;
-    case 'torus':
-      for (let i=0;i<8;i++) {
-        ctx.save();
-        ctx.rotate(i * GSD_TAU / 8);
-        ctx.beginPath();
-        ctx.ellipse(0, 0, r*0.7, r*0.28, 0, 0, GSD_TAU);
-        ctx.stroke();
-        ctx.restore();
-      }
-      ctx.beginPath(); ctx.arc(0, 0, r, 0, GSD_TAU); ctx.stroke();
-      ctx.beginPath(); ctx.arc(0, 0, r*0.25, 0, GSD_TAU);
-      ctx.globalAlpha = alpha*0.6; ctx.stroke();
-      break;
-    default:
-      drawPolygon(ctx, 0, 0, r, 6); ctx.stroke();
-  }
-  ctx.restore();
+function drawCircle(ctx, cx, cy, r) {
+  // 432 Hz, 528 Hz: circle = harmony, coherence, DNA
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, GSD_TAU); ctx.stroke();
+  // Inner phi circle
+  ctx.globalAlpha *= 0.4;
+  ctx.beginPath(); ctx.arc(cx, cy, r / GSD_PHI, 0, GSD_TAU); ctx.stroke();
+  ctx.globalAlpha /= 0.4;
 }
 
-function drawPolygon(ctx, cx, cy, r, n) {
+function drawTriangle(ctx, cx, cy, r) {
+  // 396 Hz: triangle = release, grounding, stability
+  // Upward-pointing triangle + downward-pointing (Star of David base)
+  drawRegularPolygon(ctx, cx, cy, r, 3, -Math.PI / 2);
+  ctx.stroke();
+  ctx.globalAlpha *= 0.4;
+  drawRegularPolygon(ctx, cx, cy, r / GSD_PHI, 3, Math.PI / 6);
+  ctx.stroke();
+  ctx.globalAlpha /= 0.4;
+}
+
+function drawSquare(ctx, cx, cy, r) {
+  // Grounding, structure
+  drawRegularPolygon(ctx, cx, cy, r, 4, -Math.PI / 4);
+  ctx.stroke();
+  ctx.globalAlpha *= 0.35;
+  drawRegularPolygon(ctx, cx, cy, r / GSD_PHI, 4, 0);
+  ctx.stroke();
+  ctx.globalAlpha /= 0.35;
+}
+
+function drawPentagon(ctx, cx, cy, r) {
+  // 5-fold: life, regeneration
+  drawRegularPolygon(ctx, cx, cy, r, 5, -Math.PI / 2);
+  ctx.stroke();
+  // Inner pentagram
+  ctx.globalAlpha *= 0.5;
+  drawPentagram(ctx, cx, cy, r * 0.618);
+  ctx.stroke();
+  ctx.globalAlpha /= 0.5;
+}
+
+function drawHexagon(ctx, cx, cy, r) {
+  // 528 Hz: hexagon = DNA, carbon, honeycomb, cellular healing
+  drawRegularPolygon(ctx, cx, cy, r, 6, 0);
+  ctx.stroke();
+  // Inner hexagon rotated 30 degrees
+  ctx.globalAlpha *= 0.45;
+  drawRegularPolygon(ctx, cx, cy, r / GSD_PHI, 6, Math.PI / 6);
+  ctx.stroke();
+  ctx.globalAlpha /= 0.45;
+  // Star of David (two triangles)
+  ctx.globalAlpha *= 0.3;
+  drawRegularPolygon(ctx, cx, cy, r * 0.85, 3, -Math.PI / 2);
+  ctx.stroke();
+  drawRegularPolygon(ctx, cx, cy, r * 0.85, 3, Math.PI / 6);
+  ctx.stroke();
+  ctx.globalAlpha /= 0.3;
+}
+
+function drawStar6(ctx, cx, cy, r) {
+  // 741 Hz: 6-pointed star = clarity, purification
+  drawStarPolygon(ctx, cx, cy, r, r * 0.45, 6);
+  ctx.stroke();
+  ctx.globalAlpha *= 0.35;
+  ctx.beginPath(); ctx.arc(cx, cy, r * 0.45, 0, GSD_TAU); ctx.stroke();
+  ctx.globalAlpha /= 0.35;
+}
+
+function drawStar8(ctx, cx, cy, r) {
+  // 8-pointed star: octave, completion
+  drawStarPolygon(ctx, cx, cy, r, r * 0.4, 8);
+  ctx.stroke();
+}
+
+function drawSpiral(ctx, cx, cy, r) {
+  // 888 Hz: spiral = infinite, abundance, growth
+  const a = r * 0.06;
+  const b = Math.log(GSD_PHI) / Math.PI;
+
+  // Primary spiral
   ctx.beginPath();
-  for (let i=0;i<=n;i++) {
-    const angle = i * GSD_TAU / n - Math.PI/2;
+  let first = true;
+  for (let t = 0; t <= GSD_TAU * 3; t += 0.025) {
+    const rad = a * Math.exp(b * t);
+    if (rad > r) break;
+    const x = cx + rad * Math.cos(t);
+    const y = cy + rad * Math.sin(t);
+    first ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    first = false;
+  }
+  ctx.stroke();
+
+  // Mirror spiral (180 degrees)
+  ctx.globalAlpha *= 0.6;
+  ctx.beginPath();
+  first = true;
+  for (let t = 0; t <= GSD_TAU * 3; t += 0.025) {
+    const rad = a * Math.exp(b * t);
+    if (rad > r) break;
+    const x = cx + rad * Math.cos(t + Math.PI);
+    const y = cy + rad * Math.sin(t + Math.PI);
+    first ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    first = false;
+  }
+  ctx.stroke();
+  ctx.globalAlpha /= 0.6;
+}
+
+function drawTorus2D(ctx, cx, cy, r) {
+  // 999 Hz: torus = completion, higher dimensional, field
+  const R = r * 0.65;
+  const rr = r * 0.32;
+  ctx.beginPath(); ctx.arc(cx, cy, R + rr, 0, GSD_TAU); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, R - rr, 0, GSD_TAU); ctx.stroke();
+  // Field lines
+  ctx.globalAlpha *= 0.4;
+  for (let i = 0; i < 8; i++) {
+    const phi0 = i * GSD_TAU / 8;
+    ctx.beginPath();
+    let first = true;
+    for (let theta = 0; theta <= GSD_TAU; theta += 0.06) {
+      const x = cx + (R + rr * Math.cos(phi0)) * Math.cos(theta);
+      const y = cy + (R + rr * Math.cos(phi0)) * Math.sin(theta);
+      first ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      first = false;
+    }
+    ctx.stroke();
+  }
+  ctx.globalAlpha /= 0.4;
+}
+
+function drawVesica2D(ctx, cx, cy, r) {
+  // Vesica: duality, intersection, birth
+  const off = r * 0.5;
+  ctx.beginPath(); ctx.arc(cx - off, cy, r, 0, GSD_TAU); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx + off, cy, r, 0, GSD_TAU); ctx.stroke();
+}
+
+function drawCross(ctx, cx, cy, r) {
+  // Cross/axis: grounding, orientation, cardinal directions
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - r); ctx.lineTo(cx, cy + r);
+  ctx.moveTo(cx - r, cy); ctx.lineTo(cx + r, cy);
+  ctx.stroke();
+  // Diagonal cross
+  ctx.globalAlpha *= 0.4;
+  const d = r * 0.707;
+  ctx.beginPath();
+  ctx.moveTo(cx - d, cy - d); ctx.lineTo(cx + d, cy + d);
+  ctx.moveTo(cx + d, cy - d); ctx.lineTo(cx - d, cy + d);
+  ctx.stroke();
+  ctx.globalAlpha /= 0.4;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, GSD_TAU); ctx.stroke();
+}
+
+// ── HELPER GEOMETRY FUNCTIONS ────────────────────────────────
+
+function drawRegularPolygon(ctx, cx, cy, r, n, startAngle = 0) {
+  ctx.beginPath();
+  for (let i = 0; i <= n; i++) {
+    const angle = startAngle + i * GSD_TAU / n;
     const x = cx + r * Math.cos(angle);
     const y = cy + r * Math.sin(angle);
-    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-  }
-}
-
-function drawStar(ctx, cx, cy, outerR, innerR, points) {
-  ctx.beginPath();
-  for (let i=0;i<=points*2;i++) {
-    const angle = i * Math.PI / points - Math.PI/2;
-    const r = i % 2 === 0 ? outerR : innerR;
-    const x = cx + r * Math.cos(angle);
-    const y = cy + r * Math.sin(angle);
-    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
   }
   ctx.closePath();
 }
 
-// __ Main generator __________________________________________________________
+function drawPentagram(ctx, cx, cy, r) {
+  ctx.beginPath();
+  for (let i = 0; i <= 5; i++) {
+    const angle = (i * 4 * GSD_TAU / 5) - Math.PI / 2;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+}
+
+function drawStarPolygon(ctx, cx, cy, outerR, innerR, points) {
+  ctx.beginPath();
+  for (let i = 0; i <= points * 2; i++) {
+    const angle = i * Math.PI / points - Math.PI / 2;
+    const r = i % 2 === 0 ? outerR : innerR;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+}
+
+// ── MAIN SHAPE DISPATCHER ────────────────────────────────────
+
+function drawShape(ctx, shape, cx, cy, r, color, alpha, rotation = 0) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.strokeStyle = color;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 14;
+  ctx.lineWidth = 1.3;
+  ctx.translate(cx, cy);
+  ctx.rotate(rotation);
+
+  switch (shape) {
+    case 'circle':   drawCircle(ctx, 0, 0, r); break;
+    case 'triangle': drawTriangle(ctx, 0, 0, r); break;
+    case 'square':   drawSquare(ctx, 0, 0, r); break;
+    case 'pentagon': drawPentagon(ctx, 0, 0, r); break;
+    case 'hexagon':  drawHexagon(ctx, 0, 0, r); break;
+    case 'star':     drawStar6(ctx, 0, 0, r); break;
+    case 'star8':    drawStar8(ctx, 0, 0, r); break;
+    case 'spiral':   drawSpiral(ctx, 0, 0, r); break;
+    case 'torus':    drawTorus2D(ctx, 0, 0, r); break;
+    case 'vesica':   drawVesica2D(ctx, 0, 0, r); break;
+    case 'cross':    drawCross(ctx, 0, 0, r); break;
+    default:         drawHexagon(ctx, 0, 0, r); break;
+  }
+
+  ctx.restore();
+}
+
+// ── MAIN GENERATE FUNCTION ───────────────────────────────────
+
 function generateGSD() {
   if (gsdSelected.size < 2) {
     alert('Please select at least 2 frequencies to generate your symbol.');
@@ -3529,95 +3827,119 @@ function generateGSD() {
   const canvas = document.getElementById('gsd-canvas');
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
-  const cx = W/2, cy = H/2;
+  const cx = W / 2, cy = H / 2;
 
+  // Clear
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = '#050508';
   ctx.fillRect(0, 0, W, H);
 
   const selectedFreqs = GSD_FREQS.filter(f => gsdSelected.has(f.hz));
-  const maxR = Math.min(W, H) * 0.42;
+  const maxR = Math.min(W, H) * 0.41;
 
-  // 1. Draw base template (dim)
-  ctx.globalAlpha = 0.18;
-  ctx.strokeStyle = 'rgba(212,175,55,0.5)';
-  ctx.lineWidth = 0.6;
-  switch(template) {
-    case 'flower':     drawFlowerOfLife(ctx, cx, cy, maxR * 0.38); break;
-    case 'seed':       drawSeedOfLife(ctx, cx, cy, maxR * 0.38); break;
-    case 'phi':        drawPhiSpiral(ctx, cx, cy, maxR); break;
-    case 'torus':      drawTorusField(ctx, cx, cy, maxR); break;
-    case 'vesica':     drawVesicaPiscis(ctx, cx, cy, maxR * 0.55); break;
+  // ── STEP 1: Base template (dim background layer) ──
+  ctx.save();
+  ctx.globalAlpha = 0.22;
+  switch (template) {
+    case 'flower':       drawFlowerOfLife(ctx, cx, cy, maxR * 0.33); break;
+    case 'seed':         drawSeedOfLife(ctx, cx, cy, maxR * 0.38); break;
+    case 'phi':          drawPhiSpiral(ctx, cx, cy, maxR); break;
+    case 'torus':        drawTorusField(ctx, cx, cy, maxR); break;
+    case 'vesica':       drawVesicaPiscis(ctx, cx, cy, maxR * 0.6); break;
     case 'quasicrystal': drawQuasicrystal(ctx, cx, cy, maxR); break;
   }
-  ctx.globalAlpha = 1;
+  ctx.restore();
 
-  // 2. Draw frequency layers  -  sorted by Hz (lowest = outermost)
-  const sorted = [...selectedFreqs].sort((a,b) => a.hz - b.hz);
+  // ── STEP 2: Phi-ratio concentric guide rings ──
+  ctx.save();
+  ctx.globalAlpha = 0.08;
+  ctx.strokeStyle = 'rgba(212,175,55,0.6)';
+  ctx.lineWidth = 0.4;
+  let guideR = maxR;
+  for (let i = 0; i < 8; i++) {
+    ctx.beginPath(); ctx.arc(cx, cy, guideR, 0, GSD_TAU); ctx.stroke();
+    guideR /= GSD_PHI;
+    if (guideR < 8) break;
+  }
+  ctx.restore();
+
+  // ── STEP 3: Radial symmetry lines ──
+  const sorted = [...selectedFreqs].sort((a, b) => a.hz - b.hz);
+  const symmetryFold = sorted.length <= 3 ? 6 :
+                       sorted.length <= 5 ? 8 : 12;
+  ctx.save();
+  ctx.globalAlpha = 0.06;
+  ctx.strokeStyle = 'rgba(212,175,55,0.8)';
+  ctx.lineWidth = 0.4;
+  for (let i = 0; i < symmetryFold; i++) {
+    const angle = i * GSD_TAU / symmetryFold;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + maxR * 1.05 * Math.cos(angle), cy + maxR * 1.05 * Math.sin(angle));
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // ── STEP 4: Frequency layers ──
+  // Lowest Hz = outermost ring, highest = innermost
+  // Each layer placed at a phi-ratio step inward
   sorted.forEach((freq, i) => {
-    const layerR = maxR * (1 - i * (0.72 / sorted.length));
-    const rotation = (i * GSD_TAU / sorted.length) + (i * 0.15);
-    const alpha = 0.55 + (i / sorted.length) * 0.35;
+    const layerR = maxR * Math.pow(1 / GSD_PHI, i * 0.55);
+    const rotation = (i * GSD_TAU / sorted.length) + (i % 2 === 0 ? 0 : Math.PI / sorted.length);
+    const alpha = 0.5 + (i / sorted.length) * 0.4;
     drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, alpha, rotation);
   });
 
-  // 3. Draw phi-ratio connecting lines between layers
-  ctx.globalAlpha = 0.15;
-  ctx.strokeStyle = 'rgba(212,175,55,0.6)';
+  // ── STEP 5: Connecting lines between adjacent layers ──
+  ctx.save();
+  ctx.globalAlpha = 0.12;
+  ctx.strokeStyle = 'rgba(212,175,55,0.5)';
   ctx.lineWidth = 0.5;
-  sorted.forEach((freq, i) => {
-    const r1 = maxR * (1 - i * (0.72 / sorted.length));
-    const r2 = r1 * (1 / GSD_PHI);
-    ctx.beginPath(); ctx.arc(cx, cy, r2, 0, GSD_TAU); ctx.stroke();
-  });
-  ctx.globalAlpha = 1;
-
-  // 4. Draw radial symmetry lines
-  ctx.globalAlpha = 0.08;
-  ctx.strokeStyle = 'rgba(212,175,55,0.8)';
-  ctx.lineWidth = 0.4;
-  const symmetryLines = Math.max(6, sorted.length * 2);
-  for (let i=0;i<symmetryLines;i++) {
-    const angle = i * GSD_TAU / symmetryLines;
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + maxR * 1.1 * Math.cos(angle), cy + maxR * 1.1 * Math.sin(angle));
-    ctx.stroke();
+  for (let i = 0; i < sorted.length - 1; i++) {
+    const r1 = maxR * Math.pow(1 / GSD_PHI, i * 0.55);
+    const r2 = maxR * Math.pow(1 / GSD_PHI, (i + 1) * 0.55);
+    // Draw connecting arc
+    ctx.beginPath(); ctx.arc(cx, cy, (r1 + r2) / 2, 0, GSD_TAU); ctx.stroke();
   }
-  ctx.globalAlpha = 1;
+  ctx.restore();
 
-  // 5. Central point
-  const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 20);
-  gradient.addColorStop(0, 'rgba(255,255,255,0.9)');
-  gradient.addColorStop(0.4, 'rgba(212,175,55,0.6)');
+  // ── STEP 6: Central point (anchor) ──
+  const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 18);
+  gradient.addColorStop(0, 'rgba(255,255,255,0.95)');
+  gradient.addColorStop(0.35, 'rgba(212,175,55,0.7)');
   gradient.addColorStop(1, 'rgba(212,175,55,0)');
   ctx.fillStyle = gradient;
-  ctx.beginPath(); ctx.arc(cx, cy, 20, 0, GSD_TAU); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx, cy, 18, 0, GSD_TAU); ctx.fill();
 
-  // 6. Outer boundary ring
-  ctx.strokeStyle = 'rgba(212,175,55,0.3)';
+  // ── STEP 7: Outer boundary ring ──
+  ctx.save();
+  ctx.globalAlpha = 0.45;
+  ctx.strokeStyle = 'rgba(212,175,55,0.5)';
   ctx.lineWidth = 1;
-  ctx.globalAlpha = 0.6;
-  ctx.beginPath(); ctx.arc(cx, cy, maxR * 1.05, 0, GSD_TAU); ctx.stroke();
-  ctx.globalAlpha = 1;
+  ctx.beginPath(); ctx.arc(cx, cy, maxR * 1.04, 0, GSD_TAU); ctx.stroke();
+  ctx.globalAlpha = 0.2;
+  ctx.beginPath(); ctx.arc(cx, cy, maxR * 1.08, 0, GSD_TAU); ctx.stroke();
+  ctx.restore();
 
-  // Show output
+  // ── Show output ──
   const output = document.getElementById('gsd-output');
   output.style.display = 'block';
   output.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  // Meta info
   const meta = document.getElementById('gsd-output-meta');
+  const templateNames = {
+    flower: 'Flower of Life', seed: 'Seed of Life', phi: 'Phi Spiral',
+    torus: 'Torus Field', vesica: 'Vesica Piscis', quasicrystal: 'Quasicrystal'
+  };
   meta.innerHTML = `
-    <strong style="color:var(--gold-mid);">Your Symbol</strong><br>
+    <strong style="color:var(--gold-mid);">Symbol Generated</strong><br>
     <span>Frequencies: ${sorted.map(f => f.hz + ' Hz').join(' . ')}</span><br>
-    <span>Template: ${template.charAt(0).toUpperCase() + template.slice(1)} . Layers: ${sorted.length} . Symmetry: ${symmetryLines}-fold</span><br>
-    <span style="font-size:0.75rem;opacity:0.6;">Built on the 432 Hz scale . Golden Ratio (phi = 1.618) proportions</span>
+    <span>Base: ${templateNames[template] || template} . Layers: ${sorted.length} . Symmetry: ${symmetryFold}-fold</span><br>
+    <span style="font-size:0.75rem;opacity:0.6;">432 Hz scale . Golden Ratio proportions (phi = 1.618)</span>
   `;
 
-  // Reset reading
   document.getElementById('gsd-reading-box').style.display = 'none';
-  document.getElementById('gsd-reading-text').textContent = 'Consulting the field...';
+  document.getElementById('gsd-reading-text').textContent = '';
 }
 
 function downloadGSD() {
