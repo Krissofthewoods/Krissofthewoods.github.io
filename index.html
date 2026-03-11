@@ -1240,6 +1240,46 @@
   }
 
   .reset-btn:hover { color: var(--gold); }
+
+/* ═══ GSD GENERATOR ═══ */
+#gsd { padding: 5rem 2rem; }
+.gsd-container { max-width: 900px; margin: 0 auto; }
+.gsd-howto { background: rgba(255,255,255,0.03); border: 1px solid var(--gold-dim); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+.gsd-step-title { color: var(--gold-mid); font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 1.2rem; letter-spacing: 0.05em; }
+.gsd-steps { display: flex; flex-direction: column; gap: 0.8rem; }
+.gsd-step { display: flex; align-items: flex-start; gap: 1rem; color: var(--ivory-dim); font-size: 0.9rem; line-height: 1.5; }
+.gsd-step-num { background: var(--gold-mid); color: #0a0a0f; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; flex-shrink: 0; margin-top: 1px; }
+.gsd-panel { background: rgba(255,255,255,0.03); border: 1px solid var(--gold-dim); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+.gsd-panel-title { color: var(--gold-mid); font-family: var(--font-display); font-size: 1rem; margin-bottom: 1.2rem; letter-spacing: 0.05em; display: flex; align-items: center; gap: 0.8rem; }
+.gsd-badge { background: var(--gold-mid); color: #0a0a0f; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 20px; font-family: var(--font-body); }
+.gsd-intent-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.gsd-intent-btn { background: transparent; border: 1px solid var(--gold-dim); color: var(--ivory-dim); padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+.gsd-intent-btn:hover, .gsd-intent-btn.active { background: var(--gold-mid); color: #0a0a0f; border-color: var(--gold-mid); }
+.gsd-freq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.6rem; max-height: 320px; overflow-y: auto; padding-right: 0.3rem; }
+.gsd-freq-chip { background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.2); border-radius: 8px; padding: 0.6rem 0.8rem; cursor: pointer; transition: all 0.2s; }
+.gsd-freq-chip:hover { border-color: var(--gold-mid); background: rgba(212,175,55,0.08); }
+.gsd-freq-chip.selected { background: rgba(212,175,55,0.15); border-color: var(--gold-mid); box-shadow: 0 0 8px rgba(212,175,55,0.3); }
+.gsd-freq-chip .chip-hz { color: var(--gold-mid); font-size: 0.85rem; font-weight: 600; }
+.gsd-freq-chip .chip-name { color: var(--ivory-dim); font-size: 0.7rem; margin-top: 0.2rem; line-height: 1.3; }
+.gsd-freq-chip .chip-shape { color: rgba(212,175,55,0.5); font-size: 0.65rem; margin-top: 0.2rem; }
+.gsd-template-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; }
+.gsd-template-card { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.8rem; border-radius: 10px; border: 1px solid rgba(212,175,55,0.2); transition: all 0.2s; }
+.gsd-template-card:hover { border-color: var(--gold-mid); background: rgba(212,175,55,0.05); }
+.gsd-template-card input[type=radio] { display: none; }
+.gsd-template-card input[type=radio]:checked + canvas { box-shadow: 0 0 12px var(--gold-mid); }
+.gsd-template-card:has(input:checked) { border-color: var(--gold-mid); background: rgba(212,175,55,0.1); }
+.gsd-template-preview { border-radius: 6px; }
+.gsd-template-card span { color: var(--ivory-dim); font-size: 0.75rem; text-align: center; }
+.gsd-output { margin-top: 2rem; }
+.gsd-canvas-wrap { display: flex; justify-content: center; margin-bottom: 1.5rem; }
+#gsd-canvas { border-radius: 12px; max-width: 100%; background: #050508; box-shadow: 0 0 40px rgba(212,175,55,0.15); }
+.gsd-output-meta { text-align: center; margin-bottom: 1.5rem; color: var(--ivory-dim); font-size: 0.85rem; line-height: 1.8; }
+.gsd-output-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.gsd-reading-box { background: rgba(255,255,255,0.03); border: 1px solid var(--gold-dim); border-radius: 12px; padding: 2rem; max-width: 700px; margin: 0 auto; }
+.gsd-reading-header { color: var(--gold-mid); font-family: var(--font-display); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.05em; }
+.gsd-reading-text { color: var(--ivory-dim); font-size: 0.9rem; line-height: 1.9; white-space: pre-wrap; }
+@media (max-width: 600px) { .gsd-freq-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); } .gsd-template-grid { grid-template-columns: repeat(3, 1fr); } }
+
 </style>
 </head>
 <body>
@@ -1260,6 +1300,7 @@
     <a href="#sound-sessions">Sound Sessions</a>
     <a href="#blog">Blog</a>
     <a href="#framework">The Framework</a>
+    <a href="#gsd">Symbol Generator</a>
   </div>
 </nav>
 
@@ -2127,6 +2168,111 @@
       </audio>
       <p style="text-align:center;color:var(--ivory-dim);font-size:0.8rem;margin-top:1rem;font-style:italic;">For best results: headphones, lying down, eyes closed. Not recommended while driving.</p>
     </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     GEOMETRIC SEMANTIC DRIVER GENERATOR
+═══════════════════════════════════════════════════════ -->
+<section id="gsd">
+  <div class="section-header">
+    <div class="constellation-ring" style="width:60px;height:60px;border:1px solid var(--gold-mid);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+      <svg width="30" height="30" viewBox="0 0 30 30"><polygon points="15,2 17.9,11.1 27.6,11.1 20,17 22.9,26.1 15,20.5 7.1,26.1 10,17 2.4,11.1 12.1,11.1" fill="none" stroke="var(--gold-mid)" stroke-width="1"/></svg>
+    </div>
+    <h2 class="section-title">Geometric Semantic Driver Generator</h2>
+    <p class="section-subtitle">Select your frequencies. Watch your symbol emerge. Receive your resonance reading.</p>
+  </div>
+
+  <div class="gsd-container">
+
+    <!-- STEP 1: HOW TO USE -->
+    <div class="gsd-howto">
+      <h3 class="gsd-step-title">How to Build Your Symbol</h3>
+      <div class="gsd-steps">
+        <div class="gsd-step"><span class="gsd-step-num">1</span><span>Choose your <strong>intent</strong> — healing, grounding, protection, manifestation, or consciousness expansion</span></div>
+        <div class="gsd-step"><span class="gsd-step-num">2</span><span>Select <strong>2–7 frequencies</strong> from the codex below that match your intent</span></div>
+        <div class="gsd-step"><span class="gsd-step-num">3</span><span>Choose a <strong>base template</strong> — the sacred geometry foundation your symbol builds upon</span></div>
+        <div class="gsd-step"><span class="gsd-step-num">4</span><span>Click <strong>Generate Symbol</strong> to watch the geometry build in real time</span></div>
+        <div class="gsd-step"><span class="gsd-step-num">5</span><span>Request an <strong>AI Resonance Reading</strong> — Claude interprets your symbol's meaning and activation</span></div>
+        <div class="gsd-step"><span class="gsd-step-num">6</span><span><strong>Download</strong> your symbol as a high-resolution PNG to print, meditate with, or carry</span></div>
+      </div>
+    </div>
+
+    <!-- STEP 2: FREQUENCY SELECTOR -->
+    <div class="gsd-panel">
+      <h3 class="gsd-panel-title">Select Your Frequencies <span class="gsd-badge" id="gsd-count">0 selected</span></h3>
+      <div class="gsd-intent-filters">
+        <button class="gsd-intent-btn active" data-intent="all">All</button>
+        <button class="gsd-intent-btn" data-intent="healing">Healing & Repair</button>
+        <button class="gsd-intent-btn" data-intent="grounding">Grounding</button>
+        <button class="gsd-intent-btn" data-intent="protective">Protective</button>
+        <button class="gsd-intent-btn" data-intent="consciousness">Consciousness</button>
+        <button class="gsd-intent-btn" data-intent="solfeggio">Solfeggio</button>
+        <button class="gsd-intent-btn" data-intent="lfsx">LFSX Field</button>
+      </div>
+      <div class="gsd-freq-grid" id="gsd-freq-grid"></div>
+    </div>
+
+    <!-- STEP 3: BASE TEMPLATE -->
+    <div class="gsd-panel">
+      <h3 class="gsd-panel-title">Choose Base Template</h3>
+      <div class="gsd-template-grid">
+        <label class="gsd-template-card">
+          <input type="radio" name="gsd-template" value="flower" checked>
+          <canvas class="gsd-template-preview" id="tmpl-flower" width="80" height="80"></canvas>
+          <span>Flower of Life</span>
+        </label>
+        <label class="gsd-template-card">
+          <input type="radio" name="gsd-template" value="seed">
+          <canvas class="gsd-template-preview" id="tmpl-seed" width="80" height="80"></canvas>
+          <span>Seed of Life</span>
+        </label>
+        <label class="gsd-template-card">
+          <input type="radio" name="gsd-template" value="phi">
+          <canvas class="gsd-template-preview" id="tmpl-phi" width="80" height="80"></canvas>
+          <span>Phi Spiral</span>
+        </label>
+        <label class="gsd-template-card">
+          <input type="radio" name="gsd-template" value="torus">
+          <canvas class="gsd-template-preview" id="tmpl-torus" width="80" height="80"></canvas>
+          <span>Torus Field</span>
+        </label>
+        <label class="gsd-template-card">
+          <input type="radio" name="gsd-template" value="vesica">
+          <canvas class="gsd-template-preview" id="tmpl-vesica" width="80" height="80"></canvas>
+          <span>Vesica Piscis</span>
+        </label>
+        <label class="gsd-template-card">
+          <input type="radio" name="gsd-template" value="quasicrystal">
+          <canvas class="gsd-template-preview" id="tmpl-quasicrystal" width="80" height="80"></canvas>
+          <span>Quasicrystal</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- GENERATE BUTTON -->
+    <div style="text-align:center;margin:2rem 0;">
+      <button class="btn-primary" id="gsd-generate-btn" onclick="generateGSD()">✦ Generate Symbol</button>
+    </div>
+
+    <!-- CANVAS OUTPUT -->
+    <div class="gsd-output" id="gsd-output" style="display:none;">
+      <div class="gsd-canvas-wrap">
+        <canvas id="gsd-canvas" width="600" height="600"></canvas>
+      </div>
+      <div class="gsd-output-meta" id="gsd-output-meta"></div>
+      <div class="gsd-output-actions">
+        <button class="btn-primary" onclick="downloadGSD()">⬇ Download Symbol (PNG)</button>
+        <button class="btn-ghost" id="gsd-reading-btn" onclick="requestGSDReading()">✦ Generate AI Resonance Reading</button>
+      </div>
+      <div class="gsd-reading-box" id="gsd-reading-box" style="display:none;">
+        <div class="gsd-reading-header">Resonance Reading</div>
+        <div class="gsd-reading-text" id="gsd-reading-text">Consulting the field…</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -3118,6 +3264,445 @@ document.addEventListener('click', e => {
     if (box) box.style.display = 'none';
   }
 });
+
+
+// ═══════════════════════════════════════════════════════
+//  GEOMETRIC SEMANTIC DRIVER GENERATOR
+// ═══════════════════════════════════════════════════════
+
+const GSD_PHI = 1.618033988749895;
+const GSD_TAU = Math.PI * 2;
+
+// Frequency database for the GSD tool
+const GSD_FREQS = [
+  // Solfeggio
+  { hz:174,  name:'Foundation & Safety',        cat:'solfeggio',     color:'#8B4513', shape:'triangle',  sides:3,  desc:'Root safety, pain reduction' },
+  { hz:285,  name:'Tissue Repair',               cat:'solfeggio',     color:'#228B22', shape:'triangle',  sides:3,  desc:'Cellular memory, organ repair' },
+  { hz:396,  name:'Liberation from Fear',        cat:'solfeggio',     color:'#DC143C', shape:'triangle',  sides:3,  desc:'Fear & guilt release, grounding' },
+  { hz:417,  name:'Cellular Clearing',           cat:'solfeggio',     color:'#FF8C00', shape:'square',    sides:4,  desc:'Negative pattern clearing' },
+  { hz:432,  name:'Universal Tuning',            cat:'solfeggio',     color:'#DAA520', shape:'circle',    sides:0,  desc:'Harmony, coherence, foundation' },
+  { hz:528,  name:'DNA Repair & Transformation', cat:'solfeggio',     color:'#00CED1', shape:'hexagon',   sides:6,  desc:'The Miracle Tone, DNA healing' },
+  { hz:639,  name:'Harmonising Relationships',   cat:'solfeggio',     color:'#32CD32', shape:'hexagon',   sides:6,  desc:'Heart coherence, connection' },
+  { hz:741,  name:'Cellular Detox & Clarity',    cat:'solfeggio',     color:'#4169E1', shape:'star',      sides:6,  desc:'EMF clearing, intuition' },
+  { hz:852,  name:'Pineal & Nervous System',     cat:'solfeggio',     color:'#8A2BE2', shape:'star',      sides:8,  desc:'Third eye, spiritual order' },
+  { hz:963,  name:'Crown & Divine Connection',   cat:'solfeggio',     color:'#FFFFFF', shape:'spiral',    sides:0,  desc:'Oneness, crown activation' },
+  // Healing
+  { hz:111,  name:'Cell Regeneration',           cat:'healing',       color:'#FF69B4', shape:'circle',    sides:0,  desc:'Beta-endorphin, deep healing' },
+  { hz:136.1,name:'OM — Earth Year',             cat:'healing',       color:'#8FBC8F', shape:'circle',    sides:0,  desc:'Heart resonance, grounding' },
+  { hz:256,  name:'Middle C — Natural Tone',     cat:'healing',       color:'#B8860B', shape:'circle',    sides:0,  desc:'Pure grounding tone, 432 Hz C' },
+  { hz:321,  name:'Immune Activation',           cat:'healing',       color:'#90EE90', shape:'pentagon',  sides:5,  desc:'Thymus, lymphatic support' },
+  { hz:360,  name:'Heart Field Coherence',       cat:'healing',       color:'#FF1493', shape:'circle',    sides:0,  desc:'Cardiovascular, grief' },
+  { hz:1074, name:'Mitochondrial Activation',    cat:'healing',       color:'#FFD700', shape:'hexagon',   sides:6,  desc:'Cellular energy, fatigue recovery' },
+  // Grounding
+  { hz:7.83, name:'Schumann Resonance',          cat:'grounding',     color:'#556B2F', shape:'circle',    sides:0,  desc:'Earth heartbeat, universal anchor' },
+  { hz:14.1, name:'Schumann Harmonic 2',         cat:'grounding',     color:'#6B8E23', shape:'circle',    sides:0,  desc:'Earth field, physical vitality' },
+  { hz:194.18,name:'Earth Day Frequency',        cat:'grounding',     color:'#8B7355', shape:'circle',    sides:0,  desc:'Circadian sync, sleep repair' },
+  { hz:210.42,name:'Synodic Moon',               cat:'grounding',     color:'#C0C0C0', shape:'circle',    sides:0,  desc:'Emotional grounding, hormonal' },
+  // Protective
+  { hz:40,   name:'Gamma Coherence Shield',      cat:'protective',    color:'#E0E0FF', shape:'star',      sides:8,  desc:'Neural coherence, EMF protection' },
+  { hz:285,  name:'Field Repair',                cat:'protective',    color:'#228B22', shape:'triangle',  sides:3,  desc:'Energetic boundary restoration' },
+  // Consciousness
+  { hz:333,  name:'Heart-Mind Bridge',           cat:'consciousness', color:'#FF7F50', shape:'pentagon',  sides:5,  desc:'Compassion, heart-mind coherence' },
+  { hz:888,  name:'Infinite Abundance',          cat:'lfsx',          color:'#FFD700', shape:'spiral',    sides:0,  desc:'Manifestation, infinite field' },
+  { hz:999,  name:'Completion & Transcendence',  cat:'lfsx',          color:'#E6E6FA', shape:'torus',     sides:0,  desc:'Higher dimensional access' },
+  { hz:1111, name:'Alignment Gateway',           cat:'lfsx',          color:'#FFFACD', shape:'star',      sides:11, desc:'Synchronicity, master number' },
+  { hz:1331, name:'Crystalline Activation',      cat:'lfsx',          color:'#E0FFFF', shape:'star',      sides:12, desc:'Crystal grid, high coherence' },
+  { hz:1500, name:'Celestial Bridge',            cat:'lfsx',          color:'#F0F8FF', shape:'spiral',    sides:0,  desc:'Angelic frequencies, bridge' },
+  { hz:1777, name:'Divine Architecture',         cat:'lfsx',          color:'#FFEFD5', shape:'star',      sides:7,  desc:'Sacred structure, highest field' },
+  { hz:9999, name:'Scalar Seal',                 cat:'lfsx',          color:'#FFFFFF', shape:'torus',     sides:0,  desc:'Field completion, cosmic seal' },
+];
+
+let gsdSelected = new Set();
+
+function initGSD() {
+  renderGSDFreqs('all');
+  renderTemplatePreviews();
+
+  document.querySelectorAll('.gsd-intent-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.gsd-intent-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGSDFreqs(btn.dataset.intent);
+    });
+  });
+}
+
+function renderGSDFreqs(intent) {
+  const grid = document.getElementById('gsd-freq-grid');
+  const filtered = intent === 'all' ? GSD_FREQS : GSD_FREQS.filter(f => f.cat === intent);
+  grid.innerHTML = filtered.map(f => `
+    <div class="gsd-freq-chip ${gsdSelected.has(f.hz) ? 'selected' : ''}" onclick="toggleGSDFreq(${f.hz})" data-hz="${f.hz}">
+      <div class="chip-hz">${f.hz} Hz</div>
+      <div class="chip-name">${f.name}</div>
+      <div class="chip-shape">${f.shape} · ${f.desc.substring(0,28)}…</div>
+    </div>
+  `).join('');
+}
+
+function toggleGSDFreq(hz) {
+  if (gsdSelected.has(hz)) {
+    gsdSelected.delete(hz);
+  } else {
+    if (gsdSelected.size >= 7) { alert('Maximum 7 frequencies for optimal symbol coherence.'); return; }
+    gsdSelected.add(hz);
+  }
+  const badge = document.getElementById('gsd-count');
+  badge.textContent = gsdSelected.size + ' selected';
+  // re-render current filter
+  const activeBtn = document.querySelector('.gsd-intent-btn.active');
+  renderGSDFreqs(activeBtn ? activeBtn.dataset.intent : 'all');
+}
+
+// ── Template preview renderers ──────────────────────────────────────────────
+function renderTemplatePreviews() {
+  const templates = {
+    flower: drawFlowerOfLife,
+    seed: drawSeedOfLife,
+    phi: drawPhiSpiral,
+    torus: drawTorusField,
+    vesica: drawVesicaPiscis,
+    quasicrystal: drawQuasicrystal
+  };
+  Object.entries(templates).forEach(([id, fn]) => {
+    const c = document.getElementById('tmpl-' + id);
+    if (c) fn(c.getContext('2d'), 40, 40, 32, true);
+  });
+}
+
+// ── Drawing primitives ──────────────────────────────────────────────────────
+function drawFlowerOfLife(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.7 : 0.25;
+  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+  ctx.lineWidth = mini ? 0.8 : 0.5;
+  const positions = [[0,0]];
+  for (let i=0;i<6;i++) positions.push([Math.cos(i*GSD_TAU/6)*r, Math.sin(i*GSD_TAU/6)*r]);
+  for (let ring=2;ring<=3;ring++) {
+    for (let i=0;i<6;i++) positions.push([Math.cos(i*GSD_TAU/6)*r*ring*0.5, Math.sin(i*GSD_TAU/6)*r*ring*0.5]);
+  }
+  positions.forEach(([x,y]) => {
+    ctx.beginPath();
+    ctx.arc(cx+x, cy+y, r, 0, GSD_TAU);
+    ctx.stroke();
+  });
+}
+
+function drawSeedOfLife(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.7 : 0.3;
+  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+  ctx.lineWidth = mini ? 0.8 : 0.6;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, GSD_TAU); ctx.stroke();
+  for (let i=0;i<6;i++) {
+    const x = cx + Math.cos(i*GSD_TAU/6)*r;
+    const y = cy + Math.sin(i*GSD_TAU/6)*r;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, GSD_TAU); ctx.stroke();
+  }
+}
+
+function drawPhiSpiral(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.8 : 0.6;
+  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+  ctx.lineWidth = mini ? 1 : 1.5;
+  ctx.beginPath();
+  for (let t=0; t<GSD_TAU*3; t+=0.05) {
+    const rad = (r * 0.15) * Math.pow(GSD_PHI, t / GSD_TAU);
+    const x = cx + rad * Math.cos(t);
+    const y = cy + rad * Math.sin(t);
+    t === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+}
+
+function drawTorusField(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.7 : 0.4;
+  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+  ctx.lineWidth = mini ? 0.7 : 0.8;
+  const rings = mini ? 6 : 12;
+  for (let i=0;i<rings;i++) {
+    const angle = i * GSD_TAU / rings;
+    const rx = r * 0.6, ry = r * 0.25;
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, rx, ry, 0, 0, GSD_TAU);
+    ctx.stroke();
+    ctx.restore();
+  }
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, GSD_TAU); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx, cy, r*0.3, 0, GSD_TAU); ctx.stroke();
+}
+
+function drawVesicaPiscis(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.8 : 0.5;
+  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+  ctx.lineWidth = mini ? 1 : 1.2;
+  const off = r * 0.5;
+  ctx.beginPath(); ctx.arc(cx-off, cy, r, 0, GSD_TAU); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx+off, cy, r, 0, GSD_TAU); ctx.stroke();
+  // outer ring
+  ctx.beginPath(); ctx.arc(cx, cy, r*1.2, 0, GSD_TAU);
+  ctx.strokeStyle = `rgba(212,175,55,${alpha*0.4})`; ctx.stroke();
+}
+
+function drawQuasicrystal(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.7 : 0.4;
+  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+  ctx.lineWidth = mini ? 0.6 : 0.7;
+  const n = 5; // pentagonal quasicrystal
+  for (let ring=1; ring<=3; ring++) {
+    for (let i=0;i<n*ring;i++) {
+      const angle = i * GSD_TAU / (n*ring);
+      const rr = r * ring / 3;
+      const x = cx + rr * Math.cos(angle);
+      const y = cy + rr * Math.sin(angle);
+      for (let j=0;j<n*ring;j++) {
+        const a2 = j * GSD_TAU / (n*ring);
+        const x2 = cx + rr * Math.cos(a2);
+        const y2 = cy + rr * Math.sin(a2);
+        if (Math.abs(i-j) === 1 || Math.abs(i-j) === n*ring-1) {
+          ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x2,y2); ctx.stroke();
+        }
+      }
+    }
+  }
+}
+
+// ── Shape drawers for frequency layers ─────────────────────────────────────
+function drawShape(ctx, shape, cx, cy, r, color, alpha, rotation=0) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.strokeStyle = color;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 12;
+  ctx.lineWidth = 1.2;
+  ctx.translate(cx, cy);
+  ctx.rotate(rotation);
+
+  switch(shape) {
+    case 'circle':
+      ctx.beginPath(); ctx.arc(0, 0, r, 0, GSD_TAU); ctx.stroke();
+      ctx.beginPath(); ctx.arc(0, 0, r*0.618, 0, GSD_TAU);
+      ctx.globalAlpha = alpha * 0.4; ctx.stroke();
+      break;
+    case 'triangle':
+      drawPolygon(ctx, 0, 0, r, 3); ctx.stroke();
+      drawPolygon(ctx, 0, 0, r*0.618, 3); ctx.globalAlpha = alpha*0.4; ctx.stroke();
+      break;
+    case 'square':
+      drawPolygon(ctx, 0, 0, r, 4); ctx.stroke();
+      drawPolygon(ctx, 0, 0, r*0.618, 4); ctx.globalAlpha = alpha*0.4; ctx.stroke();
+      break;
+    case 'pentagon':
+      drawPolygon(ctx, 0, 0, r, 5); ctx.stroke();
+      break;
+    case 'hexagon':
+      drawPolygon(ctx, 0, 0, r, 6); ctx.stroke();
+      drawPolygon(ctx, 0, 0, r*0.618, 6); ctx.globalAlpha = alpha*0.4; ctx.stroke();
+      break;
+    case 'star':
+      drawStar(ctx, 0, 0, r, r*0.45, 6); ctx.stroke();
+      break;
+    case 'spiral':
+      ctx.beginPath();
+      for (let t=0; t<GSD_TAU*2.5; t+=0.04) {
+        const rad = r * 0.15 * Math.pow(GSD_PHI, t/GSD_TAU);
+        const x = rad * Math.cos(t), y = rad * Math.sin(t);
+        t < 0.04 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+      // mirror
+      ctx.globalAlpha = alpha * 0.5;
+      ctx.beginPath();
+      for (let t=0; t<GSD_TAU*2.5; t+=0.04) {
+        const rad = r * 0.15 * Math.pow(GSD_PHI, t/GSD_TAU);
+        const x = -rad * Math.cos(t), y = rad * Math.sin(t);
+        t < 0.04 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+      break;
+    case 'torus':
+      for (let i=0;i<8;i++) {
+        ctx.save();
+        ctx.rotate(i * GSD_TAU / 8);
+        ctx.beginPath();
+        ctx.ellipse(0, 0, r*0.7, r*0.28, 0, 0, GSD_TAU);
+        ctx.stroke();
+        ctx.restore();
+      }
+      ctx.beginPath(); ctx.arc(0, 0, r, 0, GSD_TAU); ctx.stroke();
+      ctx.beginPath(); ctx.arc(0, 0, r*0.25, 0, GSD_TAU);
+      ctx.globalAlpha = alpha*0.6; ctx.stroke();
+      break;
+    default:
+      drawPolygon(ctx, 0, 0, r, 6); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawPolygon(ctx, cx, cy, r, n) {
+  ctx.beginPath();
+  for (let i=0;i<=n;i++) {
+    const angle = i * GSD_TAU / n - Math.PI/2;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+}
+
+function drawStar(ctx, cx, cy, outerR, innerR, points) {
+  ctx.beginPath();
+  for (let i=0;i<=points*2;i++) {
+    const angle = i * Math.PI / points - Math.PI/2;
+    const r = i % 2 === 0 ? outerR : innerR;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+}
+
+// ── Main generator ──────────────────────────────────────────────────────────
+function generateGSD() {
+  if (gsdSelected.size < 2) {
+    alert('Please select at least 2 frequencies to generate your symbol.');
+    return;
+  }
+
+  const template = document.querySelector('input[name="gsd-template"]:checked').value;
+  const canvas = document.getElementById('gsd-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#050508';
+  ctx.fillRect(0, 0, W, H);
+
+  const selectedFreqs = GSD_FREQS.filter(f => gsdSelected.has(f.hz));
+  const maxR = Math.min(W, H) * 0.42;
+
+  // 1. Draw base template (dim)
+  ctx.globalAlpha = 0.18;
+  ctx.strokeStyle = 'rgba(212,175,55,0.5)';
+  ctx.lineWidth = 0.6;
+  switch(template) {
+    case 'flower':     drawFlowerOfLife(ctx, cx, cy, maxR * 0.38); break;
+    case 'seed':       drawSeedOfLife(ctx, cx, cy, maxR * 0.38); break;
+    case 'phi':        drawPhiSpiral(ctx, cx, cy, maxR); break;
+    case 'torus':      drawTorusField(ctx, cx, cy, maxR); break;
+    case 'vesica':     drawVesicaPiscis(ctx, cx, cy, maxR * 0.55); break;
+    case 'quasicrystal': drawQuasicrystal(ctx, cx, cy, maxR); break;
+  }
+  ctx.globalAlpha = 1;
+
+  // 2. Draw frequency layers — sorted by Hz (lowest = outermost)
+  const sorted = [...selectedFreqs].sort((a,b) => a.hz - b.hz);
+  sorted.forEach((freq, i) => {
+    const layerR = maxR * (1 - i * (0.72 / sorted.length));
+    const rotation = (i * GSD_TAU / sorted.length) + (i * 0.15);
+    const alpha = 0.55 + (i / sorted.length) * 0.35;
+    drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, alpha, rotation);
+  });
+
+  // 3. Draw phi-ratio connecting lines between layers
+  ctx.globalAlpha = 0.15;
+  ctx.strokeStyle = 'rgba(212,175,55,0.6)';
+  ctx.lineWidth = 0.5;
+  sorted.forEach((freq, i) => {
+    const r1 = maxR * (1 - i * (0.72 / sorted.length));
+    const r2 = r1 * (1 / GSD_PHI);
+    ctx.beginPath(); ctx.arc(cx, cy, r2, 0, GSD_TAU); ctx.stroke();
+  });
+  ctx.globalAlpha = 1;
+
+  // 4. Draw radial symmetry lines
+  ctx.globalAlpha = 0.08;
+  ctx.strokeStyle = 'rgba(212,175,55,0.8)';
+  ctx.lineWidth = 0.4;
+  const symmetryLines = Math.max(6, sorted.length * 2);
+  for (let i=0;i<symmetryLines;i++) {
+    const angle = i * GSD_TAU / symmetryLines;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + maxR * 1.1 * Math.cos(angle), cy + maxR * 1.1 * Math.sin(angle));
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
+  // 5. Central point
+  const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 20);
+  gradient.addColorStop(0, 'rgba(255,255,255,0.9)');
+  gradient.addColorStop(0.4, 'rgba(212,175,55,0.6)');
+  gradient.addColorStop(1, 'rgba(212,175,55,0)');
+  ctx.fillStyle = gradient;
+  ctx.beginPath(); ctx.arc(cx, cy, 20, 0, GSD_TAU); ctx.fill();
+
+  // 6. Outer boundary ring
+  ctx.strokeStyle = 'rgba(212,175,55,0.3)';
+  ctx.lineWidth = 1;
+  ctx.globalAlpha = 0.6;
+  ctx.beginPath(); ctx.arc(cx, cy, maxR * 1.05, 0, GSD_TAU); ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  // Show output
+  const output = document.getElementById('gsd-output');
+  output.style.display = 'block';
+  output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Meta info
+  const meta = document.getElementById('gsd-output-meta');
+  meta.innerHTML = `
+    <strong style="color:var(--gold-mid);">Your Symbol</strong><br>
+    <span>Frequencies: ${sorted.map(f => f.hz + ' Hz').join(' · ')}</span><br>
+    <span>Template: ${template.charAt(0).toUpperCase() + template.slice(1)} · Layers: ${sorted.length} · Symmetry: ${symmetryLines}-fold</span><br>
+    <span style="font-size:0.75rem;opacity:0.6;">Built on the 432 Hz scale · Golden Ratio (φ = 1.618) proportions</span>
+  `;
+
+  // Reset reading
+  document.getElementById('gsd-reading-box').style.display = 'none';
+  document.getElementById('gsd-reading-text').textContent = 'Consulting the field…';
+}
+
+function downloadGSD() {
+  const canvas = document.getElementById('gsd-canvas');
+  const link = document.createElement('a');
+  link.download = 'taylored-harmony-symbol.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+async function requestGSDReading() {
+  const btn = document.getElementById('gsd-reading-btn');
+  const box = document.getElementById('gsd-reading-box');
+  const text = document.getElementById('gsd-reading-text');
+
+  btn.disabled = true;
+  btn.textContent = 'Consulting the field…';
+  box.style.display = 'block';
+  text.textContent = 'Consulting the field…';
+
+  const selectedFreqs = GSD_FREQS.filter(f => gsdSelected.has(f.hz));
+  const template = document.querySelector('input[name="gsd-template"]:checked').value;
+  const freqSummary = selectedFreqs.map(f => `${f.hz} Hz (${f.name} — ${f.desc})`).join(', ');
+
+  try {
+    const response = await fetch('https://taylored-harmony.tayloredharmony.workers.dev/gsd-reading', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ frequencies: freqSummary, template })
+    });
+    const data = await response.json();
+    text.textContent = data.reading || 'Unable to generate reading at this time.';
+  } catch(e) {
+    text.textContent = 'The field is quiet right now. Please try again in a moment.';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '✦ Generate AI Resonance Reading';
+}
+
+// Init on load
+document.addEventListener('DOMContentLoaded', initGSD);
 
 </script>
 </body>
