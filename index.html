@@ -1016,6 +1016,94 @@
     letter-spacing: 0.05em;
   }
 
+  /* INTERACTIVE CODEX CARD ENHANCEMENTS */
+  .codex-card-header {
+    flex-wrap: wrap;
+  }
+  .codex-cymatic-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.2rem;
+    border-bottom: 1px solid rgba(212,170,80,0.1);
+    background: rgba(0,0,0,0.2);
+  }
+  .codex-cymatic-canvas {
+    border-radius: 4px;
+    flex-shrink: 0;
+    border: 1px solid rgba(212,170,80,0.2);
+    display: block;
+  }
+  .codex-cymatic-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .codex-cymatic-note {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+  }
+  .codex-cymatic-geo {
+    font-size: 0.75rem;
+    color: var(--ivory-dim);
+    line-height: 1.5;
+  }
+  .codex-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.7rem 1.2rem;
+    border-bottom: 1px solid rgba(212,170,80,0.1);
+    flex-wrap: wrap;
+  }
+  .codex-tone-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(74,158,221,0.1);
+    border: 1px solid rgba(74,158,221,0.3);
+    color: var(--sapphire);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.8rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .codex-tone-btn:hover, .codex-tone-btn.playing {
+    background: rgba(74,158,221,0.2);
+    border-color: var(--sapphire);
+  }
+  .codex-add-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(212,170,80,0.1);
+    border: 1px solid rgba(212,170,80,0.3);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.8rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .codex-add-btn:hover {
+    background: rgba(212,170,80,0.2);
+    border-color: var(--gold);
+  }
+  .codex-add-btn.added {
+    background: rgba(212,170,80,0.25);
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
   /* SOUND CARD */
   .sound-card {
     background: var(--bg-card);
@@ -2114,10 +2202,11 @@
 <!-- FREQUENCY CODEX -->
 <section id="frequency-codex" style="padding:5rem 2rem;">
   <div class="section-inner">
-    <div class="section-label">Reference Guide</div>
+    <div class="section-label">Interactive Reference</div>
     <h2 class="section-title">Frequency Codex</h2>
     <div class="gold-rule"></div>
-    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 1rem;font-size:1rem;line-height:1.8;">A living reference of healing, Solfeggio, and LFSX frequencies. Click any entry to expand its full description, properties, and uses.</p>
+    <p style="text-align:center;color:var(--ivory-dim);max-width:680px;margin:0 auto 0.6rem;font-size:1rem;line-height:1.8;">Each frequency has a live cymatic geometry, a playable tone, and a direct path into the Symbol Generator. Explore, listen, and build your symbol from what resonates.</p>
+    <p style="text-align:center;color:rgba(212,170,80,0.55);max-width:580px;margin:0 auto 1.5rem;font-size:0.8rem;line-height:1.7;">Cymatic patterns are rendered from Chladni standing wave mathematics. Tones are generated in real time via Web Audio API. No audio file is loaded.</p>
     <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;margin-bottom:2.5rem;">
       <button class="codex-filter active" onclick="filterCodex('all',this)">All</button>
       <button class="codex-filter" onclick="filterCodex('earth',this)">Earth &amp; Grounding</button>
@@ -3156,20 +3245,268 @@ const CODEX = [
 
 let codexActive = 'all';
 
+// ============================================================
+// CYMASCOPE AUDIO ENGINE
+// Generates real sine wave tones via Web Audio API
+// ============================================================
+let cymaAudioCtx = null;
+let cymaActiveNode = null;
+let cymaActiveBtn = null;
+
+function getCymaAudioCtx() {
+  if (!cymaAudioCtx) cymaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return cymaAudioCtx;
+}
+
+function playCodexTone(hzStr, btn) {
+  const hz = parseFloat(hzStr);
+  if (isNaN(hz) || hz <= 0 || hz > 20000) {
+    // Binaural or out-of-range: show message
+    btn.textContent = '⚠ Binaural / Sub-audio';
+    setTimeout(() => { btn.textContent = '▶ Play Tone'; btn.classList.remove('playing'); }, 2000);
+    return;
+  }
+
+  const ctx = getCymaAudioCtx();
+
+  // Stop any currently playing tone
+  if (cymaActiveNode) {
+    try { cymaActiveNode.stop(); } catch(e) {}
+    cymaActiveNode = null;
+  }
+  if (cymaActiveBtn && cymaActiveBtn !== btn) {
+    cymaActiveBtn.textContent = '▶ Play Tone';
+    cymaActiveBtn.classList.remove('playing');
+  }
+
+  // If clicking the same button while playing, just stop
+  if (btn.classList.contains('playing')) {
+    btn.textContent = '▶ Play Tone';
+    btn.classList.remove('playing');
+    cymaActiveBtn = null;
+    return;
+  }
+
+  // Create oscillator with gentle fade in/out envelope
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(hz, ctx.currentTime);
+  gain.gain.setValueAtTime(0, ctx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + 0.08);
+  gain.gain.setValueAtTime(0.18, ctx.currentTime + 4.92);
+  gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 5.0);
+  osc.start(ctx.currentTime);
+  osc.stop(ctx.currentTime + 5.0);
+
+  cymaActiveNode = osc;
+  cymaActiveBtn = btn;
+  btn.textContent = '■ Stop';
+  btn.classList.add('playing');
+
+  osc.onended = () => {
+    if (cymaActiveBtn === btn) {
+      btn.textContent = '▶ Play Tone';
+      btn.classList.remove('playing');
+      cymaActiveBtn = null;
+    }
+  };
+}
+
+// ============================================================
+// CYMATIC PATTERN RENDERER
+// Renders Chladni standing wave patterns for each frequency
+// ============================================================
+
+// Maps a frequency to Chladni mode parameters (m, n) for the pattern
+// These are chosen to produce visually accurate cymatic geometry
+function getChladniMode(hz) {
+  const hzNum = parseFloat(hz);
+  if (isNaN(hzNum)) return { m: 2, n: 1 };
+  // Map frequency ranges to Chladni modes that produce characteristic patterns
+  if (hzNum < 10)    return { m: 1, n: 1 };  // Simple cross/ring
+  if (hzNum < 50)    return { m: 2, n: 1 };  // 4-petal
+  if (hzNum < 100)   return { m: 2, n: 2 };  // Grid
+  if (hzNum < 150)   return { m: 3, n: 1 };  // 6-petal
+  if (hzNum < 200)   return { m: 3, n: 2 };  // Star
+  if (hzNum < 250)   return { m: 3, n: 3 };  // 9-petal
+  if (hzNum < 300)   return { m: 4, n: 1 };  // 8-petal
+  if (hzNum < 350)   return { m: 4, n: 2 };  // Complex grid
+  if (hzNum < 400)   return { m: 4, n: 3 };  // Flower
+  if (hzNum < 450)   return { m: 4, n: 4 };  // 16-petal
+  if (hzNum < 500)   return { m: 5, n: 1 };  // 10-petal
+  if (hzNum < 550)   return { m: 5, n: 2 };  // Pentagram
+  if (hzNum < 600)   return { m: 5, n: 3 };  // Complex flower
+  if (hzNum < 650)   return { m: 5, n: 4 };  // Dense star
+  if (hzNum < 750)   return { m: 5, n: 5 };  // 25-petal
+  if (hzNum < 850)   return { m: 6, n: 2 };  // Hexagonal
+  if (hzNum < 950)   return { m: 6, n: 3 };  // Star of David
+  if (hzNum < 1000)  return { m: 6, n: 4 };  // Complex hexagon
+  if (hzNum < 1100)  return { m: 6, n: 5 };  // Dense hex
+  if (hzNum < 1200)  return { m: 7, n: 2 };  // 7-fold
+  if (hzNum < 1400)  return { m: 7, n: 3 };  // Heptagram
+  if (hzNum < 1600)  return { m: 7, n: 5 };  // Complex 7
+  if (hzNum < 2000)  return { m: 8, n: 3 };  // 8-fold
+  return { m: 9, n: 4 };  // High frequency: dense pattern
+}
+
+function drawCymaticPattern(canvas, hz, color) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#050508';
+  ctx.fillRect(0, 0, W, H);
+
+  const { m, n } = getChladniMode(hz);
+  const scale = Math.min(W, H) * 0.44;
+
+  // Chladni equation: cos(m*pi*x)*cos(n*pi*y) - cos(n*pi*x)*cos(m*pi*y) = 0
+  // We render the nodal lines (where the equation is near zero) as bright lines
+  const step = 2;
+  const threshold = 0.12;
+
+  // Parse color to RGB
+  let r = 212, g = 170, b = 80; // default gold
+  if (color && color.startsWith('#')) {
+    const hex = color.slice(1);
+    if (hex.length === 6) {
+      r = parseInt(hex.slice(0,2), 16);
+      g = parseInt(hex.slice(2,4), 16);
+      b = parseInt(hex.slice(4,6), 16);
+    }
+  }
+
+  for (let px = 0; px < W; px += step) {
+    for (let py = 0; py < H; py += step) {
+      const x = (px - cx) / scale;
+      const y = (py - cy) / scale;
+      if (x < -1 || x > 1 || y < -1 || y > 1) continue;
+
+      const val = Math.cos(m * Math.PI * x) * Math.cos(n * Math.PI * y)
+                - Math.cos(n * Math.PI * x) * Math.cos(m * Math.PI * y);
+
+      if (Math.abs(val) < threshold) {
+        const brightness = 1 - Math.abs(val) / threshold;
+        ctx.fillStyle = `rgba(${r},${g},${b},${brightness * 0.85})`;
+        ctx.fillRect(px, py, step, step);
+      }
+    }
+  }
+
+  // Draw bounding circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, scale, 0, Math.PI * 2);
+  ctx.strokeStyle = `rgba(${r},${g},${b},0.2)`;
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
+}
+
+// ============================================================
+// CODEX CARD BUILDER - Interactive CymaScope Version
+// ============================================================
+
+// Geometry description for each frequency based on its cymatic mode
+function getCymaticGeoDesc(hz) {
+  const hzNum = parseFloat(hz);
+  if (isNaN(hzNum)) return 'Binaural / standing wave pattern';
+  if (hzNum < 10)    return 'Simple nodal cross · 2-fold symmetry';
+  if (hzNum < 50)    return '4-petal flower · 4-fold symmetry';
+  if (hzNum < 100)   return 'Orthogonal grid · 4-fold symmetry';
+  if (hzNum < 150)   return '6-petal rosette · 6-fold symmetry';
+  if (hzNum < 200)   return 'Star pattern · 6-fold symmetry';
+  if (hzNum < 250)   return '9-petal mandala · 9-fold symmetry';
+  if (hzNum < 300)   return '8-petal flower · 8-fold symmetry';
+  if (hzNum < 350)   return 'Complex grid · 4-fold symmetry';
+  if (hzNum < 400)   return 'Flower of Life pattern · 12-fold';
+  if (hzNum < 450)   return '16-petal mandala · 16-fold symmetry';
+  if (hzNum < 500)   return '10-petal rosette · 10-fold symmetry';
+  if (hzNum < 550)   return 'Pentagram star · 5-fold symmetry';
+  if (hzNum < 600)   return 'Complex flower · 5-fold symmetry';
+  if (hzNum < 650)   return 'Dense star · 5-fold symmetry';
+  if (hzNum < 750)   return '25-node mandala · 5-fold symmetry';
+  if (hzNum < 850)   return 'Hexagonal lattice · 6-fold symmetry';
+  if (hzNum < 950)   return 'Star of David · 6-fold symmetry';
+  if (hzNum < 1000)  return 'Complex hexagon · 6-fold symmetry';
+  if (hzNum < 1100)  return 'Dense hexagonal · 6-fold symmetry';
+  if (hzNum < 1200)  return '7-fold star · 7-fold symmetry';
+  if (hzNum < 1400)  return 'Heptagram · 7-fold symmetry';
+  if (hzNum < 1600)  return 'Complex 7-fold · 7-fold symmetry';
+  if (hzNum < 2000)  return '8-fold mandala · 8-fold symmetry';
+  return 'Dense high-harmonic pattern';
+}
+
+// Check if a frequency is in the GSD_FREQS list (can be added to symbol)
+function isGSDFreq(hz) {
+  const hzNum = parseFloat(hz);
+  return GSD_FREQS.some(f => parseFloat(f.hz) === hzNum);
+}
+
+function addCodexFreqToGSD(hz, btn) {
+  const hzNum = parseFloat(hz);
+  const freq = GSD_FREQS.find(f => parseFloat(f.hz) === hzNum);
+  if (!freq) {
+    btn.textContent = '✗ Not in Symbol Builder';
+    setTimeout(() => { btn.textContent = '+ Add to Symbol'; }, 2000);
+    return;
+  }
+
+  if (gsdSelected.has(freq.hz)) {
+    gsdSelected.delete(freq.hz);
+    btn.textContent = '+ Add to Symbol';
+    btn.classList.remove('added');
+    // Deselect in GSD grid too
+    document.querySelectorAll(`.gsd-freq-chip[data-hz="${freq.hz}"]`).forEach(c => c.classList.remove('selected'));
+  } else {
+    if (gsdSelected.size >= 7) {
+      btn.textContent = '✗ Max 7 selected';
+      setTimeout(() => { btn.textContent = '+ Add to Symbol'; }, 2000);
+      return;
+    }
+    gsdSelected.add(freq.hz);
+    btn.textContent = '✓ Added';
+    btn.classList.add('added');
+    // Select in GSD grid too
+    document.querySelectorAll(`.gsd-freq-chip[data-hz="${freq.hz}"]`).forEach(c => c.classList.add('selected'));
+  }
+}
+
 function buildCodex(filter) {
   const grid = document.getElementById('codexGrid');
   if (!grid) return;
   grid.innerHTML = '';
   const data = filter === 'all' ? CODEX : CODEX.filter(f => f.cat === filter);
+
   data.forEach((f, i) => {
     const card = document.createElement('div');
     card.className = 'codex-card';
     card.dataset.cat = f.cat;
+
+    const canvasId = `cyma-${i}-${f.hz}`;
+    const hzNum = parseFloat(f.hz);
+    const isTonal = !isNaN(hzNum) && hzNum > 0 && hzNum <= 20000;
+    const canAddToGSD = isGSDFreq(f.hz);
+    const geoDesc = getCymaticGeoDesc(f.hz);
+
     card.innerHTML = `
       <div class="codex-card-header" onclick="toggleCodex(this)">
         <span class="codex-hz">${f.hz} Hz</span>
         <span class="codex-name">${f.name}</span>
         <span class="codex-tag">${f.tag}</span>
+      </div>
+      <div class="codex-cymatic-wrap">
+        <canvas id="${canvasId}" class="codex-cymatic-canvas" width="72" height="72"></canvas>
+        <div class="codex-cymatic-info">
+          <div class="codex-cymatic-note">${f.note}</div>
+          <div class="codex-cymatic-geo">${geoDesc}</div>
+        </div>
+      </div>
+      <div class="codex-card-actions">
+        <button class="codex-tone-btn" onclick="event.stopPropagation(); playCodexTone('${f.hz}', this)">▶ Play Tone</button>
+        ${canAddToGSD ? `<button class="codex-add-btn" onclick="event.stopPropagation(); addCodexFreqToGSD('${f.hz}', this)">+ Add to Symbol</button>` : ''}
+        ${canAddToGSD ? `<button class="codex-add-btn" style="background:rgba(155,111,212,0.1);border-color:rgba(155,111,212,0.3);color:var(--violet);" onclick="event.stopPropagation(); addCodexFreqToGSD('${f.hz}', this.previousElementSibling); document.getElementById('gsd').scrollIntoView({behavior:'smooth'});">→ Go to Builder</button>` : ''}
       </div>
       <div class="codex-body">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem 1.5rem;margin-bottom:1.2rem;padding:0.9rem;background:rgba(212,170,80,0.05);border:1px solid rgba(212,170,80,0.12);border-radius:4px;">
@@ -3181,13 +3518,29 @@ function buildCodex(filter) {
         <div class="codex-props">${f.props.map(p=>`<span class="codex-prop">${p}</span>`).join('')}</div>
       </div>`;
     grid.appendChild(card);
+
+    // Render cymatic pattern after card is in DOM
+    // Use IntersectionObserver to render only when visible (performance)
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        const cvs = document.getElementById(canvasId);
+        if (cvs && !cvs.dataset.rendered) {
+          // Get the frequency color from GSD_FREQS if available, else use gold
+          const gsdFreq = GSD_FREQS.find(gf => parseFloat(gf.hz) === parseFloat(f.hz));
+          const color = gsdFreq ? gsdFreq.color : '#d4aa50';
+          drawCymaticPattern(cvs, f.hz, color);
+          cvs.dataset.rendered = '1';
+        }
+        obs.disconnect();
+      }
+    }, { threshold: 0.1 });
+    obs.observe(card);
   });
 }
 
 function toggleCodex(header) {
-  const body = header.nextElementSibling;
+  const body = header.parentElement.querySelector('.codex-body');
   const isOpen = body.style.display === 'block';
-  // Close all
   document.querySelectorAll('.codex-body').forEach(b => b.style.display = 'none');
   if (!isOpen) body.style.display = 'block';
 }
@@ -3826,9 +4179,23 @@ function drawStarPolygon(ctx, cx, cy, outerR, innerR, points) {
   ctx.closePath();
 }
 
-// ── MAIN SHAPE DISPATCHER ────────────────────────────────────
+// ── N-POINTED STAR DRAWER ───────────────────────────────────
+// Draws a star with exactly n points, inner radius = outer * 0.42
+function drawNStar(ctx, cx, cy, r, n) {
+  const innerR = r * 0.42;
+  drawStarPolygon(ctx, cx, cy, r, innerR, n);
+  ctx.stroke();
+  // Inner polygon echo
+  ctx.globalAlpha *= 0.3;
+  drawRegularPolygon(ctx, cx, cy, innerR, n, -Math.PI / n);
+  ctx.stroke();
+  ctx.globalAlpha /= 0.3;
+}
 
-function drawShape(ctx, shape, cx, cy, r, color, alpha, rotation = 0) {
+// ── MAIN SHAPE DISPATCHER ────────────────────────────────────
+// `sides` is passed through from the frequency data to draw the correct polygon
+
+function drawShape(ctx, shape, cx, cy, r, color, alpha, rotation = 0, sides = 0) {
   ctx.save();
   ctx.globalAlpha = alpha;
   ctx.strokeStyle = color;
@@ -3844,7 +4211,14 @@ function drawShape(ctx, shape, cx, cy, r, color, alpha, rotation = 0) {
     case 'square':   drawSquare(ctx, 0, 0, r); break;
     case 'pentagon': drawPentagon(ctx, 0, 0, r); break;
     case 'hexagon':  drawHexagon(ctx, 0, 0, r); break;
-    case 'star':     drawStar6(ctx, 0, 0, r); break;
+    case 'star':
+      // Use sides field to draw the correct number of star points
+      if (sides && sides > 4) {
+        drawNStar(ctx, 0, 0, r, sides);
+      } else {
+        drawStar6(ctx, 0, 0, r);
+      }
+      break;
     case 'star8':    drawStar8(ctx, 0, 0, r); break;
     case 'spiral':   drawSpiral(ctx, 0, 0, r); break;
     case 'torus':    drawTorus2D(ctx, 0, 0, r); break;
@@ -3906,8 +4280,11 @@ function generateGSD() {
 
   // ── STEP 3: Radial symmetry lines ──
   const sorted = [...selectedFreqs].sort((a, b) => a.hz - b.hz);
-  const symmetryFold = sorted.length <= 3 ? 6 :
-                       sorted.length <= 5 ? 8 : 12;
+  // Symmetry fold is determined by the template, not the number of frequencies
+  const templateSymmetry = {
+    flower: 6, seed: 6, phi: 4, torus: 8, vesica: 2, quasicrystal: 10
+  };
+  const symmetryFold = templateSymmetry[template] || 6;
   ctx.save();
   ctx.globalAlpha = 0.06;
   ctx.strokeStyle = 'rgba(212,175,55,0.8)';
@@ -3974,12 +4351,12 @@ function generateGSD() {
     // The lowest frequency (foundation) goes in the center
     if (i === 0) {
       const layerR = maxR * 0.45;
-      drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, 0.8, 0);
+      drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, 0.8, 0, freq.sides || 0);
     } 
     // The highest frequency (apex) goes on the outer boundary
     else if (i === sorted.length - 1 && sorted.length > 2) {
       const layerR = maxR * 0.85;
-      drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, 0.6, Math.PI / sorted.length);
+      drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, 0.6, Math.PI / sorted.length, freq.sides || 0);
     }
     // Middle frequencies are distributed across the template's structural nodes
     else {
@@ -3991,12 +4368,12 @@ function generateGSD() {
         nodes.forEach(node => {
           // Rotate the shape to point outward from the center
           const rotation = node.angle + Math.PI / 2;
-          drawShape(ctx, freq.shape, node.x, node.y, shapeR, freq.color, alpha, rotation);
+          drawShape(ctx, freq.shape, node.x, node.y, shapeR, freq.color, alpha, rotation, freq.sides || 0);
         });
       } else {
         // Fallback if no nodes (shouldn't happen)
         const layerR = maxR * Math.pow(1 / GSD_PHI, i * 0.55);
-        drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, alpha, 0);
+        drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, alpha, 0, freq.sides || 0);
       }
     }
   });
