@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kristina Rose Taylor — Author & Creator</title>
+<title>Kristina Rose Taylor, Author & Creator</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -92,8 +92,81 @@
     transition: color 0.3s;
   }
   .nav-links a:hover { color: var(--gold-light); }
-
-  /* HERO */
+  /* Hamburger button */
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+    z-index: 210;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  /* Slide-out menu */
+  .nav-menu {
+    position: fixed;
+    top: 64px;
+    right: -320px;
+    width: 280px;
+    height: calc(100vh - 64px);
+    background: rgba(3,4,10,0.99);
+    border-left: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+    z-index: 199;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .nav-menu.open { right: 0; }
+  .nav-menu-group {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin: 1.25rem 0 0.5rem;
+    opacity: 0.6;
+  }
+  .nav-menu a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+    text-decoration: none;
+    padding: 0.6rem 0.75rem;
+    border-radius: 4px;
+    display: block;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-menu a:hover {
+    color: var(--gold-light);
+    background: rgba(212,170,80,0.08);
+  }
+  /* Overlay */
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 198;
+  }
+  .nav-overlay.open { display: block; }
+    /* HERO */
   header {
     min-height: 100vh;
     display: flex;
@@ -1289,20 +1362,29 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo"><img src="assets/taylored-harmony.png" alt="Taylored Harmony" style="height:48px;width:auto;display:block;"></div>
-  <div class="nav-links">
-    <a href="#start-here">Start Here</a>
-    <a href="#daily">Daily Insight</a>
-    <a href="#recommended-reading">Reading</a>
-    <a href="#books">Books</a>
-    <a href="#creations">Creations</a>
-    <a href="#rpms">Root Pattern System</a>
-    <a href="#frequency-codex">Frequency Codex</a>
-    <a href="#sound-sessions">Sound Sessions</a>
-    <a href="#blog">Blog</a>
-    <a href="#framework">The Framework</a>
-    <a href="#gsd">Symbol Generator</a>
-  </div>
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
+<div class="nav-menu" id="nav-menu">
+  <div class="nav-menu-group">Begin</div>
+  <a href="#start-here" onclick="toggleNav()">Start Here</a>
+  <a href="#daily" onclick="toggleNav()">Daily Insight</a>
+  <div class="nav-menu-group">Explore</div>
+  <a href="#frequency-codex" onclick="toggleNav()">Frequency Codex</a>
+  <a href="#sound-sessions" onclick="toggleNav()">Sound Sessions</a>
+  <a href="#framework" onclick="toggleNav()">The Framework</a>
+  <div class="nav-menu-group">Tools</div>
+  <a href="#rpms" onclick="toggleNav()">Root Pattern System</a>
+  <a href="#gsd" onclick="toggleNav()">Symbol Generator</a>
+  <div class="nav-menu-group">Reading</div>
+  <a href="#recommended-reading" onclick="toggleNav()">Recommended Books</a>
+  <a href="#blog" onclick="toggleNav()">Blog</a>
+  <div class="nav-menu-group">The Work</div>
+  <a href="#books" onclick="toggleNav()">My Books</a>
+  <a href="#creations" onclick="toggleNav()">Other Creations</a>
+</div>
 
 <!-- HERO -->
 <header>
@@ -1328,7 +1410,7 @@
 <!-- SEARCH BAR -->
 <section id="search-bar" style="padding:1.5rem 2rem;background:#03040a;border-bottom:1px solid rgba(212,170,80,0.12);">
   <div style="max-width:700px;margin:0 auto;position:relative;">
-    <input id="siteSearch" type="text" placeholder="Search topics — frequency, archetypes, nervous system, patterns..." oninput="runSearch(this.value)" style="width:100%;padding:0.85rem 1.2rem 0.85rem 3rem;background:rgba(255,255,255,0.04);border:1px solid rgba(212,170,80,0.3);border-radius:4px;color:#f8f4ee;font-family:'Lora',serif;font-size:0.9rem;outline:none;">
+    <input id="siteSearch" type="text" placeholder="Search topics, frequency, archetypes, nervous system, patterns..." oninput="runSearch(this.value)" style="width:100%;padding:0.85rem 1.2rem 0.85rem 3rem;background:rgba(255,255,255,0.04);border:1px solid rgba(212,170,80,0.3);border-radius:4px;color:#f8f4ee;font-family:'Lora',serif;font-size:0.9rem;outline:none;">
     <span style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);opacity:0.5;font-size:1.1rem;">&#128269;</span>
     <div id="searchResults" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#0b0f1e;border:1px solid rgba(212,170,80,0.25);border-radius:4px;z-index:200;max-height:320px;overflow-y:auto;"></div>
   </div>
@@ -1339,21 +1421,21 @@
   <div class="section-inner">
     <div class="section-label">New Here?</div>
     <h2 class="section-title" style="margin-bottom:1rem;">Start Here</h2>
-    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 3rem;font-size:1.05rem;line-height:1.8;">Sound, frequency, and pattern work can feel like a lot to navigate. This path walks you through the essentials — in order, at your own pace.</p>
+    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 3rem;font-size:1.05rem;line-height:1.8;">Sound, frequency, and pattern work can feel like a lot to navigate. This path walks you through the essentials, in order, at your own pace.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto;">
       <div class="start-step" onclick="document.getElementById('daily').scrollIntoView({behavior:'smooth'})">
         <div class="start-step-num">01</div>
         <h3 class="start-step-title">What Is Frequency?</h3>
-        <p class="start-step-desc">Everything in existence is in motion. At the atomic level, particles are not solid objects — they are excitations of underlying fields, oscillating at specific rates. Frequency is simply the measure of how fast something oscillates: cycles per second, expressed in Hertz (Hz).</p>
-        <p class="start-step-desc" style="margin-top:0.6rem;">Your body is no different. Every organ, every cell membrane, every neural firing pattern has a characteristic frequency signature. Your brain operates in measurable frequency bands — delta during deep sleep, theta in meditation, alpha in relaxed awareness, beta in active thought. Your heart generates an electromagnetic field with a torus topology measurable several feet beyond your skin.</p>
-        <p class="start-step-desc" style="margin-top:0.6rem;">Sound, light, thought, emotion — all of it is frequency. When two frequencies interact, they either amplify each other (resonance) or cancel each other out (interference). This is why certain music moves you, certain environments drain you, and certain people leave you feeling more alive. You are a tuned instrument, and your environment is constantly playing you.</p>
-        <p class="start-step-desc" style="margin-top:0.6rem;">The work on this site is about learning to recognise your own frequency signature — and consciously choosing what you resonate with.</p>
+        <p class="start-step-desc">Everything in existence is in motion. At the atomic level, particles are not solid objects, they are excitations of underlying fields, oscillating at specific rates. Frequency is simply the measure of how fast something oscillates: cycles per second, expressed in Hertz (Hz).</p>
+        <p class="start-step-desc" style="margin-top:0.6rem;">Your body is no different. Every organ, every cell membrane, every neural firing pattern has a characteristic frequency signature. Your brain operates in measurable frequency bands, delta during deep sleep, theta in meditation, alpha in relaxed awareness, beta in active thought. Your heart generates an electromagnetic field with a torus topology measurable several feet beyond your skin.</p>
+        <p class="start-step-desc" style="margin-top:0.6rem;">Sound, light, thought, emotion, all of it is frequency. When two frequencies interact, they either amplify each other (resonance) or cancel each other out (interference). This is why certain music moves you, certain environments drain you, and certain people leave you feeling more alive. You are a tuned instrument, and your environment is constantly playing you.</p>
+        <p class="start-step-desc" style="margin-top:0.6rem;">The work on this site is about learning to recognise your own frequency signature, and consciously choosing what you resonate with.</p>
         <span class="start-step-link">Begin with Today's Insight &rarr;</span>
       </div>
       <div class="start-step" onclick="document.getElementById('frequency-codex').scrollIntoView({behavior:'smooth'})">
         <div class="start-step-num">02</div>
         <h3 class="start-step-title">Explore the Frequency Codex</h3>
-        <p class="start-step-desc">A comprehensive reference of healing frequencies — Solfeggio, binaural, and scalar — with their properties and uses. Click any frequency to expand its full description.</p>
+        <p class="start-step-desc">A comprehensive reference of healing frequencies, Solfeggio, binaural, and scalar, with their properties and uses. Click any frequency to expand its full description.</p>
         <span class="start-step-link">Open the Codex &rarr;</span>
       </div>
       <div class="start-step" onclick="document.getElementById('sound-sessions').scrollIntoView({behavior:'smooth'})">
@@ -1365,19 +1447,19 @@
       <div class="start-step" onclick="document.getElementById('rpms').scrollIntoView({behavior:'smooth'})">
         <div class="start-step-num">04</div>
         <h3 class="start-step-title">Map Your Root Patterns</h3>
-        <p class="start-step-desc">Once you've felt the field, use the Root Pattern Mapping System to identify which loops are running beneath the surface — and what wants to shift.</p>
+        <p class="start-step-desc">Once you've felt the field, use the Root Pattern Mapping System to identify which loops are running beneath the surface, and what wants to shift.</p>
         <span class="start-step-link">Use the RPMS &rarr;</span>
       </div>
       <div class="start-step" onclick="document.getElementById('framework').scrollIntoView({behavior:'smooth'})">
         <div class="start-step-num">05</div>
         <h3 class="start-step-title">Understand the Science</h3>
-        <p class="start-step-desc">Ready for the deeper architecture? The Framework maps where physics, neuroscience, and ancient tradition converge — with citations at every step.</p>
+        <p class="start-step-desc">Ready for the deeper architecture? The Framework maps where physics, neuroscience, and ancient tradition converge, with citations at every step.</p>
         <span class="start-step-link">Read The Framework &rarr;</span>
       </div>
       <div class="start-step" onclick="document.getElementById('books').scrollIntoView({behavior:'smooth'})">
         <div class="start-step-num">06</div>
         <h3 class="start-step-title">Go Deeper with the Books</h3>
-        <p class="start-step-desc">The books extend everything on this site into full narrative form — for children, for adults, and for those ready to rewrite their story entirely.</p>
+        <p class="start-step-desc">The books extend everything on this site into full narrative form, for children, for adults, and for those ready to rewrite their story entirely.</p>
         <span class="start-step-link">Browse the Books &rarr;</span>
       </div>
     </div>
@@ -1452,7 +1534,7 @@
       <div style="max-width: 680px; width: 100%; margin: 0 auto 2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem 2rem; text-align: left;">
         <div class="section-label" style="margin-bottom: 0.8rem;">This Season's Energy</div>
         <p id="daily-energy" style="font-size: 0.9rem; line-height: 1.85; color: var(--ivory-dim); font-style: italic;">
-          We move through the final degrees of Pisces — the last sign, the veil between worlds. This is the season of dissolution and recollection, where boundaries thin and what has been unspoken finally rises. The Piscean field carries the memory of all twelve signs before it. It is not a time for building, but for listening. For releasing what the last cycle asked you to carry so long.
+          We move through the final degrees of Pisces, the last sign, the veil between worlds. This is the season of dissolution and recollection, where boundaries thin and what has been unspoken finally rises. The Piscean field carries the memory of all twelve signs before it. It is not a time for building, but for listening. For releasing what the last cycle asked you to carry so long.
         </p>
       </div>
 
@@ -1461,7 +1543,7 @@
         <div class="affirmation-text" id="affirmation-text">
           "I release what I was never meant to hold. The current knows where I belong, and I am learning to trust the depth."
         </div>
-        <div class="aff-sign" id="aff-sign">— Pisces Transmission · March 2026</div>
+        <div class="aff-sign" id="aff-sign">,  Pisces Transmission · March 2026</div>
         <button class="btn-ghost" onclick="cycleAffirmation()">Receive Another →</button>
       </div>
     </div>
@@ -1476,35 +1558,35 @@
     <div class="section-label">Go Deeper</div>
     <h2 class="section-title">Recommended Reading</h2>
     <div class="gold-rule"></div>
-    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 3rem;font-size:1.05rem;line-height:1.8;">These authors have been mapping the same territory for years — from neuroscience and epigenetics to sacred geometry and consciousness. Each book is a doorway deeper into the frameworks explored on this site.</p>
+    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 3rem;font-size:1.05rem;line-height:1.8;">These authors have been mapping the same territory for years, from neuroscience and epigenetics to sacred geometry and consciousness. Each book is a doorway deeper into the frameworks explored on this site.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto;">
 
       <div class="meta-card" style="padding:1.8rem;text-align:left;">
         <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--sapphire);text-transform:uppercase;margin-bottom:0.6rem;">Neuroscience · Trauma</div>
         <div style="font-family:'Cinzel Decorative',cursive;font-size:0.95rem;color:var(--ivory);margin-bottom:0.4rem;line-height:1.4;">The Body Keeps the Score</div>
         <div style="font-size:0.78rem;color:var(--gold);margin-bottom:0.8rem;">Bessel van der Kolk</div>
-        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">The definitive work on how trauma is stored in the body and nervous system — and how movement, rhythm, and somatic practices can rewire it. Essential reading for anyone working with inherited patterns.</p>
+        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">The definitive work on how trauma is stored in the body and nervous system, and how movement, rhythm, and somatic practices can rewire it. Essential reading for anyone working with inherited patterns.</p>
       </div>
 
       <div class="meta-card" style="padding:1.8rem;text-align:left;">
         <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--sapphire);text-transform:uppercase;margin-bottom:0.6rem;">Epigenetics · Biology</div>
         <div style="font-family:'Cinzel Decorative',cursive;font-size:0.95rem;color:var(--ivory);margin-bottom:0.4rem;line-height:1.4;">The Biology of Belief</div>
         <div style="font-size:0.78rem;color:var(--gold);margin-bottom:0.8rem;">Bruce Lipton</div>
-        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">A cellular biologist’s groundbreaking case that our beliefs and environment — not our genes — control our biology. The scientific foundation for why perception and frequency matter at the cellular level.</p>
+        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">A cellular biologist’s groundbreaking case that our beliefs and environment, not our genes, control our biology. The scientific foundation for why perception and frequency matter at the cellular level.</p>
       </div>
 
       <div class="meta-card" style="padding:1.8rem;text-align:left;">
         <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--violet);text-transform:uppercase;margin-bottom:0.6rem;">Consciousness · Neuroscience</div>
         <div style="font-family:'Cinzel Decorative',cursive;font-size:0.95rem;color:var(--ivory);margin-bottom:0.4rem;line-height:1.4;">Breaking the Habit of Being Yourself</div>
         <div style="font-size:0.78rem;color:var(--gold);margin-bottom:0.8rem;">Joe Dispenza</div>
-        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">How the brain’s neural patterns lock us into habitual identity — and how meditation, intention, and elevated emotion can literally rewire the brain and change your biology. Bridges neuroscience and quantum physics.</p>
+        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">How the brain’s neural patterns lock us into habitual identity, and how meditation, intention, and elevated emotion can literally rewire the brain and change your biology. Bridges neuroscience and quantum physics.</p>
       </div>
 
       <div class="meta-card" style="padding:1.8rem;text-align:left;">
         <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Sacred Geometry · Mathematics</div>
         <div style="font-family:'Cinzel Decorative',cursive;font-size:0.95rem;color:var(--ivory);margin-bottom:0.4rem;line-height:1.4;">Sacred Geometry: Philosophy & Practice</div>
         <div style="font-size:0.78rem;color:var(--gold);margin-bottom:0.8rem;">Robert Lawlor</div>
-        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">The foundational text on how mathematical ratios — the Golden Ratio, Fibonacci sequence, Platonic solids — underlie all natural form. The intellectual backbone of the Geometry chapter in The Framework.</p>
+        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">The foundational text on how mathematical ratios, the Golden Ratio, Fibonacci sequence, Platonic solids, underlie all natural form. The intellectual backbone of the Geometry chapter in The Framework.</p>
       </div>
 
       <div class="meta-card" style="padding:1.8rem;text-align:left;">
@@ -1518,21 +1600,21 @@
         <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--violet);text-transform:uppercase;margin-bottom:0.6rem;">Archetypes · Psychology</div>
         <div style="font-family:'Cinzel Decorative',cursive;font-size:0.95rem;color:var(--ivory);margin-bottom:0.4rem;line-height:1.4;">The Archetypes and the Collective Unconscious</div>
         <div style="font-size:0.78rem;color:var(--gold);margin-bottom:0.8rem;">Carl Gustav Jung</div>
-        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">Jung’s foundational work on the universal patterns that live beneath individual psychology. The source of the archetypal framework used throughout this site — the Lover, the Rebel, the Healer, the Sage.</p>
+        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">Jung’s foundational work on the universal patterns that live beneath individual psychology. The source of the archetypal framework used throughout this site, the Lover, the Rebel, the Healer, the Sage.</p>
       </div>
 
       <div class="meta-card" style="padding:1.8rem;text-align:left;">
         <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Heart · Coherence</div>
         <div style="font-family:'Cinzel Decorative',cursive;font-size:0.95rem;color:var(--ivory);margin-bottom:0.4rem;line-height:1.4;">The HeartMath Solution</div>
         <div style="font-size:0.78rem;color:var(--gold);margin-bottom:0.8rem;">Doc Childre &amp; Howard Martin</div>
-        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">The science and practice of heart coherence — the state in which the heart, brain, and nervous system synchronise into a measurable, high-performance frequency. The research behind the heart field described in The Framework.</p>
+        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">The science and practice of heart coherence, the state in which the heart, brain, and nervous system synchronise into a measurable, high-performance frequency. The research behind the heart field described in The Framework.</p>
       </div>
 
       <div class="meta-card" style="padding:1.8rem;text-align:left;">
         <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:var(--sapphire);text-transform:uppercase;margin-bottom:0.6rem;">Ancestral Healing · Family Systems</div>
         <div style="font-family:'Cinzel Decorative',cursive;font-size:0.95rem;color:var(--ivory);margin-bottom:0.4rem;line-height:1.4;">It Didn’t Start With You</div>
         <div style="font-size:0.78rem;color:var(--gold);margin-bottom:0.8rem;">Mark Wolynn</div>
-        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">How inherited family trauma shapes who we are — and how to break the cycle. Draws on epigenetics, family systems therapy, and somatic work. Directly maps to the Ancestral Loop chapter in The Framework.</p>
+        <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.8;">How inherited family trauma shapes who we are, and how to break the cycle. Draws on epigenetics, family systems therapy, and somatic work. Directly maps to the Ancestral Loop chapter in The Framework.</p>
       </div>
 
     </div>
@@ -1615,14 +1697,14 @@
     <div class="meta-card" style="padding: 2rem; text-align:left;">
       <div style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; color:var(--sapphire); text-transform:uppercase; margin-bottom:0.8rem;">Symbol · Art</div>
       <div style="font-family:'Cinzel Decorative',cursive; font-size:1.1rem; color:var(--ivory); margin-bottom:0.8rem; line-height:1.4;">Biogeometric Symbol Library</div>
-      <p style="font-size:0.82rem; color:var(--ivory-dim); line-height:1.8; margin-bottom:1.2rem;">A collection of 19+ original geometric symbols developed through years of pattern research — each one designed to represent a specific frequency, cycle, or natural principle.</p>
+      <p style="font-size:0.82rem; color:var(--ivory-dim); line-height:1.8; margin-bottom:1.2rem;">A collection of 19+ original geometric symbols developed through years of pattern research, each one designed to represent a specific frequency, cycle, or natural principle.</p>
       <span style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--gold); border: 1px solid var(--border); padding:0.3rem 0.8rem; border-radius:2px;">Coming Soon</span>
     </div>
 
     <div class="meta-card" style="padding: 2rem; text-align:left;">
       <div style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:0.8rem;">Memoir · In Progress</div>
       <div style="font-family:'Cinzel Decorative',cursive; font-size:1.1rem; color:var(--ivory); margin-bottom:0.8rem; line-height:1.4;">Encoded Inheritance</div>
-      <p style="font-size:0.82rem; color:var(--ivory-dim); line-height:1.8; margin-bottom:1.2rem;">A personal memoir about tracing inherited family patterns — the beliefs, behaviors, and health stories passed down through generations — and what it looks like to consciously change them.</p>
+      <p style="font-size:0.82rem; color:var(--ivory-dim); line-height:1.8; margin-bottom:1.2rem;">A personal memoir about tracing inherited family patterns, the beliefs, behaviors, and health stories passed down through generations, and what it looks like to consciously change them.</p>
       <span style="font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; color:var(--violet); border: 1px solid rgba(155,111,212,0.3); padding:0.3rem 0.8rem; border-radius:2px;">In Progress</span>
     </div>
 
@@ -1639,163 +1721,11 @@
       <h2 class="section-title">The Blog</h2>
       <div class="gold-rule"></div>
       <p style="color: var(--ivory-dim); max-width: 460px; margin: 0 auto; font-style: italic; font-size: 0.9rem; line-height: 1.8;">
-        Honest writing about the work — what's being built, what's being learned, and what keeps showing up.
+        Honest writing about the work, what's being built, what's being learned, and what keeps showing up.
       </p>
     </div>
 
     <div class="blog-grid">
-
-      <!-- Post 1: Archetypes -->
-      <article class="blog-card">
-        <div class="blog-img-wrap">
-          <img src="assets/blog-archetypes.png" alt="Archetypes" class="blog-img">
-        </div>
-        <div class="blog-content">
-          <div class="blog-tag">Identity · Pattern Work</div>
-          <h3 class="blog-title">Who Are You Showing Up As Today?</h3>
-          <p class="blog-excerpt">The Lover. The Rebel. The Healer. The Sage. These aren't just characters in myths — they're universal energies that live within you. Archetypes are ancient blueprints of being.</p>
-          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
-          <div class="blog-full" style="display:none;">
-            <p>The Lover. The Rebel. The Healer. The Sage.</p>
-            <p>These aren't just characters in myths; they're universal energies that live within you. Archetypes are ancient blueprints of being. They're not your fixed identity — they're facets of your soul.</p>
-            <h4 class="blog-subhead">How We Box Ourselves In</h4>
-            <p>It's easy to pick one and say, "This is me."<br>
-            "I'm the creative one," we claim, forgetting our inner strategist.<br>
-            "She's the Nurturer," we decide, overlooking her fierce Warrior.</p>
-            <p>But when we cling to a single archetype, we build a cage. We limit our responses, our growth, our wholeness.</p>
-            <h4 class="blog-subhead">The Dance of Wholeness</h4>
-            <p>The real journey is dancing with them all. Notice which energy is present right now. Notice which ones you project onto the world.</p>
-            <p>Allow the paradox:</p>
-            <ul class="blog-list">
-              <li>Be the Sage who can also play the Fool.</li>
-              <li>Be the Nurturer who can also draw boundaries like a King or Queen.</li>
-              <li>Be the Creator who understands the necessity of the Destroyer.</li>
-            </ul>
-            <p>Embracing all your archetypes doesn't confuse your identity — it completes it. You contain multitudes.</p>
-            <p class="blog-question">Which archetypal energy do you feel most connected to right now?</p>
-            <p class="blog-cta-text">If you want to see which archetypal loops you may be stuck in — and how to break free — <a href="#rpms" class="blog-link">explore the Root Pattern Mapping System below →</a></p>
-            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- Post 2: House of Mirrors -->
-      <article class="blog-card">
-        <div class="blog-img-wrap">
-          <img src="assets/blog-house-of-mirrors.jpeg" alt="House of Mirrors" class="blog-img">
-        </div>
-        <div class="blog-content">
-          <div class="blog-tag">Perception · Integration</div>
-          <h3 class="blog-title">Get Control of Your Environment</h3>
-          <p class="blog-excerpt">I keep getting the same message: get control of your environment. At first that sounded like "fix everything out there." But I think it's actually something quieter, and way more powerful.</p>
-          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
-          <div class="blog-full" style="display:none;">
-            <p>I keep getting the same message over and over: <em>get control of your environment.</em></p>
-            <p>At first that sounded like "fix everything out there." But I think it's actually something quieter, and way more powerful: Stop letting the outside world decide who you are. Because the moment we identify with anything external — a role, a diagnosis, a relationship dynamic, a past version of ourselves, a fear — it's like we hand our perception over to it. And then we wonder why we feel stuck. We're not stuck in life… we're stuck in an identity.</p>
-            <p>I've been thinking of reality like a house of mirrors — not in a paranoid way, but in a pattern way. Everything reflects something back. If I think every reflection is "me," it becomes fractal confusion. I'm reacting to reactions to reactions.</p>
-            <p>But if I remember: <em>I'm not the reflection, I'm the one looking</em> — then the mirrors turn into maps.</p>
-            <ul class="blog-list">
-              <li>A trigger becomes information.</li>
-              <li>A repeated pattern becomes a message.</li>
-              <li>An old story becomes something I can finally witness without being swallowed by it.</li>
-            </ul>
-            <p>And here's the part that's hard to explain until you feel it: when you integrate what you've been splitting off — grief, anger, truth, softness, power — your whole frequency and perception changes. You choose differently. You move differently. You stop attracting the same loops. It's like new doors appear, not because the world magically changed, but because you did.</p>
-            <p class="blog-question">What am I identifying with that I don't actually have to be? And what happens if I step back far enough to see it, without becoming it?</p>
-            <p>If you're in a season where everything feels heavy or confusing — sometimes the breakthrough isn't doing more. Sometimes it's remembering who's holding the light.</p>
-            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- Post 3: Brain Patterns -->
-      <article class="blog-card">
-        <div class="blog-img-wrap">
-          <img src="assets/blog-brain-patterns.png" alt="Brain Patterns" class="blog-img">
-        </div>
-        <div class="blog-content">
-          <div class="blog-tag">Neuroscience · Healing</div>
-          <h3 class="blog-title">Your Brain Isn't Stuck. It's Just Patterned.</h3>
-          <p class="blog-excerpt">Every thought, reaction, or emotion travels a neural pathway — and the more you repeat it, the stronger it gets. That's how synapses form. But the good news is: repetition rewires.</p>
-          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
-          <div class="blog-full" style="display:none;">
-            <p>Every thought, reaction, or emotion travels a neural pathway — and the more you repeat it, the stronger it gets.</p>
-            <p>That's how synapses form: repetition, emotional charge, subconscious reinforcement.</p>
-            <p>By age 7, most of your core pathways are already wired. Not by truth — but by what was repeated in your environment. Which means that anxious thought? That shutdown pattern? That people-pleasing loop? It's not you. It's just a well-worn trail.</p>
-            <p>But the good news is:</p>
-            <ul class="blog-list">
-              <li>Repetition rewires.</li>
-              <li>Frequency accelerates.</li>
-              <li>Safety makes it stick.</li>
-            </ul>
-            <p>When you combine intention + coherent frequency + a regulated nervous system, you give your brain a new map.</p>
-            <p>Healing = building new synapses that hold peace, clarity, and presence. Over and over, until that becomes the new default.</p>
-            <p class="blog-question">Your brain is always listening. What are you teaching it to expect?</p>
-            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- Post 4: Humming -->
-      <article class="blog-card">
-        <div class="blog-img-wrap">
-          <img src="assets/blog-humming.png" alt="Humming" class="blog-img">
-        </div>
-        <div class="blog-content">
-          <div class="blog-tag">Nervous System · Somatic Tools</div>
-          <h3 class="blog-title">If You're Anxious or Overwhelmed, Try This: Hum.</h3>
-          <p class="blog-excerpt">Seriously. It sounds small, but it's powerful. Humming increases nitric oxide by up to 15x, activates the vagus nerve, and shifts your brainwaves from stress into calm.</p>
-          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
-          <div class="blog-full" style="display:none;">
-            <p>If you're anxious, overwhelmed, or struggling to regulate your nervous system — try this: <strong>Hum.</strong></p>
-            <p>Seriously. It sounds small, but it's powerful. Here's why:</p>
-            <h4 class="blog-subhead">What the Research Shows</h4>
-            <ul class="blog-list">
-              <li><strong>Nitric Oxide Production:</strong> Humming increases nitric oxide in the nasal passages by up to 15x — anti-viral, anti-inflammatory, and improves oxygen flow.</li>
-              <li><strong>Vagus Nerve Stimulation:</strong> Activates the parasympathetic system — lowers cortisol, slows heart rate, improves digestion, reduces anxiety.</li>
-              <li><strong>Brain &amp; Body Coherence:</strong> The vibration travels through bone, fascia, and fluid — like an internal massage, reducing tension and inflammation.</li>
-              <li><strong>Brainwave Shifts:</strong> Slow, steady humming moves brainwaves from beta (stress) into alpha and theta — states linked to healing, clarity, and calm.</li>
-            </ul>
-            <h4 class="blog-subhead">It's Been Used for Centuries</h4>
-            <p>Tibetan monks. Vedic healers. Mystics in Egypt, Sufi, and Taoist traditions. They all used forms of humming, toning, or vowel sound practices — not as "ritual," but as vibrational medicine. They knew what science is now catching up to: your voice changes your physiology.</p>
-            <h4 class="blog-subhead">How To Use It (Anywhere)</h4>
-            <ol class="blog-list">
-              <li>Sit or lie down.</li>
-              <li>Inhale slowly through the nose.</li>
-              <li>Hum gently on the exhale — "mmm," "ohhh," or "ahhh."</li>
-              <li>Feel where the sound vibrates in your body.</li>
-              <li>Repeat for 2–5 minutes. No need for perfection — just presence.</li>
-            </ol>
-            <p>Do this before sleep, during stress, or when your child is dysregulated. It helps both of you return to a state where healing can happen.</p>
-            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- Post 5: Manifestation / Becoming -->
-      <article class="blog-card">
-        <div class="blog-img-wrap">
-          <img src="assets/blog-becoming.jpeg" alt="You Are Becoming" class="blog-img">
-        </div>
-        <div class="blog-content">
-          <div class="blog-tag">Manifestation · Personal Story</div>
-          <h3 class="blog-title">Manifestation Isn't About Getting What You Want.</h3>
-          <p class="blog-excerpt">It's about becoming aligned with what you truly want beneath the surface. For most of my life, the deepest desire I carried was to be a mother. Life didn't hand me that dream easily.</p>
-          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
-          <div class="blog-full" style="display:none;">
-            <p>Manifestation isn't about "getting what you want." It's about becoming aligned with what you truly want beneath the surface.</p>
-            <p>For most of my life, the deepest desire I carried was to be a mother. Not just a passing wish — it was the strongest want I've ever had. The kind of ache that sits in your bones. I pictured myself with a big family, surrounded by kids, overflowing with the unconditional love I thought motherhood would give me.</p>
-            <p>But life didn't hand me that dream easily. I walked through multiple miscarriages, years of infertility, and the kind of heartbreak that forces you to question everything.</p>
-            <p>What I eventually had to face was this: It wasn't just about having children. It was about the wound underneath — the part of me that was seeking unconditional love outside of myself. Motherhood was the mirror showing me where I still felt empty, where I hadn't yet learned to love myself fully.</p>
-            <p>And here's the thing — your subconscious knows. It will play out every "delay," every "failure," every painful loop, not to punish you, but to press you closer to the lesson. To peel back the layers of what you think you want, until you can finally see what's real.</p>
-            <p>When I finally healed that wound — when I stopped seeking outside of myself to fill the hole — I conceived. Today, I have two children. Not because I "manifested hard enough" or repeated affirmations every night, but because I faced the part of me that believed love had to come from somewhere else.</p>
-            <p>So no, this journey isn't simple. It's messy. It's brutal. It's the kind of path that breaks you down before it rebuilds you. But if you let it, every heartbreak is a doorway. Every loss is shaping you into the person who is ready to receive the life you're actually asking for — whether you realize it yet or not.</p>
-            <p class="blog-question">You are not a victim. You are becoming.</p>
-            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- Post 6: The Body as the King's Chamber -->
       <article class="blog-card">
         <div class="blog-img-wrap">
           <img src="assets/blog-kings-chamber.jpeg" alt="The Body as the King's Chamber" class="blog-img">
@@ -1828,29 +1758,62 @@
             </ul>
             <p>When the observer is scattered or hijacked, perception distorts. When the observer is seated, perception clarifies.</p>
 
-            <h4 class="blog-subhead">Romans 12:2 — A Blueprint for Consciousness</h4>
+            <h4 class="blog-subhead">Romans 12:2, A Blueprint for Consciousness</h4>
             <p class="blog-question">“Do not be conformed to this world, but be transformed by the renewing of your mind.”</p>
             <p>This verse is often interpreted as moral instruction. But psychologically, it describes a transformation of perception. Renewal of the mind means re-patterning perception. Transformation begins within the observer, not the environment.</p>
 
             <h4 class="blog-subhead">The Body as the King's Chamber</h4>
-            <p>Inside the Great Pyramid of Giza lies a space known as the King's Chamber. It is not decorated. It contains no elaborate carvings. Instead, it is a resonant cavity — its geometry, stone composition, and acoustic properties create a chamber that amplifies vibration and resonance.</p>
+            <p>Inside the Great Pyramid of Giza lies a space known as the King's Chamber. It is not decorated. It contains no elaborate carvings. Instead, it is a resonant cavity, its geometry, stone composition, and acoustic properties create a chamber that amplifies vibration and resonance.</p>
             <p>Symbolically, the human body functions the same way. Your cranial vault, spine, and heart field create a vertical resonant axis. Your biology encodes mathematical ratios found throughout sacred architecture and nature: π, φ, √5. These harmonic relationships appear in cellular growth, DNA structure, and neural branching patterns.</p>
             <p><em>When awareness is scattered, the body becomes a sealed tomb. When awareness is enthroned, the body becomes a tuned temple.</em></p>
 
             <h4 class="blog-subhead">The Chrysalis</h4>
-            <p>When a caterpillar enters the chrysalis, much of its body dissolves into a nutrient-rich cellular soup. Yet the butterfly was never absent. Inside the caterpillar already exist tiny clusters of cells called imaginal discs — dormant cells that contain the blueprint for wings, eyes, antennae, and legs. As the caterpillar dissolves, the imaginal cells activate and reorganize the dissolved material into a completely new form.</p>
-            <p>The same process happens psychologically and spiritually. Old identities dissolve. But latent potentials — long encoded within us — begin to organize.</p>
+            <p>When a caterpillar enters the chrysalis, much of its body dissolves into a nutrient-rich cellular soup. Yet the butterfly was never absent. Inside the caterpillar already exist tiny clusters of cells called imaginal discs, dormant cells that contain the blueprint for wings, eyes, antennae, and legs. As the caterpillar dissolves, the imaginal cells activate and reorganize the dissolved material into a completely new form.</p>
+            <p>The same process happens psychologically and spiritually. Old identities dissolve. But latent potentials, long encoded within us, begin to organize.</p>
 
             <h4 class="blog-subhead">Compassion as the Key</h4>
             <p>The chrysalis is a sealed chamber of transformation. So is your body. But the difference between metamorphosis and collapse is compassion. Without compassion, dissolution feels like terror. With compassion, the observer remains seated. Somatic signals become messages. Grief becomes honored rather than suppressed. The old identities can be acknowledged as former protectors:</p>
             <p class="blog-question">“Thank you for serving me. It’s safe to release now.”</p>
-            <p>Your body is not an obstacle to consciousness. It is the chamber that allows consciousness to take form. When consciousness is enthroned within a compassionate, regulated body, the chamber activates. Perception clarifies. And transformation begins to unfold naturally — not through force, but through alignment.</p>
+            <p>Your body is not an obstacle to consciousness. It is the chamber that allows consciousness to take form. When consciousness is enthroned within a compassionate, regulated body, the chamber activates. Perception clarifies. And transformation begins to unfold naturally, not through force, but through alignment.</p>
             <p><em>Your body becomes the living chrysalis. And the observer within becomes the architect of what emerges.</em></p>
             <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
           </div>
         </div>
       </article>
-
+      <article class="blog-card">
+        <div class="blog-img-wrap">
+          <img src="assets/blog-humming.png" alt="Humming" class="blog-img">
+        </div>
+        <div class="blog-content">
+          <div class="blog-tag">Nervous System · Somatic Tools</div>
+          <h3 class="blog-title">If You're Anxious or Overwhelmed, Try This: Hum.</h3>
+          <p class="blog-excerpt">Seriously. It sounds small, but it's powerful. Humming increases nitric oxide by up to 15x, activates the vagus nerve, and shifts your brainwaves from stress into calm.</p>
+          <button class="btn-ghost blog-read-more" onclick="togglePost(this)">Read More →</button>
+          <div class="blog-full" style="display:none;">
+            <p>If you're anxious, overwhelmed, or struggling to regulate your nervous system, try this: <strong>Hum.</strong></p>
+            <p>Seriously. It sounds small, but it's powerful. Here's why:</p>
+            <h4 class="blog-subhead">What the Research Shows</h4>
+            <ul class="blog-list">
+              <li><strong>Nitric Oxide Production:</strong> Humming increases nitric oxide in the nasal passages by up to 15x, anti-viral, anti-inflammatory, and improves oxygen flow.</li>
+              <li><strong>Vagus Nerve Stimulation:</strong> Activates the parasympathetic system, lowers cortisol, slows heart rate, improves digestion, reduces anxiety.</li>
+              <li><strong>Brain &amp; Body Coherence:</strong> The vibration travels through bone, fascia, and fluid, like an internal massage, reducing tension and inflammation.</li>
+              <li><strong>Brainwave Shifts:</strong> Slow, steady humming moves brainwaves from beta (stress) into alpha and theta, states linked to healing, clarity, and calm.</li>
+            </ul>
+            <h4 class="blog-subhead">It's Been Used for Centuries</h4>
+            <p>Tibetan monks. Vedic healers. Mystics in Egypt, Sufi, and Taoist traditions. They all used forms of humming, toning, or vowel sound practices, not as "ritual," but as vibrational medicine. They knew what science is now catching up to: your voice changes your physiology.</p>
+            <h4 class="blog-subhead">How To Use It (Anywhere)</h4>
+            <ol class="blog-list">
+              <li>Sit or lie down.</li>
+              <li>Inhale slowly through the nose.</li>
+              <li>Hum gently on the exhale, "mmm," "ohhh," or "ahhh."</li>
+              <li>Feel where the sound vibrates in your body.</li>
+              <li>Repeat for 2–5 minutes. No need for perfection, just presence.</li>
+            </ol>
+            <p>Do this before sleep, during stress, or when your child is dysregulated. It helps both of you return to a state where healing can happen.</p>
+            <button class="btn-ghost" onclick="togglePost(this)" style="margin-top:1.5rem;">← Close</button>
+          </div>
+        </div>
+      </article>
     </div><!-- end blog-grid -->
   </div>
 </section>
@@ -1865,7 +1828,7 @@
     <h2 class="section-title">Root Pattern Mapping System™</h2>
     <div class="gold-rule"></div>
     <p style="color:var(--ivory-dim); max-width:560px; margin:0 auto 0.5rem; line-height:1.85; font-style:italic; font-size:0.95rem;">
-      Answer 8 questions and receive a clear picture of your core patterns — what's recurring in your body, your relationships, and your family history — and one practical shift to help you move through it.
+      Answer 8 questions and receive a clear picture of your core patterns, what's recurring in your body, your relationships, and your family history, and one practical shift to help you move through it.
     </p>
     <p style="color:var(--ivory-dim); max-width:500px; margin:0 auto; font-size:0.8rem; line-height:1.7;">This is not therapy. It's a structured reflection tool.</p>
 
@@ -1890,7 +1853,7 @@
         <div class="rpms-step" id="step-1">
           <div class="rpms-q-label">Question 1 of 8</div>
           <div class="rpms-q-text">What are your top 3 recurring concerns right now?</div>
-          <div class="rpms-q-sub">Physical, emotional, mental, or energetic — what keeps showing up? You don't need to explain them fully yet.</div>
+          <div class="rpms-q-sub">Physical, emotional, mental, or energetic, what keeps showing up? You don't need to explain them fully yet.</div>
           <textarea class="rpms-textarea" id="q1" placeholder="e.g. exhaustion that sleep doesn't fix, feeling invisible in relationships, a tightness in my chest I can't name..."></textarea>
           <div class="rpms-nav">
             <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
@@ -1903,7 +1866,7 @@
         <div class="rpms-step" id="step-2">
           <div class="rpms-q-label">Question 2 of 8</div>
           <div class="rpms-q-text">When did each of these begin? What was happening in your life 6 months before?</div>
-          <div class="rpms-q-sub">Transitions, losses, breakthroughs, relocations, relationship shifts — anything that changed the terrain.</div>
+          <div class="rpms-q-sub">Transitions, losses, breakthroughs, relocations, relationship shifts, anything that changed the terrain.</div>
           <textarea class="rpms-textarea" id="q2" placeholder="e.g. the exhaustion started after I had my second child in 2021. Six months before that I had left a job I'd held for 8 years..."></textarea>
           <div class="rpms-nav">
             <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
@@ -1929,7 +1892,7 @@
         <div class="rpms-step" id="step-4">
           <div class="rpms-q-label">Question 4 of 8</div>
           <div class="rpms-q-text">What are the main roles or identities you carry? Do any of them conflict?</div>
-          <div class="rpms-q-sub">Mother, provider, healer, rebel, peacekeeper, black sheep, the strong one — which ones feel chosen? Which feel assigned?</div>
+          <div class="rpms-q-sub">Mother, provider, healer, rebel, peacekeeper, black sheep, the strong one, which ones feel chosen? Which feel assigned?</div>
           <textarea class="rpms-textarea" id="q4" placeholder="e.g. I'm the caretaker of everyone and also trying to be the creative visionary. They fight each other constantly. I also feel like the outsider in every room..."></textarea>
           <div class="rpms-nav">
             <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
@@ -1942,7 +1905,7 @@
         <div class="rpms-step" id="step-5">
           <div class="rpms-q-label">Question 5 of 8</div>
           <div class="rpms-q-text">Where do your symptoms live in your body? When do they flare?</div>
-          <div class="rpms-q-sub">Be specific if you can — throat, gut, chest, hips, jaw. And what environments, emotions, or interactions tend to trigger them?</div>
+          <div class="rpms-q-sub">Be specific if you can, throat, gut, chest, hips, jaw. And what environments, emotions, or interactions tend to trigger them?</div>
           <textarea class="rpms-textarea" id="q5" placeholder="e.g. my shoulders lock up whenever I'm in a conflict. My gut tightens when someone needs something from me and I don't want to give it but feel like I should..."></textarea>
           <div class="rpms-nav">
             <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
@@ -1955,7 +1918,7 @@
         <div class="rpms-step" id="step-6">
           <div class="rpms-q-label">Question 6 of 8</div>
           <div class="rpms-q-text">Name your top 3 safe environments and top 3 draining ones.</div>
-          <div class="rpms-q-sub">Places, people, dynamics, routines — where do you expand and where do you contract?</div>
+          <div class="rpms-q-sub">Places, people, dynamics, routines, where do you expand and where do you contract?</div>
           <textarea class="rpms-textarea" id="q6" placeholder="Safe: alone in the woods, my garage, cooking in the morning. Draining: large family gatherings, social media, being asked to explain myself..."></textarea>
           <div class="rpms-nav">
             <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
@@ -1967,7 +1930,7 @@
         <!-- Step 7 -->
         <div class="rpms-step" id="step-7">
           <div class="rpms-q-label">Question 7 of 8</div>
-          <div class="rpms-q-text">What is the thing you haven't said — or barely let yourself think?</div>
+          <div class="rpms-q-text">What is the thing you haven't said, or barely let yourself think?</div>
           <div class="rpms-q-sub">The thought that feels shameful, crazy, selfish, or unforgivable. You can be indirect. Encrypted hints work. This field holds without judgment.</div>
           <textarea class="rpms-textarea" id="q7" placeholder="You can write around it if you need to. Even a fragment counts."></textarea>
           <div class="rpms-nav">
@@ -1980,9 +1943,9 @@
         <!-- Step 8 -->
         <div class="rpms-step" id="step-8">
           <div class="rpms-q-label">Question 8 of 8</div>
-          <div class="rpms-q-text">Can you access your desire right now — what you actually want?</div>
-          <div class="rpms-q-sub">Is it clear, foggy, or completely blank? If blank — do you know why? What feels in the way?</div>
-          <textarea class="rpms-textarea" id="q8" placeholder="e.g. I can feel it but it's blurry — like looking at something through water. I want to be fully seen but that also terrifies me..."></textarea>
+          <div class="rpms-q-text">Can you access your desire right now, what you actually want?</div>
+          <div class="rpms-q-sub">Is it clear, foggy, or completely blank? If blank, do you know why? What feels in the way?</div>
+          <textarea class="rpms-textarea" id="q8" placeholder="e.g. I can feel it but it's blurry, like looking at something through water. I want to be fully seen but that also terrifies me..."></textarea>
           <div class="rpms-nav">
             <button class="btn-ghost" onclick="rpmsBack()">← Back</button>
             <div class="rpms-progress">9 of 9</div>
@@ -2085,7 +2048,7 @@
   <div class="section-inner">
     <div class="section-label">A Unified Architecture</div>
     <h2 class="section-title">The Framework</h2>
-    <p class="section-sub">Where physics, neuroscience, and ancient tradition converge. This is not a set of claims — it is a map of where the threads meet.</p>
+    <p class="section-sub">Where physics, neuroscience, and ancient tradition converge. This is not a set of claims, it is a map of where the threads meet.</p>
 
     <!-- THE CHAIN -->
     <div class="fw-chain-wrap">
@@ -2103,7 +2066,7 @@
       <div class="fw-stream-btns">
         <button class="fw-stream-btn" data-stream="structural" onclick="fwSetStream('structural',this)">Structural Stream</button>
         <button class="fw-stream-btn" data-stream="semantic" onclick="fwSetStream('semantic',this)">Semantic Stream</button>
-        <button class="fw-stream-btn fw-stream-both" data-stream="both" onclick="fwSetStream('both',this)">Both — Coherence</button>
+        <button class="fw-stream-btn fw-stream-both" data-stream="both" onclick="fwSetStream('both',this)">Both, Coherence</button>
       </div>
       <canvas id="fw-dual-canvas" width="600" height="320"></canvas>
       <p class="fw-diagram-caption" id="fw-dual-caption">Tap a stream above to activate it.</p>
@@ -2141,7 +2104,7 @@
     <div class="section-label">Resonance Field Audio</div>
     <h2 class="section-title">Sound Sessions</h2>
     <div class="gold-rule"></div>
-    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 3rem;font-size:1.05rem;line-height:1.8;">These are not background tracks. They are intentional scalar-encoded fields — designed to be listened to with presence, headphones, and an open body.</p>
+    <p style="text-align:center;color:var(--ivory-dim);max-width:640px;margin:0 auto 3rem;font-size:1.05rem;line-height:1.8;">These are not background tracks. They are intentional scalar-encoded fields, designed to be listened to with presence, headphones, and an open body.</p>
 
     <!-- Full Session Only -->
     <div class="sound-card" style="max-width:820px;margin:0 auto;border-color:rgba(212,170,80,0.4);">
@@ -2191,11 +2154,11 @@
     <div class="gsd-howto">
       <h3 class="gsd-step-title">How to Build Your Symbol</h3>
       <div class="gsd-steps">
-        <div class="gsd-step"><span class="gsd-step-num">1</span><span>Choose your <strong>intent</strong> — healing, grounding, protection, manifestation, or consciousness expansion</span></div>
+        <div class="gsd-step"><span class="gsd-step-num">1</span><span>Choose your <strong>intent</strong>, healing, grounding, protection, manifestation, or consciousness expansion</span></div>
         <div class="gsd-step"><span class="gsd-step-num">2</span><span>Select <strong>2–7 frequencies</strong> from the codex below that match your intent</span></div>
-        <div class="gsd-step"><span class="gsd-step-num">3</span><span>Choose a <strong>base template</strong> — the sacred geometry foundation your symbol builds upon</span></div>
+        <div class="gsd-step"><span class="gsd-step-num">3</span><span>Choose a <strong>base template</strong>, the sacred geometry foundation your symbol builds upon</span></div>
         <div class="gsd-step"><span class="gsd-step-num">4</span><span>Click <strong>Generate Symbol</strong> to watch the geometry build in real time</span></div>
-        <div class="gsd-step"><span class="gsd-step-num">5</span><span>Request an <strong>AI Resonance Reading</strong> — Claude interprets your symbol's meaning and activation</span></div>
+        <div class="gsd-step"><span class="gsd-step-num">5</span><span>Request an <strong>AI Resonance Reading</strong>, Claude interprets your symbol's meaning and activation</span></div>
         <div class="gsd-step"><span class="gsd-step-num">6</span><span><strong>Download</strong> your symbol as a high-resolution PNG to print, meditate with, or carry</span></div>
       </div>
     </div>
@@ -3704,6 +3667,17 @@ async function requestGSDReading() {
 // Init on load
 document.addEventListener('DOMContentLoaded', initGSD);
 
+
+// Navigation toggle
+function toggleNav() {
+  const btn = document.getElementById('nav-hamburger');
+  const menu = document.getElementById('nav-menu');
+  const overlay = document.getElementById('nav-overlay');
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
 </script>
 </body>
 </html>
