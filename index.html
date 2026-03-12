@@ -166,6 +166,322 @@
     z-index: 198;
   }
   .nav-overlay.open { display: block; }
+
+  /* SCANNER NAV BUTTON */
+  .scanner-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(212,170,80,0.12);
+    border: 1px solid rgba(212,170,80,0.4);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.85rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    z-index: 210;
+  }
+  .scanner-nav-btn:hover { background: rgba(212,170,80,0.22); border-color: var(--gold); }
+
+  /* SCANNER MODAL */
+  #scanner-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 500;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+  }
+  #scanner-modal.open { display: flex; align-items: flex-start; justify-content: center; }
+  .scanner-panel {
+    background: #070a14;
+    border: 1px solid rgba(212,170,80,0.3);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 720px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    margin: auto;
+  }
+  .scanner-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--ivory-dim);
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+  }
+  .scanner-close:hover { color: var(--gold); }
+  .scanner-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.4rem;
+  }
+  .scanner-sub {
+    color: var(--ivory-dim);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .scanner-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(212,170,80,0.2);
+    margin-bottom: 1.8rem;
+  }
+  .scanner-tab {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+    padding: 0.7rem 1.2rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    margin-bottom: -1px;
+  }
+  .scanner-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .scanner-pane { display: none; }
+  .scanner-pane.active { display: block; }
+  #scanner-video-wrap {
+    position: relative;
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    max-height: 320px;
+  }
+  #scanner-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .scanner-viewfinder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .scanner-viewfinder-box {
+    width: 70%;
+    height: 40%;
+    border: 2px solid rgba(212,170,80,0.7);
+    border-radius: 4px;
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.45);
+  }
+  .scanner-hint {
+    text-align: center;
+    color: var(--ivory-dim);
+    font-size: 0.8rem;
+    margin-top: 0.75rem;
+    font-style: italic;
+  }
+  .scanner-input-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .scanner-input {
+    flex: 1;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,170,80,0.3);
+    border-radius: 4px;
+    color: var(--ivory);
+    font-family: 'Lora', serif;
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .scanner-input:focus { border-color: var(--gold); }
+  .scanner-btn {
+    background: rgba(212,170,80,0.15);
+    border: 1px solid rgba(212,170,80,0.5);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .scanner-btn:hover { background: rgba(212,170,80,0.28); }
+  .scanner-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* SCANNER RESULTS */
+  #scanner-results { margin-top: 2rem; }
+  .scan-product-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--ivory);
+    margin-bottom: 0.3rem;
+  }
+  .scan-product-brand {
+    color: var(--ivory-dim);
+    font-size: 0.82rem;
+    margin-bottom: 1.5rem;
+  }
+  .scan-scores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.8rem;
+  }
+  .scan-score-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,170,80,0.15);
+    border-radius: 6px;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .scan-score-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+  }
+  .scan-score-value {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .scan-score-sub {
+    font-size: 0.72rem;
+    color: var(--ivory-dim);
+    line-height: 1.4;
+  }
+  .score-high { color: #5dba7d; }
+  .score-mid { color: #d4aa50; }
+  .score-low { color: #e05c5c; }
+  .scan-section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.7;
+    margin: 1.5rem 0 0.75rem;
+  }
+  .scan-toxin-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .scan-toxin-item {
+    background: rgba(224,92,92,0.08);
+    border: 1px solid rgba(224,92,92,0.25);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .scan-toxin-flag { color: #e05c5c; font-size: 0.85rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .scan-toxin-name { color: var(--ivory); font-size: 0.88rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .scan-toxin-detail { color: var(--ivory-dim); font-size: 0.78rem; line-height: 1.5; }
+  .scan-systems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .scan-system-tag {
+    background: rgba(74,158,221,0.1);
+    border: 1px solid rgba(74,158,221,0.25);
+    color: var(--sapphire);
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+  }
+  .scan-geometry-wrap {
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+  #scan-geometry-canvas {
+    border-radius: 50%;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(212,170,80,0.15);
+  }
+  .scan-geometry-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-top: 0.6rem;
+  }
+  .scan-geometry-desc {
+    color: var(--ivory-dim);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0.5rem auto 0;
+  }
+  .scan-no-toxins {
+    background: rgba(93,186,125,0.08);
+    border: 1px solid rgba(93,186,125,0.25);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    color: #5dba7d;
+    font-size: 0.88rem;
+  }
+  .scan-disclaimer {
+    color: var(--ivory-dim);
+    font-size: 0.72rem;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(212,170,80,0.1);
+    text-align: center;
+  }
+  .scan-loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--ivory-dim);
+    font-size: 0.9rem;
+  }
+  .scan-loading-spinner {
+    width: 36px;
+    height: 36px;
+    border: 2px solid rgba(212,170,80,0.2);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 1rem;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .scan-error {
+    background: rgba(224,92,92,0.08);
+    border: 1px solid rgba(224,92,92,0.2);
+    border-radius: 4px;
+    padding: 1rem;
+    color: #e05c5c;
+    font-size: 0.88rem;
+    text-align: center;
+  }
     /* HERO */
   header {
     min-height: 100vh;
@@ -1461,9 +1777,15 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo"><img src="assets/taylored-harmony.png" alt="Taylored Harmony" style="height:48px;width:auto;display:block;"></div>
-  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button class="scanner-nav-btn" onclick="openScanner()" title="Product Intelligence Scanner">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a4 4 0 018 0v2"/><line x1="3" y1="12" x2="21" y2="12"/></svg>
+      <span>Scan</span>
+    </button>
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
 <div class="nav-menu" id="nav-menu">
@@ -4621,6 +4943,500 @@ function toggleNav() {
   overlay.classList.toggle('open');
   document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
 }
+
+// ═══════════════════════════════════════════════════
+//  PRODUCT INTELLIGENCE SCANNER
+// ═══════════════════════════════════════════════════
+
+// --- Toxin database ---
+const TOXIN_DB = [
+  { id:'bpa', name:'BPA (Bisphenol A)', match:['bisphenol','bpa'], category:'Endocrine Disruptor', detail:'Synthetic estrogen that mimics hormones. Linked to hormonal disruption, reproductive issues, and metabolic effects. Found in plastics, can linings, and thermal paper.', systems:['Endocrine','Reproductive','Metabolic'] },
+  { id:'pfas', name:'PFAS / PFOA / PFOS', match:['perfluoro','pfas','pfoa','pfos','polytetrafluoro'], category:'Persistent Organic Pollutant', detail:'"Forever chemicals" that accumulate in tissue. Associated with immune suppression, thyroid disruption, and elevated cancer risk. Used in non-stick coatings and water-resistant treatments.', systems:['Immune','Thyroid','Liver'] },
+  { id:'phthalates', name:'Phthalates', match:['phthalate','dibutyl phthalate','dehp','dbp','dep','dmp','dinp','didp'], category:'Endocrine Disruptor', detail:'Plasticisers that interfere with androgen and estrogen signalling. Linked to reproductive development effects, particularly in males. Common in fragrances, flexible plastics, and personal care products.', systems:['Endocrine','Reproductive','Neurological'] },
+  { id:'parabens', name:'Parabens', match:['paraben','methylparaben','ethylparaben','propylparaben','butylparaben','isobutylparaben'], category:'Endocrine Disruptor', detail:'Preservatives with weak estrogenic activity. Found in breast tissue samples. Widely used in cosmetics, pharmaceuticals, and processed foods.', systems:['Endocrine','Reproductive'] },
+  { id:'formaldehyde', name:'Formaldehyde / Releasers', match:['formaldehyde','dmdm hydantoin','imidazolidinyl urea','diazolidinyl urea','quaternium-15','bronopol'], category:'Carcinogen', detail:'Known human carcinogen (IARC Group 1). Irritates mucous membranes and respiratory tract. Used directly or released by preservatives in personal care products.', systems:['Respiratory','Immune','Skin'] },
+  { id:'sls', name:'Sodium Lauryl Sulfate (SLS/SLES)', match:['sodium lauryl sulfate','sodium laureth sulfate','sls','sles','ammonium lauryl'], category:'Irritant / Penetration Enhancer', detail:'Surfactant that strips the skin barrier and increases permeability to other chemicals. Can cause irritation and may be contaminated with 1,4-dioxane (a probable carcinogen).', systems:['Skin','Immune'] },
+  { id:'artificial_colors', name:'Artificial Colours / Dyes', match:['fd&c','red 40','yellow 5','yellow 6','blue 1','blue 2','red 3','green 3','tartrazine','allura red','sunset yellow','brilliant blue'], category:'Neurotoxic Concern', detail:'Synthetic petroleum-derived dyes linked to hyperactivity in children (Southampton study). Several are banned in the EU. Associated with allergic reactions and behavioural effects.', systems:['Neurological','Immune'] },
+  { id:'msg', name:'MSG / Glutamate Excitotoxins', match:['monosodium glutamate','msg','autolyzed yeast','hydrolyzed protein','yeast extract','natural flavors'], category:'Excitotoxin', detail:'Free glutamate in high concentrations can overstimulate neurons. Sensitive individuals report headaches, flushing, and neurological symptoms. Often hidden under "natural flavours" labelling.', systems:['Neurological','Cardiovascular'] },
+  { id:'nitrates', name:'Nitrates / Nitrites', match:['sodium nitrate','sodium nitrite','potassium nitrate','potassium nitrite'], category:'Carcinogen Precursor', detail:'Preservatives in processed meats that convert to nitrosamines (potent carcinogens) during cooking or digestion. Associated with colorectal cancer risk.', systems:['Digestive','Cardiovascular'] },
+  { id:'hfcs', name:'High-Fructose Corn Syrup', match:['high fructose corn syrup','hfcs','corn syrup'], category:'Metabolic Disruptor', detail:'Fructose bypasses normal appetite regulation and is metabolised primarily in the liver. Associated with insulin resistance, fatty liver disease, and obesity.', systems:['Metabolic','Liver','Endocrine'] },
+  { id:'trans_fat', name:'Trans Fats / Hydrogenated Oils', match:['partially hydrogenated','hydrogenated vegetable oil','trans fat'], category:'Cardiovascular Risk', detail:'Industrially produced trans fats raise LDL cholesterol and lower HDL. Strongly associated with cardiovascular disease. Banned in many countries but still present in some products.', systems:['Cardiovascular','Metabolic'] },
+  { id:'carrageenan', name:'Carrageenan', match:['carrageenan'], category:'Inflammatory Agent', detail:'Seaweed-derived thickener that triggers inflammatory responses in the gut epithelium in animal studies. Linked to intestinal permeability and digestive inflammation.', systems:['Digestive','Immune'] },
+  { id:'titanium_dioxide', name:'Titanium Dioxide (nano)', match:['titanium dioxide','ci 77891'], category:'Genotoxic Concern', detail:'IARC classified as possibly carcinogenic (Group 2B) when inhaled. Nano-form may cross gut barrier. Banned as food additive in the EU since 2022. Still used in cosmetics and some supplements.', systems:['Immune','Digestive','Respiratory'] },
+  { id:'aluminum', name:'Aluminium Compounds', match:['aluminum','aluminium','alum','potassium alum','aluminum chlorohydrate'], category:'Neurotoxic Concern', detail:'Accumulates in brain tissue. Associated with neurological effects at high exposures. Used in antiperspirants, baking powder, and some vaccines as adjuvant.', systems:['Neurological','Endocrine'] },
+  { id:'fragrance', name:'Synthetic Fragrance / Parfum', match:['fragrance','parfum','perfume'], category:'Undisclosed Chemical Mixture', detail:'"Fragrance" is a trade secret loophole that can conceal hundreds of undisclosed chemicals including phthalates, allergens, and sensitisers. One of the most common contact allergens.', systems:['Skin','Respiratory','Endocrine'] },
+  { id:'propylene_glycol', name:'Propylene Glycol', match:['propylene glycol'], category:'Penetration Enhancer', detail:'Solvent that increases skin permeability, allowing other chemicals to penetrate more deeply. Can cause skin sensitisation in some individuals.', systems:['Skin'] },
+  { id:'triclosan', name:'Triclosan / Triclocarban', match:['triclosan','triclocarban'], category:'Endocrine Disruptor', detail:'Antimicrobial agent that disrupts thyroid hormone signalling. Contributes to antibiotic resistance. Banned from hand soaps in the US but still present in some toothpastes and products.', systems:['Endocrine','Thyroid','Immune'] },
+  { id:'bht_bha', name:'BHA / BHT', match:['butylated hydroxyanisole','butylated hydroxytoluene','bha','bht'], category:'Endocrine Disruptor', detail:'Synthetic antioxidant preservatives. BHA is listed as a possible human carcinogen (IARC 2B). Both have estrogenic activity. Used in fats, oils, and personal care products.', systems:['Endocrine','Liver'] },
+  { id:'acrylamide', name:'Acrylamide', match:['acrylamide'], category:'Carcinogen', detail:'Forms naturally in starchy foods cooked at high temperatures (frying, baking). IARC Group 2A probable carcinogen. Also used in industrial processes and some cosmetics.', systems:['Neurological','Reproductive'] },
+  { id:'oxybenzone', name:'Oxybenzone / Chemical Sunscreens', match:['oxybenzone','benzophenone','octinoxate','homosalate','avobenzone','octocrylene'], category:'Endocrine Disruptor', detail:'Chemical UV filters that are absorbed through the skin and detected in blood, urine, and breast milk. Oxybenzone has estrogenic activity and is toxic to coral reef ecosystems.', systems:['Endocrine','Reproductive'] }
+];
+
+// --- Ingredient analysis engine ---
+function analyseIngredients(ingredientStr, novaGroup, nutriscoreGrade) {
+  const text = (ingredientStr || '').toLowerCase();
+  const found = [];
+  TOXIN_DB.forEach(t => {
+    if (t.match.some(m => text.includes(m))) found.push(t);
+  });
+
+  // Vitality Score (0-100)
+  let vitality = 80;
+  vitality -= found.length * 7;
+  if (novaGroup === 4) vitality -= 20;
+  else if (novaGroup === 3) vitality -= 10;
+  if (nutriscoreGrade) {
+    const ns = {'a':0,'b':-5,'c':-10,'d':-18,'e':-25};
+    vitality += (ns[nutriscoreGrade.toLowerCase()] || 0);
+  }
+  vitality = Math.max(5, Math.min(100, Math.round(vitality)));
+
+  // Aging Factor
+  const agingScore = Math.max(0, Math.min(100, 100 - found.length * 12 - (novaGroup === 4 ? 25 : novaGroup === 3 ? 12 : 0)));
+  let agingLabel, agingClass;
+  if (agingScore >= 70) { agingLabel = 'Pro-Regenerative'; agingClass = 'score-high'; }
+  else if (agingScore >= 40) { agingLabel = 'Neutral'; agingClass = 'score-mid'; }
+  else { agingLabel = 'Pro-Inflammatory'; agingClass = 'score-low'; }
+
+  // Processing Level
+  const processing = novaGroup || estimateNova(text);
+  const processingLabels = {1:'Whole / Unprocessed',2:'Minimally Processed',3:'Processed',4:'Ultra-Processed'};
+
+  // Body systems
+  const systems = new Set();
+  found.forEach(t => t.systems.forEach(s => systems.add(s)));
+
+  // Vitality class
+  let vClass;
+  if (vitality >= 65) vClass = 'score-high';
+  else if (vitality >= 35) vClass = 'score-mid';
+  else vClass = 'score-low';
+
+  return { vitality, vClass, found, agingScore, agingLabel, agingClass, processing, processingLabels, systems: [...systems] };
+}
+
+function estimateNova(text) {
+  const ultraMarkers = ['high fructose','hydrogenated','maltodextrin','modified starch','artificial','flavour','color','colour','emulsifier','stabilizer','preservative','xanthan','carrageenan','soy lecithin','sodium benzoate','potassium sorbate','aspartame','sucralose','acesulfame'];
+  const count = ultraMarkers.filter(m => text.includes(m)).length;
+  if (count >= 4) return 4;
+  if (count >= 2) return 3;
+  if (count >= 1) return 2;
+  return 1;
+}
+
+// --- Structural Load geometry renderer ---
+function drawStructuralLoad(canvas, toxinCount, vitality, processing) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2, R = W * 0.42;
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  ctx.fillStyle = 'rgba(7,10,20,1)';
+  ctx.fillRect(0, 0, W, H);
+
+  // Determine geometry type based on toxin load
+  // High toxin = angular/fragmented; low toxin = radial/coherent
+  const coherence = Math.max(0, Math.min(1, vitality / 100));
+  const fragmentation = 1 - coherence;
+
+  // Base circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, Math.PI * 2);
+  ctx.strokeStyle = `rgba(212,170,80,${0.15 + coherence * 0.2})`;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  if (coherence >= 0.7) {
+    // HIGH COHERENCE: Flower of Life / radial pattern
+    drawRadialPattern(ctx, cx, cy, R, coherence);
+  } else if (coherence >= 0.4) {
+    // MEDIUM: Partial flower with disruption
+    drawPartialPattern(ctx, cx, cy, R, coherence, toxinCount);
+  } else {
+    // LOW COHERENCE: Fragmented angular pattern
+    drawFragmentedPattern(ctx, cx, cy, R, coherence, toxinCount);
+  }
+
+  // Processing level ring
+  const ringR = R * 0.88;
+  const ringSegments = processing || 1;
+  for (let i = 0; i < ringSegments; i++) {
+    const a0 = (i / ringSegments) * Math.PI * 2 - Math.PI / 2;
+    const a1 = ((i + 0.85) / ringSegments) * Math.PI * 2 - Math.PI / 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, ringR, a0, a1);
+    const colors = ['#5dba7d','#a8c060','#d4aa50','#e05c5c'];
+    ctx.strokeStyle = colors[i] || colors[3];
+    ctx.lineWidth = 3;
+    ctx.globalAlpha = 0.5;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+}
+
+function drawRadialPattern(ctx, cx, cy, R, coherence) {
+  const petals = 6;
+  const pr = R * 0.5;
+  ctx.globalAlpha = 0.6 + coherence * 0.3;
+  for (let i = 0; i < petals; i++) {
+    const angle = (i / petals) * Math.PI * 2;
+    const px = cx + Math.cos(angle) * pr;
+    const py = cy + Math.sin(angle) * pr;
+    ctx.beginPath();
+    ctx.arc(px, py, pr, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(93,186,125,${0.4 + coherence * 0.3})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  // Center circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, pr, 0, Math.PI * 2);
+  ctx.strokeStyle = `rgba(93,186,125,0.6)`;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  // Inner glow
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, pr * 0.6);
+  grad.addColorStop(0, `rgba(93,186,125,${0.3 * coherence})`);
+  grad.addColorStop(1, 'rgba(93,186,125,0)');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(cx, cy, pr * 0.6, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+function drawPartialPattern(ctx, cx, cy, R, coherence, toxinCount) {
+  const petals = 6;
+  const pr = R * 0.5;
+  const disrupted = Math.min(petals, toxinCount);
+  for (let i = 0; i < petals; i++) {
+    const angle = (i / petals) * Math.PI * 2;
+    const px = cx + Math.cos(angle) * pr;
+    const py = cy + Math.sin(angle) * pr;
+    const isDisrupted = i < disrupted;
+    ctx.beginPath();
+    ctx.arc(px, py, pr, 0, Math.PI * 2);
+    ctx.strokeStyle = isDisrupted ? `rgba(212,170,80,0.35)` : `rgba(93,186,125,0.45)`;
+    ctx.lineWidth = 1;
+    ctx.setLineDash(isDisrupted ? [4, 4] : []);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  ctx.beginPath();
+  ctx.arc(cx, cy, pr, 0, Math.PI * 2);
+  ctx.strokeStyle = `rgba(212,170,80,0.5)`;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  // Disruption marks
+  for (let i = 0; i < disrupted; i++) {
+    const angle = (i / petals) * Math.PI * 2;
+    const dx = cx + Math.cos(angle) * pr * 1.1;
+    const dy = cy + Math.sin(angle) * pr * 1.1;
+    ctx.beginPath();
+    ctx.arc(dx, dy, 4, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(224,92,92,0.7)';
+    ctx.fill();
+  }
+}
+
+function drawFragmentedPattern(ctx, cx, cy, R, coherence, toxinCount) {
+  const sides = Math.max(3, Math.min(8, 3 + toxinCount));
+  // Irregular polygon
+  ctx.beginPath();
+  for (let i = 0; i < sides; i++) {
+    const angle = (i / sides) * Math.PI * 2 - Math.PI / 2;
+    const jitter = 0.6 + Math.random() * 0.4;
+    const x = cx + Math.cos(angle) * R * jitter;
+    const y = cy + Math.sin(angle) * R * jitter;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.strokeStyle = `rgba(224,92,92,${0.4 + (1 - coherence) * 0.4})`;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  // Fragmentation lines
+  for (let i = 0; i < toxinCount && i < 8; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const r1 = R * 0.2, r2 = R * (0.5 + Math.random() * 0.4);
+    ctx.beginPath();
+    ctx.moveTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1);
+    ctx.lineTo(cx + Math.cos(a + 0.3) * r2, cy + Math.sin(a + 0.3) * r2);
+    ctx.strokeStyle = `rgba(224,92,92,${0.2 + Math.random() * 0.3})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+}
+
+// --- Barcode camera scanner ---
+let scanStream = null;
+let scanInterval = null;
+let scannerLib = null;
+
+async function loadZXing() {
+  if (window.ZXing) return window.ZXing;
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/umd/index.min.js';
+    s.onload = () => resolve(window.ZXing);
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+async function startCameraScanner() {
+  const video = document.getElementById('scanner-video');
+  const hint = document.getElementById('scanner-camera-hint');
+  hint.textContent = 'Starting camera...';
+  try {
+    scanStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+    video.srcObject = scanStream;
+    await video.play();
+    hint.textContent = 'Point the barcode at the viewfinder. Hold steady.';
+    const ZXing = await loadZXing();
+    const hints = new Map();
+    const formats = [ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8, ZXing.BarcodeFormat.UPC_A, ZXing.BarcodeFormat.UPC_E, ZXing.BarcodeFormat.CODE_128, ZXing.BarcodeFormat.CODE_39, ZXing.BarcodeFormat.QR_CODE];
+    hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, formats);
+    const reader = new ZXing.MultiFormatReader();
+    reader.setHints(hints);
+    const canvas = document.createElement('canvas');
+    scanInterval = setInterval(() => {
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        try {
+          const luminance = new ZXing.HTMLCanvasElementLuminanceSource(canvas);
+          const bitmap = new ZXing.BinaryBitmap(new ZXing.HybridBinarizer(luminance));
+          const result = reader.decode(bitmap);
+          if (result) {
+            stopCameraScanner();
+            hint.textContent = 'Barcode detected: ' + result.getText();
+            lookupBarcode(result.getText());
+          }
+        } catch(e) { /* no barcode yet */ }
+      }
+    }, 300);
+  } catch(e) {
+    hint.textContent = 'Camera access denied or unavailable. Use the text input instead.';
+  }
+}
+
+function stopCameraScanner() {
+  if (scanInterval) { clearInterval(scanInterval); scanInterval = null; }
+  if (scanStream) { scanStream.getTracks().forEach(t => t.stop()); scanStream = null; }
+}
+
+// --- API lookup ---
+async function lookupBarcode(barcode) {
+  showScanLoading();
+  try {
+    const res = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`);
+    const data = await res.json();
+    if (data.status === 0 || !data.product) {
+      showScanError('Product not found in the Open Food Facts database. Try entering the ingredient list manually.');
+      return;
+    }
+    processScanResult(data.product);
+  } catch(e) {
+    showScanError('Could not reach the product database. Check your connection and try again.');
+  }
+}
+
+async function lookupByText() {
+  const input = document.getElementById('scanner-text-input').value.trim();
+  if (!input) return;
+  // Check if it looks like a barcode (all digits)
+  if (/^\d{8,14}$/.test(input)) {
+    lookupBarcode(input);
+    return;
+  }
+  // Treat as ingredient list
+  showScanLoading();
+  const fakeProduct = {
+    product_name: 'Custom Ingredient Analysis',
+    brands: 'User-provided',
+    ingredients_text: input,
+    nova_group: null,
+    nutriscore_grade: null
+  };
+  setTimeout(() => processScanResult(fakeProduct), 400);
+}
+
+function processScanResult(product) {
+  const name = product.product_name || product.abbreviated_product_name || 'Unknown Product';
+  const brand = product.brands || '';
+  const ingredients = product.ingredients_text || product.ingredients_text_en || '';
+  const novaGroup = product.nova_group ? parseInt(product.nova_group) : null;
+  const nutriscoreGrade = product.nutriscore_grade || null;
+
+  const analysis = analyseIngredients(ingredients, novaGroup, nutriscoreGrade);
+  renderScanResults(name, brand, ingredients, analysis, novaGroup, nutriscoreGrade);
+}
+
+function renderScanResults(name, brand, ingredients, analysis, novaGroup, nutriscoreGrade) {
+  const el = document.getElementById('scanner-results');
+  const { vitality, vClass, found, agingScore, agingLabel, agingClass, processing, processingLabels, systems } = analysis;
+
+  const processingColor = ['','#5dba7d','#a8c060','#d4aa50','#e05c5c'][processing] || '#d4aa50';
+
+  let toxinsHTML;
+  if (found.length === 0) {
+    toxinsHTML = `<div class="scan-no-toxins">✓ No flagged substances detected in the ingredient list.</div>`;
+  } else {
+    toxinsHTML = `<div class="scan-toxin-list">${found.map(t => `
+      <div class="scan-toxin-item">
+        <div class="scan-toxin-flag">⚑</div>
+        <div>
+          <div class="scan-toxin-name">${t.name} <span style="font-size:0.7rem;color:var(--ivory-dim);font-weight:normal;">(${t.category})</span></div>
+          <div class="scan-toxin-detail">${t.detail}</div>
+        </div>
+      </div>`).join('')}</div>`;
+  }
+
+  const systemsHTML = systems.length > 0
+    ? `<div class="scan-systems">${systems.map(s => `<span class="scan-system-tag">${s}</span>`).join('')}</div>`
+    : `<div style="color:var(--ivory-dim);font-size:0.82rem;">No specific system burden detected.</div>`;
+
+  const novaLabel = processingLabels[processing] || 'Unknown';
+  const nutriHTML = nutriscoreGrade ? `<div class="scan-score-card"><div class="scan-score-label">Nutri-Score</div><div class="scan-score-value ${['a','b'].includes(nutriscoreGrade.toLowerCase()) ? 'score-high' : ['d','e'].includes(nutriscoreGrade.toLowerCase()) ? 'score-low' : 'score-mid'}">${nutriscoreGrade.toUpperCase()}</div><div class="scan-score-sub">EU nutritional quality grade</div></div>` : '';
+
+  // Geometry description
+  let geoDesc;
+  if (vitality >= 70) geoDesc = 'The ingredient profile maps to a coherent radial pattern. The Flower of Life structure indicates low structural burden and high biological compatibility.';
+  else if (vitality >= 40) geoDesc = 'The ingredient profile maps to a partially disrupted pattern. Some petal nodes are broken, indicating moderate chemical burden on specific biological systems.';
+  else geoDesc = 'The ingredient profile maps to a fragmented angular pattern. High structural load indicates significant chemical burden across multiple biological systems.';
+
+  el.innerHTML = `
+    <div class="scan-product-name">${name}</div>
+    ${brand ? `<div class="scan-product-brand">${brand}</div>` : ''}
+    <div class="scan-scores">
+      <div class="scan-score-card">
+        <div class="scan-score-label">Vitality Score</div>
+        <div class="scan-score-value ${vClass}">${vitality}</div>
+        <div class="scan-score-sub">Life-supportive index (0-100)</div>
+      </div>
+      <div class="scan-score-card">
+        <div class="scan-score-label">Aging Factor</div>
+        <div class="scan-score-value ${agingClass}">${agingScore}</div>
+        <div class="scan-score-sub">${agingLabel}</div>
+      </div>
+      <div class="scan-score-card">
+        <div class="scan-score-label">Processing Level</div>
+        <div class="scan-score-value" style="color:${processingColor};font-size:1.2rem;">${novaLabel}</div>
+        <div class="scan-score-sub">NOVA Group ${processing || '?'}</div>
+      </div>
+      ${nutriHTML}
+    </div>
+
+    <div class="scan-section-title">Structural Load Pattern</div>
+    <div class="scan-geometry-wrap">
+      <canvas id="scan-geometry-canvas" width="240" height="240"></canvas>
+      <div class="scan-geometry-label">Ingredient Geometry Map</div>
+      <div class="scan-geometry-desc">${geoDesc}</div>
+    </div>
+
+    <div class="scan-section-title">Flagged Substances (${found.length})</div>
+    ${toxinsHTML}
+
+    <div class="scan-section-title">Body Systems Affected</div>
+    ${systemsHTML}
+
+    ${ingredients ? `<div class="scan-section-title">Ingredient List</div><p style="color:var(--ivory-dim);font-size:0.78rem;line-height:1.7;">${ingredients}</p>` : ''}
+
+    <div class="scan-disclaimer">This analysis cross-references the ingredient list against published toxicological and regulatory databases. It is for informational purposes only and does not constitute medical advice. Scores are estimates based on known ingredient properties and may not reflect individual sensitivity, product formulation changes, or exposure levels. Always consult a qualified health professional for medical decisions.</div>
+  `;
+
+  // Draw geometry
+  const gCanvas = document.getElementById('scan-geometry-canvas');
+  if (gCanvas) drawStructuralLoad(gCanvas, found.length, vitality, processing);
+}
+
+function showScanLoading() {
+  document.getElementById('scanner-results').innerHTML = `<div class="scan-loading"><div class="scan-loading-spinner"></div>Analysing product...</div>`;
+}
+
+function showScanError(msg) {
+  document.getElementById('scanner-results').innerHTML = `<div class="scan-error">${msg}</div>`;
+}
+
+// --- Scanner modal controls ---
+function openScanner() {
+  document.getElementById('scanner-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  switchScannerTab('camera');
+}
+
+function closeScanner() {
+  document.getElementById('scanner-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  stopCameraScanner();
+}
+
+function switchScannerTab(tab) {
+  document.querySelectorAll('.scanner-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  document.querySelectorAll('.scanner-pane').forEach(p => p.classList.toggle('active', p.dataset.pane === tab));
+  if (tab === 'camera') {
+    startCameraScanner();
+  } else {
+    stopCameraScanner();
+  }
+}
+
+// Close scanner on backdrop click
+document.addEventListener('click', e => {
+  const modal = document.getElementById('scanner-modal');
+  if (modal && e.target === modal) closeScanner();
+});
+
+// Navigation toggle
+function toggleNav() {
+  const btn = document.getElementById('nav-hamburger');
+  const menu = document.getElementById('nav-menu');
+  const overlay = document.getElementById('nav-overlay');
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
 </script>
+
+<!-- PRODUCT INTELLIGENCE SCANNER MODAL -->
+<div id="scanner-modal">
+  <div class="scanner-panel">
+    <button class="scanner-close" onclick="closeScanner()">&times;</button>
+    <div class="scanner-title">Product Intelligence Scanner</div>
+    <p class="scanner-sub">Scan a barcode or enter an ingredient list to reveal what a product may be doing beneath the surface. Powered by Open Food Facts and a curated toxicological database.</p>
+
+    <div class="scanner-tabs">
+      <button class="scanner-tab active" data-tab="camera" onclick="switchScannerTab('camera')">&#128247; Camera Scan</button>
+      <button class="scanner-tab" data-tab="text" onclick="switchScannerTab('text')">&#9998; Enter Manually</button>
+    </div>
+
+    <!-- Camera pane -->
+    <div class="scanner-pane active" data-pane="camera">
+      <div id="scanner-video-wrap">
+        <video id="scanner-video" autoplay muted playsinline></video>
+        <div class="scanner-viewfinder">
+          <div class="scanner-viewfinder-box"></div>
+        </div>
+      </div>
+      <p class="scanner-hint" id="scanner-camera-hint">Camera will start automatically. Point the barcode at the viewfinder.</p>
+    </div>
+
+    <!-- Text pane -->
+    <div class="scanner-pane" data-pane="text">
+      <div class="scanner-input-row">
+        <input class="scanner-input" id="scanner-text-input" type="text" placeholder="Enter barcode number, product name, or paste ingredient list..." onkeydown="if(event.key==='Enter')lookupByText()">
+        <button class="scanner-btn" onclick="lookupByText()">Analyse</button>
+      </div>
+      <p style="color:var(--ivory-dim);font-size:0.8rem;line-height:1.6;">You can enter a barcode number (e.g. 737628064502), a product name, or paste the full ingredient list directly from the label.</p>
+    </div>
+
+    <!-- Results -->
+    <div id="scanner-results"></div>
+  </div>
+</div>
+
 </body>
 </html>
