@@ -2301,7 +2301,7 @@
       <svg width="30" height="30" viewBox="0 0 30 30"><polygon points="15,2 17.9,11.1 27.6,11.1 20,17 22.9,26.1 15,20.5 7.1,26.1 10,17 2.4,11.1 12.1,11.1" fill="none" stroke="var(--gold-mid)" stroke-width="1"/></svg>
     </div>
     <h2 class="section-title">Geometric Semantic Driver Generator</h2>
-    <p class="section-subtitle">Select your frequencies. Watch your symbol emerge. Receive your resonance reading.</p>
+    <p class="section-subtitle">Select your frequencies. Watch your symbol emerge. Receive your geometry analysis.</p>
   </div>
 
   <div class="gsd-container">
@@ -2384,10 +2384,10 @@
       <div class="gsd-output-meta" id="gsd-output-meta"></div>
       <div class="gsd-output-actions">
         <button class="btn-primary" onclick="downloadGSD()">⬇ Download Symbol (PNG)</button>
-        <button class="btn-ghost" id="gsd-reading-btn" onclick="requestGSDReading()">✦ Generate AI Resonance Reading</button>
+        <button class="btn-ghost" id="gsd-reading-btn" onclick="requestGSDReading()">✦ Geometry Analysis</button>
       </div>
       <div class="gsd-reading-box" id="gsd-reading-box" style="display:none;">
-        <div class="gsd-reading-header">Resonance Reading</div>
+        <div class="gsd-reading-header">Geometry Analysis</div>
         <div class="gsd-reading-text" id="gsd-reading-text">Generating reading...</div>
       </div>
     </div>
@@ -4539,7 +4539,7 @@ async function requestGSDReading() {
   }
 
   btn.disabled = false;
-  btn.textContent = '_ Generate AI Resonance Reading';
+  btn.textContent = '✦ Geometry Analysis';
 }
 
 // Init on load
