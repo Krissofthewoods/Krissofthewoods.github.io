@@ -508,6 +508,11 @@
     to { transform: rotate(360deg); }
   }
 
+  @keyframes rpms-dot {
+    0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1.2); }
+  }
+
   header h1 {
     font-family: 'Cinzel Decorative', cursive;
     font-size: clamp(2.2rem, 6vw, 5rem);
@@ -2281,50 +2286,97 @@ function checkPW(){
 
     <div style="display:flex;flex-direction:column;gap:1.2rem;">
 
-      <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;">
-        <img src="assets/the-listening-forest.jpeg" alt="The Listening Forest" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
-        <div style="flex:1;">
-          <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">The Listening Forest</div>
-          <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A children's story about connection, belonging, and the bond between children and nature.</div>
+      <div style="background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;">
+          <img src="assets/the-listening-forest.jpeg" alt="The Listening Forest" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
+          <div style="flex:1;">
+            <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">The Listening Forest</div>
+            <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A children's story about connection, belonging, and the bond between children and nature.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end;">
+            <a href="https://a.co/d/0gWOC9ze" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;text-align:center;width:100%;box-sizing:border-box;">Amazon</a>
+            <button onclick="toggleBookInfo('book-info-0')" style="background:none;border:none;color:var(--muted);font-size:0.7rem;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;">How it connects &darr;</button>
+          </div>
         </div>
-        <a href="https://a.co/d/0gWOC9ze" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;">Amazon</a>
+        <div id="book-info-0" style="display:none;padding:0 1.4rem 1.4rem 1.4rem;border-top:1px solid rgba(212,170,80,0.08);margin-top:0.5rem;padding-top:1.2rem;">
+          <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Framework Connection</div>
+          <p style="font-size:0.85rem;color:var(--ivory-dim);line-height:1.7;margin:0;">This book introduces the concept of the 'blueprint' to children before they have the language for it. It teaches that the natural world operates on a frequency of connection, and that by quieting the mind and listening, a child can tune into the same coherent geometry that structures the forest. It is the earliest foundation for understanding that we are not separate from the environment, but resonant with it.</p>
+        </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;">
-        <img src="assets/flickers-inner-light.jpeg" alt="Flicker's Inner Light" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
-        <div style="flex:1;">
-          <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">Flicker's Inner Light</div>
-          <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A children's story about recognising the light that lives within every child.</div>
+      <div style="background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;">
+          <img src="assets/flickers-inner-light.jpeg" alt="Flicker's Inner Light" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
+          <div style="flex:1;">
+            <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">Flicker's Inner Light</div>
+            <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A children's story about recognising the light that lives within every child.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end;">
+            <a href="https://a.co/d/0iOr2Txl" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;text-align:center;width:100%;box-sizing:border-box;">Amazon</a>
+            <button onclick="toggleBookInfo('book-info-1')" style="background:none;border:none;color:var(--muted);font-size:0.7rem;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;">How it connects &darr;</button>
+          </div>
         </div>
-        <a href="https://a.co/d/0iOr2Txl" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;">Amazon</a>
+        <div id="book-info-1" style="display:none;padding:0 1.4rem 1.4rem 1.4rem;border-top:1px solid rgba(212,170,80,0.08);margin-top:0.5rem;padding-top:1.2rem;">
+          <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Framework Connection</div>
+          <p style="font-size:0.85rem;color:var(--ivory-dim);line-height:1.7;margin:0;">Flicker's journey is an early introduction to the bioelectric field—the 'inner light' that exists prior to external validation. It teaches children that their core frequency cannot be extinguished by outside circumstances, mapping directly to the framework's principle that the original blueprint remains intact beneath any acquired distortion.</p>
+        </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;">
-        <img src="assets/the-spiral.jpeg" alt="The Spiral" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
-        <div style="flex:1;">
-          <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">The Spiral</div>
-          <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A nature-rooted children's story that follows the pattern woven through all living things.</div>
+      <div style="background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;">
+          <img src="assets/the-spiral.jpeg" alt="The Spiral" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
+          <div style="flex:1;">
+            <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">The Spiral</div>
+            <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A nature-rooted children's story that follows the pattern woven through all living things.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end;">
+            <a href="https://a.co/d/0jcu8YYG" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;text-align:center;width:100%;box-sizing:border-box;">Amazon</a>
+            <button onclick="toggleBookInfo('book-info-2')" style="background:none;border:none;color:var(--muted);font-size:0.7rem;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;">How it connects &darr;</button>
+          </div>
         </div>
-        <a href="https://a.co/d/0jcu8YYG" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;">Amazon</a>
+        <div id="book-info-2" style="display:none;padding:0 1.4rem 1.4rem 1.4rem;border-top:1px solid rgba(212,170,80,0.08);margin-top:0.5rem;padding-top:1.2rem;">
+          <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Framework Connection</div>
+          <p style="font-size:0.85rem;color:var(--ivory-dim);line-height:1.7;margin:0;">This is a direct translation of sacred geometry and the Fibonacci sequence for young minds. By showing how the spiral pattern repeats in shells, galaxies, and unfolding ferns, it establishes the core premise of the Taylored Harmony framework: that there is a universal geometric language underlying all physical form, and we are built from that same math.</p>
+        </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;">
-        <img src="assets/rewritten.jpeg" alt="Rewritten" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
-        <div style="flex:1;">
-          <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">Rewritten</div>
-          <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A guide to transforming inherited pain and authoring the next chapter of your life.</div>
+      <div style="background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;">
+          <img src="assets/rewritten.jpeg" alt="Rewritten" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
+          <div style="flex:1;">
+            <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">Rewritten</div>
+            <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A guide to transforming inherited pain and authoring the next chapter of your life.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end;">
+            <a href="https://a.co/d/04vVI0wh" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;text-align:center;width:100%;box-sizing:border-box;">Amazon</a>
+            <button onclick="toggleBookInfo('book-info-3')" style="background:none;border:none;color:var(--muted);font-size:0.7rem;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;">How it connects &darr;</button>
+          </div>
         </div>
-        <a href="https://a.co/d/04vVI0wh" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;">Amazon</a>
+        <div id="book-info-3" style="display:none;padding:0 1.4rem 1.4rem 1.4rem;border-top:1px solid rgba(212,170,80,0.08);margin-top:0.5rem;padding-top:1.2rem;">
+          <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Framework Connection</div>
+          <p style="font-size:0.85rem;color:var(--ivory-dim);line-height:1.7;margin:0;">Rewritten is the practical application of breaking the ancestral loop. While the Taylored Harmony site maps the physics and geometry of how patterns are held in the body, this book provides the narrative and emotional tools to interrupt those patterns. It is the bridge between recognizing an inherited frequency and actively choosing not to pass it on.</p>
+        </div>
       </div>
 
-      <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;">
-        <img src="assets/wild-school-pack.jpeg" alt="Wild School Pack" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
-        <div style="flex:1;">
-          <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">Wild School Pack</div>
-          <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A nature-based homeschool curriculum for the wonder-led child.</div>
+      <div style="background:rgba(212,170,80,0.04);border:1px solid rgba(212,170,80,0.12);border-radius:5px;overflow:hidden;">
+        <div style="display:flex;align-items:center;gap:1.4rem;padding:1.2rem 1.4rem;">
+          <img src="assets/wild-school-pack.jpeg" alt="Wild School Pack" style="width:56px;height:auto;border-radius:3px;flex-shrink:0;">
+          <div style="flex:1;">
+            <div style="font-family:'Cinzel Decorative',cursive;font-size:0.88rem;color:var(--ivory);margin-bottom:0.3rem;">Wild School Pack</div>
+            <div style="font-size:0.8rem;color:var(--ivory-dim);line-height:1.6;">A nature-based homeschool curriculum for the wonder-led child.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end;">
+            <a href="https://www.amazon.com/Listening-Forest-Kristina-Taylor/dp/B0FNY552DS" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;text-align:center;width:100%;box-sizing:border-box;">Amazon</a>
+            <button onclick="toggleBookInfo('book-info-4')" style="background:none;border:none;color:var(--muted);font-size:0.7rem;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;">How it connects &darr;</button>
+          </div>
         </div>
-        <a href="https://www.amazon.com/Listening-Forest-Kristina-Taylor/dp/B0FNY552DS" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);border:1px solid rgba(212,170,80,0.35);padding:0.4rem 0.9rem;border-radius:3px;white-space:nowrap;text-decoration:none;">Amazon</a>
+        <div id="book-info-4" style="display:none;padding:0 1.4rem 1.4rem 1.4rem;border-top:1px solid rgba(212,170,80,0.08);margin-top:0.5rem;padding-top:1.2rem;">
+          <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Framework Connection</div>
+          <p style="font-size:0.85rem;color:var(--ivory-dim);line-height:1.7;margin:0;">This curriculum takes the principles of coherence and natural geometry out of theory and into daily practice. It is designed to keep a child's nervous system regulated and open by anchoring their learning in the undistorted frequencies of the natural world, preventing the early installation of stress-based survival architecture.</p>
+        </div>
       </div>
+
+    </div>
 
     </div>
   </div>
@@ -2758,8 +2810,17 @@ function checkPW(){
           <polygon points="50,92 10,28 90,28" stroke="#9b6fd4" stroke-width="1" fill="none" opacity="0.6"/>
           <circle cx="50" cy="50" r="5" fill="#d4aa50" opacity="0.8"/>
         </svg>
-        <div class="loading-text">Reading your field...</div>
+        <div class="loading-text" id="rpms-loading-text">Reading your field...</div>
         <p style="color:var(--ivory-dim); font-size:0.8rem; margin-top:0.8rem; font-style:italic;">This takes 20–40 seconds. The system is mapping your patterns.</p>
+        <!-- Progress bar -->
+        <div style="width:200px;height:2px;background:rgba(212,170,80,0.15);border-radius:2px;margin:1.5rem auto 0;overflow:hidden;">
+          <div id="rpms-progress-bar" style="height:100%;width:0%;background:var(--gold);border-radius:2px;transition:width 0.5s ease;"></div>
+        </div>
+        <div style="display:flex;justify-content:center;gap:6px;margin-top:1rem;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0s;display:inline-block;"></span>
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.2s;display:inline-block;"></span>
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.4s;display:inline-block;"></span>
+        </div>
       </div>
 
       <!-- RESULT -->
@@ -3356,8 +3417,30 @@ function checkPW(){
     </div>
 
     <div id="gsd-reading-box" class="gsd-reading-box" style="display:none;">
-      <div class="gsd-reading-header">AI Resonance Reading</div>
-      <div id="gsd-reading-text" class="gsd-reading-text"></div>
+      <!-- Loading state -->
+      <div id="gsd-loading-state" style="text-align:center;padding:2rem 0;">
+        <svg style="width:60px;height:60px;margin:0 auto 1.2rem;display:block;animation:rotateSlow 4s linear infinite;" viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="50" r="46" stroke="#d4aa50" stroke-width="0.8" opacity="0.4"/>
+          <polygon points="50,8 90,72 10,72" stroke="#d4aa50" stroke-width="1" fill="none" opacity="0.7"/>
+          <polygon points="50,92 10,28 90,28" stroke="#9b6fd4" stroke-width="1" fill="none" opacity="0.6"/>
+          <circle cx="50" cy="50" r="5" fill="#d4aa50" opacity="0.8"/>
+        </svg>
+        <div style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Generating your reading...</div>
+        <p style="color:var(--ivory-dim);font-size:0.8rem;font-style:italic;margin:0 0 1.2rem;">This takes 20–40 seconds. Mapping your selected frequencies.</p>
+        <div style="width:200px;height:2px;background:rgba(212,170,80,0.15);border-radius:2px;margin:0 auto;overflow:hidden;">
+          <div id="gsd-progress-bar" style="height:100%;width:0%;background:var(--gold);border-radius:2px;transition:width 0.5s ease;"></div>
+        </div>
+        <div style="display:flex;justify-content:center;gap:6px;margin-top:1rem;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0s;display:inline-block;"></span>
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.2s;display:inline-block;"></span>
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.4s;display:inline-block;"></span>
+        </div>
+      </div>
+      <!-- Result state -->
+      <div id="gsd-result-state" style="display:none;">
+        <div class="gsd-reading-header">Resonance Reading</div>
+        <div id="gsd-reading-text" class="gsd-reading-text"></div>
+      </div>
     </div>
     
     <p style="text-align:center;color:rgba(212,170,80,0.55);max-width:580px;margin:2rem auto 0;font-size:0.8rem;line-height:1.7;">These are personal tools and a personal synthesis. I am not a doctor, therapist, or scientist. Results are individual. Consult a licensed professional for health concerns.</p>
@@ -3384,6 +3467,17 @@ function checkPW(){
 </footer>
 
 <script>
+// BOOK INFO TOGGLE
+function toggleBookInfo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const isOpen = el.style.display !== 'none';
+  el.style.display = isOpen ? 'none' : 'block';
+  // Update button text
+  const btn = el.previousElementSibling ? el.previousElementSibling.querySelector('button') : null;
+  if (btn) btn.innerHTML = isOpen ? 'How it connects &darr;' : 'Close &uarr;';
+}
+
 // STARFIELD
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
@@ -3625,6 +3719,7 @@ async function rpmsSubmit() {
   document.getElementById('rpms-steps-wrap').style.display = 'none';
   const loading = document.getElementById('rpms-loading');
   loading.classList.add('visible');
+  let rpmsProgress=0;const rpmsProgressBar=document.getElementById('rpms-progress-bar');const rpmsProgressInterval=setInterval(function(){rpmsProgress=Math.min(rpmsProgress+(Math.random()*3+0.5),90);rpmsProgressBar.style.width=rpmsProgress+'%';},600);window._rpmsProgressInterval=rpmsProgressInterval;
 
   const intake = {
     q1, q2: document.getElementById('q2').value,
@@ -3693,10 +3788,12 @@ Safety clause: always include educational disclaimer. No fluff, no fear language
     const parsed = await res.json();
     if (!res.ok || parsed.error) throw new Error(parsed.error || 'API error');
 
+    clearInterval(window._rpmsProgressInterval);document.getElementById('rpms-progress-bar').style.width='100%';
     loading.classList.remove('visible');
     renderRpmsResult(parsed);
 
   } catch(e) {
+    clearInterval(window._rpmsProgressInterval);document.getElementById('rpms-progress-bar').style.width='100%';
     loading.classList.remove('visible');
     document.getElementById('rpms-steps-wrap').style.display = 'block';
     document.getElementById(`step-${rpmsCurrentStep}`).classList.add('active');
@@ -5496,7 +5593,10 @@ async function requestGSDReading() {
   btn.disabled = true;
   btn.textContent = 'Generating reading...';
   box.style.display = 'block';
-  text.textContent = 'Generating reading...';
+  document.getElementById('gsd-loading-state').style.display = 'block';
+  document.getElementById('gsd-result-state').style.display = 'none';
+  text.textContent = '';
+  let gsdProgress=0;const gsdProgressBar=document.getElementById('gsd-progress-bar');const gsdProgressInterval=setInterval(function(){gsdProgress=Math.min(gsdProgress+(Math.random()*3+0.5),90);gsdProgressBar.style.width=gsdProgress+'%';},600);
 
   const selectedFreqs = GSD_FREQS.filter(f => gsdSelected.has(f.hz));
   const template = document.querySelector('input[name="gsd-template"]:checked').value;
@@ -5509,11 +5609,19 @@ async function requestGSDReading() {
       body: JSON.stringify({ frequencies: freqSummary, template })
     });
     const data = await response.json();
-    text.textContent = data.reading || 'Unable to generate reading at this time.';
+    clearInterval(gsdProgressInterval);
+    document.getElementById('gsd-progress-bar').style.width = '100%';
+    setTimeout(function() {
+      document.getElementById('gsd-loading-state').style.display = 'none';
+      document.getElementById('gsd-result-state').style.display = 'block';
+      text.textContent = data.reading || 'Unable to generate reading at this time.';
+    }, 400);
   } catch(e) {
+    clearInterval(gsdProgressInterval);
+    document.getElementById('gsd-loading-state').style.display = 'none';
+    document.getElementById('gsd-result-state').style.display = 'block';
     text.textContent = 'Unable to generate reading at this time. Please try again in a moment.';
   }
-
   btn.disabled = false;
   btn.textContent = '✦ Geometry Analysis';
 }
