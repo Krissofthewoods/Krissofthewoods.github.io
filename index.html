@@ -3477,6 +3477,182 @@ function checkPW(){
 <div class="section-divider"></div>
 
 <!-- THE FRAMEWORK -->
+<section id="symbol-generator" style="padding:5rem 2rem;">
+  <div class="section-inner" style="max-width:860px;">
+    <div class="section-label">Build Your Stack</div>
+    <h2 class="section-title">Frequency & Geometry Builder</h2>
+    <div class="gold-rule"></div>
+    <p style="text-align:center;color:var(--ivory-dim);max-width:600px;margin:0 auto 2.5rem;font-size:0.95rem;line-height:1.8;">Start with your body. Select the area that needs attention, choose the frequencies that resonate, set your intention, and build a geometric symbol and audio stack tuned to your specific pattern.</p>
+
+    <!-- STEP 1: BODY MAP -->
+    <div style="margin-bottom:2.5rem;">
+      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1.2rem;">Step 1 — Where in your body?</div>
+      <div class="body-map-wrap" id="body-map-wrap">
+        <div class="body-map-svg-wrap">
+          <!-- Gender-neutral human silhouette with clickable regions -->
+          <svg viewBox="0 0 200 480" fill="none" xmlns="http://www.w3.org/2000/svg" id="body-svg">
+            <!-- HEAD -->
+            <g class="body-region" id="region-head" onclick="selectBodyRegion('head')" title="Head & Mind">
+              <ellipse cx="100" cy="42" rx="32" ry="38" fill="rgba(212,170,80,0.08)" stroke="rgba(212,170,80,0.35)" stroke-width="1.5"/>
+              <text x="100" y="46" text-anchor="middle" fill="rgba(212,170,80,0.7)" font-size="9" font-family="Cinzel, serif">HEAD</text>
+            </g>
+            <!-- THROAT/NECK -->
+            <g class="body-region" id="region-throat" onclick="selectBodyRegion('throat')" title="Throat & Expression">
+              <rect x="84" y="78" width="32" height="28" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
+              <text x="100" y="96" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7" font-family="Cinzel, serif">THROAT</text>
+            </g>
+            <!-- CHEST/HEART -->
+            <g class="body-region" id="region-chest" onclick="selectBodyRegion('chest')" title="Chest & Heart">
+              <rect x="62" y="104" width="76" height="72" rx="6" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
+              <text x="100" y="144" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="8" font-family="Cinzel, serif">CHEST</text>
+            </g>
+            <!-- LEFT ARM -->
+            <g class="body-region" id="region-arms" onclick="selectBodyRegion('arms')" title="Arms & Hands">
+              <rect x="24" y="108" width="34" height="110" rx="10" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <rect x="142" y="108" width="34" height="110" rx="10" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <text x="41" y="168" text-anchor="middle" fill="rgba(212,170,80,0.5)" font-size="7" font-family="Cinzel, serif" transform="rotate(-90,41,168)">ARMS</text>
+            </g>
+            <!-- SOLAR PLEXUS -->
+            <g class="body-region" id="region-solar" onclick="selectBodyRegion('solar')" title="Solar Plexus">
+              <rect x="66" y="174" width="68" height="44" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <text x="100" y="200" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7" font-family="Cinzel, serif">SOLAR PLEXUS</text>
+            </g>
+            <!-- ABDOMEN -->
+            <g class="body-region" id="region-abdomen" onclick="selectBodyRegion('abdomen')" title="Abdomen & Gut">
+              <rect x="66" y="216" width="68" height="52" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <text x="100" y="246" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7.5" font-family="Cinzel, serif">ABDOMEN</text>
+            </g>
+            <!-- SPINE/LOWER BACK (shown as a subtle spine line) -->
+            <g class="body-region" id="region-spine" onclick="selectBodyRegion('spine')" title="Spine & Lower Back">
+              <rect x="88" y="266" width="24" height="40" rx="4" fill="rgba(212,170,80,0.08)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
+              <text x="100" y="290" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="6" font-family="Cinzel, serif">SPINE</text>
+            </g>
+            <!-- LEGS/HIPS -->
+            <g class="body-region" id="region-legs" onclick="selectBodyRegion('legs')" title="Legs & Hips">
+              <rect x="62" y="304" width="34" height="150" rx="12" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <rect x="104" y="304" width="34" height="150" rx="12" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <text x="100" y="385" text-anchor="middle" fill="rgba(212,170,80,0.5)" font-size="8" font-family="Cinzel, serif">LEGS</text>
+            </g>
+            <!-- Tap prompt -->
+            <text x="100" y="468" text-anchor="middle" fill="rgba(212,170,80,0.35)" font-size="7.5" font-family="Cinzel, serif">tap a region</text>
+          </svg>
+        </div>
+
+        <!-- Frequency panel (shown when region selected) -->
+        <div class="body-freq-panel" id="body-freq-panel">
+          <div style="text-align:center;color:rgba(212,170,80,0.4);font-size:0.8rem;font-style:italic;padding:2rem 0;">Tap a region on the body map to see suggested frequencies.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: INTENTION -->
+    <div style="margin-bottom:2rem;">
+      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem;">Step 2 — Set your intention</div>
+      <div class="intention-bar" id="intention-bar">
+        <button class="intention-btn" onclick="setIntention('grounding')" id="int-grounding">Grounding</button>
+        <button class="intention-btn" onclick="setIntention('clarity')" id="int-clarity">Clarity</button>
+        <button class="intention-btn" onclick="setIntention('release')" id="int-release">Release</button>
+        <button class="intention-btn" onclick="setIntention('integration')" id="int-integration">Integration</button>
+        <button class="intention-btn" onclick="setIntention('nervous-system')" id="int-nervous-system">Nervous System</button>
+        <button class="intention-btn" onclick="setIntention('protection')" id="int-protection">Protection</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: FREQUENCY SELECTION (existing tiles, enhanced) -->
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem;">Step 3 — Select frequencies (up to 6)</div>
+      <!-- Frequency info panel (shown on hover/select) -->
+      <div class="gsd-freq-info-panel" id="gsd-freq-info-panel">
+        <div class="gfi-header">
+          <span class="gfi-hz" id="gfi-hz">432 Hz</span>
+          <span class="gfi-note" id="gfi-note">A4 · 432 Hz tuning</span>
+        </div>
+        <div class="gfi-name" id="gfi-name">Universal Tuning</div>
+        <div class="gfi-grid">
+          <div class="gfi-field"><strong>Archetype</strong><span id="gfi-archetype">The Anchor</span></div>
+          <div class="gfi-field"><strong>Geometry</strong><span id="gfi-shape">Circle</span></div>
+          <div class="gfi-field"><strong>Brainwave</strong><span id="gfi-brainwave">Alpha</span></div>
+          <div class="gfi-field"><strong>Layer</strong><span id="gfi-layer">Foundation</span></div>
+        </div>
+        <div class="gfi-guidance" id="gfi-guidance">The universal reference tone. Use as an anchor frequency in any stack.</div>
+      </div>
+
+      <!-- Existing frequency grid (kept, will be enhanced by JS) -->
+      <div class="gsd-freq-grid" id="gsd-freq-grid"></div>
+    </div>
+
+    <!-- STEP 4: SYMBOL CANVAS (existing) -->
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem;">Step 4 — Generate your symbol</div>
+      <!-- Base template selector -->
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:1rem;" id="gsd-template-wrap">
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="flower" checked style="accent-color:var(--gold);"> Flower of Life</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="seed"> Seed of Life</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="phi"> Phi Spiral</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="torus"> Torus Field</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="vesica"> Vesica Piscis</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="quasicrystal"> Quasicrystal</label>
+      </div>
+      <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <button onclick="generateGSD()" style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;color:var(--dark);background:var(--gold);border:none;padding:0.7rem 1.8rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">✦ Generate Symbol</button>
+        <button onclick="clearGSD()" style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;color:var(--gold);background:none;border:1px solid rgba(212,170,80,0.4);padding:0.7rem 1.2rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">Clear</button>
+      </div>
+      <div id="gsd-output" style="display:none;">
+        <canvas id="gsd-canvas" width="500" height="500" style="display:block;max-width:100%;margin:0 auto;border-radius:8px;background:#0a0a0a;"></canvas>
+        <div id="gsd-output-meta" style="text-align:center;font-size:0.75rem;color:var(--ivory-dim);margin-top:0.8rem;line-height:1.8;"></div>
+        <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;margin-top:0.8rem;">
+          <button onclick="downloadGSD()" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.12em;color:var(--gold);background:none;border:1px solid rgba(212,170,80,0.4);padding:0.5rem 1.1rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">Download Symbol</button>
+          <button id="gsd-reading-btn" onclick="requestGSDReading()" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.12em;color:var(--gold);background:none;border:1px solid rgba(212,170,80,0.4);padding:0.5rem 1.1rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">✦ Geometry Analysis</button>
+        </div>
+      </div>
+      <div id="gsd-reading-box" class="gsd-reading-box" style="display:none;">
+        <div id="gsd-loading-state" style="text-align:center;padding:2rem 0;">
+          <svg style="width:60px;height:60px;margin:0 auto 1.2rem;display:block;animation:rotateSlow 4s linear infinite;" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="46" stroke="#d4aa50" stroke-width="0.8" opacity="0.4"/>
+            <polygon points="50,8 90,72 10,72" stroke="#d4aa50" stroke-width="1" fill="none" opacity="0.7"/>
+            <polygon points="50,92 10,28 90,28" stroke="#9b6fd4" stroke-width="1" fill="none" opacity="0.6"/>
+            <circle cx="50" cy="50" r="5" fill="#d4aa50" opacity="0.8"/>
+          </svg>
+          <div style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Generating your reading...</div>
+          <p style="color:var(--ivory-dim);font-size:0.8rem;font-style:italic;margin:0 0 1.2rem;">This takes 20–40 seconds. Mapping your selected frequencies.</p>
+          <div style="width:200px;height:2px;background:rgba(212,170,80,0.15);border-radius:2px;margin:0 auto;overflow:hidden;">
+            <div id="gsd-progress-bar" style="height:100%;width:0%;background:var(--gold);border-radius:2px;transition:width 0.5s ease;"></div>
+          </div>
+          <div style="display:flex;justify-content:center;gap:6px;margin-top:1rem;">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0s;display:inline-block;"></span>
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.2s;display:inline-block;"></span>
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.4s;display:inline-block;"></span>
+          </div>
+        </div>
+        <div id="gsd-result-state" style="display:none;">
+          <div class="gsd-reading-header">Resonance Reading</div>
+          <div id="gsd-reading-text" class="gsd-reading-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: AUDIO STACK -->
+    <div class="audio-stack-panel" id="audio-stack-panel">
+      <h4>Step 5 — Your Audio Stack</h4>
+      <p class="audio-stack-desc">Your selected frequencies are layered into an entrainment arc following the LFSX structure: foundation tones anchor the field, mid-tier frequencies introduce the pattern, binaural tones create spatial depth, and high harmonics seal the structure. Select frequencies above to build your stack.</p>
+      <div class="audio-layer-list" id="audio-layer-list">
+        <div style="font-size:0.75rem;color:rgba(212,170,80,0.4);font-style:italic;">No frequencies selected yet.</div>
+      </div>
+      <div class="audio-controls">
+        <button class="audio-play-btn" id="audio-play-btn" onclick="playAudioStack()" disabled>▶ Play Stack</button>
+        <button class="audio-stop-btn" id="audio-stop-btn" onclick="stopAudioStack()">■ Stop</button>
+        <a class="audio-download-btn" id="audio-download-btn" href="https://buy.stripe.com/6oU6oH4DBabfda84Kn9AA00" target="_blank">↓ Download ($5.55)</a>
+      </div>
+      <div class="audio-visualiser" id="audio-visualiser">
+        <!-- bars generated by JS -->
+      </div>
+      <div class="audio-status" id="audio-status"></div>
+      <p style="font-size:0.7rem;color:rgba(212,170,80,0.4);margin-top:1rem;font-style:italic;">Headphones recommended for binaural effects. For personal use only. This is not a medical device.</p>
+    </div>
+
+    <p style="text-align:center;color:rgba(212,170,80,0.4);font-size:0.72rem;font-style:italic;margin-top:1.5rem;">These are personal tools and a personal synthesis. I am not a doctor, therapist, or scientist. Results are individual. Consult a licensed professional for health concerns.</p>
+  </div>
+</section>
 <section id="framework">
   <div class="section-inner">
     <div class="section-label">A Unified Architecture</div>
@@ -3965,182 +4141,137 @@ function toggleBookInfo(id) {
 }
 
 // STARFIELD
-const canvas = document.getElementByI<section id="symbol-generator" style="padding:5rem 2rem;">
-  <div class="section-inner" style="max-width:860px;">
-    <div class="section-label">Build Your Stack</div>
-    <h2 class="section-title">Frequency & Geometry Builder</h2>
-    <div class="gold-rule"></div>
-    <p style="text-align:center;color:var(--ivory-dim);max-width:600px;margin:0 auto 2.5rem;font-size:0.95rem;line-height:1.8;">Start with your body. Select the area that needs attention, choose the frequencies that resonate, set your intention, and build a geometric symbol and audio stack tuned to your specific pattern.</p>
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
 
-    <!-- STEP 1: BODY MAP -->
-    <div style="margin-bottom:2.5rem;">
-      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1.2rem;">Step 1 — Where in your body?</div>
-      <div class="body-map-wrap" id="body-map-wrap">
-        <div class="body-map-svg-wrap">
-          <!-- Gender-neutral human silhouette with clickable regions -->
-          <svg viewBox="0 0 200 480" fill="none" xmlns="http://www.w3.org/2000/svg" id="body-svg">
-            <!-- HEAD -->
-            <g class="body-region" id="region-head" onclick="selectBodyRegion('head')" title="Head & Mind">
-              <ellipse cx="100" cy="42" rx="32" ry="38" fill="rgba(212,170,80,0.08)" stroke="rgba(212,170,80,0.35)" stroke-width="1.5"/>
-              <text x="100" y="46" text-anchor="middle" fill="rgba(212,170,80,0.7)" font-size="9" font-family="Cinzel, serif">HEAD</text>
-            </g>
-            <!-- THROAT/NECK -->
-            <g class="body-region" id="region-throat" onclick="selectBodyRegion('throat')" title="Throat & Expression">
-              <rect x="84" y="78" width="32" height="28" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
-              <text x="100" y="96" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7" font-family="Cinzel, serif">THROAT</text>
-            </g>
-            <!-- CHEST/HEART -->
-            <g class="body-region" id="region-chest" onclick="selectBodyRegion('chest')" title="Chest & Heart">
-              <rect x="62" y="104" width="76" height="72" rx="6" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
-              <text x="100" y="144" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="8" font-family="Cinzel, serif">CHEST</text>
-            </g>
-            <!-- LEFT ARM -->
-            <g class="body-region" id="region-arms" onclick="selectBodyRegion('arms')" title="Arms & Hands">
-              <rect x="24" y="108" width="34" height="110" rx="10" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <rect x="142" y="108" width="34" height="110" rx="10" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <text x="41" y="168" text-anchor="middle" fill="rgba(212,170,80,0.5)" font-size="7" font-family="Cinzel, serif" transform="rotate(-90,41,168)">ARMS</text>
-            </g>
-            <!-- SOLAR PLEXUS -->
-            <g class="body-region" id="region-solar" onclick="selectBodyRegion('solar')" title="Solar Plexus">
-              <rect x="66" y="174" width="68" height="44" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <text x="100" y="200" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7" font-family="Cinzel, serif">SOLAR PLEXUS</text>
-            </g>
-            <!-- ABDOMEN -->
-            <g class="body-region" id="region-abdomen" onclick="selectBodyRegion('abdomen')" title="Abdomen & Gut">
-              <rect x="66" y="216" width="68" height="52" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <text x="100" y="246" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7.5" font-family="Cinzel, serif">ABDOMEN</text>
-            </g>
-            <!-- SPINE/LOWER BACK (shown as a subtle spine line) -->
-            <g class="body-region" id="region-spine" onclick="selectBodyRegion('spine')" title="Spine & Lower Back">
-              <rect x="88" y="266" width="24" height="40" rx="4" fill="rgba(212,170,80,0.08)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
-              <text x="100" y="290" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="6" font-family="Cinzel, serif">SPINE</text>
-            </g>
-            <!-- LEGS/HIPS -->
-            <g class="body-region" id="region-legs" onclick="selectBodyRegion('legs')" title="Legs & Hips">
-              <rect x="62" y="304" width="34" height="150" rx="12" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <rect x="104" y="304" width="34" height="150" rx="12" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <text x="100" y="385" text-anchor="middle" fill="rgba(212,170,80,0.5)" font-size="8" font-family="Cinzel, serif">LEGS</text>
-            </g>
-            <!-- Tap prompt -->
-            <text x="100" y="468" text-anchor="middle" fill="rgba(212,170,80,0.35)" font-size="7.5" font-family="Cinzel, serif">tap a region</text>
-          </svg>
-        </div>
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
 
-        <!-- Frequency panel (shown when region selected) -->
-        <div class="body-freq-panel" id="body-freq-panel">
-          <div style="text-align:center;color:rgba(212,170,80,0.4);font-size:0.8rem;font-style:italic;padding:2rem 0;">Tap a region on the body map to see suggested frequencies.</div>
-        </div>
-      </div>
-    </div>
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2,
+      o: Math.random() * 0.7 + 0.1,
+      speed: Math.random() * 0.15 + 0.02,
+      drift: (Math.random() - 0.5) * 0.05
+    });
+  }
+}
 
-    <!-- STEP 2: INTENTION -->
-    <div style="margin-bottom:2rem;">
-      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem;">Step 2 — Set your intention</div>
-      <div class="intention-bar" id="intention-bar">
-        <button class="intention-btn" onclick="setIntention('grounding')" id="int-grounding">Grounding</button>
-        <button class="intention-btn" onclick="setIntention('clarity')" id="int-clarity">Clarity</button>
-        <button class="intention-btn" onclick="setIntention('release')" id="int-release">Release</button>
-        <button class="intention-btn" onclick="setIntention('integration')" id="int-integration">Integration</button>
-        <button class="intention-btn" onclick="setIntention('nervous-system')" id="int-nervous-system">Nervous System</button>
-        <button class="intention-btn" onclick="setIntention('protection')" id="int-protection">Protection</button>
-      </div>
-    </div>
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(245,240,232,${s.o})`;
+    ctx.fill();
+    s.y -= s.speed;
+    s.x += s.drift;
+    if (s.y < 0) { s.y = canvas.height; s.x = Math.random() * canvas.width; }
+  });
+  requestAnimationFrame(drawStars);
+}
 
-    <!-- STEP 3: FREQUENCY SELECTION (existing tiles, enhanced) -->
-    <div style="margin-bottom:1.5rem;">
-      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem;">Step 3 — Select frequencies (up to 6)</div>
-      <!-- Frequency info panel (shown on hover/select) -->
-      <div class="gsd-freq-info-panel" id="gsd-freq-info-panel">
-        <div class="gfi-header">
-          <span class="gfi-hz" id="gfi-hz">432 Hz</span>
-          <span class="gfi-note" id="gfi-note">A4 · 432 Hz tuning</span>
-        </div>
-        <div class="gfi-name" id="gfi-name">Universal Tuning</div>
-        <div class="gfi-grid">
-          <div class="gfi-field"><strong>Archetype</strong><span id="gfi-archetype">The Anchor</span></div>
-          <div class="gfi-field"><strong>Geometry</strong><span id="gfi-shape">Circle</span></div>
-          <div class="gfi-field"><strong>Brainwave</strong><span id="gfi-brainwave">Alpha</span></div>
-          <div class="gfi-field"><strong>Layer</strong><span id="gfi-layer">Foundation</span></div>
-        </div>
-        <div class="gfi-guidance" id="gfi-guidance">The universal reference tone. Use as an anchor frequency in any stack.</div>
-      </div>
+window.addEventListener('resize', () => { resize(); initStars(); });
+resize(); initStars(); drawStars();
 
-      <!-- Existing frequency grid (kept, will be enhanced by JS) -->
-      <div class="gsd-freq-grid" id="gsd-freq-grid"></div>
-    </div>
+// ZODIAC DATA
+const zodiacData = {
+  Aries:       { dates: "Mar 21 - Apr 19", element: "Fire",  mod: "Cardinal", arch: "The Warrior",  sub: "Pioneer . Initiator" },
+  Taurus:      { dates: "Apr 20 - May 20", element: "Earth", mod: "Fixed",    arch: "The Steward",  sub: "Builder . Sensualist" },
+  Gemini:      { dates: "May 21 - Jun 20", element: "Air",   mod: "Mutable",  arch: "The Messenger",sub: "Trickster . Bridge" },
+  Cancer:      { dates: "Jun 21 - Jul 22", element: "Water", mod: "Cardinal", arch: "The Keeper",   sub: "Nurturer . Guardian" },
+  Leo:         { dates: "Jul 23 - Aug 22", element: "Fire",  mod: "Fixed",    arch: "The Sovereign",sub: "Creator . Luminary" },
+  Virgo:       { dates: "Aug 23 - Sep 22", element: "Earth", mod: "Mutable",  arch: "The Healer",   sub: "Analyst . Alchemist" },
+  Libra:       { dates: "Sep 23 - Oct 22", element: "Air",   mod: "Cardinal", arch: "The Weaver",   sub: "Mediator . Artist" },
+  Scorpio:     { dates: "Oct 23 - Nov 21", element: "Water", mod: "Fixed",    arch: "The Depths",   sub: "Transformer . Seer" },
+  Sagittarius: { dates: "Nov 22 - Dec 21", element: "Fire",  mod: "Mutable",  arch: "The Seeker",   sub: "Philosopher . Archer" },
+  Capricorn:   { dates: "Dec 22 - Jan 19", element: "Earth", mod: "Cardinal", arch: "The Elder",    sub: "Architect . Sovereign" },
+  Aquarius:    { dates: "Jan 20 - Feb 18", element: "Air",   mod: "Fixed",    arch: "The Visionary",sub: "Rebel . Innovator" },
+  Pisces:      { dates: "Feb 19 - Mar 20", element: "Water", mod: "Mutable",  arch: "The Dreamer",  sub: "Mystic . Visionary" }
+};
 
-    <!-- STEP 4: SYMBOL CANVAS (existing) -->
-    <div style="margin-bottom:1.5rem;">
-      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem;">Step 4 — Generate your symbol</div>
-      <!-- Base template selector -->
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:1rem;" id="gsd-template-wrap">
-        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="flower" checked style="accent-color:var(--gold);"> Flower of Life</label>
-        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="seed"> Seed of Life</label>
-        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="phi"> Phi Spiral</label>
-        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="torus"> Torus Field</label>
-        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="vesica"> Vesica Piscis</label>
-        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="quasicrystal"> Quasicrystal</label>
-      </div>
-      <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;margin-bottom:1rem;">
-        <button onclick="generateGSD()" style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;color:var(--dark);background:var(--gold);border:none;padding:0.7rem 1.8rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">✦ Generate Symbol</button>
-        <button onclick="clearGSD()" style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;color:var(--gold);background:none;border:1px solid rgba(212,170,80,0.4);padding:0.7rem 1.2rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">Clear</button>
-      </div>
-      <div id="gsd-output" style="display:none;">
-        <canvas id="gsd-canvas" width="500" height="500" style="display:block;max-width:100%;margin:0 auto;border-radius:8px;background:#0a0a0a;"></canvas>
-        <div id="gsd-output-meta" style="text-align:center;font-size:0.75rem;color:var(--ivory-dim);margin-top:0.8rem;line-height:1.8;"></div>
-        <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;margin-top:0.8rem;">
-          <button onclick="downloadGSD()" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.12em;color:var(--gold);background:none;border:1px solid rgba(212,170,80,0.4);padding:0.5rem 1.1rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">Download Symbol</button>
-          <button id="gsd-reading-btn" onclick="requestGSDReading()" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.12em;color:var(--gold);background:none;border:1px solid rgba(212,170,80,0.4);padding:0.5rem 1.1rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">✦ Geometry Analysis</button>
-        </div>
-      </div>
-      <div id="gsd-reading-box" class="gsd-reading-box" style="display:none;">
-        <div id="gsd-loading-state" style="text-align:center;padding:2rem 0;">
-          <svg style="width:60px;height:60px;margin:0 auto 1.2rem;display:block;animation:rotateSlow 4s linear infinite;" viewBox="0 0 100 100" fill="none">
-            <circle cx="50" cy="50" r="46" stroke="#d4aa50" stroke-width="0.8" opacity="0.4"/>
-            <polygon points="50,8 90,72 10,72" stroke="#d4aa50" stroke-width="1" fill="none" opacity="0.7"/>
-            <polygon points="50,92 10,28 90,28" stroke="#9b6fd4" stroke-width="1" fill="none" opacity="0.6"/>
-            <circle cx="50" cy="50" r="5" fill="#d4aa50" opacity="0.8"/>
-          </svg>
-          <div style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Generating your reading...</div>
-          <p style="color:var(--ivory-dim);font-size:0.8rem;font-style:italic;margin:0 0 1.2rem;">This takes 20–40 seconds. Mapping your selected frequencies.</p>
-          <div style="width:200px;height:2px;background:rgba(212,170,80,0.15);border-radius:2px;margin:0 auto;overflow:hidden;">
-            <div id="gsd-progress-bar" style="height:100%;width:0%;background:var(--gold);border-radius:2px;transition:width 0.5s ease;"></div>
-          </div>
-          <div style="display:flex;justify-content:center;gap:6px;margin-top:1rem;">
-            <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0s;display:inline-block;"></span>
-            <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.2s;display:inline-block;"></span>
-            <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.4s;display:inline-block;"></span>
-          </div>
-        </div>
-        <div id="gsd-result-state" style="display:none;">
-          <div class="gsd-reading-header">Resonance Reading</div>
-          <div id="gsd-reading-text" class="gsd-reading-text"></div>
-        </div>
-      </div>
-    </div>
+const affirmations = {
+  Aries: [
+    "I act from the fire that is mine alone. My initiative is a gift, not an imposition.",
+    "I do not wait for permission to begin. The path reveals itself when I move.",
+    "Every boundary I set is an act of self-respect and sacred will."
+  ],
+  Taurus: [
+    "My body is sacred land. I tend it with patience and pleasure.",
+    "What I am building is worthy of time. Roots grow in silence.",
+    "I receive abundance without guilt. I have always belonged here."
+  ],
+  Gemini: [
+    "My mind is a gift, not a burden. I honor every question I carry.",
+    "I do not need to resolve the paradox  -  I am the bridge between.",
+    "Every thread I follow leads somewhere true."
+  ],
+  Cancer: [
+    "My sensitivity is not weakness. It is the way I know what others cannot.",
+    "I can nurture others and still pour back into myself.",
+    "Home lives in me first. Everything else is reflection."
+  ],
+  Leo: [
+    "My light does not diminish others. I was made to shine.",
+    "I create from love, not from the need to be seen.",
+    "What I offer is rare. I stop apologizing for taking up space."
+  ],
+  Virgo: [
+    "I am allowed to rest even when the work is not finished.",
+    "My discernment is sacred. I trust what I notice.",
+    "Healing is not a project to complete. It is a practice to inhabit."
+  ],
+  Libra: [
+    "I do not have to carry the weight of everyone's harmony.",
+    "Beauty is not frivolous. It is a form of truth.",
+    "My yes and my no are equally holy."
+  ],
+  Scorpio: [
+    "What I have survived is not all that I am  -  but it has shaped something formidable.",
+    "I do not fear the depths. I was made for them.",
+    "I transform by allowing, not by forcing."
+  ],
+  Sagittarius: [
+    "I trust the horizon even when I cannot see what lies there.",
+    "My vision is not delusion. It is instruction.",
+    "The search itself is sacred. I release the need for final answers."
+  ],
+  Capricorn: [
+    "I build slowly and on solid ground. This is not failure  -  this is mastery.",
+    "My ambition is in service of something lasting.",
+    "I am allowed to claim what I have earned."
+  ],
+  Aquarius: [
+    "I do not need to fit. I was designed to introduce.",
+    "The future I imagine is not fantasy. It is invitation.",
+    "My difference is not a wound. It is a frequency."
+  ],
+  Pisces: [
+    "I release what I was never meant to hold. The current knows where I belong.",
+    "My sensitivity reads what others cannot. I honor this as a gift.",
+    "I do not disappear into others. I am the ocean, not the tide."
+  ]
+};
 
-    <!-- STEP 5: AUDIO STACK -->
-    <div class="audio-stack-panel" id="audio-stack-panel">
-      <h4>Step 5 — Your Audio Stack</h4>
-      <p class="audio-stack-desc">Your selected frequencies are layered into an entrainment arc following the LFSX structure: foundation tones anchor the field, mid-tier frequencies introduce the pattern, binaural tones create spatial depth, and high harmonics seal the structure. Select frequencies above to build your stack.</p>
-      <div class="audio-layer-list" id="audio-layer-list">
-        <div style="font-size:0.75rem;color:rgba(212,170,80,0.4);font-style:italic;">No frequencies selected yet.</div>
-      </div>
-      <div class="audio-controls">
-        <button class="audio-play-btn" id="audio-play-btn" onclick="playAudioStack()" disabled>▶ Play Stack</button>
-        <button class="audio-stop-btn" id="audio-stop-btn" onclick="stopAudioStack()">■ Stop</button>
-        <a class="audio-download-btn" id="audio-download-btn" href="https://buy.stripe.com/6oU6oH4DBabfda84Kn9AA00" target="_blank">↓ Download ($5.55)</a>
-      </div>
-      <div class="audio-visualiser" id="audio-visualiser">
-        <!-- bars generated by JS -->
-      </div>
-      <div class="audio-status" id="audio-status"></div>
-      <p style="font-size:0.7rem;color:rgba(212,170,80,0.4);margin-top:1rem;font-style:italic;">Headphones recommended for binaural effects. For personal use only. This is not a medical device.</p>
-    </div>
-
-    <p style="text-align:center;color:rgba(212,170,80,0.4);font-size:0.72rem;font-style:italic;margin-top:1.5rem;">These are personal tools and a personal synthesis. I am not a doctor, therapist, or scientist. Results are individual. Consult a licensed professional for health concerns.</p>
-  </div>
-</section>builds. What you are building now will be standing long after the season turns.",
+const energyText = {
+  Pisces: "Late winter asks the nervous system to process the accumulated weight of the season while preparing for renewal. This threshold time reveals how we handle ambiguity: some retreat into overwhelm, others develop a fluid responsiveness to uncertainty. The body knows spring is coming even when the mind resists change.",
+  Aries: "Early spring brings a measurable shift in light and circadian rhythm. The nervous system responds to longer days with increased cortisol in the morning and a natural uptick in energy and drive. This is a physiologically real season of initiation. What has been waiting for the right conditions is now meeting them.",
+  Taurus: "Mid-spring stabilises the energy that Aries ignited. The nervous system settles into a slower, more grounded rhythm. Research on seasonal affect shows that this period supports consolidation, sensory presence, and the kind of deep focus that builds lasting things. Slow is not behind. Slow is solid.",
+  Gemini: "Late spring activates curiosity and social engagement. Longer days and increased serotonin support cognitive flexibility, pattern recognition, and the ability to hold multiple perspectives simultaneously. This is a natural season for learning, connecting, and letting ideas cross-pollinate.",
+  Cancer: "Early summer turns attention inward even as the outer world is most alive. The contrast between external brightness and internal depth is characteristic of this season. The nervous system often uses this time to process what was accumulated in the first half of the year. Memory, family, and belonging become more present.",
+  Leo: "Midsummer is peak solar energy. Vitamin D is highest, circadian rhythms are most stable, and the body is physiologically primed for expression and output. This is not performance for its own sake. It is the natural outward movement of a system that has been building since winter.",
+  Virgo: "Late summer begins the harvest and the first turn toward autumn. The nervous system starts preparing for the shift in light. This is a natural time for discernment: what is worth keeping, what needs to be refined, what can be released before the year turns inward again.",
+  Libra: "Autumn equinox brings equal day and night, and with it a natural recalibration. The nervous system registers the balance point and begins adjusting to shorter days. Relationships and reciprocity become more salient as the season turns social and reflective.",
+  Scorpio: "Deep autumn accelerates the inward turn. Melatonin increases, sleep deepens, and the psyche naturally moves toward what has been avoided or unresolved. This is not morbidity. It is the body's intelligent use of the dark season for processing and integration.",
+  Sagittarius: "Early winter brings the last surge of outward energy before the solstice. The nervous system often generates a final push of optimism and expansion before the deepest dark. This is a good season for vision, for asking larger questions, for letting the mind range further than usual.",
+  Capricorn: "Winter solstice and the weeks that follow are the body's natural season for rest, consolidation, and long-range planning. The slowest point of the year is not a failure of momentum. It is the foundation from which the next cycle builds. What you are building now will be standing long after the season turns.",
   Aquarius: "Late winter brings the first subtle lengthening of days. The nervous system begins to stir before the body fully registers the change. This is the season of ideas that arrive before their time, of seeing what the next cycle will need before it has arrived. What you are carrying right now may be ahead of its moment."
 };
 
@@ -5336,6 +5467,109 @@ const GSD_TAU = Math.PI * 2;
 
 // Frequency database for the GSD tool
 
+
+let gsdSelected = new Set();
+
+function initGSD() {
+  renderGSDFreqs('all');
+  renderTemplatePreviews();
+
+  document.querySelectorAll('.gsd-intent-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.gsd-intent-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGSDFreqs(btn.dataset.intent);
+    });
+  });
+}
+
+function renderGSDFreqs(intent) {
+  const grid = document.getElementById('gsd-freq-grid');
+  const filtered = intent === 'all' ? GSD_FREQS : GSD_FREQS.filter(f => f.cat === intent);
+  grid.innerHTML = filtered.map(f => `
+    <div class="gsd-freq-chip ${gsdSelected.has(f.hz) ? 'selected' : ''}" onclick="toggleGSDFreq(${f.hz})" data-hz="${f.hz}">
+      <div class="chip-hz">${f.hz} Hz</div>
+      <div class="chip-name">${f.name}</div>
+      <div class="chip-shape">${f.shape} . ${f.desc.substring(0,28)}...</div>
+    </div>
+  `).join('');
+}
+
+function toggleGSDFreq(hz) {
+  if (gsdSelected.has(hz)) {
+    gsdSelected.delete(hz);
+  } else {
+    if (gsdSelected.size >= 7) { alert('Maximum 7 frequencies for optimal symbol coherence.'); return; }
+    gsdSelected.add(hz);
+  }
+  const badge = document.getElementById('gsd-count');
+  badge.textContent = gsdSelected.size + ' selected';
+  // re-render current filter
+  const activeBtn = document.querySelector('.gsd-intent-btn.active');
+  renderGSDFreqs(activeBtn ? activeBtn.dataset.intent : 'all');
+}
+
+// __ Template preview renderers ______________________________________________
+function renderTemplatePreviews() {
+  const templates = {
+    flower: drawFlowerOfLife,
+    seed: drawSeedOfLife,
+    phi: drawPhiSpiral,
+    torus: drawTorusField,
+    vesica: drawVesicaPiscis,
+    quasicrystal: drawQuasicrystal
+  };
+  Object.entries(templates).forEach(([id, fn]) => {
+    const c = document.getElementById('tmpl-' + id);
+    if (c) fn(c.getContext('2d'), 40, 40, 32, true);
+  });
+}
+
+// __ Drawing primitives ______________________________________________________
+// ============================================================
+// TAYLORED HARMONY — GSD GENERATOR ENGINE (REBUILT)
+// Mathematically precise sacred geometry rendering
+// All geometry based on 432 Hz scale, phi ratio = 1.6180339887
+// ============================================================
+
+
+// ── BASE TEMPLATE RENDERERS ──────────────────────────────────
+
+// Flower of Life: 19-circle construction
+// Center circle + ring of 6 + ring of 12 = 19 circles total
+// Each circle has radius r, centers placed at exact intersection nodes
+function drawFlowerOfLife(ctx, cx, cy, r, mini=false) {
+  const alpha = mini ? 0.9 : 0.35;
+  const lw = mini ? 0.8 : 0.7;
+  ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+  ctx.lineWidth = lw;
+
+  // Center circle
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, GSD_TAU); ctx.stroke();
+
+  // Ring 1: 6 circles, each center at distance r from center
+  const ring1 = [];
+  for (let i = 0; i < 6; i++) {
+    const angle = i * GSD_TAU / 6;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    ring1.push({x, y});
+    ctx.beginPath(); ctx.arc(x, y, r, 0, GSD_TAU); ctx.stroke();
+  }
+
+  // Ring 2: 6 circles at distance 2r from center (at 30-degree offsets)
+  for (let i = 0; i < 6; i++) {
+    const angle = i * GSD_TAU / 6 + GSD_TAU / 12;
+    const x = cx + r * Math.sqrt(3) * Math.cos(angle);
+    const y = cy + r * Math.sqrt(3) * Math.sin(angle);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, GSD_TAU); ctx.stroke();
+  }
+
+  // Ring 2 continued: 6 more at distance 2r (aligned with ring 1)
+  for (let i = 0; i < 6; i++) {
+    const angle = i * GSD_TAU / 6;
+    const x = cx + 2 * r * Math.cos(angle);
+    const y = cy + 2 * r * Math.sin(angle);
     ctx.beginPath(); ctx.arc(x, y, r, 0, GSD_TAU); ctx.stroke();
   }
 
@@ -5803,37 +6037,258 @@ function drawShape(ctx, shape, cx, cy, r, color, alpha, rotation = 0, sides = 0)
 
 // ── MAIN GENERATE FUNCTION ───────────────────────────────────
 
-// ── INTENTION COMPATIBILITY MAP ───────────────────────────────────────────────
-const INTENTION_FREQS = {
-  grounding:      [7.83, 14.1, 136.1, 174, 194.18, 210.42, 256, 396, 432],
-  clarity:        [40, 741, 852, 333, 417, 528, 963],
-  release:        [396, 417, 528, 174, 285, 741, 999],
-  integration:    [432, 528, 639, 888, 963, 333, 360],
-  'nervous-system':[7.83, 40, 111, 136.1, 256, 432, 852],
-  protection:     [40, 285, 741, 174, 432, 963]
-};
+function generateGSD() {
+  if (gsdSelected.size < 2) {
+    alert('Please select at least 2 frequencies to generate your symbol.');
+    return;
+  }
 
-// ── BODY REGION DATA ──────────────────────────────────────────────────────────
-const BODY_REGIONS = {
-  head:     { label:'Head & Mind',         desc:'Cognitive clarity, neural coherence, pineal activation',          freqs:[40, 852, 963, 1111, 741],          guidance:'These frequencies support neural coherence and cognitive clarity. Best used for focus, meditation, or mental pattern interruption.' },
-  throat:   { label:'Throat & Expression', desc:'Communication, truth, thyroid, vocal resonance',                  freqs:[741, 639, 333, 417, 256],          guidance:'Associated with expression, truth-telling, and clearing what has been unsaid. Useful for communication blocks and thyroid support.' },
-  chest:    { label:'Chest & Heart',       desc:'Heart coherence, grief, connection, lungs',                       freqs:[360, 639, 528, 136.1, 333],        guidance:'Heart-centred frequencies for grief processing, relationship coherence, and cardiovascular regulation.' },
-  solar:    { label:'Solar Plexus',        desc:'Personal power, identity, digestion, nervous system',             freqs:[528, 417, 321, 396, 432],          guidance:'Frequencies for identity, personal agency, and digestive system support. Useful when feeling powerless or stuck.' },
-  abdomen:  { label:'Abdomen & Gut',       desc:'Gut-brain axis, ancestral patterns, reproductive system',         freqs:[285, 396, 174, 210.42, 194.18],    guidance:'The gut holds inherited patterns. These frequencies support the gut-brain axis and ancestral pattern interruption.' },
-  spine:    { label:'Spine & Lower Back',  desc:'Structural support, nervous system highway, sacral',              freqs:[174, 136.1, 7.83, 194.18, 256],    guidance:'Foundational frequencies for structural integrity and nervous system regulation along the spinal column.' },
-  arms:     { label:'Arms & Hands',        desc:'Action, giving, receiving, lymphatic flow',                       freqs:[321, 639, 528, 285, 432],          guidance:'Frequencies associated with action, giving and receiving, and lymphatic circulation.' },
-  legs:     { label:'Legs & Hips',         desc:'Grounding, stability, ancestral foundation, movement',            freqs:[7.83, 14.1, 174, 194.18, 396],     guidance:'Deep grounding frequencies. The legs carry inherited weight. These support physical grounding and ancestral release.' }
-};
+  const template = document.querySelector('input[name="gsd-template"]:checked').value;
+  const canvas = document.getElementById('gsd-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2;
 
-// ── STATE ─────────────────────────────────────────────────────────────────────
-let gsdSelected = new Set();
-let currentIntention = null;
-let currentRegion = null;
-let audioCtx = null;
-let activeNodes = [];
-let isPlaying = false;
+  // Clear
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#050508';
+  ctx.fillRect(0, 0, W, H);
 
-// ── BODY MAP ──────────────────────────────────────────────────────────────────
+  const selectedFreqs = GSD_FREQS.filter(f => gsdSelected.has(f.hz));
+  const maxR = Math.min(W, H) * 0.41;
+
+  // ── STEP 1: Base template (dim background layer) ──
+  ctx.save();
+  ctx.globalAlpha = 0.22;
+  switch (template) {
+    case 'flower':       drawFlowerOfLife(ctx, cx, cy, maxR * 0.33); break;
+    case 'seed':         drawSeedOfLife(ctx, cx, cy, maxR * 0.38); break;
+    case 'phi':          drawPhiSpiral(ctx, cx, cy, maxR); break;
+    case 'torus':        drawTorusField(ctx, cx, cy, maxR); break;
+    case 'vesica':       drawVesicaPiscis(ctx, cx, cy, maxR * 0.6); break;
+    case 'quasicrystal': drawQuasicrystal(ctx, cx, cy, maxR); break;
+  }
+  ctx.restore();
+
+  // ── STEP 2: Phi-ratio concentric guide rings ──
+  ctx.save();
+  ctx.globalAlpha = 0.08;
+  ctx.strokeStyle = 'rgba(212,175,55,0.6)';
+  ctx.lineWidth = 0.4;
+  let guideR = maxR;
+  for (let i = 0; i < 8; i++) {
+    ctx.beginPath(); ctx.arc(cx, cy, guideR, 0, GSD_TAU); ctx.stroke();
+    guideR /= GSD_PHI;
+    if (guideR < 8) break;
+  }
+  ctx.restore();
+
+  // ── STEP 3: Radial symmetry lines ──
+  const sorted = [...selectedFreqs].sort((a, b) => a.hz - b.hz);
+  // Symmetry fold is determined by the template, not the number of frequencies
+  const templateSymmetry = {
+    flower: 6, seed: 6, phi: 4, torus: 8, vesica: 2, quasicrystal: 10
+  };
+  const symmetryFold = templateSymmetry[template] || 6;
+  ctx.save();
+  ctx.globalAlpha = 0.06;
+  ctx.strokeStyle = 'rgba(212,175,55,0.8)';
+  ctx.lineWidth = 0.4;
+  for (let i = 0; i < symmetryFold; i++) {
+    const angle = i * GSD_TAU / symmetryFold;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + maxR * 1.05 * Math.cos(angle), cy + maxR * 1.05 * Math.sin(angle));
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // ── STEP 4: Frequency layers (Structural Node Placement) ──
+  // Shapes are placed at the actual mathematical intersection nodes of the chosen template
+  // rather than just stacked concentrically in the center.
+  
+  // Calculate node positions based on the selected template
+  const nodes = [];
+  
+  if (template === 'flower' || template === 'seed') {
+    // 6-fold petal intersections
+    const r = template === 'flower' ? maxR * 0.33 : maxR * 0.38;
+    for (let i = 0; i < 6; i++) {
+      const angle = i * GSD_TAU / 6;
+      nodes.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle), angle });
+    }
+  } else if (template === 'phi') {
+    // Points along the golden spiral arms
+    const a = maxR * 0.04;
+    const b = Math.log(GSD_PHI) / Math.PI;
+    for (let i = 0; i < 4; i++) { // 4 mirrored arms
+      const t = GSD_TAU * 1.5; // Midpoint of spiral
+      const rad = a * Math.exp(b * t);
+      const angle = (i * GSD_TAU / 4) + t;
+      nodes.push({ x: cx + rad * Math.cos(angle), y: cy + rad * Math.sin(angle), angle });
+    }
+  } else if (template === 'torus') {
+    // Points along the major radius (center of the tube)
+    const R = maxR * 0.6;
+    for (let i = 0; i < 8; i++) {
+      const angle = i * GSD_TAU / 8;
+      nodes.push({ x: cx + R * Math.cos(angle), y: cy + R * Math.sin(angle), angle });
+    }
+  } else if (template === 'vesica') {
+    // The two circle centers and the top/bottom lens intersections
+    const r = maxR * 0.6;
+    const h = r * Math.sqrt(3) / 2;
+    nodes.push({ x: cx - r/2, y: cy, angle: Math.PI }); // Left center
+    nodes.push({ x: cx + r/2, y: cy, angle: 0 }); // Right center
+    nodes.push({ x: cx, y: cy - h, angle: -Math.PI/2 }); // Top intersection
+    nodes.push({ x: cx, y: cy + h, angle: Math.PI/2 }); // Bottom intersection
+  } else if (template === 'quasicrystal') {
+    // 10-fold vertices of the inner decagon
+    const r = maxR * 0.5;
+    for (let i = 0; i < 10; i++) {
+      const angle = i * GSD_TAU / 10 - Math.PI / 10;
+      nodes.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle), angle });
+    }
+  }
+
+  // Draw the frequencies
+  sorted.forEach((freq, i) => {
+    // The lowest frequency (foundation) goes in the center
+    if (i === 0) {
+      const layerR = maxR * 0.45;
+      drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, 0.8, 0, freq.sides || 0);
+    } 
+    // The highest frequency (apex) goes on the outer boundary
+    else if (i === sorted.length - 1 && sorted.length > 2) {
+      const layerR = maxR * 0.85;
+      drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, 0.6, Math.PI / sorted.length, freq.sides || 0);
+    }
+    // Middle frequencies are distributed across the template's structural nodes
+    else {
+      const shapeR = maxR * 0.18; // Smaller radius for node shapes
+      const alpha = 0.7;
+      
+      // If we have nodes, place this frequency's shape at every node
+      if (nodes.length > 0) {
+        nodes.forEach(node => {
+          // Rotate the shape to point outward from the center
+          const rotation = node.angle + Math.PI / 2;
+          drawShape(ctx, freq.shape, node.x, node.y, shapeR, freq.color, alpha, rotation, freq.sides || 0);
+        });
+      } else {
+        // Fallback if no nodes (shouldn't happen)
+        const layerR = maxR * Math.pow(1 / GSD_PHI, i * 0.55);
+        drawShape(ctx, freq.shape, cx, cy, layerR, freq.color, alpha, 0, freq.sides || 0);
+      }
+    }
+  });
+
+  // ── STEP 5: Connecting lines between adjacent layers ──
+  ctx.save();
+  ctx.globalAlpha = 0.12;
+  ctx.strokeStyle = 'rgba(212,175,55,0.5)';
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i < sorted.length - 1; i++) {
+    const r1 = maxR * Math.pow(1 / GSD_PHI, i * 0.55);
+    const r2 = maxR * Math.pow(1 / GSD_PHI, (i + 1) * 0.55);
+    // Draw connecting arc
+    ctx.beginPath(); ctx.arc(cx, cy, (r1 + r2) / 2, 0, GSD_TAU); ctx.stroke();
+  }
+  ctx.restore();
+
+  // ── STEP 6: Central point (anchor) ──
+  const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 18);
+  gradient.addColorStop(0, 'rgba(255,255,255,0.95)');
+  gradient.addColorStop(0.35, 'rgba(212,175,55,0.7)');
+  gradient.addColorStop(1, 'rgba(212,175,55,0)');
+  ctx.fillStyle = gradient;
+  ctx.beginPath(); ctx.arc(cx, cy, 18, 0, GSD_TAU); ctx.fill();
+
+  // ── STEP 7: Outer boundary ring ──
+  ctx.save();
+  ctx.globalAlpha = 0.45;
+  ctx.strokeStyle = 'rgba(212,175,55,0.5)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(cx, cy, maxR * 1.04, 0, GSD_TAU); ctx.stroke();
+  ctx.globalAlpha = 0.2;
+  ctx.beginPath(); ctx.arc(cx, cy, maxR * 1.08, 0, GSD_TAU); ctx.stroke();
+  ctx.restore();
+
+  // ── Show output ──
+  const output = document.getElementById('gsd-output');
+  output.style.display = 'block';
+  output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const meta = document.getElementById('gsd-output-meta');
+  const templateNames = {
+    flower: 'Flower of Life', seed: 'Seed of Life', phi: 'Phi Spiral',
+    torus: 'Torus Field', vesica: 'Vesica Piscis', quasicrystal: 'Quasicrystal'
+  };
+  meta.innerHTML = `
+    <strong style="color:var(--gold-mid);">Symbol Generated</strong><br>
+    <span>Frequencies: ${sorted.map(f => f.hz + ' Hz').join(' . ')}</span><br>
+    <span>Base: ${templateNames[template] || template} . Layers: ${sorted.length} . Symmetry: ${symmetryFold}-fold</span><br>
+    <span style="font-size:0.75rem;opacity:0.6;">432 Hz scale . Golden Ratio proportions (phi = 1.618)</span>
+  `;
+
+  document.getElementById('gsd-reading-box').style.display = 'none';
+  document.getElementById('gsd-reading-text').textContent = '';
+}
+
+function downloadGSD() {
+  const canvas = document.getElementById('gsd-canvas');
+  const link = document.createElement('a');
+  link.download = 'taylored-harmony-symbol.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+async function requestGSDReading() {
+  const btn = document.getElementById('gsd-reading-btn');
+  const box = document.getElementById('gsd-reading-box');
+  const text = document.getElementById('gsd-reading-text');
+
+  btn.disabled = true;
+  btn.textContent = 'Generating reading...';
+  box.style.display = 'block';
+  document.getElementById('gsd-loading-state').style.display = 'block';
+  document.getElementById('gsd-result-state').style.display = 'none';
+  text.textContent = '';
+  let gsdProgress=0;const gsdProgressBar=document.getElementById('gsd-progress-bar');const gsdProgressInterval=setInterval(function(){gsdProgress=Math.min(gsdProgress+(Math.random()*3+0.5),90);gsdProgressBar.style.width=gsdProgress+'%';},600);
+
+  const selectedFreqs = GSD_FREQS.filter(f => gsdSelected.has(f.hz));
+  const template = document.querySelector('input[name="gsd-template"]:checked').value;
+  const freqSummary = selectedFreqs.map(f => `${f.hz} Hz (${f.name}  -  ${f.desc})`).join(', ');
+
+  try {
+    const response = await fetch('https://taylored-harmony.tayloredharmony.workers.dev/gsd-reading', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ frequencies: freqSummary, template })
+    });
+    const data = await response.json();
+    clearInterval(gsdProgressInterval);
+    document.getElementById('gsd-progress-bar').style.width = '100%';
+    setTimeout(function() {
+      document.getElementById('gsd-loading-state').style.display = 'none';
+      document.getElementById('gsd-result-state').style.display = 'block';
+      text.textContent = data.reading || 'Unable to generate reading at this time.';
+    }, 400);
+  } catch(e) {
+    clearInterval(gsdProgressInterval);
+    document.getElementById('gsd-loading-state').style.display = 'none';
+    document.getElementById('gsd-result-state').style.display = 'block';
+    text.textContent = 'Unable to generate reading at this time. Please try again in a moment.';
+  }
+  btn.disabled = false;
+  btn.textContent = '✦ Geometry Analysis';
+}
+
+// Init on load
+document.addEventListener('DOMContentLoaded', initGSD);
+
+
+// Navigation toggle
 function selectBodyRegion(regionId) {
   currentRegion = regionId;
   // Update SVG active state
