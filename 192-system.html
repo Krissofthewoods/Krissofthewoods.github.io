@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 192 System | Taylored Harmony</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@400;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #03040a;
+      --bg-mid: #070a14;
+      --gold: #d4aa50;
+      --gold-light: #f0d080;
+      --gold-dim: rgba(212,170,80,0.15);
+      --ivory: #f8f4ee;
+      --ivory-dim: rgba(248,244,238,0.75);
+      --border: rgba(212,170,80,0.25);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-deep);
+      color: var(--ivory);
+      font-family: 'Lora', Georgia, serif;
+      line-height: 1.8;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 5rem 2rem 6rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 3.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--gold-light); }
+    .page-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      color: rgba(212,170,80,0.6);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1.25;
+      margin-bottom: 0.6rem;
+    }
+    .subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: rgba(212,170,80,0.6);
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+    .gold-rule {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 0 3rem;
+      opacity: 0.4;
+    }
+    .intro-quote {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--ivory);
+      line-height: 1.75;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    p {
+      color: var(--ivory-dim);
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 1.6rem;
+    }
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin: 3rem 0 1.2rem;
+    }
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .number-card {
+      background: rgba(212,170,80,0.04);
+      border: 1px solid rgba(212,170,80,0.2);
+      border-radius: 6px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .number-card .num {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .number-card .num-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: rgba(212,170,80,0.6);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .number-card .num-desc {
+      font-size: 0.78rem;
+      color: var(--ivory-dim);
+      line-height: 1.5;
+    }
+    .freq-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 2.5rem;
+      font-size: 0.85rem;
+    }
+    .freq-table th {
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid rgba(212,170,80,0.3);
+      text-align: left;
+    }
+    .freq-table td {
+      padding: 0.55rem 0.8rem;
+      border-bottom: 1px solid rgba(212,170,80,0.08);
+      color: var(--ivory-dim);
+      vertical-align: top;
+    }
+    .freq-table tr:hover td { background: rgba(212,170,80,0.03); }
+    .freq-hz { font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.9rem; }
+    .disclaimer {
+      background: rgba(212,170,80,0.04);
+      border: 1px solid rgba(212,170,80,0.15);
+      border-radius: 6px;
+      padding: 1.4rem 1.8rem;
+      margin-top: 3rem;
+    }
+    .disclaimer p {
+      font-size: 0.82rem;
+      color: rgba(248,244,238,0.5);
+      margin: 0;
+      line-height: 1.7;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+    footer a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <a href="index.html" class="back-link">&#8592; Return to Taylored Harmony</a>
+
+  <div class="page-label">Mathematical Framework &middot; Taylored Harmony</div>
+  <h1>The 192 System</h1>
+  <div class="subtitle">Why Base-12 &middot; Why 16 Frequencies &middot; Why These Numbers</div>
+  <div class="gold-rule"></div>
+
+  <div class="intro-quote">
+    This is not a theory I arrived at through academic study. It is a pattern I kept finding in my own body, my own lineage, and the structures of sound &mdash; until I could no longer ignore that it was pointing at something real.
+  </div>
+
+  <p>The 192 System is a personal synthesis framework built on a single structural observation: that base-12 arithmetic describes the natural organisation of recurring human experience more accurately than base-10 does. This is not a claim about physics or biology. It is a claim about pattern recognition &mdash; specifically, the patterns I kept encountering when mapping ancestral cycles, nervous system states, and the geometry of sound.</p>
+
+  <h2>Why Base-12?</h2>
+
+  <p>Base-10 is a counting system built around the number of fingers on two hands. It is useful for commerce and measurement. But it is not the system that nature uses to organise cycles. The clock runs on 12. The musical octave divides into 12 semitones. The zodiac organises into 12 positions. The human body has 12 cranial nerves, 12 thoracic vertebrae, 12 ribs. The Sumerian and Babylonian systems &mdash; the oldest mathematical traditions we have record of &mdash; were base-60, which is a multiple of 12.</p>
+
+  <p>When I began mapping the recurring patterns in my own lineage, I found that they organised naturally into 12 positions. Not 10. Not 8. Twelve. Each position corresponded to a distinct quality of experience: a specific way that fear, grief, anger, or disconnection expressed itself in the body. I did not impose this structure. I found it already there, waiting to be named.</p>
+
+  <div class="number-grid">
+    <div class="number-card">
+      <div class="num">12</div>
+      <div class="num-label">Root Positions</div>
+      <div class="num-desc">The number of distinct pattern archetypes in the mapping system</div>
+    </div>
+    <div class="number-card">
+      <div class="num">16</div>
+      <div class="num-label">Core Frequencies</div>
+      <div class="num-desc">The minimum frequency set for a complete harmonic stack (4 layers &times; 4)</div>
+    </div>
+    <div class="number-card">
+      <div class="num">192</div>
+      <div class="num-label">The System</div>
+      <div class="num-desc">12 positions &times; 16 frequencies = the full mapping matrix</div>
+    </div>
+    <div class="number-card">
+      <div class="num">432</div>
+      <div class="num-label">Hz Reference</div>
+      <div class="num-desc">The tuning standard: 432 = 12 &times; 36, harmonically coherent with the system</div>
+    </div>
+  </div>
+
+  <h2>Why 16 Frequencies?</h2>
+
+  <p>The audio stack architecture in this system uses four layers: Foundation, Breath (mid-low), Mid, and Binaural/High. Each layer requires a minimum of four frequencies to create what I call a &ldquo;coherent field&rdquo; &mdash; a stack where the harmonic relationships between tones reinforce rather than cancel each other. Four layers times four frequencies equals sixteen. This is the minimum viable stack for a complete session.</p>
+
+  <p>The 16 core frequencies in the system are drawn from three sources: the Solfeggio scale (which divides into 9 tones, all multiples of 3), the Schumann resonances (Earth's electromagnetic field harmonics, beginning at 7.83 Hz), and the 432 Hz tuning system (where A4 = 432 Hz rather than the modern 440 Hz standard). These three sources share a common mathematical ancestor: they are all expressible as multiples or harmonics of 3, 6, 9, and 12.</p>
+
+  <h2>The 192 Matrix</h2>
+
+  <p>The full system maps 12 root pattern positions against 16 core frequencies. Each intersection in the matrix represents a specific combination: a body region, an emotional quality, a geometric archetype, and a corresponding frequency range. This is the structural backbone of the Root Pattern Mapping System and the Symbol Generator.</p>
+
+  <p>I want to be clear about what this is and what it is not. The 192 System is a personal synthesis tool &mdash; a framework I built to make sense of my own experience and to create practical instruments for others doing similar work. It is not a scientific theory. It is not a medical protocol. It is a pattern language, and like all pattern languages, its value is in whether it helps you see something you couldn't see before.</p>
+
+  <h2>The 16 Core Frequencies at a Glance</h2>
+
+  <table class="freq-table">
+    <thead>
+      <tr>
+        <th>Hz</th>
+        <th>Name</th>
+        <th>Layer</th>
+        <th>Root Connection</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="freq-hz">7.83</td><td>Schumann Resonance</td><td>Foundation</td><td>Earth anchor, root safety</td></tr>
+      <tr><td class="freq-hz">40</td><td>Gamma Coherence</td><td>Foundation</td><td>Neural binding, protection</td></tr>
+      <tr><td class="freq-hz">111</td><td>Cell Regeneration</td><td>Foundation</td><td>Deep rest, beta-endorphin</td></tr>
+      <tr><td class="freq-hz">136.1</td><td>OM &mdash; Earth Year</td><td>Foundation</td><td>Heart resonance, grounding</td></tr>
+      <tr><td class="freq-hz">174</td><td>Foundation &amp; Safety</td><td>Foundation</td><td>Root, pain reduction</td></tr>
+      <tr><td class="freq-hz">285</td><td>Tissue Repair</td><td>Foundation</td><td>Cellular memory, organ repair</td></tr>
+      <tr><td class="freq-hz">333</td><td>Heart-Mind Bridge</td><td>Mid</td><td>Compassion, coherence</td></tr>
+      <tr><td class="freq-hz">396</td><td>Liberation from Fear</td><td>Mid</td><td>Fear &amp; guilt release</td></tr>
+      <tr><td class="freq-hz">417</td><td>Cellular Clearing</td><td>Mid</td><td>Pattern clearing</td></tr>
+      <tr><td class="freq-hz">432</td><td>Universal Tuning</td><td>Mid</td><td>Harmonic anchor</td></tr>
+      <tr><td class="freq-hz">528</td><td>Transformation</td><td>Mid</td><td>Structural coherence</td></tr>
+      <tr><td class="freq-hz">639</td><td>Harmonising</td><td>Binaural</td><td>Relationship patterns</td></tr>
+      <tr><td class="freq-hz">741</td><td>Clarity &amp; Detox</td><td>Binaural</td><td>Cognitive clearing</td></tr>
+      <tr><td class="freq-hz">852</td><td>Pineal &amp; Nervous System</td><td>Binaural</td><td>Pattern recognition</td></tr>
+      <tr><td class="freq-hz">963</td><td>Crown Connection</td><td>Binaural</td><td>Integration, completion</td></tr>
+      <tr><td class="freq-hz">1111</td><td>Alignment Gateway</td><td>Crystalline</td><td>Synchronicity, master number</td></tr>
+    </tbody>
+  </table>
+
+  <div class="disclaimer">
+    <p><strong style="color:rgba(212,170,80,0.8);">A note on claims:</strong> The 192 System is a personal synthesis framework developed through lived experience and pattern observation. It is not a medical system, a scientific theory, or a clinical protocol. The frequency associations described here draw on published research in cymatics, bioacoustics, and neuroscience, but the specific mapping to body regions and emotional patterns is my own synthesis. I am not a doctor, therapist, or scientist. Nothing on this page should be used in place of professional medical or mental health care.</p>
+  </div>
+
+</div>
+
+<footer>
+  <a href="index.html">&#8592; Return to Taylored Harmony</a>
+  &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+  <a href="sources.html">Sources &amp; Citations</a>
+</footer>
+
+</body>
+</html>

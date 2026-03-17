@@ -1814,6 +1814,9 @@
   <div class="nav-menu-group">The Work</div>
   <a href="#books" onclick="toggleNav()">My Books</a>
   <a href="#creations" onclick="toggleNav()">Other Creations</a>
+  <div class="nav-menu-group">Theory</div>
+  <a href="192-system.html" onclick="toggleNav()">The 192 System</a>
+  <a href="sources.html" onclick="toggleNav()">Sources &amp; Citations</a>
 </div>
 
 <!-- HERO -->
@@ -1853,6 +1856,14 @@
 <!-- START HERE -->
 <section id="start-here" style="padding:5rem 2rem;">
   <div class="section-inner">
+
+    <!-- First Principle anchor -->
+    <div style="max-width:680px;margin:0 auto 3rem;text-align:center;">
+      <div style="display:inline-block;border:1px solid rgba(212,170,80,0.3);border-radius:4px;padding:1.2rem 2rem;background:rgba(212,170,80,0.04);">
+        <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:rgba(212,170,80,0.6);text-transform:uppercase;margin-bottom:0.7rem;">First Principle</div>
+        <p style="font-family:'Lora',serif;font-size:1.05rem;color:var(--ivory);line-height:1.7;margin:0;font-style:italic;">Every pattern in the body can be mapped to one of twelve root positions. This is not a metaphor &mdash; it is the structural logic of how recurring experience encodes itself in tissue, posture, and nervous system response. The 192 System is a base-12 framework for reading that map.</p>
+      </div>
+    </div>
 
     <!-- Personal intro block -->
     <div style="max-width:720px;margin:0 auto 4rem;text-align:center;">
@@ -1911,6 +1922,29 @@
         <span class="start-step-link">Open the Symbol Generator &rarr;</span>
       </div>
     </div>
+
+    <!-- Wonder → Observation → Application journey flow -->
+    <div style="max-width:800px;margin:3rem auto 0;">
+      <div style="font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.3em;color:rgba(212,170,80,0.5);text-transform:uppercase;text-align:center;margin-bottom:1.5rem;">How most people move through this work</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;">
+        <div style="padding:1.5rem 1.8rem;border:1px solid rgba(212,170,80,0.15);border-radius:6px 0 0 6px;background:rgba(212,170,80,0.03);text-align:center;">
+          <div style="font-family:'Cinzel',serif;font-size:1.4rem;color:rgba(212,170,80,0.4);margin-bottom:0.5rem;">&#9670;</div>
+          <div style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Wonder</div>
+          <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.7;margin:0;">Something in you recognises this. You don't know why yet. You feel a pull toward the geometry, the frequencies, the language of pattern. Follow that.</p>
+        </div>
+        <div style="padding:1.5rem 1.8rem;border:1px solid rgba(212,170,80,0.15);border-left:none;background:rgba(212,170,80,0.04);text-align:center;">
+          <div style="font-family:'Cinzel',serif;font-size:1.4rem;color:rgba(212,170,80,0.5);margin-bottom:0.5rem;">&#9670;</div>
+          <div style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Observation</div>
+          <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.7;margin:0;">You begin to see your own patterns. The RPMS names them. The Codex shows you what frequencies correspond. The Framework explains the structural logic beneath what you've been living.</p>
+        </div>
+        <div style="padding:1.5rem 1.8rem;border:1px solid rgba(212,170,80,0.15);border-left:none;border-radius:0 6px 6px 0;background:rgba(212,170,80,0.05);text-align:center;">
+          <div style="font-family:'Cinzel',serif;font-size:1.4rem;color:rgba(212,170,80,0.7);margin-bottom:0.5rem;">&#9670;</div>
+          <div style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Application</div>
+          <p style="font-size:0.82rem;color:var(--ivory-dim);line-height:1.7;margin:0;">You build a practice. The Symbol Generator creates a personal geometric device. The audio stacks give you something to listen to. The books give you something to return to.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -2646,6 +2680,7 @@
       Answer 8 questions and receive a clear picture of your core patterns, what's recurring in your body, your relationships, and your family history, and one practical shift to help you move through it.
     </p>
     <p style="color:var(--ivory-dim); max-width:500px; margin:0 auto; font-size:0.8rem; line-height:1.7;">This is not therapy. It's a structured reflection tool.</p>
+    <p style="font-family:'Lora',serif;font-size:0.9rem;color:rgba(212,170,80,0.7);font-style:italic;max-width:500px;margin:1rem auto 0;line-height:1.7;">&ldquo;The archetypes are not personalities. They are geometries of the soul &mdash; the shapes that recurring experience carves into the body over time.&rdquo;</p>
 
     <div class="rpms-form">
 
@@ -3456,54 +3491,55 @@
     <div style="margin-bottom:2.5rem;">
       <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1.2rem;">Step 1 — Where in your body?</div>
       <div class="body-map-wrap" id="body-map-wrap">
-        <div class="body-map-svg-wrap">
-          <!-- Gender-neutral human silhouette with clickable regions -->
-          <svg viewBox="0 0 200 480" fill="none" xmlns="http://www.w3.org/2000/svg" id="body-svg">
-            <!-- HEAD -->
-            <g class="body-region" id="region-head" onclick="selectBodyRegion('head')" title="Head & Mind">
-              <ellipse cx="100" cy="42" rx="32" ry="38" fill="rgba(212,170,80,0.08)" stroke="rgba(212,170,80,0.35)" stroke-width="1.5"/>
-              <text x="100" y="46" text-anchor="middle" fill="rgba(212,170,80,0.7)" font-size="9" font-family="Cinzel, serif">HEAD</text>
-            </g>
-            <!-- THROAT/NECK -->
-            <g class="body-region" id="region-throat" onclick="selectBodyRegion('throat')" title="Throat & Expression">
-              <rect x="84" y="78" width="32" height="28" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
-              <text x="100" y="96" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7" font-family="Cinzel, serif">THROAT</text>
-            </g>
-            <!-- CHEST/HEART -->
-            <g class="body-region" id="region-chest" onclick="selectBodyRegion('chest')" title="Chest & Heart">
-              <rect x="62" y="104" width="76" height="72" rx="6" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
-              <text x="100" y="144" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="8" font-family="Cinzel, serif">CHEST</text>
-            </g>
-            <!-- LEFT ARM -->
-            <g class="body-region" id="region-arms" onclick="selectBodyRegion('arms')" title="Arms & Hands">
-              <rect x="24" y="108" width="34" height="110" rx="10" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <rect x="142" y="108" width="34" height="110" rx="10" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <text x="41" y="168" text-anchor="middle" fill="rgba(212,170,80,0.5)" font-size="7" font-family="Cinzel, serif" transform="rotate(-90,41,168)">ARMS</text>
-            </g>
-            <!-- SOLAR PLEXUS -->
-            <g class="body-region" id="region-solar" onclick="selectBodyRegion('solar')" title="Solar Plexus">
-              <rect x="66" y="174" width="68" height="44" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <text x="100" y="200" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7" font-family="Cinzel, serif">SOLAR PLEXUS</text>
-            </g>
-            <!-- ABDOMEN -->
-            <g class="body-region" id="region-abdomen" onclick="selectBodyRegion('abdomen')" title="Abdomen & Gut">
-              <rect x="66" y="216" width="68" height="52" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <text x="100" y="246" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7.5" font-family="Cinzel, serif">ABDOMEN</text>
-            </g>
-            <!-- SPINE/LOWER BACK (shown as a subtle spine line) -->
-            <g class="body-region" id="region-spine" onclick="selectBodyRegion('spine')" title="Spine & Lower Back">
-              <rect x="88" y="266" width="24" height="40" rx="4" fill="rgba(212,170,80,0.08)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
-              <text x="100" y="290" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="6" font-family="Cinzel, serif">SPINE</text>
-            </g>
-            <!-- LEGS/HIPS -->
-            <g class="body-region" id="region-legs" onclick="selectBodyRegion('legs')" title="Legs & Hips">
-              <rect x="62" y="304" width="34" height="150" rx="12" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <rect x="104" y="304" width="34" height="150" rx="12" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
-              <text x="100" y="385" text-anchor="middle" fill="rgba(212,170,80,0.5)" font-size="8" font-family="Cinzel, serif">LEGS</text>
-            </g>
-            <!-- Tap prompt -->
-            <text x="100" y="468" text-anchor="middle" fill="rgba(212,170,80,0.35)" font-size="7.5" font-family="Cinzel, serif">tap a region</text>
-          </svg>
+        <div class="body-map-svg-wrap" style="position:relative;">
+          <!-- Resonance Map artwork -->
+          <img src="resonance-map.png" alt="The Resonance Map — where beliefs affect the body" style="width:100%;height:auto;display:block;border-radius:6px;opacity:0.92;">
+          <!-- Clickable overlay regions positioned over the image -->
+          <!-- Image is 1024x1536 px, displayed at ~220px wide = scale 0.215 -->
+          <!-- Regions positioned as % of image dimensions -->
+          <div style="position:absolute;inset:0;">
+            <!-- HEAD / CROWN FIELD (~top 18% of image) -->
+            <div class="body-region" id="region-head" onclick="selectBodyRegion('head')" title="Crown Field · Mind & Eyes"
+              style="position:absolute;left:32%;top:8%;width:36%;height:16%;border-radius:50%;">
+              <span class="region-label">Crown</span>
+            </div>
+            <!-- THROAT CENTER (~18-26%) -->
+            <div class="body-region" id="region-throat" onclick="selectBodyRegion('throat')" title="Throat Center · Truth"
+              style="position:absolute;left:38%;top:24%;width:24%;height:8%;border-radius:4px;">
+              <span class="region-label">Throat</span>
+            </div>
+            <!-- HEART FIELD (~26-40%) -->
+            <div class="body-region" id="region-chest" onclick="selectBodyRegion('chest')" title="Heart Field · Grief & Armoring"
+              style="position:absolute;left:30%;top:32%;width:40%;height:14%;border-radius:6px;">
+              <span class="region-label">Heart</span>
+            </div>
+            <!-- ARMS (~26-52%) -->
+            <div class="body-region" id="region-arms" onclick="selectBodyRegion('arms')" title="Arms & Hands"
+              style="position:absolute;left:10%;top:30%;width:16%;height:26%;border-radius:8px;">
+              <span class="region-label" style="writing-mode:vertical-rl;font-size:0.45rem;">Arms</span>
+            </div>
+            <!-- SOLAR CENTER (~40-50%) -->
+            <div class="body-region" id="region-solar" onclick="selectBodyRegion('solar')" title="Solar Center · Inner Critic"
+              style="position:absolute;left:32%;top:46%;width:36%;height:9%;border-radius:4px;">
+              <span class="region-label">Solar</span>
+            </div>
+            <!-- DIGESTIVE / ABDOMEN (~50-62%) -->
+            <div class="body-region" id="region-abdomen" onclick="selectBodyRegion('abdomen')" title="Digestive Field · Resentment"
+              style="position:absolute;left:30%;top:55%;width:40%;height:10%;border-radius:4px;">
+              <span class="region-label">Digestive</span>
+            </div>
+            <!-- SACRAL FIELD (~62-72%) -->
+            <div class="body-region" id="region-spine" onclick="selectBodyRegion('spine')" title="Sacral Field · Ancestral Fear"
+              style="position:absolute;left:32%;top:65%;width:36%;height:9%;border-radius:4px;">
+              <span class="region-label">Sacral</span>
+            </div>
+            <!-- ROOT / LEGS / HIPS / ANKLES (~72-100%) -->
+            <div class="body-region" id="region-legs" onclick="selectBodyRegion('legs')" title="Root, Hips & Ankles · Safety"
+              style="position:absolute;left:28%;top:74%;width:44%;height:22%;border-radius:8px;">
+              <span class="region-label">Root &amp; Legs</span>
+            </div>
+          </div>
+          <div style="text-align:center;font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.15em;color:rgba(212,170,80,0.4);margin-top:0.5rem;">tap a region</div>
         </div>
 
         <!-- Frequency panel (shown when region selected) -->
@@ -3809,19 +3845,44 @@
 }
 .body-map-svg-wrap {
   position: relative;
-  width: 220px;
+  width: 240px;
   flex-shrink: 0;
 }
-.body-map-svg-wrap svg {
+.body-map-svg-wrap img {
   width: 100%;
   height: auto;
+  display: block;
 }
 .body-region {
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: background 0.2s, box-shadow 0.2s;
+  background: rgba(212,170,80,0.0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.body-region:hover { opacity: 0.75; }
-.body-region.active { filter: drop-shadow(0 0 6px #d4aa50); }
+.body-region:hover {
+  background: rgba(212,170,80,0.15);
+  box-shadow: 0 0 0 1px rgba(212,170,80,0.4);
+}
+.body-region.active {
+  background: rgba(212,170,80,0.18);
+  box-shadow: 0 0 0 2px rgba(212,170,80,0.7), 0 0 12px rgba(212,170,80,0.3);
+}
+.region-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  color: rgba(212,170,80,0.0);
+  text-transform: uppercase;
+  transition: color 0.2s;
+  pointer-events: none;
+  text-align: center;
+}
+.body-region:hover .region-label,
+.body-region.active .region-label {
+  color: rgba(212,170,80,0.9);
+}
 
 .body-freq-panel {
   background: rgba(212,170,80,0.05);
@@ -4091,6 +4152,7 @@ sition of specific frequencies, designed to be listened to with headphones, in a
   <p>Books · Tools · Frameworks for Healing · by Kristina Rose Taylor</p>
   <p style="margin-top: 1rem;">© 2026 · All rights reserved</p>
   <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="192-system.html" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);padding:0.6rem 1.6rem;border-radius:2px;text-decoration:none;transition:all 0.3s;">The 192 System</a>
     <a href="sources.html" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);padding:0.6rem 1.6rem;border-radius:2px;text-decoration:none;transition:all 0.3s;">Sources &amp; Citations</a>
     <a href="https://linktr.ee/TayloredHarmony" target="_blank" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);padding:0.6rem 1.6rem;border-radius:2px;text-decoration:none;transition:all 0.3s;">All Links · Linktree →</a>
   </div>
@@ -5210,6 +5272,70 @@ const GSD_FREQS = [
   { hz:9999,  name:'Harmonic Completion Seal',      cat:'lfsx',          color:'#FFFFFF', shape:'torus',    sides:0, desc:'Field completion, cosmic seal',            note:'D#9',    archetype:'The Seal',              brainwave:'High harmonic',                  layer:'seal',       guidance:'The completion seal. Closes the field. Always place last if used.' },
 ];
 
+// ── BODY REGIONS DATA ───────────────────────────────────────────────────────
+let currentRegion = null;
+let currentIntention = null;
+
+const BODY_REGIONS = {
+  head: {
+    label: 'Crown Field · Mind & Eyes',
+    desc: 'Where beliefs about control, flow, and mental patterns are held. Overcontrol and resistance to flow often register here.',
+    guidance: 'Frequencies that support mental clarity, pattern recognition, and releasing the need to control outcomes.',
+    freqs: [963, 852, 741, 528, 40]
+  },
+  throat: {
+    label: 'Throat Center · Truth & Expression',
+    desc: 'Where unexpressed truth accumulates. Blocked communication, withheld words, and silenced voice patterns.',
+    guidance: 'Frequencies that support authentic expression, releasing withheld truth, and vocal coherence.',
+    freqs: [741, 528, 417, 396, 136.1]
+  },
+  chest: {
+    label: 'Heart Field · Grief & Armoring',
+    desc: 'Where grief, withheld love, and armored expression are stored. The heart field extends beyond the physical chest.',
+    guidance: 'Frequencies that support heart coherence, grief processing, and opening to connection.',
+    freqs: [639, 528, 360, 333, 136.1]
+  },
+  arms: {
+    label: 'Arms & Hands · Holding & Releasing',
+    desc: 'How we hold on to or release experiences. Arms represent our capacity to embrace or push away.',
+    guidance: 'Frequencies that support releasing what no longer serves and opening to receive.',
+    freqs: [417, 396, 285, 174, 7.83]
+  },
+  solar: {
+    label: 'Solar Center · Inner Critic & Power',
+    desc: 'Where the inner critic lives. Personal power, self-worth, and the stories we tell about our adequacy.',
+    guidance: 'Frequencies that support personal power, dissolving self-criticism, and reclaiming agency.',
+    freqs: [528, 417, 396, 285, 256]
+  },
+  abdomen: {
+    label: 'Digestive Field · Resentment & Anger',
+    desc: 'Where resentment, anger, and undigested experiences are held. The liver and gallbladder process more than food.',
+    guidance: 'Frequencies that support releasing resentment, processing anger, and digestive coherence.',
+    freqs: [396, 285, 256, 194.18, 136.1]
+  },
+  spine: {
+    label: 'Sacral Field · Ancestral Fear & Worth',
+    desc: 'Where ancestral patterns, worth beliefs, and reproductive system patterns are encoded. Deep inherited material.',
+    guidance: 'Frequencies that support ancestral pattern interruption, worth reclamation, and sacral grounding.',
+    freqs: [396, 285, 210.42, 194.18, 174]
+  },
+  legs: {
+    label: 'Root, Hips & Ankles · Safety & Change',
+    desc: 'Where safety fears, rigidity, pride, and fear of change are held. The foundation of how we move through life.',
+    guidance: 'Frequencies that support safety, flexibility, grounding, and willingness to move forward.',
+    freqs: [174, 136.1, 7.83, 14.1, 194.18]
+  }
+};
+
+const INTENTION_FREQS = {
+  grounding:       [7.83, 14.1, 174, 136.1, 194.18, 210.42, 256, 285],
+  clarity:         [741, 528, 852, 40, 333, 963, 1111],
+  release:         [396, 417, 285, 174, 528, 639],
+  integration:     [528, 639, 432, 333, 285, 888, 999],
+  'nervous-system':[136.1, 7.83, 40, 111, 194.18, 210.42, 528],
+  protection:      [40, 741, 852, 1331, 963, 432]
+};
+
 // Check if a frequency is in the GSD_FREQS list (can be added to symbol)
 function isGSDFreq(hz) {
   const hzNum = parseFloat(hz);
@@ -6201,6 +6327,25 @@ function generateGSD() {
 
   document.getElementById('gsd-reading-box').style.display = 'none';
   document.getElementById('gsd-reading-text').textContent = '';
+}
+
+function clearGSD() {
+  gsdSelected.clear();
+  updateGSDSelectedDisplay();
+  const canvas = document.getElementById('gsd-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  const readingBox = document.getElementById('gsd-reading-box');
+  const readingText = document.getElementById('gsd-reading-text');
+  if (readingBox) readingBox.style.display = 'none';
+  if (readingText) readingText.textContent = '';
+  document.querySelectorAll('.intention-btn').forEach(b => b.classList.remove('active'));
+  window.gsdIntention = null;
+  document.querySelectorAll('.body-region').forEach(r => r.classList.remove('active'));
+  window.gsdBodyRegion = null;
+  renderGSDFreqs();
 }
 
 function downloadGSD() {
