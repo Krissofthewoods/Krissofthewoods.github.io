@@ -1780,39 +1780,7 @@
 <canvas id="starfield"></canvas>
 
 <!-- PASSWORD GATE -->
-<div id="pw-gate" style="position:fixed;inset:0;z-index:99999;background:#0a0a0f;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;font-family:'Cormorant Garamond',serif;">
-  <img src="assets/taylored-harmony.png" alt="Taylored Harmony" style="height:72px;width:auto;margin-bottom:0.5rem;opacity:0.9;">
-  <p style="color:#c8a84b;font-size:1.1rem;letter-spacing:0.15em;text-transform:uppercase;margin:0;">Private Preview</p>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;width:100%;max-width:320px;padding:0 1.5rem;box-sizing:border-box;">
-    <input id="pw-input" type="password" placeholder="Enter access code" autocomplete="off" style="width:100%;padding:0.75rem 1rem;background:rgba(255,255,255,0.05);border:1px solid rgba(200,168,75,0.4);border-radius:4px;color:#f5f0e8;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:0.05em;outline:none;text-align:center;box-sizing:border-box;" onkeydown="if(event.key==='Enter')checkPW()">
-    <button onclick="checkPW()" style="width:100%;padding:0.75rem;background:rgba(200,168,75,0.15);border:1px solid rgba(200,168,75,0.5);border-radius:4px;color:#c8a84b;font-family:'Cinzel',serif;font-size:0.85rem;letter-spacing:0.15em;cursor:pointer;text-transform:uppercase;">Enter</button>
-    <p id="pw-err" style="color:#c0392b;font-size:0.85rem;margin:0;min-height:1.2em;"></p>
-  </div>
-</div>
-<script>
-(function(){
-  // Check if already authenticated this session
-  if(sessionStorage.getItem('th_auth')==='1'){
-    document.getElementById('pw-gate').style.display='none';
-    return;
-  }
-  // Prevent body scroll while gate is showing
-  document.body.style.overflow='hidden';
-})();
-function checkPW(){
-  var v=document.getElementById('pw-input').value;
-  // Simple hash check - password: Goedderz
-  if(v==='Goedderz'){
-    sessionStorage.setItem('th_auth','1');
-    document.getElementById('pw-gate').style.display='none';
-    document.body.style.overflow='';
-  } else {
-    document.getElementById('pw-err').textContent='Incorrect access code.';
-    document.getElementById('pw-input').value='';
-    document.getElementById('pw-input').focus();
-  }
-}
-</script>
+
 
 <!-- NAV -->
 <nav>
