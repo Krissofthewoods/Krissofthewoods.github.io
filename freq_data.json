@@ -1,0 +1,363 @@
+{
+  "freqs": [
+    {
+      "hz": 7.83,
+      "name": "Schumann Resonance",
+      "cat": "grounding",
+      "archetype": "Earth Anchor",
+      "note": "C-1 (-43\u00a2)",
+      "brainwave": "Theta (deep meditation, trauma release)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 14.1,
+      "name": "Schumann Harmonic 2",
+      "cat": "grounding",
+      "archetype": "Vitality Root",
+      "note": "A#-1 (-25\u00a2)",
+      "brainwave": "Beta (focused attention)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 40,
+      "name": "Gamma Coherence Shield",
+      "cat": "protective",
+      "archetype": "The Sentinel",
+      "note": "E1 (-20\u00a2)",
+      "brainwave": "Gamma (peak coherence, insight)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 111,
+      "name": "Cell Regeneration",
+      "cat": "healing",
+      "archetype": "The Regenerator",
+      "note": "A2 (+47\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 136.1,
+      "name": "OM \u2014 Earth Year",
+      "cat": "healing",
+      "archetype": "The Heartbeat",
+      "note": "C#3",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 174,
+      "name": "Foundation & Safety",
+      "cat": "solfeggio",
+      "archetype": "The Foundation Stone",
+      "note": "F3 (+26\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 194.18,
+      "name": "Earth Day Frequency",
+      "cat": "grounding",
+      "archetype": "The Circadian Keeper",
+      "note": "G3 (+16\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 210.42,
+      "name": "Synodic Moon",
+      "cat": "grounding",
+      "archetype": "The Tide Turner",
+      "note": "A3 (-45\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 256,
+      "name": "Middle C \u2014 Natural Tone",
+      "cat": "healing",
+      "archetype": "The Ground Note",
+      "note": "C4 (-6\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 285,
+      "name": "Tissue Repair / Field Repair",
+      "cat": "solfeggio",
+      "archetype": "The Restorer",
+      "note": "D4 (-20\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "foundation"
+    },
+    {
+      "hz": 321,
+      "name": "Immune Activation",
+      "cat": "healing",
+      "archetype": "The Defender",
+      "note": "E4 (-14\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "mid"
+    },
+    {
+      "hz": 333,
+      "name": "Heart-Mind Bridge",
+      "cat": "consciousness",
+      "archetype": "The Bridge Builder",
+      "note": "E4 (+49\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "mid"
+    },
+    {
+      "hz": 360,
+      "name": "Heart Field Coherence",
+      "cat": "healing",
+      "archetype": "The Heart Keeper",
+      "note": "F#4 (-16\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "mid"
+    },
+    {
+      "hz": 396,
+      "name": "Liberation from Fear",
+      "cat": "solfeggio",
+      "archetype": "The Liberator",
+      "note": "G4 (+49\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "mid"
+    },
+    {
+      "hz": 417,
+      "name": "Cellular Clearing",
+      "cat": "solfeggio",
+      "archetype": "The Cleanser",
+      "note": "G#4 (+39\u00a2)",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "mid"
+    },
+    {
+      "hz": 432,
+      "name": "Universal Tuning",
+      "cat": "solfeggio",
+      "archetype": "The Anchor",
+      "note": "A4",
+      "brainwave": "Audible tone (direct nervous system input)",
+      "layer": "mid"
+    },
+    {
+      "hz": 528,
+      "name": "DNA Repair & Transformation",
+      "cat": "solfeggio",
+      "archetype": "The Transformer",
+      "note": "C5 (+47\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "mid"
+    },
+    {
+      "hz": 639,
+      "name": "Harmonising Relationships",
+      "cat": "solfeggio",
+      "archetype": "The Connector",
+      "note": "E5 (-22\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "binaural"
+    },
+    {
+      "hz": 741,
+      "name": "Cellular Detox & Clarity",
+      "cat": "solfeggio",
+      "archetype": "The Clarifier",
+      "note": "F#5 (+34\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "binaural"
+    },
+    {
+      "hz": 852,
+      "name": "Pineal & Nervous System",
+      "cat": "solfeggio",
+      "archetype": "The Seer",
+      "note": "A5 (-24\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "binaural"
+    },
+    {
+      "hz": 888,
+      "name": "Infinite Abundance",
+      "cat": "lfsx",
+      "archetype": "The Infinite Loop",
+      "note": "A5 (+47\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "binaural"
+    },
+    {
+      "hz": 963,
+      "name": "Crown & Divine Connection",
+      "cat": "solfeggio",
+      "archetype": "The Crown",
+      "note": "B5 (-12\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "binaural"
+    },
+    {
+      "hz": 999,
+      "name": "Completion & Transcendence",
+      "cat": "lfsx",
+      "archetype": "The Completer",
+      "note": "C6 (-49\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "binaural"
+    },
+    {
+      "hz": 1074,
+      "name": "Mitochondrial Activation",
+      "cat": "healing",
+      "archetype": "The Energiser",
+      "note": "C#6 (-23\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "crystalline"
+    },
+    {
+      "hz": 1111,
+      "name": "Alignment Gateway",
+      "cat": "lfsx",
+      "archetype": "The Gateway",
+      "note": "C#6 (+35\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "crystalline"
+    },
+    {
+      "hz": 1331,
+      "name": "Crystalline Activation",
+      "cat": "lfsx",
+      "archetype": "The Crystal",
+      "note": "E6 (+48\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "crystalline"
+    },
+    {
+      "hz": 1500,
+      "name": "Celestial Bridge",
+      "cat": "lfsx",
+      "archetype": "The Bridge",
+      "note": "G6 (-45\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "crystalline"
+    },
+    {
+      "hz": 1777,
+      "name": "Divine Architecture",
+      "cat": "lfsx",
+      "archetype": "The Architect",
+      "note": "A6 (+48\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "crystalline"
+    },
+    {
+      "hz": 9999,
+      "name": "Harmonic Completion Seal",
+      "cat": "lfsx",
+      "archetype": "The Seal",
+      "note": "D#9 (+39\u00a2)",
+      "brainwave": "High harmonic (crystalline, structural)",
+      "layer": "seal"
+    }
+  ],
+  "body_regions": {
+    "head": {
+      "label": "Head & Mind",
+      "desc": "Cognitive clarity, neural coherence, pineal activation",
+      "freqs": [
+        40,
+        852,
+        963,
+        1111,
+        741
+      ],
+      "guidance": "These frequencies support neural coherence and cognitive clarity. Best used for focus, meditation, or mental pattern interruption."
+    },
+    "throat": {
+      "label": "Throat & Expression",
+      "desc": "Communication, truth, thyroid, vocal resonance",
+      "freqs": [
+        741,
+        639,
+        333,
+        417,
+        256
+      ],
+      "guidance": "Associated with expression, truth-telling, and clearing what has been unsaid. Useful for communication blocks and thyroid support."
+    },
+    "chest": {
+      "label": "Chest & Heart",
+      "desc": "Heart coherence, grief, connection, lungs",
+      "freqs": [
+        360,
+        639,
+        528,
+        136.1,
+        333
+      ],
+      "guidance": "Heart-centred frequencies for grief processing, relationship coherence, and cardiovascular regulation."
+    },
+    "solar": {
+      "label": "Solar Plexus",
+      "desc": "Personal power, identity, digestion, nervous system",
+      "freqs": [
+        528,
+        417,
+        321,
+        396,
+        432
+      ],
+      "guidance": "Frequencies for identity, personal agency, and digestive system support. Useful when feeling powerless or stuck."
+    },
+    "abdomen": {
+      "label": "Abdomen & Gut",
+      "desc": "Gut-brain axis, ancestral patterns, reproductive system",
+      "freqs": [
+        285,
+        396,
+        174,
+        210.42,
+        194.18
+      ],
+      "guidance": "The gut holds inherited patterns. These frequencies support the gut-brain axis and ancestral pattern interruption."
+    },
+    "spine": {
+      "label": "Spine & Lower Back",
+      "desc": "Structural support, nervous system highway, sacral",
+      "freqs": [
+        174,
+        136.1,
+        7.83,
+        194.18,
+        256
+      ],
+      "guidance": "Foundational frequencies for structural integrity and nervous system regulation along the spinal column."
+    },
+    "arms": {
+      "label": "Arms & Hands",
+      "desc": "Action, giving, receiving, lymphatic flow",
+      "freqs": [
+        321,
+        639,
+        528,
+        285,
+        432
+      ],
+      "guidance": "Frequencies associated with action, giving and receiving, and lymphatic circulation."
+    },
+    "legs": {
+      "label": "Legs & Hips",
+      "desc": "Grounding, stability, ancestral foundation, movement",
+      "freqs": [
+        7.83,
+        14.1,
+        174,
+        194.18,
+        396
+      ],
+      "guidance": "Deep grounding frequencies. The legs carry inherited weight. These support physical grounding and ancestral release."
+    }
+  }
+}

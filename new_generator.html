@@ -1,0 +1,768 @@
+<!-- ============================================================
+     TAYLORED HARMONY — BODY-LED FREQUENCY BUILDER
+     Replaces the existing Symbol Generator section
+     ============================================================ -->
+
+<style>
+/* ── Body Map ─────────────────────────────────────────────── */
+.body-map-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.body-map-svg-wrap {
+  position: relative;
+  width: 220px;
+  flex-shrink: 0;
+}
+.body-map-svg-wrap svg {
+  width: 100%;
+  height: auto;
+}
+.body-region {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.body-region:hover { opacity: 0.75; }
+.body-region.active { filter: drop-shadow(0 0 6px #d4aa50); }
+
+.body-freq-panel {
+  background: rgba(212,170,80,0.05);
+  border: 1px solid rgba(212,170,80,0.2);
+  border-radius: 8px;
+  padding: 1.4rem 1.6rem;
+  min-height: 200px;
+  width: 100%;
+  max-width: 480px;
+}
+.body-freq-panel h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin: 0 0 0.3rem;
+}
+.body-freq-panel .region-desc {
+  font-size: 0.8rem;
+  color: var(--ivory-dim);
+  font-style: italic;
+  margin: 0 0 0.8rem;
+  line-height: 1.6;
+}
+.body-freq-panel .region-guidance {
+  font-size: 0.78rem;
+  color: rgba(248,244,238,0.5);
+  line-height: 1.6;
+  margin: 0 0 1rem;
+  padding: 0.6rem 0.8rem;
+  border-left: 2px solid rgba(212,170,80,0.3);
+}
+.body-freq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.body-freq-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(212,170,80,0.1);
+  border-radius: 4px;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.body-freq-item:hover { border-color: rgba(212,170,80,0.4); background: rgba(212,170,80,0.07); }
+.body-freq-item.selected { border-color: var(--gold); background: rgba(212,170,80,0.12); }
+.body-freq-item .bfi-left { display: flex; flex-direction: column; gap: 0.15rem; }
+.body-freq-item .bfi-hz { font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--gold); }
+.body-freq-item .bfi-name { font-size: 0.72rem; color: var(--ivory-dim); }
+.body-freq-item .bfi-note { font-size: 0.68rem; color: rgba(212,170,80,0.6); font-style: italic; }
+.body-freq-item .bfi-add { font-size: 0.65rem; color: var(--gold); border: 1px solid rgba(212,170,80,0.4); padding: 0.2rem 0.6rem; border-radius: 3px; white-space: nowrap; }
+
+/* ── Intention Selector ───────────────────────────────────── */
+.intention-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+.intention-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--ivory-dim);
+  border: 1px solid rgba(212,170,80,0.25);
+  background: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.intention-btn:hover { border-color: rgba(212,170,80,0.6); color: var(--ivory); }
+.intention-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(212,170,80,0.08); }
+
+/* ── Frequency Tiles (enhanced) ───────────────────────────── */
+.gsd-freq-info-panel {
+  background: rgba(212,170,80,0.05);
+  border: 1px solid rgba(212,170,80,0.2);
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  display: none;
+  animation: fadeUp 0.3s ease forwards;
+}
+.gsd-freq-info-panel.visible { display: block; }
+.gfi-header { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 0.6rem; }
+.gfi-hz { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); }
+.gfi-note { font-size: 0.75rem; color: rgba(212,170,80,0.7); font-style: italic; }
+.gfi-name { font-size: 0.8rem; color: var(--ivory); margin-bottom: 0.4rem; }
+.gfi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 1rem; margin-top: 0.5rem; }
+.gfi-field { font-size: 0.72rem; color: var(--ivory-dim); line-height: 1.5; }
+.gfi-field strong { color: rgba(212,170,80,0.8); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.1rem; }
+.gfi-guidance { font-size: 0.75rem; color: rgba(248,244,238,0.5); font-style: italic; margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid rgba(212,170,80,0.1); }
+
+/* ── Audio Player ─────────────────────────────────────────── */
+.audio-stack-panel {
+  background: rgba(212,170,80,0.04);
+  border: 1px solid rgba(212,170,80,0.15);
+  border-radius: 8px;
+  padding: 1.6rem;
+  margin-top: 1.5rem;
+}
+.audio-stack-panel h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+.audio-stack-desc {
+  font-size: 0.8rem;
+  color: var(--ivory-dim);
+  line-height: 1.7;
+  margin: 0 0 1.2rem;
+}
+.audio-layer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+.audio-layer-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.75rem;
+  color: var(--ivory-dim);
+}
+.audio-layer-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.audio-play-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--dark);
+  background: var(--gold);
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.audio-play-btn:hover { opacity: 0.85; }
+.audio-play-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.audio-stop-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  background: none;
+  border: 1px solid rgba(212,170,80,0.4);
+  padding: 0.6rem 1.2rem;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: none;
+}
+.audio-stop-btn.visible { display: inline-block; }
+.audio-download-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: rgba(212,170,80,0.6);
+  background: none;
+  border: 1px solid rgba(212,170,80,0.2);
+  padding: 0.6rem 1.2rem;
+  border-radius: 3px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+}
+.audio-download-btn:hover { border-color: rgba(212,170,80,0.5); color: var(--gold); }
+.audio-status {
+  font-size: 0.72rem;
+  color: var(--ivory-dim);
+  font-style: italic;
+  margin-top: 0.6rem;
+}
+.audio-visualiser {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 30px;
+  margin-top: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.audio-visualiser.playing { opacity: 1; }
+.audio-bar {
+  width: 4px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: audioBar 1.2s ease-in-out infinite;
+}
+
+@keyframes audioBar {
+  0%, 100% { height: 4px; opacity: 0.4; }
+  50% { height: 24px; opacity: 1; }
+}
+</style>
+
+<!-- BODY MAP + FREQUENCY BUILDER SECTION -->
+<section id="symbol-generator" style="padding:5rem 2rem;">
+  <div class="section-inner" style="max-width:860px;">
+    <div class="section-label">Build Your Stack</div>
+    <h2 class="section-title">Frequency & Geometry Builder</h2>
+    <div class="gold-rule"></div>
+    <p style="text-align:center;color:var(--ivory-dim);max-width:600px;margin:0 auto 2.5rem;font-size:0.95rem;line-height:1.8;">Start with your body. Select the area that needs attention, choose the frequencies that resonate, set your intention, and build a geometric symbol and audio stack tuned to your specific pattern.</p>
+
+    <!-- STEP 1: BODY MAP -->
+    <div style="margin-bottom:2.5rem;">
+      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1.2rem;">Step 1 — Where in your body?</div>
+      <div class="body-map-wrap" id="body-map-wrap">
+        <div class="body-map-svg-wrap">
+          <!-- Gender-neutral human silhouette with clickable regions -->
+          <svg viewBox="0 0 200 480" fill="none" xmlns="http://www.w3.org/2000/svg" id="body-svg">
+            <!-- HEAD -->
+            <g class="body-region" id="region-head" onclick="selectBodyRegion('head')" title="Head & Mind">
+              <ellipse cx="100" cy="42" rx="32" ry="38" fill="rgba(212,170,80,0.08)" stroke="rgba(212,170,80,0.35)" stroke-width="1.5"/>
+              <text x="100" y="46" text-anchor="middle" fill="rgba(212,170,80,0.7)" font-size="9" font-family="Cinzel, serif">HEAD</text>
+            </g>
+            <!-- THROAT/NECK -->
+            <g class="body-region" id="region-throat" onclick="selectBodyRegion('throat')" title="Throat & Expression">
+              <rect x="84" y="78" width="32" height="28" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
+              <text x="100" y="96" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7" font-family="Cinzel, serif">THROAT</text>
+            </g>
+            <!-- CHEST/HEART -->
+            <g class="body-region" id="region-chest" onclick="selectBodyRegion('chest')" title="Chest & Heart">
+              <rect x="62" y="104" width="76" height="72" rx="6" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
+              <text x="100" y="144" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="8" font-family="Cinzel, serif">CHEST</text>
+            </g>
+            <!-- LEFT ARM -->
+            <g class="body-region" id="region-arms" onclick="selectBodyRegion('arms')" title="Arms & Hands">
+              <rect x="24" y="108" width="34" height="110" rx="10" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <rect x="142" y="108" width="34" height="110" rx="10" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <text x="41" y="168" text-anchor="middle" fill="rgba(212,170,80,0.5)" font-size="7" font-family="Cinzel, serif" transform="rotate(-90,41,168)">ARMS</text>
+            </g>
+            <!-- SOLAR PLEXUS -->
+            <g class="body-region" id="region-solar" onclick="selectBodyRegion('solar')" title="Solar Plexus">
+              <rect x="66" y="174" width="68" height="44" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <text x="100" y="200" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7" font-family="Cinzel, serif">SOLAR PLEXUS</text>
+            </g>
+            <!-- ABDOMEN -->
+            <g class="body-region" id="region-abdomen" onclick="selectBodyRegion('abdomen')" title="Abdomen & Gut">
+              <rect x="66" y="216" width="68" height="52" rx="4" fill="rgba(212,170,80,0.06)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <text x="100" y="246" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="7.5" font-family="Cinzel, serif">ABDOMEN</text>
+            </g>
+            <!-- SPINE/LOWER BACK (shown as a subtle spine line) -->
+            <g class="body-region" id="region-spine" onclick="selectBodyRegion('spine')" title="Spine & Lower Back">
+              <rect x="88" y="266" width="24" height="40" rx="4" fill="rgba(212,170,80,0.08)" stroke="rgba(212,170,80,0.3)" stroke-width="1.5"/>
+              <text x="100" y="290" text-anchor="middle" fill="rgba(212,170,80,0.6)" font-size="6" font-family="Cinzel, serif">SPINE</text>
+            </g>
+            <!-- LEGS/HIPS -->
+            <g class="body-region" id="region-legs" onclick="selectBodyRegion('legs')" title="Legs & Hips">
+              <rect x="62" y="304" width="34" height="150" rx="12" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <rect x="104" y="304" width="34" height="150" rx="12" fill="rgba(212,170,80,0.05)" stroke="rgba(212,170,80,0.25)" stroke-width="1.5"/>
+              <text x="100" y="385" text-anchor="middle" fill="rgba(212,170,80,0.5)" font-size="8" font-family="Cinzel, serif">LEGS</text>
+            </g>
+            <!-- Tap prompt -->
+            <text x="100" y="468" text-anchor="middle" fill="rgba(212,170,80,0.35)" font-size="7.5" font-family="Cinzel, serif">tap a region</text>
+          </svg>
+        </div>
+
+        <!-- Frequency panel (shown when region selected) -->
+        <div class="body-freq-panel" id="body-freq-panel">
+          <div style="text-align:center;color:rgba(212,170,80,0.4);font-size:0.8rem;font-style:italic;padding:2rem 0;">Tap a region on the body map to see suggested frequencies.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: INTENTION -->
+    <div style="margin-bottom:2rem;">
+      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem;">Step 2 — Set your intention</div>
+      <div class="intention-bar" id="intention-bar">
+        <button class="intention-btn" onclick="setIntention('grounding')" id="int-grounding">Grounding</button>
+        <button class="intention-btn" onclick="setIntention('clarity')" id="int-clarity">Clarity</button>
+        <button class="intention-btn" onclick="setIntention('release')" id="int-release">Release</button>
+        <button class="intention-btn" onclick="setIntention('integration')" id="int-integration">Integration</button>
+        <button class="intention-btn" onclick="setIntention('nervous-system')" id="int-nervous-system">Nervous System</button>
+        <button class="intention-btn" onclick="setIntention('protection')" id="int-protection">Protection</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: FREQUENCY SELECTION (existing tiles, enhanced) -->
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem;">Step 3 — Select frequencies (up to 6)</div>
+      <!-- Frequency info panel (shown on hover/select) -->
+      <div class="gsd-freq-info-panel" id="gsd-freq-info-panel">
+        <div class="gfi-header">
+          <span class="gfi-hz" id="gfi-hz">432 Hz</span>
+          <span class="gfi-note" id="gfi-note">A4 · 432 Hz tuning</span>
+        </div>
+        <div class="gfi-name" id="gfi-name">Universal Tuning</div>
+        <div class="gfi-grid">
+          <div class="gfi-field"><strong>Archetype</strong><span id="gfi-archetype">The Anchor</span></div>
+          <div class="gfi-field"><strong>Geometry</strong><span id="gfi-shape">Circle</span></div>
+          <div class="gfi-field"><strong>Brainwave</strong><span id="gfi-brainwave">Alpha</span></div>
+          <div class="gfi-field"><strong>Layer</strong><span id="gfi-layer">Foundation</span></div>
+        </div>
+        <div class="gfi-guidance" id="gfi-guidance">The universal reference tone. Use as an anchor frequency in any stack.</div>
+      </div>
+
+      <!-- Existing frequency grid (kept, will be enhanced by JS) -->
+      <div class="gsd-freq-grid" id="gsd-freq-grid"></div>
+    </div>
+
+    <!-- STEP 4: SYMBOL CANVAS (existing) -->
+    <div style="margin-bottom:1.5rem;">
+      <div style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:1rem;">Step 4 — Generate your symbol</div>
+      <!-- Base template selector -->
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:1rem;" id="gsd-template-wrap">
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="flower" checked style="accent-color:var(--gold);"> Flower of Life</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="seed"> Seed of Life</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="phi"> Phi Spiral</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="torus"> Torus Field</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="vesica"> Vesica Piscis</label>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;color:var(--ivory-dim);cursor:pointer;"><input type="radio" name="gsd-template" value="quasicrystal"> Quasicrystal</label>
+      </div>
+      <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <button onclick="generateGSD()" style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;color:var(--dark);background:var(--gold);border:none;padding:0.7rem 1.8rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">✦ Generate Symbol</button>
+        <button onclick="clearGSD()" style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;color:var(--gold);background:none;border:1px solid rgba(212,170,80,0.4);padding:0.7rem 1.2rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">Clear</button>
+      </div>
+      <div id="gsd-output" style="display:none;">
+        <canvas id="gsd-canvas" width="500" height="500" style="display:block;max-width:100%;margin:0 auto;border-radius:8px;background:#0a0a0a;"></canvas>
+        <div id="gsd-output-meta" style="text-align:center;font-size:0.75rem;color:var(--ivory-dim);margin-top:0.8rem;line-height:1.8;"></div>
+        <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;margin-top:0.8rem;">
+          <button onclick="downloadGSD()" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.12em;color:var(--gold);background:none;border:1px solid rgba(212,170,80,0.4);padding:0.5rem 1.1rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">Download Symbol</button>
+          <button id="gsd-reading-btn" onclick="requestGSDReading()" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.12em;color:var(--gold);background:none;border:1px solid rgba(212,170,80,0.4);padding:0.5rem 1.1rem;border-radius:3px;cursor:pointer;text-transform:uppercase;">✦ Geometry Analysis</button>
+        </div>
+      </div>
+      <div id="gsd-reading-box" class="gsd-reading-box" style="display:none;">
+        <div id="gsd-loading-state" style="text-align:center;padding:2rem 0;">
+          <svg style="width:60px;height:60px;margin:0 auto 1.2rem;display:block;animation:rotateSlow 4s linear infinite;" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="46" stroke="#d4aa50" stroke-width="0.8" opacity="0.4"/>
+            <polygon points="50,8 90,72 10,72" stroke="#d4aa50" stroke-width="1" fill="none" opacity="0.7"/>
+            <polygon points="50,92 10,28 90,28" stroke="#9b6fd4" stroke-width="1" fill="none" opacity="0.6"/>
+            <circle cx="50" cy="50" r="5" fill="#d4aa50" opacity="0.8"/>
+          </svg>
+          <div style="font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:0.6rem;">Generating your reading...</div>
+          <p style="color:var(--ivory-dim);font-size:0.8rem;font-style:italic;margin:0 0 1.2rem;">This takes 20–40 seconds. Mapping your selected frequencies.</p>
+          <div style="width:200px;height:2px;background:rgba(212,170,80,0.15);border-radius:2px;margin:0 auto;overflow:hidden;">
+            <div id="gsd-progress-bar" style="height:100%;width:0%;background:var(--gold);border-radius:2px;transition:width 0.5s ease;"></div>
+          </div>
+          <div style="display:flex;justify-content:center;gap:6px;margin-top:1rem;">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0s;display:inline-block;"></span>
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.2s;display:inline-block;"></span>
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:0.4;animation:rpms-dot 1.4s ease-in-out infinite;animation-delay:0.4s;display:inline-block;"></span>
+          </div>
+        </div>
+        <div id="gsd-result-state" style="display:none;">
+          <div class="gsd-reading-header">Resonance Reading</div>
+          <div id="gsd-reading-text" class="gsd-reading-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: AUDIO STACK -->
+    <div class="audio-stack-panel" id="audio-stack-panel">
+      <h4>Step 5 — Your Audio Stack</h4>
+      <p class="audio-stack-desc">Your selected frequencies are layered into an entrainment arc following the LFSX structure: foundation tones anchor the field, mid-tier frequencies introduce the pattern, binaural tones create spatial depth, and high harmonics seal the structure. Select frequencies above to build your stack.</p>
+      <div class="audio-layer-list" id="audio-layer-list">
+        <div style="font-size:0.75rem;color:rgba(212,170,80,0.4);font-style:italic;">No frequencies selected yet.</div>
+      </div>
+      <div class="audio-controls">
+        <button class="audio-play-btn" id="audio-play-btn" onclick="playAudioStack()" disabled>▶ Play Stack</button>
+        <button class="audio-stop-btn" id="audio-stop-btn" onclick="stopAudioStack()">■ Stop</button>
+        <a class="audio-download-btn" id="audio-download-btn" href="https://buy.stripe.com/PLACEHOLDER" target="_blank">↓ Download ($3.99)</a>
+      </div>
+      <div class="audio-visualiser" id="audio-visualiser">
+        <!-- bars generated by JS -->
+      </div>
+      <div class="audio-status" id="audio-status"></div>
+      <p style="font-size:0.7rem;color:rgba(212,170,80,0.4);margin-top:1rem;font-style:italic;">Headphones recommended for binaural effects. For personal use only. This is not a medical device.</p>
+    </div>
+
+    <p style="text-align:center;color:rgba(212,170,80,0.4);font-size:0.72rem;font-style:italic;margin-top:1.5rem;">These are personal tools and a personal synthesis. I am not a doctor, therapist, or scientist. Results are individual. Consult a licensed professional for health concerns.</p>
+  </div>
+</section>
+
+<script>
+// ── FREQUENCY DATA WITH NOTE NAMES ────────────────────────────────────────────
+const GSD_FREQS = [
+  { hz:7.83,  name:'Schumann Resonance',          cat:'grounding',     color:'#556B2F', shape:'circle',   sides:0, desc:'Earth heartbeat, universal anchor',         note:'C-1',    archetype:'Earth Anchor',          brainwave:'Theta (deep meditation)',        layer:'foundation', guidance:'The Earth\'s own pulse. Use as the deepest anchor in any grounding stack.' },
+  { hz:14.1,  name:'Schumann Harmonic 2',          cat:'grounding',     color:'#6B8E23', shape:'circle',   sides:0, desc:'Earth field, physical vitality',            note:'A#-1',   archetype:'Vitality Root',         brainwave:'Alpha (relaxed awareness)',      layer:'foundation', guidance:'Second harmonic of the Schumann field. Supports physical vitality and wakefulness.' },
+  { hz:40,    name:'Gamma Coherence Shield',        cat:'protective',    color:'#E0E0FF', shape:'star',     sides:8, desc:'Neural coherence, EMF protection',          note:'E1',     archetype:'The Sentinel',          brainwave:'Gamma (peak coherence)',         layer:'foundation', guidance:'40 Hz gamma is associated with neural binding and coherence. Best for focus and protection.' },
+  { hz:111,   name:'Cell Regeneration',             cat:'healing',       color:'#FF69B4', shape:'circle',   sides:0, desc:'Beta-endorphin, deep healing',              note:'A2',     archetype:'The Regenerator',       brainwave:'Alpha (relaxed awareness)',      layer:'foundation', guidance:'Associated with beta-endorphin release. Use for deep rest and cellular recovery.' },
+  { hz:136.1, name:'OM — Earth Year',               cat:'healing',       color:'#8FBC8F', shape:'circle',   sides:0, desc:'Heart resonance, grounding',                note:'C#3',    archetype:'The Heartbeat',         brainwave:'Alpha (relaxed awareness)',      layer:'foundation', guidance:'The frequency of Earth\'s year-long orbit. Deeply grounding and heart-centred.' },
+  { hz:174,   name:'Foundation & Safety',           cat:'solfeggio',     color:'#8B4513', shape:'triangle', sides:3, desc:'Root safety, pain reduction',               note:'F3',     archetype:'The Foundation Stone',  brainwave:'Audible tone',                   layer:'foundation', guidance:'The lowest solfeggio frequency. Anchors the root and reduces physical tension.' },
+  { hz:194.18,name:'Earth Day Frequency',           cat:'grounding',     color:'#8B7355', shape:'circle',   sides:0, desc:'Circadian sync, sleep repair',              note:'G3',     archetype:'The Circadian Keeper',  brainwave:'Audible tone',                   layer:'foundation', guidance:'Tuned to Earth\'s 24-hour rotation. Supports circadian rhythm and sleep architecture.' },
+  { hz:210.42,name:'Synodic Moon',                  cat:'grounding',     color:'#C0C0C0', shape:'circle',   sides:0, desc:'Emotional grounding, hormonal',             note:'A3',     archetype:'The Tide Turner',       brainwave:'Audible tone',                   layer:'foundation', guidance:'Tuned to the lunar cycle. Supports hormonal balance and emotional regulation.' },
+  { hz:256,   name:'Middle C — Natural Tone',       cat:'healing',       color:'#B8860B', shape:'circle',   sides:0, desc:'Pure grounding tone, 432 Hz C',             note:'C4',     archetype:'The Ground Note',       brainwave:'Audible tone',                   layer:'foundation', guidance:'The natural C in 432 Hz tuning. A clean, neutral grounding reference.' },
+  { hz:285,   name:'Tissue Repair',                 cat:'solfeggio',     color:'#228B22', shape:'triangle', sides:3, desc:'Cellular memory, organ repair',             note:'D4',     archetype:'The Restorer',          brainwave:'Audible tone',                   layer:'foundation', guidance:'Associated with cellular memory and tissue restoration. Use for physical recovery.' },
+  { hz:321,   name:'Immune Activation',             cat:'healing',       color:'#90EE90', shape:'pentagon', sides:5, desc:'Thymus, lymphatic support',                 note:'E4',     archetype:'The Defender',          brainwave:'Audible tone',                   layer:'mid',        guidance:'Resonates with the thymus gland. Use for immune support and lymphatic flow.' },
+  { hz:333,   name:'Heart-Mind Bridge',             cat:'consciousness', color:'#FF7F50', shape:'pentagon', sides:5, desc:'Compassion, heart-mind coherence',          note:'E4',     archetype:'The Bridge Builder',    brainwave:'Audible tone',                   layer:'mid',        guidance:'Bridges heart and mind coherence. Use when the head and heart are in conflict.' },
+  { hz:360,   name:'Heart Field Coherence',         cat:'healing',       color:'#FF1493', shape:'circle',   sides:0, desc:'Cardiovascular, grief',                    note:'F#4',    archetype:'The Heart Keeper',      brainwave:'Audible tone',                   layer:'mid',        guidance:'Directly associated with heart field coherence. Use for grief, loss, and cardiovascular support.' },
+  { hz:396,   name:'Liberation from Fear',          cat:'solfeggio',     color:'#DC143C', shape:'triangle', sides:3, desc:'Fear & guilt release, grounding',           note:'G4',     archetype:'The Liberator',         brainwave:'Audible tone',                   layer:'mid',        guidance:'Solfeggio frequency for releasing fear and guilt patterns held in the body.' },
+  { hz:417,   name:'Cellular Clearing',             cat:'solfeggio',     color:'#FF8C00', shape:'square',   sides:4, desc:'Negative pattern clearing',                note:'G#4',    archetype:'The Cleanser',          brainwave:'Audible tone',                   layer:'mid',        guidance:'Facilitates the clearing of old cellular patterns. Best used before building new ones.' },
+  { hz:432,   name:'Universal Tuning',              cat:'solfeggio',     color:'#DAA520', shape:'circle',   sides:0, desc:'Harmony, coherence, foundation',           note:'A4',     archetype:'The Anchor',            brainwave:'Audible tone',                   layer:'mid',        guidance:'The base reference tone. Harmonically coherent with all other frequencies in this system.' },
+  { hz:528,   name:'DNA Repair & Transformation',   cat:'solfeggio',     color:'#00CED1', shape:'hexagon',  sides:6, desc:'The Miracle Tone, transformation',         note:'C5',     archetype:'The Transformer',       brainwave:'Audible tone',                   layer:'mid',        guidance:'The most researched solfeggio frequency. Associated with transformation and structural coherence.' },
+  { hz:639,   name:'Harmonising Relationships',     cat:'solfeggio',     color:'#32CD32', shape:'hexagon',  sides:6, desc:'Heart coherence, connection',              note:'E5',     archetype:'The Connector',         brainwave:'High harmonic',                  layer:'binaural',   guidance:'Resonates with interpersonal connection and heart coherence. Use for relationship patterns.' },
+  { hz:741,   name:'Cellular Detox & Clarity',      cat:'solfeggio',     color:'#4169E1', shape:'star',     sides:6, desc:'EMF clearing, intuition',                  note:'F#5',    archetype:'The Clarifier',         brainwave:'High harmonic',                  layer:'binaural',   guidance:'Associated with detoxification and mental clarity. Use for clearing cognitive fog.' },
+  { hz:852,   name:'Pineal & Nervous System',       cat:'solfeggio',     color:'#8A2BE2', shape:'star',     sides:8, desc:'Third eye, spiritual order',               note:'A5',     archetype:'The Seer',              brainwave:'High harmonic',                  layer:'binaural',   guidance:'Resonates with the pineal gland and nervous system regulation. Use for deep pattern recognition.' },
+  { hz:888,   name:'Infinite Abundance',            cat:'lfsx',          color:'#FFD700', shape:'spiral',   sides:0, desc:'Manifestation, infinite field',            note:'A5',     archetype:'The Infinite Loop',     brainwave:'High harmonic',                  layer:'binaural',   guidance:'Triple 8 — associated with completion and abundance cycles. Use for integration.' },
+  { hz:963,   name:'Crown & Divine Connection',     cat:'solfeggio',     color:'#FFFFFF', shape:'spiral',   sides:0, desc:'Oneness, crown activation',               note:'B5',     archetype:'The Crown',             brainwave:'High harmonic',                  layer:'binaural',   guidance:'The highest solfeggio frequency. Use for states of expanded awareness and integration.' },
+  { hz:999,   name:'Completion & Transcendence',    cat:'lfsx',          color:'#E6E6FA', shape:'torus',    sides:0, desc:'Higher dimensional access',               note:'C6',     archetype:'The Completer',         brainwave:'High harmonic',                  layer:'binaural',   guidance:'Triple 9 — the frequency of completion. Use at the end of a release or integration session.' },
+  { hz:1074,  name:'Mitochondrial Activation',      cat:'healing',       color:'#FFD700', shape:'hexagon',  sides:6, desc:'Cellular energy, fatigue recovery',        note:'C#6',    archetype:'The Energiser',         brainwave:'High harmonic',                  layer:'crystalline',guidance:'Associated with mitochondrial function and cellular energy production. Use for fatigue.' },
+  { hz:1111,  name:'Alignment Gateway',             cat:'lfsx',          color:'#FFFACD', shape:'star',     sides:11,desc:'Synchronicity, master number',             note:'C#6',    archetype:'The Gateway',           brainwave:'High harmonic',                  layer:'crystalline',guidance:'Master number frequency. Associated with synchronicity and alignment. Use sparingly.' },
+  { hz:1331,  name:'Crystalline Activation',        cat:'lfsx',          color:'#E0FFFF', shape:'star',     sides:12,desc:'Crystal grid, high coherence',             note:'E6',     archetype:'The Crystal',           brainwave:'High harmonic',                  layer:'crystalline',guidance:'High-coherence crystalline frequency. Use as a structural seal in complex stacks.' },
+  { hz:1500,  name:'Celestial Bridge',              cat:'lfsx',          color:'#F0F8FF', shape:'spiral',   sides:0, desc:'High harmonic bridge',                     note:'G6',     archetype:'The Bridge',            brainwave:'High harmonic',                  layer:'crystalline',guidance:'A bridging frequency between audible and ultrasonic ranges. Use as a transitional layer.' },
+  { hz:1777,  name:'Divine Architecture',           cat:'lfsx',          color:'#FFEFD5', shape:'star',     sides:7, desc:'Sacred structure, highest field',          note:'A6',     archetype:'The Architect',         brainwave:'High harmonic',                  layer:'crystalline',guidance:'The highest architectural frequency in the codex. Use only as a final crystalline layer.' },
+  { hz:9999,  name:'Harmonic Completion Seal',      cat:'lfsx',          color:'#FFFFFF', shape:'torus',    sides:0, desc:'Field completion, cosmic seal',            note:'D#9',    archetype:'The Seal',              brainwave:'High harmonic',                  layer:'seal',       guidance:'The completion seal. Closes the field. Always place last if used.' },
+];
+
+// ── INTENTION COMPATIBILITY MAP ───────────────────────────────────────────────
+const INTENTION_FREQS = {
+  grounding:      [7.83, 14.1, 136.1, 174, 194.18, 210.42, 256, 396, 432],
+  clarity:        [40, 741, 852, 333, 417, 528, 963],
+  release:        [396, 417, 528, 174, 285, 741, 999],
+  integration:    [432, 528, 639, 888, 963, 333, 360],
+  'nervous-system':[7.83, 40, 111, 136.1, 256, 432, 852],
+  protection:     [40, 285, 741, 174, 432, 963]
+};
+
+// ── BODY REGION DATA ──────────────────────────────────────────────────────────
+const BODY_REGIONS = {
+  head:     { label:'Head & Mind',         desc:'Cognitive clarity, neural coherence, pineal activation',          freqs:[40, 852, 963, 1111, 741],          guidance:'These frequencies support neural coherence and cognitive clarity. Best used for focus, meditation, or mental pattern interruption.' },
+  throat:   { label:'Throat & Expression', desc:'Communication, truth, thyroid, vocal resonance',                  freqs:[741, 639, 333, 417, 256],          guidance:'Associated with expression, truth-telling, and clearing what has been unsaid. Useful for communication blocks and thyroid support.' },
+  chest:    { label:'Chest & Heart',       desc:'Heart coherence, grief, connection, lungs',                       freqs:[360, 639, 528, 136.1, 333],        guidance:'Heart-centred frequencies for grief processing, relationship coherence, and cardiovascular regulation.' },
+  solar:    { label:'Solar Plexus',        desc:'Personal power, identity, digestion, nervous system',             freqs:[528, 417, 321, 396, 432],          guidance:'Frequencies for identity, personal agency, and digestive system support. Useful when feeling powerless or stuck.' },
+  abdomen:  { label:'Abdomen & Gut',       desc:'Gut-brain axis, ancestral patterns, reproductive system',         freqs:[285, 396, 174, 210.42, 194.18],    guidance:'The gut holds inherited patterns. These frequencies support the gut-brain axis and ancestral pattern interruption.' },
+  spine:    { label:'Spine & Lower Back',  desc:'Structural support, nervous system highway, sacral',              freqs:[174, 136.1, 7.83, 194.18, 256],    guidance:'Foundational frequencies for structural integrity and nervous system regulation along the spinal column.' },
+  arms:     { label:'Arms & Hands',        desc:'Action, giving, receiving, lymphatic flow',                       freqs:[321, 639, 528, 285, 432],          guidance:'Frequencies associated with action, giving and receiving, and lymphatic circulation.' },
+  legs:     { label:'Legs & Hips',         desc:'Grounding, stability, ancestral foundation, movement',            freqs:[7.83, 14.1, 174, 194.18, 396],     guidance:'Deep grounding frequencies. The legs carry inherited weight. These support physical grounding and ancestral release.' }
+};
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let gsdSelected = new Set();
+let currentIntention = null;
+let currentRegion = null;
+let audioCtx = null;
+let activeNodes = [];
+let isPlaying = false;
+
+// ── BODY MAP ──────────────────────────────────────────────────────────────────
+function selectBodyRegion(regionId) {
+  currentRegion = regionId;
+  // Update SVG active state
+  document.querySelectorAll('.body-region').forEach(el => el.classList.remove('active'));
+  document.getElementById('region-' + regionId).classList.add('active');
+
+  const region = BODY_REGIONS[regionId];
+  const panel = document.getElementById('body-freq-panel');
+
+  let freqItems = '';
+  region.freqs.forEach(hz => {
+    const f = GSD_FREQS.find(x => Math.abs(x.hz - hz) < 0.5);
+    if (!f) return;
+    const sel = gsdSelected.has(f.hz) ? ' selected' : '';
+    freqItems += `
+      <div class="body-freq-item${sel}" id="bfi-${f.hz}" onclick="toggleFreqFromBody(${f.hz})">
+        <div class="bfi-left">
+          <span class="bfi-hz">${f.hz} Hz</span>
+          <span class="bfi-name">${f.name}</span>
+          <span class="bfi-note">${f.note} · ${f.brainwave.split(' ')[0]}</span>
+        </div>
+        <span class="bfi-add">${gsdSelected.has(f.hz) ? '✓ Added' : '+ Add'}</span>
+      </div>`;
+  });
+
+  panel.innerHTML = `
+    <h4>${region.label}</h4>
+    <div class="region-desc">${region.desc}</div>
+    <div class="region-guidance">${region.guidance}</div>
+    <div class="body-freq-list">${freqItems}</div>`;
+}
+
+function toggleFreqFromBody(hz) {
+  const f = GSD_FREQS.find(x => Math.abs(x.hz - hz) < 0.5);
+  if (!f) return;
+  if (gsdSelected.has(hz)) {
+    gsdSelected.delete(hz);
+  } else {
+    if (gsdSelected.size >= 6) { alert('Maximum 6 frequencies. Remove one first.'); return; }
+    gsdSelected.add(hz);
+  }
+  // Refresh body panel and freq grid
+  if (currentRegion) selectBodyRegion(currentRegion);
+  renderFreqGrid();
+  updateAudioLayerList();
+}
+
+// ── INTENTION ─────────────────────────────────────────────────────────────────
+function setIntention(intent) {
+  currentIntention = currentIntention === intent ? null : intent;
+  document.querySelectorAll('.intention-btn').forEach(b => b.classList.remove('active'));
+  if (currentIntention) document.getElementById('int-' + intent).classList.add('active');
+  renderFreqGrid();
+}
+
+// ── FREQUENCY GRID ────────────────────────────────────────────────────────────
+function renderFreqGrid() {
+  const grid = document.getElementById('gsd-freq-grid');
+  const compatible = currentIntention ? new Set(INTENTION_FREQS[currentIntention]) : null;
+
+  let html = '';
+  const cats = [...new Set(GSD_FREQS.map(f => f.cat))];
+  cats.forEach(cat => {
+    const catFreqs = GSD_FREQS.filter(f => f.cat === cat);
+    const catLabel = cat.charAt(0).toUpperCase() + cat.slice(1);
+    html += `<div class="gsd-cat-label">${catLabel}</div><div class="gsd-cat-row">`;
+    catFreqs.forEach(f => {
+      const sel = gsdSelected.has(f.hz) ? ' selected' : '';
+      const dim = compatible && !compatible.has(f.hz) ? ' style="opacity:0.35"' : '';
+      html += `<div class="gsd-freq-tile${sel}"${dim} onclick="toggleFreq(${f.hz})" onmouseenter="showFreqInfo(${f.hz})" style="border-color:${f.color}40">
+        <div class="gsd-freq-hz" style="color:${f.color}">${f.hz}</div>
+        <div class="gsd-freq-name">${f.name}</div>
+        <div class="gsd-freq-note" style="font-size:0.6rem;color:rgba(212,170,80,0.5);margin-top:0.15rem;">${f.note}</div>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  grid.innerHTML = html;
+}
+
+function toggleFreq(hz) {
+  if (gsdSelected.has(hz)) {
+    gsdSelected.delete(hz);
+  } else {
+    if (gsdSelected.size >= 6) { alert('Maximum 6 frequencies. Remove one first.'); return; }
+    gsdSelected.add(hz);
+  }
+  renderFreqGrid();
+  if (currentRegion) selectBodyRegion(currentRegion);
+  updateAudioLayerList();
+  showFreqInfo(hz);
+}
+
+function showFreqInfo(hz) {
+  const f = GSD_FREQS.find(x => Math.abs(x.hz - hz) < 0.5);
+  if (!f) return;
+  const panel = document.getElementById('gsd-freq-info-panel');
+  document.getElementById('gfi-hz').textContent = f.hz + ' Hz';
+  document.getElementById('gfi-note').textContent = f.note + ' · 432 Hz tuning';
+  document.getElementById('gfi-name').textContent = f.name;
+  document.getElementById('gfi-archetype').textContent = f.archetype;
+  document.getElementById('gfi-shape').textContent = f.shape.charAt(0).toUpperCase() + f.shape.slice(1);
+  document.getElementById('gfi-brainwave').textContent = f.brainwave;
+  document.getElementById('gfi-layer').textContent = f.layer.charAt(0).toUpperCase() + f.layer.slice(1);
+  document.getElementById('gfi-guidance').textContent = f.guidance;
+  panel.classList.add('visible');
+}
+
+// ── AUDIO LAYER LIST ──────────────────────────────────────────────────────────
+const LAYER_COLORS = { foundation:'#8B7355', mid:'#d4aa50', binaural:'#9b6fd4', crystalline:'#7ec8e3', seal:'#ffffff' };
+const LAYER_ORDER = ['foundation','mid','binaural','crystalline','seal'];
+
+function updateAudioLayerList() {
+  const list = document.getElementById('audio-layer-list');
+  const playBtn = document.getElementById('audio-play-btn');
+
+  if (gsdSelected.size === 0) {
+    list.innerHTML = '<div style="font-size:0.75rem;color:rgba(212,170,80,0.4);font-style:italic;">No frequencies selected yet.</div>';
+    playBtn.disabled = true;
+    return;
+  }
+
+  // Sort selected freqs by layer order then by hz
+  const selected = [...gsdSelected].map(hz => GSD_FREQS.find(f => Math.abs(f.hz - hz) < 0.5)).filter(Boolean);
+  selected.sort((a,b) => LAYER_ORDER.indexOf(a.layer) - LAYER_ORDER.indexOf(b.layer) || a.hz - b.hz);
+
+  let html = '';
+  let currentLayer = null;
+  selected.forEach(f => {
+    if (f.layer !== currentLayer) {
+      currentLayer = f.layer;
+      html += `<div style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.15em;color:${LAYER_COLORS[f.layer]};text-transform:uppercase;margin-top:0.6rem;margin-bottom:0.2rem;">${f.layer}</div>`;
+    }
+    html += `<div class="audio-layer-item">
+      <span class="audio-layer-dot" style="background:${LAYER_COLORS[f.layer]};"></span>
+      <span>${f.hz} Hz — ${f.name}</span>
+      <span style="margin-left:auto;font-size:0.65rem;color:rgba(212,170,80,0.5);">${f.note}</span>
+    </div>`;
+  });
+
+  list.innerHTML = html;
+  playBtn.disabled = false;
+}
+
+// ── AUDIO ENGINE ──────────────────────────────────────────────────────────────
+function playAudioStack() {
+  if (isPlaying) return;
+  if (gsdSelected.size === 0) return;
+
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  activeNodes = [];
+  isPlaying = true;
+
+  const selected = [...gsdSelected].map(hz => GSD_FREQS.find(f => Math.abs(f.hz - hz) < 0.5)).filter(Boolean);
+  selected.sort((a,b) => LAYER_ORDER.indexOf(a.layer) - LAYER_ORDER.indexOf(b.layer) || a.hz - b.hz);
+
+  const masterGain = audioCtx.createGain();
+  masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+  masterGain.gain.linearRampToValueAtTime(0.7, audioCtx.currentTime + 2);
+  masterGain.connect(audioCtx.destination);
+  activeNodes.push(masterGain);
+
+  let delay = 0;
+  selected.forEach((f, i) => {
+    const hz = f.hz;
+
+    // Skip sub-Hz frequencies (use as LFO modulation instead)
+    if (hz < 20) {
+      // Use as amplitude modulation (tremolo)
+      const lfoFreq = hz;
+      const lfo = audioCtx.createOscillator();
+      const lfoGain = audioCtx.createGain();
+      lfo.frequency.value = lfoFreq;
+      lfoGain.gain.value = 0.15;
+      lfo.connect(lfoGain);
+      lfoGain.connect(masterGain.gain);
+      lfo.start(audioCtx.currentTime + delay);
+      activeNodes.push(lfo, lfoGain);
+      return;
+    }
+
+    // For binaural layer: split L/R with small offset
+    const isBinaural = f.layer === 'binaural' || f.layer === 'crystalline';
+    const binauralOffset = isBinaural ? 4 : 0; // 4 Hz binaural beat
+
+    // Left channel
+    const oscL = audioCtx.createOscillator();
+    const gainL = audioCtx.createGain();
+    const panL = audioCtx.createStereoPanner();
+    oscL.type = f.layer === 'crystalline' || f.layer === 'seal' ? 'sine' : 'sine';
+    oscL.frequency.value = hz;
+    gainL.gain.setValueAtTime(0, audioCtx.currentTime + delay);
+    gainL.gain.linearRampToValueAtTime(getLayerVolume(f.layer), audioCtx.currentTime + delay + 1.5);
+    panL.pan.value = isBinaural ? -0.6 : 0;
+    oscL.connect(gainL);
+    gainL.connect(panL);
+    panL.connect(masterGain);
+    oscL.start(audioCtx.currentTime + delay);
+    activeNodes.push(oscL, gainL, panL);
+
+    // Right channel (offset for binaural)
+    if (isBinaural) {
+      const oscR = audioCtx.createOscillator();
+      const gainR = audioCtx.createGain();
+      const panR = audioCtx.createStereoPanner();
+      oscR.type = 'sine';
+      oscR.frequency.value = hz + binauralOffset;
+      gainR.gain.setValueAtTime(0, audioCtx.currentTime + delay);
+      gainR.gain.linearRampToValueAtTime(getLayerVolume(f.layer), audioCtx.currentTime + delay + 1.5);
+      panR.pan.value = 0.6;
+      oscR.connect(gainR);
+      gainR.connect(panR);
+      panR.connect(masterGain);
+      oscR.start(audioCtx.currentTime + delay);
+      activeNodes.push(oscR, gainR, panR);
+    }
+
+    delay += 2; // stagger each layer by 2 seconds
+  });
+
+  // UI
+  document.getElementById('audio-play-btn').disabled = true;
+  document.getElementById('audio-stop-btn').classList.add('visible');
+  document.getElementById('audio-status').textContent = 'Playing — layers entering one by one...';
+  startVisualiser();
+}
+
+function getLayerVolume(layer) {
+  return { foundation: 0.35, mid: 0.28, binaural: 0.22, crystalline: 0.15, seal: 0.1 }[layer] || 0.2;
+}
+
+function stopAudioStack() {
+  if (!isPlaying) return;
+  const fadeTime = 2;
+  activeNodes.forEach(node => {
+    if (node.gain) {
+      node.gain.linearRampToValueAtTime(0, audioCtx.currentTime + fadeTime);
+    }
+    if (node.stop) {
+      try { node.stop(audioCtx.currentTime + fadeTime + 0.1); } catch(e) {}
+    }
+  });
+  setTimeout(() => {
+    if (audioCtx) { audioCtx.close(); audioCtx = null; }
+    activeNodes = [];
+    isPlaying = false;
+    document.getElementById('audio-play-btn').disabled = false;
+    document.getElementById('audio-stop-btn').classList.remove('visible');
+    document.getElementById('audio-status').textContent = '';
+    stopVisualiser();
+  }, (fadeTime + 0.2) * 1000);
+}
+
+function startVisualiser() {
+  const vis = document.getElementById('audio-visualiser');
+  vis.innerHTML = '';
+  for (let i = 0; i < 20; i++) {
+    const bar = document.createElement('div');
+    bar.className = 'audio-bar';
+    bar.style.animationDelay = (i * 0.06) + 's';
+    bar.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
+    vis.appendChild(bar);
+  }
+  vis.classList.add('playing');
+}
+
+function stopVisualiser() {
+  const vis = document.getElementById('audio-visualiser');
+  vis.classList.remove('playing');
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  renderFreqGrid();
+  updateAudioLayerList();
+});
+</script>

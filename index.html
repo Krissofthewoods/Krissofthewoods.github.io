@@ -1773,6 +1773,71 @@
 .gsd-reading-text { color: var(--ivory-dim); font-size: 0.9rem; line-height: 1.9; white-space: pre-wrap; }
 @media (max-width: 600px) { .gsd-freq-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); } .gsd-template-grid { grid-template-columns: repeat(3, 1fr); } }
 
+/* ── Density Reduction ─────────────────────────────────────── */
+/* Reduce default section padding to make the page feel less dense */
+section { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+section#origin-story { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+
+/* Section skip bar */
+.section-skip-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background: rgba(3,4,10,0.95);
+  border-bottom: 1px solid rgba(212,170,80,0.12);
+  position: sticky;
+  top: 64px;
+  z-index: 100;
+}
+.section-skip-btn {
+  background: transparent;
+  border: 1px solid rgba(212,170,80,0.25);
+  color: rgba(212,170,80,0.7);
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.section-skip-btn:hover {
+  border-color: rgba(212,170,80,0.6);
+  color: var(--gold);
+  background: rgba(212,170,80,0.06);
+}
+
+/* Collapsible section wrapper */
+.section-collapse-body {
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.section-collapse-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  border-top: 1px solid rgba(212,170,80,0.15);
+  color: rgba(212,170,80,0.6);
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.6rem 0;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  transition: color 0.2s;
+}
+.section-collapse-toggle:hover { color: var(--gold); }
+
 </style>
 </head>
 <body>
@@ -1798,22 +1863,22 @@
 <div class="nav-overlay" id="nav-overlay" onclick="toggleNav()"></div>
 <div class="nav-menu" id="nav-menu">
   <div class="nav-menu-group">Begin</div>
-  <a href="#start-here" onclick="toggleNav()">Start Here</a>
-  <a href="#daily" onclick="toggleNav()">Daily Insight</a>
+  <a href="#start-here" onclick="navTo('start-here')">Start Here</a>
+  <a href="#daily" onclick="navTo('daily')">Daily Insight</a>
   <div class="nav-menu-group">Explore</div>
-  <a href="#frequency-codex" onclick="toggleNav()">Frequency Codex</a>
-  <a href="#sound-sessions" onclick="toggleNav()">Sound Sessions</a>
-  <a href="#framework" onclick="toggleNav()">The Framework</a>
-  <a href="#resonance-gating" onclick="toggleNav()">Resonance Gating Hypothesis</a>
+  <a href="#frequency-codex" onclick="navTo('frequency-codex')">Frequency Codex</a>
+  <a href="#sound-sessions" onclick="navTo('sound-sessions')">Sound Sessions</a>
+  <a href="#framework" onclick="navTo('framework')">The Framework</a>
+  <a href="#resonance-gating" onclick="navTo('resonance-gating')">Resonance Gating Hypothesis</a>
   <div class="nav-menu-group">Tools</div>
-  <a href="#rpms" onclick="toggleNav()">Root Pattern System</a>
-  <a href="#gsd" onclick="toggleNav()">Symbol Generator</a>
+  <a href="#rpms" onclick="navTo('rpms')">Root Pattern System</a>
+  <a href="#symbol-generator" onclick="navTo('symbol-generator')">Symbol Generator</a>
   <div class="nav-menu-group">Reading</div>
-  <a href="#recommended-reading" onclick="toggleNav()">Recommended Books</a>
-  <a href="#blog" onclick="toggleNav()">Blog</a>
+  <a href="#recommended-reading" onclick="navTo('recommended-reading')">Recommended Books</a>
+  <a href="#blog" onclick="navTo('blog')">Blog</a>
   <div class="nav-menu-group">The Work</div>
-  <a href="#books" onclick="toggleNav()">My Books</a>
-  <a href="#creations" onclick="toggleNav()">Other Creations</a>
+  <a href="#books" onclick="navTo('books')">My Books</a>
+  <a href="#creations" onclick="navTo('creations')">Other Creations</a>
   <div class="nav-menu-group">Theory</div>
   <a href="192-system.html" onclick="toggleNav()">The 192 System</a>
   <a href="sources.html" onclick="toggleNav()">Sources &amp; Citations</a>
@@ -1849,7 +1914,17 @@
   </div>
 </section>
 
-
+<!-- SECTION SKIP BAR -->
+<div class="section-skip-bar" id="section-skip-bar">
+  <button class="section-skip-btn" onclick="scrollTo('start-here')">Start Here</button>
+  <button class="section-skip-btn" onclick="scrollTo('daily')">Daily Insight</button>
+  <button class="section-skip-btn" onclick="scrollTo('frequency-codex')">Frequency Codex</button>
+  <button class="section-skip-btn" onclick="scrollTo('sound-sessions')">Sound Sessions</button>
+  <button class="section-skip-btn" onclick="scrollTo('rpms')">Root Patterns</button>
+  <button class="section-skip-btn" onclick="scrollTo('symbol-generator')">Symbol Builder</button>
+  <button class="section-skip-btn" onclick="scrollTo('books')">My Books</button>
+  <button class="section-skip-btn" onclick="scrollTo('blog')">Blog</button>
+</div>
 
 <div class="section-divider"></div>
 
@@ -1983,6 +2058,9 @@
         I grew up carrying something I couldn't name. A bracing. A nervous system that ran loud and never fully settled. It wasn't until I traced my family line back through generations of silence, illness, and survival strategies passed down like heirlooms that I understood: what I was carrying wasn't originally mine. It was inherited. Encoded. A frequency running in my lineage for over three hundred years before I arrived to receive it.
       </p>
 
+      <!-- Collapsible: rest of origin story -->
+      <div id="origin-more" style="overflow:hidden;max-height:0;transition:max-height 0.6s ease;">
+
       <p style="color:var(--ivory-dim);font-size:1rem;line-height:1.9;margin-bottom:1.8rem;">
         I lost a baby when I was a teenager. Then another. Then I spent years in relationships that reflected back everything the pattern knew how to find &mdash; danger dressed as safety, distortion mistaken for love. I laid on a floor once and planned how I would end my life. I stayed in that planning for months. The one thread I held onto was that I didn't want to leave the people I loved with the weight of it.
       </p>
@@ -2028,6 +2106,12 @@
           This site is not a substitute for professional mental health support. If you are in crisis, please reach out.
           <br>US: <a href="tel:988" style="color:var(--gold);text-decoration:none;">988 Suicide &amp; Crisis Lifeline</a> &mdash; call or text <strong style="color:var(--gold);">988</strong> &nbsp;|&nbsp; International: <a href="https://www.befrienders.org" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">befrienders.org</a>
         </p>
+      </div>
+
+      </div><!-- /origin-more -->
+
+      <div style="text-align:center;margin-top:1.5rem;">
+        <button id="origin-read-btn" onclick="toggleOriginStory()" style="background:transparent;border:1px solid rgba(212,170,80,0.4);color:var(--gold);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.7rem 2rem;cursor:pointer;transition:all 0.2s;">Read the Full Story &darr;</button>
       </div>
 
     </div>
@@ -2484,6 +2568,9 @@
           </div>
         </div>
       </article>
+      <!-- Hidden additional posts -->
+      <div id="blog-more-posts" style="display:none;">
+
       <article class="blog-card">
         <div class="blog-img-wrap">
           <img src="assets/blog-humming.png" alt="Humming" class="blog-img">
@@ -2663,6 +2750,13 @@
           </div>
         </div>
       </article>
+
+      </div><!-- /blog-more-posts -->
+
+      <div style="text-align:center;margin-top:1.5rem;">
+        <button id="blog-more-btn" onclick="toggleBlogPosts()" style="background:transparent;border:1px solid rgba(212,170,80,0.4);color:var(--gold);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.7rem 2rem;cursor:pointer;transition:all 0.2s;">Show More Posts &darr;</button>
+      </div>
+
     </div><!-- end blog-grid -->
   </div>
 </section>
@@ -2915,6 +3009,9 @@
       Your body already knows its shape. Geometry is how we help it remember.
     </p>
 
+    <!-- Collapsible body -->
+    <div id="geo-body" class="section-collapse-body" style="max-height:0;">
+
     <p style="color:var(--ivory-dim);font-size:0.95rem;line-height:1.95;margin-bottom:1.4rem;">
       Every living thing grows according to a blueprint &mdash; a set of instructions that exists before the physical form does. You grew two arms, two legs, a spine, a heart in exactly the right place. Not because of a lucky accident, but because your body was reading a pattern. That pattern is geometric in nature, and it is encoded in you at a level deeper than thought.
     </p>
@@ -2991,6 +3088,10 @@
       <button class="scanner-btn" style="background:transparent;color:var(--gold);border:1px solid var(--gold);" onclick="document.getElementById('rpms').scrollIntoView({behavior:'smooth'})">Map Your Root Patterns &rarr;</button>
     </div>
 
+    </div><!-- /geo-body -->
+
+    <button class="section-collapse-toggle" id="geo-toggle" onclick="toggleSection('geo-body','geo-toggle','Read More','Collapse')">Read More &darr;</button>
+
   </div>
 </section>
 
@@ -3007,6 +3108,7 @@
       The four steps above describe the basic mechanism. But to understand why some patterns release quickly while others feel intractable, we have to look closer at how the body stores meaning, where the original blueprint actually lives, and why time matters.
     </p>
 
+    <div id="theory-body" class="section-collapse-body" style="max-height:0;">
     <div class="accordion-group" style="display:flex;flex-direction:column;gap:1rem;">
       
       <!-- Thread 1: Archetype as Architecture -->
@@ -3090,7 +3192,7 @@
         </div>
       </div>
 
-    </div>
+    </div><!-- /accordion-group -->
 
     <style>
       .accordion-item.active .accordion-content {
@@ -3105,6 +3207,10 @@
         background: rgba(201,168,76,0.05) !important;
       }
     </style>
+
+    </div><!-- /theory-body -->
+
+    <button class="section-collapse-toggle" id="theory-toggle" onclick="toggleSection('theory-body','theory-toggle','Explore the Deep Architecture','Collapse')">Explore the Deep Architecture &darr;</button>
 
   </div>
 </section>
@@ -3480,7 +3586,7 @@
 <div class="section-divider"></div>
 
 <!-- THE FRAMEWORK -->
-<section id="symbol-generator" style="padding:5rem 2rem;">
+<section id="symbol-generator" style="padding:5rem 2rem;"><a id="gsd" style="display:block;position:relative;top:-80px;"></a>
   <div class="section-inner" style="max-width:860px;">
     <div class="section-label">Build Your Stack</div>
     <h2 class="section-title">Frequency & Geometry Builder</h2>
@@ -5051,7 +5157,9 @@ let cymaActiveNode = null;
 let cymaActiveBtn = null;
 
 function getCymaAudioCtx() {
-  if (!cymaAudioCtx) cymaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (!cymaAudioCtx || cymaAudioCtx.state === 'closed') {
+    cymaAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
   return cymaAudioCtx;
 }
 
@@ -5369,9 +5477,13 @@ function addCodexFreqToGSD(hz, btn) {
     // Select chip in GSD grid
     document.querySelectorAll(`.gsd-freq-chip[data-hz="${freq.hz}"]`).forEach(c => c.classList.add('selected'));
     updateGSDSelectedDisplay();
-    // Scroll to GSD section after short delay
+    // Enable play button
+    const playBtn = document.getElementById('audio-play-btn');
+    if (playBtn) playBtn.disabled = false;
+    // Scroll to symbol generator section after short delay
     setTimeout(() => {
-      document.getElementById('gsd').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const target = document.getElementById('symbol-generator') || document.getElementById('gsd');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 600);
     setTimeout(() => { btn.textContent = '✓ Added'; }, 3000);
   }
@@ -5597,7 +5709,10 @@ function toggleGSDFreq(hz) {
     gsdSelected.add(hz);
   }
   const badge = document.getElementById('gsd-count');
-  badge.textContent = gsdSelected.size + ' selected';
+  if (badge) badge.textContent = gsdSelected.size + ' selected';
+  // Enable/disable play button based on selection
+  const playBtn = document.getElementById('audio-play-btn');
+  if (playBtn) playBtn.disabled = (gsdSelected.size === 0);
   // re-render current filter
   const activeBtn = document.querySelector('.gsd-intent-btn.active');
   renderGSDFreqs(activeBtn ? activeBtn.dataset.intent : 'all');
@@ -7213,6 +7328,86 @@ function toggleNav() {
   menu.classList.toggle('open');
   overlay.classList.toggle('open');
   document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+
+// Blog posts show/hide
+function toggleBlogPosts() {
+  const el = document.getElementById('blog-more-posts');
+  const btn = document.getElementById('blog-more-btn');
+  if (!el) return;
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    if (btn) btn.innerHTML = 'Show Less &uarr;';
+  } else {
+    el.style.display = 'none';
+    if (btn) btn.innerHTML = 'Show More Posts &darr;';
+  }
+}
+
+// Direct scroll to section (no menu to close)
+function scrollTo(sectionId) {
+  const el = document.getElementById(sectionId);
+  if (!el) return;
+  const navHeight = 64;
+  const skipBar = document.getElementById('section-skip-bar');
+  const skipBarHeight = skipBar ? skipBar.offsetHeight : 0;
+  const offset = navHeight + skipBarHeight + 8;
+  const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+}
+
+// Generic section collapse toggle
+function toggleSection(bodyId, btnId, openLabel, closeLabel) {
+  const el = document.getElementById(bodyId);
+  const btn = document.getElementById(btnId);
+  if (!el) return;
+  const isOpen = el.style.maxHeight && el.style.maxHeight !== '0px' && el.style.maxHeight !== '0';
+  if (isOpen) {
+    el.style.maxHeight = '0';
+    if (btn) btn.innerHTML = openLabel + ' &darr;';
+  } else {
+    el.style.maxHeight = el.scrollHeight + 'px';
+    if (btn) btn.innerHTML = closeLabel + ' &uarr;';
+  }
+}
+
+// Origin story expand/collapse
+function toggleOriginStory() {
+  const el = document.getElementById('origin-more');
+  const btn = document.getElementById('origin-read-btn');
+  if (!el) return;
+  if (el.style.maxHeight === '0px' || el.style.maxHeight === '0') {
+    el.style.maxHeight = el.scrollHeight + 'px';
+    btn.textContent = 'Collapse \u2191';
+  } else {
+    el.style.maxHeight = '0';
+    btn.textContent = 'Read the Full Story \u2193';
+  }
+}
+
+// Navigate to section: close menu first, then scroll after transition completes
+function navTo(sectionId) {
+  // Close the nav menu
+  const btn = document.getElementById('nav-hamburger');
+  const menu = document.getElementById('nav-menu');
+  const overlay = document.getElementById('nav-overlay');
+  btn.classList.remove('open');
+  menu.classList.remove('open');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  // Wait for menu slide-out transition (350ms) then scroll
+  setTimeout(() => {
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+    // Account for sticky nav (64px) + sticky skip bar (~44px) = 108px offset
+    const navHeight = 64;
+    const skipBar = document.getElementById('section-skip-bar');
+    const skipBarHeight = skipBar ? skipBar.offsetHeight : 0;
+    const offset = navHeight + skipBarHeight + 8;
+    const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }, 380);
+  return false; // prevent default href jump
 }
 </script>
 
