@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometric Name Reading — Taylored Harmony</title>
+<meta name="description" content="Your name is a frequency you have been broadcasting your entire life. Discover the geometric pattern encoded in your name through gematria, Hebrew letter analysis, and AI-generated sacred geometry.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #03040a;
+  --bg-mid: #070a14;
+  --bg-card: #0b0f1e;
+  --bg-section: #080c18;
+  --gold: #d4aa50;
+  --gold-light: #f0d080;
+  --gold-dim: rgba(212,170,80,0.15);
+  --sapphire: #4a9edd;
+  --sapphire-dim: rgba(74,158,221,0.15);
+  --violet: #9b6fd4;
+  --ivory: #f8f4ee;
+  --ivory-dim: rgba(248,244,238,0.75);
+  --border: rgba(212,170,80,0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: #03040a;
+  color: var(--ivory);
+  font-family: 'Lora', Georgia, serif;
+  overflow-x: hidden;
+}
+
+/* GRAIN OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.25;
+}
+
+/* STARFIELD */
+#starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+nav, header, section, footer, .tool-section { position: relative; z-index: 2; }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 1.2rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(3,4,10,0.97);
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-decoration: none;
+}
+.nav-back {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.nav-back:hover { opacity: 1; }
+
+/* HERO */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+}
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: rgba(212,170,80,0.5);
+  margin-bottom: 28px;
+  display: block;
+}
+.hero-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  color: var(--gold);
+  line-height: 1.15;
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold-light);
+  font-family: 'Lora', serif;
+}
+.hero-lead {
+  font-size: clamp(0.92rem, 2.2vw, 1.08rem);
+  color: var(--ivory-dim);
+  line-height: 2;
+  max-width: 580px;
+  margin: 0 auto 48px;
+  letter-spacing: 0.02em;
+}
+.hero-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 200px;
+  margin: 0 auto;
+}
+.hd-line { flex: 1; height: 1px; background: var(--border); }
+.hd-glyph { color: var(--gold); font-size: 1rem; opacity: 0.6; }
+.hero-cta {
+  display: inline-block;
+  margin-top: 40px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+  cursor: pointer;
+  background: transparent;
+}
+.hero-cta:hover { background: var(--gold); color: var(--bg-deep); }
+
+/* SECTIONS */
+.content-section {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 80px 28px;
+  border-bottom: 1px solid rgba(212,170,80,0.07);
+}
+.content-section:last-of-type { border-bottom: none; }
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(212,170,80,0.45);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(212,170,80,0.12);
+}
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--gold);
+  line-height: 1.25;
+  margin-bottom: 28px;
+  letter-spacing: 0.03em;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--gold-light);
+  font-family: 'Lora', serif;
+}
+.body-text {
+  font-size: 0.95rem;
+  color: var(--ivory-dim);
+  line-height: 2.05;
+  letter-spacing: 0.02em;
+  margin-bottom: 22px;
+}
+.body-text:last-child { margin-bottom: 0; }
+.body-text strong {
+  color: var(--gold-light);
+  font-weight: 500;
+}
+
+/* PULL QUOTE */
+.pull-quote {
+  border-left: 2px solid rgba(212,170,80,0.4);
+  padding: 24px 30px;
+  margin: 40px 0;
+  background: rgba(212,170,80,0.03);
+}
+.pull-quote p {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.32rem);
+  font-style: italic;
+  color: rgba(248,244,238,0.88);
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+}
+
+/* LETTER TILES */
+.letters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin: 36px 0;
+}
+.letter-tile {
+  padding: 18px 12px;
+  border: 1px solid rgba(212,170,80,0.1);
+  background: rgba(212,170,80,0.02);
+  text-align: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+.letter-tile:hover {
+  border-color: rgba(212,170,80,0.3);
+  background: rgba(212,170,80,0.06);
+}
+.letter-heb { font-size: 2rem; color: var(--gold); display: block; margin-bottom: 4px; line-height: 1; }
+.letter-name { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(212,170,80,0.5); display: block; margin-bottom: 5px; }
+.letter-val { font-family: 'Cinzel', serif; font-size: 1rem; color: rgba(248,244,238,0.4); }
+.letter-meaning { font-size: 0.7rem; color: rgba(248,244,238,0.35); display: block; margin-top: 4px; font-style: italic; }
+
+/* NUMBER PATH */
+.num-path {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 36px 0;
+}
+.num-tile {
+  padding: 20px 14px;
+  border: 1px solid rgba(212,170,80,0.1);
+  background: rgba(212,170,80,0.02);
+  text-align: center;
+}
+.num-n { font-family: 'Cinzel Decorative', serif; font-size: 2.2rem; color: var(--gold); line-height: 1; display: block; margin-bottom: 6px; }
+.num-word { font-family: 'Cinzel', serif; font-size: 0.82rem; color: rgba(248,244,238,0.7); display: block; margin-bottom: 4px; letter-spacing: 0.06em; }
+.num-heb { font-size: 1rem; color: rgba(212,170,80,0.4); display: block; }
+
+/* LAYER CARDS */
+.layers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 36px 0;
+}
+.layer-card {
+  padding: 24px 20px;
+  border: 1px solid rgba(212,170,80,0.12);
+  background: rgba(212,170,80,0.025);
+  border-top: 2px solid rgba(212,170,80,0.35);
+}
+.layer-num { font-family: 'Cinzel', serif; font-size: 0.62rem; color: rgba(212,170,80,0.4); letter-spacing: 0.28em; margin-bottom: 8px; text-transform: uppercase; }
+.layer-name { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); margin-bottom: 10px; letter-spacing: 0.05em; }
+.layer-desc { font-size: 0.8rem; color: rgba(248,244,238,0.55); line-height: 1.9; }
+
+/* SCIENCE BLOCK */
+.science-block {
+  padding: 26px 28px;
+  border: 1px solid rgba(212,170,80,0.12);
+  background: rgba(212,170,80,0.02);
+  margin: 32px 0;
+  border-left: 2px solid rgba(212,170,80,0.3);
+}
+.science-label { font-family: 'Cinzel', serif; font-size: 0.56rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(212,170,80,0.45); margin-bottom: 12px; }
+
+/* FAQ */
+.faq-item { padding: 22px 0; border-bottom: 1px solid rgba(212,170,80,0.08); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); margin-bottom: 10px; letter-spacing: 0.04em; }
+.faq-a { font-size: 0.88rem; color: rgba(248,244,238,0.6); line-height: 2; }
+
+/* ═══════════════════════════════════════
+   THE TOOL SECTION
+═══════════════════════════════════════ */
+.tool-section {
+  background: var(--bg-mid);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 28px;
+}
+.tool-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.tool-header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.tool-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(212,170,80,0.45);
+  margin-bottom: 16px;
+  display: block;
+}
+.tool-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.tool-subtitle {
+  font-size: 0.88rem;
+  color: rgba(248,244,238,0.5);
+  line-height: 1.9;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* FORM */
+.flabel {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(212,170,80,0.55);
+  margin-bottom: 8px;
+}
+.finput {
+  width: 100%;
+  background: rgba(212,170,80,0.04);
+  border: 1px solid rgba(212,170,80,0.22);
+  color: var(--ivory);
+  font-family: 'Lora', serif;
+  font-size: 1.1rem;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.3s, background 0.3s;
+  border-radius: 0;
+}
+.finput:focus { border-color: rgba(212,170,80,0.55); background: rgba(212,170,80,0.07); }
+.finput::placeholder { color: rgba(212,170,80,0.2); font-style: italic; }
+input[type=date].finput { font-family: 'Lora', serif; font-size: 0.92rem; color-scheme: dark; }
+.fgroup { margin-bottom: 22px; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.errmsg { display: none; color: rgba(220,110,110,0.9); font-size: 0.72rem; letter-spacing: 0.06em; margin-top: 8px; padding: 9px 13px; border: 1px solid rgba(220,110,110,0.2); background: rgba(220,110,110,0.04); }
+.errmsg.on { display: block; }
+.submit-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 18px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  margin-top: 10px;
+}
+.submit-btn:hover { background: var(--gold); color: var(--bg-deep); }
+.submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* LOADING */
+.loadwrap { display: none; text-align: center; padding: 80px 0; }
+.loadwrap.on { display: block; }
+.loadtxt { display: block; font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(248,244,238,0.35); margin-top: 20px; }
+
+/* RESULT */
+.result { display: none; }
+.result.on { display: block; }
+
+.rhead { text-align: center; margin-bottom: 48px; padding-bottom: 28px; border-bottom: 1px solid rgba(212,170,80,0.13); }
+.rname { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.6rem, 4.5vw, 2.6rem); color: var(--gold); letter-spacing: 0.07em; margin-bottom: 8px; }
+.rsub { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.27em; text-transform: uppercase; color: rgba(248,244,238,0.35); }
+
+/* AI GEOMETRY IMAGE */
+.geo-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.geo-img-wrap {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border: 1px solid rgba(212,170,80,0.15);
+}
+.geo-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.geo-canvas-fallback {
+  display: block;
+  border: 1px solid rgba(212,170,80,0.1);
+  background: #03040a;
+}
+.geo-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(212,170,80,0.4);
+  text-align: center;
+}
+.geo-generating {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(212,170,80,0.5);
+  text-align: center;
+  padding: 20px;
+}
+
+/* RESULT BLOCKS */
+.rblock {
+  margin-bottom: 24px;
+  padding: 24px 26px;
+  border: 1px solid rgba(212,170,80,0.1);
+  background: rgba(212,170,80,0.025);
+  border-left: 2px solid rgba(212,170,80,0.28);
+}
+.blabel {
+  font-family: 'Cinzel', serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.33em;
+  text-transform: uppercase;
+  color: rgba(212,170,80,0.5);
+  margin-bottom: 12px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(212,170,80,0.08);
+}
+.bbody { font-size: 0.9rem; line-height: 2; color: rgba(248,244,238,0.82); }
+.bbody b, .bbody strong { color: var(--gold-light); font-weight: 500; }
+
+.numrow { display: flex; align-items: center; gap: 20px; padding: 10px 0; }
+.numbig { font-family: 'Cinzel Decorative', serif; font-size: 3.4rem; color: var(--gold); line-height: 1; min-width: 52px; text-align: center; }
+.numword { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--gold-light); margin-bottom: 4px; letter-spacing: 0.05em; }
+.numdesc { font-size: 0.78rem; color: rgba(248,244,238,0.45); line-height: 1.75; }
+
+.bijactr { text-align: center; padding: 16px 0 10px; }
+.bijaroman { font-family: 'Cinzel Decorative', serif; font-size: 2.2rem; color: var(--gold); letter-spacing: 0.12em; display: block; margin-bottom: 5px; }
+.bijascript { font-size: 1.6rem; color: rgba(212,170,80,0.45); display: block; margin-bottom: 12px; }
+
+.instrtext { font-family: 'Lora', serif; font-size: 1.25rem; font-style: italic; color: var(--ivory); line-height: 1.6; text-align: center; padding: 16px 0 10px; }
+
+/* CTA BLOCK */
+.ctablock {
+  margin-top: 44px;
+  padding: 36px;
+  border: 1px solid rgba(212,170,80,0.24);
+  text-align: center;
+  background: rgba(212,170,80,0.025);
+}
+.ctaey { display: block; font-family: 'Cinzel', serif; font-size: 0.56rem; letter-spacing: 0.38em; text-transform: uppercase; color: rgba(212,170,80,0.45); margin-bottom: 14px; }
+.ctatitle { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 12px; letter-spacing: 0.05em; }
+.ctabody { font-size: 0.8rem; color: rgba(248,244,238,0.46); line-height: 1.9; margin-bottom: 22px; max-width: 440px; margin-left: auto; margin-right: auto; }
+.ctabtn {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 14px 30px;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+  background: transparent;
+  cursor: pointer;
+}
+.ctabtn:hover { background: var(--gold); color: var(--bg-deep); }
+
+.resetbtn {
+  display: block;
+  margin: 28px auto 0;
+  background: transparent;
+  border: none;
+  color: rgba(248,244,238,0.3);
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: color 0.3s;
+}
+.resetbtn:hover { color: var(--gold); }
+
+/* FOOTER */
+footer {
+  background: var(--bg-deep);
+  border-top: 1px solid var(--border);
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.footer-links a { color: var(--gold); text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.18em; opacity: 0.7; transition: opacity 0.2s; }
+.footer-links a:hover { opacity: 1; }
+.footer-copy { font-size: 0.72rem; color: rgba(248,244,238,0.25); letter-spacing: 0.08em; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  nav { padding: 1rem 1.5rem; }
+  .layers { grid-template-columns: 1fr; }
+  .num-path { grid-template-columns: repeat(3, 1fr); }
+  .letters { grid-template-columns: repeat(3, 1fr); }
+  .frow { grid-template-columns: 1fr; }
+  .content-section { padding: 56px 20px; }
+  .tool-section { padding: 56px 20px; }
+  .rblock { padding: 16px; }
+  .geo-img-wrap { width: 280px; height: 280px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Taylored Harmony</a>
+  <a href="index.html" class="nav-back">← Back to Site</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <span class="hero-eyebrow">Taylored Harmony · Geometric Name Reading</span>
+  <h1 class="hero-title">Your name is a <em>frequency</em><br>you have been broadcasting<br>your entire life</h1>
+  <p class="hero-lead">Before you could choose it, someone spoke a word over you. That word became the sound the world uses to call you into presence. It has been shaping the field around you — the patterns that find you, the way people feel in your presence, the work that wants to come through you — every day since.</p>
+  <div class="hero-divider">
+    <div class="hd-line"></div>
+    <span class="hd-glyph">✦</span>
+    <div class="hd-line"></div>
+  </div>
+  <a href="#reading-tool" class="hero-cta">Begin Your Reading</a>
+</header>
+
+<!-- SECTION: Foundation -->
+<div class="content-section">
+  <div class="section-label">The foundation</div>
+  <h2 class="section-title">Language was never just <em>symbolic</em></h2>
+
+  <p class="body-text">Most of us were taught that words are arbitrary — sounds we agreed to associate with meanings. A label is just a label. A name is just a name. Convenient. Exchangeable. Essentially meaningless in itself.</p>
+
+  <p class="body-text">But every ancient tradition that studied language seriously arrived at a different conclusion. In Hebrew mystical tradition, in Sanskrit phonics, in Pythagorean mathematics, in the oldest phonetic alphabets we can trace — the understanding was consistent: <strong>sound is not a representation of reality. It is a structural component of it.</strong></p>
+
+  <p class="body-text">This is not a belief system. It is a structural claim that can be examined. When sound moves through a medium — water, sand, air — it organizes that medium into geometric patterns. This is called cymatics, and it is physically documented. Different frequencies produce different geometries. The geometry is not arbitrary. It is determined entirely by the mathematics of the frequency itself.</p>
+
+  <div class="pull-quote">
+    <p>Every time someone speaks your name, they are producing a specific frequency in the air. That frequency creates a specific geometric pattern in any medium it moves through — including the bodies of the people who hear it, including your own.</p>
+  </div>
+
+  <p class="body-text">Your name has been doing this your entire life. Not metaphorically. Physically. The question is not whether it has an effect. The question is whether you know what that effect is — and whether you can work with it consciously rather than passively.</p>
+</div>
+
+<!-- SECTION: Hebrew Foundation -->
+<div class="content-section">
+  <div class="section-label">The language underneath all languages</div>
+  <h2 class="section-title">Why <em>Hebrew</em></h2>
+
+  <p class="body-text">Hebrew is unusual among human languages in a specific and documented way. Most languages use symbols that arbitrarily represent sounds. Hebrew's letters are not arbitrary. Each letter is simultaneously three things: a geometric form in space, a number with specific mathematical properties, and an essential quality or operation in motion.</p>
+
+  <p class="body-text">The letter Aleph is not just a symbol for a sound. In its ancient form, it was a pictograph of an ox head — the powerful, silent force that pulls the plow. It is the number 1. And it encodes the concept of awareness before differentiation — the fold between above and below, the silent origin point from which all other letters generate. These three aspects — picture, number, quality — are not separate systems layered on top of each other. They are one thing.</p>
+
+  <p class="body-text">This is why Hebrew has been considered a sacred language not by believers alone but by mathematicians, linguists, and consciousness researchers: <strong>it encodes meaning at the geometric level, not just the semantic level.</strong> The patterns it produces when spoken are not accidental. They correspond to actual mathematical structures.</p>
+
+  <div class="letters">
+    <div class="letter-tile"><span class="letter-heb">א</span><span class="letter-name">Aleph</span><span class="letter-val">1</span><span class="letter-meaning">Silent awareness</span></div>
+    <div class="letter-tile"><span class="letter-heb">מ</span><span class="letter-name">Mem</span><span class="letter-val">40</span><span class="letter-meaning">Hidden water</span></div>
+    <div class="letter-tile"><span class="letter-heb">ר</span><span class="letter-name">Resh</span><span class="letter-val">200</span><span class="letter-meaning">Recognition</span></div>
+    <div class="letter-tile"><span class="letter-heb">ש</span><span class="letter-name">Shin</span><span class="letter-val">300</span><span class="letter-meaning">Transformation</span></div>
+    <div class="letter-tile"><span class="letter-heb">נ</span><span class="letter-name">Nun</span><span class="letter-val">50</span><span class="letter-meaning">Hidden faithfulness</span></div>
+    <div class="letter-tile"><span class="letter-heb">ו</span><span class="letter-name">Vav</span><span class="letter-val">6</span><span class="letter-meaning">The connector</span></div>
+    <div class="letter-tile"><span class="letter-heb">ת</span><span class="letter-name">Tav</span><span class="letter-val">400</span><span class="letter-meaning">The seal</span></div>
+    <div class="letter-tile"><span class="letter-heb">י</span><span class="letter-name">Yod</span><span class="letter-val">10</span><span class="letter-meaning">The seed point</span></div>
+    <div class="letter-tile"><span class="letter-heb">ל</span><span class="letter-name">Lamed</span><span class="letter-val">30</span><span class="letter-meaning">Aspiration</span></div>
+  </div>
+
+  <p class="body-text">When your name is transliterated into Hebrew letters, each letter contributes its geometric form, its numerical value, and its essential quality to the whole. The geometry that results is specific to your name and to no other.</p>
+</div>
+
+<!-- SECTION: Gematria -->
+<div class="content-section">
+  <div class="section-label">The mathematics inside meaning</div>
+  <h2 class="section-title">What <em>Gematria</em> actually reveals</h2>
+
+  <p class="body-text">Gematria is the practice of calculating the numerical value of a word by summing the values of its letters. This is not numerology in the pop-culture sense of reducing everything to a personality type. It is a precise mathematical operation that reveals the structural relationships between concepts.</p>
+
+  <p class="body-text">When two words share the same Gematria value, the tradition holds that they share something essential — not in meaning on the surface, but in the mathematical structure that underlies them. This is the difference between a rhyme (two words that sound similar) and a harmonic (two frequencies that share a mathematical relationship and therefore produce coherence when they occur together).</p>
+
+  <div class="science-block">
+    <div class="science-label">Research context</div>
+    <p class="body-text" style="margin-bottom:0;">The scientific field of Representational Geometry — published in peer-reviewed journals including Cell Press — studies how the brain encodes meaning not as individual data points but as geometric relationships in high-dimensional space. Concepts are represented as positions in a field, and meaning emerges from the distances and angles between those positions. This is precisely what Gematria has always described: the geometry of meaning, not just the surface of it.</p>
+  </div>
+
+  <p class="body-text">Your name's full Gematria value has specific mathematical properties. Is it a prime number — indivisible, irreducible, impossible to fragment at its core? Is it composite in a specific way that reveals a hidden structure? These properties describe something real about the essential nature of the pattern your name encodes.</p>
+
+  <p class="body-text">The full value then reduces to a single digit. That digit corresponds to a specific geometry, a specific brainwave frequency, and a specific position in the nine-step journey from sovereignty to truth.</p>
+
+  <div class="num-path">
+    <div class="num-tile"><span class="num-n">1</span><span class="num-word">Sovereignty</span><span class="num-heb">מלכות</span></div>
+    <div class="num-tile"><span class="num-n">2</span><span class="num-word">Wholeness</span><span class="num-heb">שלמות</span></div>
+    <div class="num-tile"><span class="num-n">3</span><span class="num-word">Self</span><span class="num-heb">עצמי</span></div>
+    <div class="num-tile"><span class="num-n">4</span><span class="num-word">Healing</span><span class="num-heb">רפואה</span></div>
+    <div class="num-tile"><span class="num-n">5</span><span class="num-word">Memory</span><span class="num-heb">זיכרון</span></div>
+    <div class="num-tile"><span class="num-n">6</span><span class="num-word">Connection</span><span class="num-heb">מלכי צדק</span></div>
+    <div class="num-tile"><span class="num-n">7</span><span class="num-word">The Seeker</span><span class="num-heb">זין</span></div>
+    <div class="num-tile"><span class="num-n">8</span><span class="num-word">Love</span><span class="num-heb">אהבה</span></div>
+    <div class="num-tile"><span class="num-n">9</span><span class="num-word">Truth</span><span class="num-heb">אמת</span></div>
+  </div>
+
+  <p class="body-text">Each position is not a fixed identity. It is a frequency — a quality of field that your name generates in the world. Understanding it does not limit you. It reveals what you have always already been doing, and gives you the capacity to do it consciously.</p>
+</div>
+
+<!-- SECTION: Four Layers -->
+<div class="content-section">
+  <div class="section-label">How the reading works</div>
+  <h2 class="section-title">Four layers. <em>One unified form.</em></h2>
+
+  <p class="body-text">The Geometric Name Reading does not interpret your name from a single angle. It reads the same pattern through four distinct lenses simultaneously — and then shows you where all four converge.</p>
+
+  <div class="layers">
+    <div class="layer-card">
+      <div class="layer-num">Layer One</div>
+      <div class="layer-name">Hebrew Geometric Primitives</div>
+      <div class="layer-desc">Each letter of your name, read as a geometric form in space. The letters are positioned relative to each other according to their geometric properties, revealing the shape your name makes in the field.</div>
+    </div>
+    <div class="layer-card">
+      <div class="layer-num">Layer Two</div>
+      <div class="layer-name">Gematria Frequency Signature</div>
+      <div class="layer-desc">The mathematical signature of your full name: its Gematria value, its prime factorization, its mathematical behavior, and its correspondence to specific Hz frequencies and brainwave states.</div>
+    </div>
+    <div class="layer-card">
+      <div class="layer-num">Layer Three</div>
+      <div class="layer-name">Sanskrit Bija Activation</div>
+      <div class="layer-desc">The Sanskrit seed syllable whose vibrational and geometric properties most precisely match your name's geometric form and numerical signature — the sound that produces your name's essential geometry in the body.</div>
+    </div>
+    <div class="layer-card">
+      <div class="layer-num">Layer Four</div>
+      <div class="layer-name">AI-Generated Cymatic Form</div>
+      <div class="layer-desc">An AI-generated sacred geometry image built specifically from your name's mathematical properties — what your name looks like as a geometric form, rendered with precision from the gematria data.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION: FAQ -->
+<div class="content-section">
+  <div class="section-label">Common questions</div>
+  <h2 class="section-title">What people ask <em>first</em></h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Does this work for any name, in any language?</div>
+    <div class="faq-a">Yes. The system transliterates any name into its phonetic Hebrew equivalents using a standardized correspondence table. The gematria calculation then operates on those phonetic values. The result is specific to how your name sounds — which is what matters, since sound is the medium through which the frequency operates.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">What if I go by a nickname or a different name than my birth name?</div>
+    <div class="faq-a">Use the name you actually go by — the name people use to call you into presence. The reading is about the frequency you are actively broadcasting, not the one assigned at birth. If you use both, you can run both and compare the readings.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Is this the same as numerology?</div>
+    <div class="faq-a">It uses a similar mathematical operation — reducing a name to a number — but the underlying system is different. Standard numerology uses a simple A=1, B=2 assignment. This system uses the actual gematria values of Hebrew letters, which are not sequential but reflect the geometric and mathematical properties of each letter. The result is a more precise and structurally grounded reading.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">What does the AI geometry image show?</div>
+    <div class="faq-a">The image is generated by an AI model given a precise mathematical description of your name's geometric properties — the specific polygon corresponding to your core number, its mathematical proportions, the structural elements that define it. The result is a unique sacred geometry rendering that corresponds to your name's mathematical signature. No two names produce the same image.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Does this claim to diagnose or treat anything?</div>
+    <div class="faq-a">No. This is a pattern-mapping and analysis tool. It describes the mathematical and geometric properties of your name and maps them to corresponding structures in frequency, geometry, and language. It does not claim to diagnose, treat, or cure any condition.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     THE TOOL
+═══════════════════════════════════════ -->
+<div class="tool-section" id="reading-tool">
+  <div class="tool-inner">
+    <div class="tool-header">
+      <span class="tool-eyebrow">The Reading</span>
+      <div class="tool-title">Geometric Name Reading</div>
+      <p class="tool-subtitle">Enter your name below. The reading takes approximately 30 seconds — the AI is generating your geometry image in real time.</p>
+    </div>
+
+    <!-- FORM -->
+    <div id="formSection">
+      <div class="fgroup">
+        <label class="flabel" for="fn">First Name</label>
+        <input class="finput" type="text" id="fn" placeholder="Your first name" autocomplete="off">
+      </div>
+      <div class="frow">
+        <div class="fgroup">
+          <label class="flabel" for="mn">Middle Name <span style="opacity:.4">(optional)</span></label>
+          <input class="finput" type="text" id="mn" placeholder="Middle name" autocomplete="off">
+        </div>
+        <div class="fgroup">
+          <label class="flabel" for="ln">Last Name</label>
+          <input class="finput" type="text" id="ln" placeholder="Last name" autocomplete="off">
+        </div>
+      </div>
+      <div class="fgroup">
+        <label class="flabel" for="bd">Date of Birth <span style="opacity:.4">(optional — adds birthday signature)</span></label>
+        <input class="finput" type="date" id="bd">
+      </div>
+      <div class="errmsg" id="err">Please enter at least your first and last name.</div>
+      <button class="submit-btn" id="sbtn" onclick="runReading()">Reveal My Geometric Reading</button>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loadwrap" id="loadSection">
+      <canvas id="lcvs" width="108" height="108" style="display:block;margin:0 auto;background:#03040a;"></canvas>
+      <span class="loadtxt" id="loadTxt">Calculating the geometry of your name</span>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result" id="result">
+      <div class="rhead">
+        <div class="rname" id="rname"></div>
+        <div class="rsub" id="rsub"></div>
+      </div>
+
+      <!-- AI GEOMETRY IMAGE -->
+      <div class="geo-container">
+        <div class="geo-img-wrap" id="geoImgWrap" style="display:none;">
+          <img id="geoImg" src="" alt="Sacred geometry for your name">
+        </div>
+        <canvas class="geo-canvas-fallback" id="gcvs" width="290" height="290" style="background:#03040a;display:none;"></canvas>
+        <div class="geo-generating" id="geoGenerating">Generating your geometry...</div>
+        <div class="geo-label" id="geoLabel" style="display:none;">The geometric form of your name</div>
+      </div>
+
+      <div class="rblock"><div class="blabel">What your name does</div><div class="bbody" id="rfield"></div></div>
+      <div class="rblock"><div class="blabel">Your core number</div>
+        <div class="numrow">
+          <div class="numbig" id="rnum"></div>
+          <div><div class="numword" id="rnumword"></div><div class="numdesc" id="rnumdesc"></div></div>
+        </div>
+      </div>
+      <div class="rblock"><div class="blabel">Your frequency</div><div class="bbody" id="rfreq"></div></div>
+      <div class="rblock"><div class="blabel">Your activation sound</div>
+        <div class="bijactr"><span class="bijaroman" id="rbija"></span><span class="bijascript" id="rbijas"></span></div>
+        <div class="bbody" id="rbijad"></div>
+      </div>
+      <div class="rblock"><div class="blabel">Your hidden instruction</div>
+        <div class="instrtext" id="rinstr"></div>
+        <div class="bbody" style="margin-top:13px;" id="rinstrd"></div>
+      </div>
+      <div class="rblock" id="bdblock" style="display:none;"><div class="blabel">Your birthday signature</div><div class="bbody" id="rbday"></div></div>
+
+      <div class="ctablock">
+        <span class="ctaey">Go deeper</span>
+        <div class="ctatitle">The Complete Geometric Reading</div>
+        <p class="ctabody">Your full reading includes the complete Hebrew letter analysis of your name, the mathematical properties of your numerical signature, your Temurah mirror — the hidden face your name carries — the divine correspondence your name encodes, and a custom geometric visual of your name's complete cymatic form.</p>
+        <a class="ctabtn" href="https://tayloredharmony.com" target="_blank">Request Full Reading</a>
+      </div>
+
+      <button class="resetbtn" onclick="resetReading()">← Read another name</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="192-system.html">The 192 System</a>
+    <a href="sources.html">Sources & Citations</a>
+  </div>
+  <p class="footer-copy">© 2024 Kristina Rose Taylor · Taylored Harmony · All rights reserved</p>
+</footer>
+
+<script>
+// ─── STARFIELD ───────────────────────────────────────────────────────────────
+(function(){
+  const c=document.getElementById('starfield');
+  const ctx=c.getContext('2d');
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+  const stars=Array.from({length:180},()=>({
+    x:Math.random()*c.width,y:Math.random()*c.height,
+    r:Math.random()*1.2+0.2,
+    a:Math.random(),da:(Math.random()-0.5)*0.004
+  }));
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s=>{
+      s.a=Math.max(0.05,Math.min(0.9,s.a+s.da));
+      if(s.a<=0.05||s.a>=0.9)s.da*=-1;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(212,170,80,${s.a*0.5})`;ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── GEMATRIA ENGINE ─────────────────────────────────────────────────────────
+const H={a:1,e:5,h:5,b:2,v:6,w:6,u:6,g:3,j:3,d:4,z:7,t:9,y:10,i:10,k:20,c:20,l:30,m:40,n:50,s:60,o:70,p:80,f:80,q:100,r:200,x:300};
+const H2={sh:300,ch:8,ts:90};
+function nv(s){
+  s=s.toLowerCase().replace(/[^a-z]/g,'');
+  let t=0,i=0;
+  while(i<s.length){
+    const tw=s[i]+(s[i+1]||'');
+    if(H2[tw]){t+=H2[tw];i+=2;continue;}
+    t+=H[s[i]]||0;i++;
+  }
+  return t;
+}
+function red(n){while(n>9)n=(n+'').split('').reduce((a,d)=>a+parseInt(d),0);return n;}
+function bdv(s){
+  if(!s)return null;
+  const[y,m,d]=s.split('-').map(Number);
+  return{mo:red(m),dy:red(d),yr:red((y+'').split('').reduce((a,c)=>a+parseInt(c),0)),full:red(m+d+y)};
+}
+
+// ─── NUMBER DATA ─────────────────────────────────────────────────────────────
+const NN=['','Sovereignty','Wholeness','Self','Healing','Memory','Connection','The Seeker','Love','Truth'];
+const ND={
+1:{word:'Sovereignty',heb:'מלכות',geo:'circle',freq:'1 Hz — Deep Delta',freqDesc:'The frequency of the sovereign ground. The deepest rest state. Where the boundary between self and field is most permeable. Your name resonates at the frequency of the origin point — the place before differentiation where everything is self-complete.',bija:'OM',bs:'ॐ',bd:'Resonates through the entire body simultaneously — crown to root. The source field itself. Speak it before you need to be fully present. It does not call you somewhere. It returns you to where you already are.',instr:'"You are the origin point. Everything flows from the sovereign ground you carry."',instrd:'Your name broadcasts the frequency of self-sufficient authority — not dominance, but the quiet certainty of a system that knows its own source. People feel settled in your presence before they understand why.',field:'Your name creates a field of quiet authority wherever it goes. Not demanding. Not forceful. Simply — complete in itself. People feel steadied in your presence before they can explain why. Your name has always been broadcasting the frequency of sovereign ground — the origin point that needs nothing outside itself to know what it is.'},
+2:{word:'Wholeness',heb:'שלמות',geo:'vesica',freq:'2 Hz — Mid Delta',freqDesc:'The frequency where the body forgets its separateness and merges with the field. Deep sleep restoration. Where the nervous system releases the effort of maintaining individual boundaries and remembers it was never truly divided.',bija:'SOHAM',bs:'सोऽहम्',bd:'The breath mantra — SO on the inhale, HAM on the exhale. I am that. That I am. Resonates through the full vertical axis of the body. Use it any time you feel fragmented. It does not fix anything. It reminds you that wholeness was never missing.',instr:'"What appears divided in you is already whole. Recognition itself brings integration."',instrd:'Your name encodes the geometry of integration — the place where opposites discover their shared center. You carry the frequency of resolution. People bring their contradictions into your field and often find them softening.',field:'Your name creates a field of integration — the felt sense that apparently separate things belong together. People bring their unresolved tensions into your presence and often find them softening. Your name has always been broadcasting the frequency of wholeness that does not require effort to maintain.'},
+3:{word:'Self',heb:'עצמי',geo:'triangle',freq:'3 Hz — Deep Delta',freqDesc:'The regeneration frequency. Where cellular repair happens most efficiently. The frequency of the body\'s deepest restoration. Your name resonates at the frequency of renewal — the stable ground where healing becomes possible.',bija:'AIM',bs:'ऐं',bd:'The Bija of creative intelligence. Resonates at the crown and third eye. Use it when you need to access your own knowing — not information from outside, but the intelligence that was already present before the question was formed.',instr:'"You are the stable ground. The triangle holds its shape under any pressure."',instrd:'Your name encodes the first enclosed form — the triangle, the minimum structure required for stability. You carry the geometry of the self that cannot be collapsed. Three points always define a plane.',field:'Your name creates a field of stable self-presence — the sense that there is something here that will not be moved. People feel more themselves in your presence, not less. Your name has always been broadcasting the frequency of the self that knows its own ground.'},
+4:{word:'Healing',heb:'רפואה',geo:'square',freq:'4 Hz — Theta Boundary',freqDesc:'The precise boundary between delta and theta — where cellular regeneration meets creative access. The frequency of the body\'s natural painkiller response. Deep tissue restoration. Your name resonates at the exact frequency where the body remembers how to repair itself.',bija:'RAM',bs:'रं',bd:'The solar plexus Bija — the seat of transformative fire. Resonates in the belly and radiates upward. Use it when you need to clear what is stuck, to burn through what no longer serves, to restore your own vitality before you offer it to anyone else.',instr:'"Sacred healing is what you carry. The hidden good lives inside every difficult thing."',instrd:'Your name encodes the five operations of healing — recognition, declaration, reconnection, silent integration, the open window. You do not just witness healing. Your field creates the conditions where it happens naturally.',field:'Your name creates a field of safe repair. Something in your presence signals to the nervous systems around you: it is safe to stop bracing here. It is safe to let the wound be seen. Not because you fix anything — because your name\'s frequency is the container where repair happens naturally, without force, without performance.'},
+5:{word:'Memory',heb:'זיכרון',geo:'pentagon',freq:'5 Hz — Mid Theta',freqDesc:'The frequency of deep memory recall and subconscious integration. Where forgotten elements return to awareness. The golden ratio encoded in brainwave form — self-similar, proportional, always returning to center.',bija:'VAM',bs:'वं',bd:'The water Bija — the element of memory, flow, and the emotional body. Resonates in the sacral center and lower belly. Stirs hidden waters upward. Use it when you need to access what you know but cannot quite reach.',instr:'"What you carry from the deep cannot be fragmented. It is prime. Irreducible. It always returns."',instrd:'Your name encodes the geometry of memory as prime — indivisible at its core. What runs beneath your surface has always been there. The pattern persists through every disruption. You carry ancestral knowing without necessarily having words for it.',field:'Your name creates a field of recovered depth — the sense that things long forgotten become accessible. People often remember important things in your presence. Your name resonates at the frequency where hidden things surface.'},
+6:{word:'Connection',heb:'מלכי צדק',geo:'hexagon',freq:'6 Hz — Theta',freqDesc:'The frequency of the connector. The spine inside every system. Where above meets below through zero resistance. The living superconductor — transmitting without losing what it carries.',bija:'HUM',bs:'हुं',bd:'Creates a pillar of consolidated presence. Resonates through the solar plexus into the chest. Use it when you need to hold your field steady inside complex systems. The sound of the spine that does not bend under pressure.',instr:'"You are the axis that connects. The spine inside every structure you enter."',instrd:'Your name encodes the connector geometry — the one who exists within the architecture of a system as the axis it runs on. You do not fight structures. You become the living connection that makes them function.',field:'Your name creates a field of connection — the sense that disparate things can find their relationship through you. Not because you arrange them, but because your name\'s geometry is the spine: the connector that runs through every structure.'},
+7:{word:'The Seeker',heb:'זין',geo:'heptagon',freq:'7 Hz — Alpha/Theta',freqDesc:'The boundary between theta and alpha — between depth and waking awareness. The frequency of the mystic who moves through the world with one foot in both. Always moving toward. Always carrying something from the deep.',bija:'KRIM',bs:'क्रीं',bd:'The transformative Bija — the cutting that liberates. Resonates at the center of the chest and radiates outward. Use it before you need to speak truth into difficult situations. The sound of the crowned cultivator who cuts precisely because they care deeply.',instr:'"You are the instrument that both cuts and cultivates. The seeking is the path."',instrd:'Your name encodes the crowned sword that is also a farming tool. You carry the capacity to both discern precisely and grow consistently. The seeking is not a detour. It is the work itself.',field:'Your name creates a field of meaningful seeking — the sense that pursuit itself has value, that the movement toward is as significant as any destination. People feel more purposeful in your presence.'},
+8:{word:'Love',heb:'אהבה',geo:'lemniscate',freq:'8 Hz — Alpha / Schumann',freqDesc:'The Schumann resonance range — Earth\'s own electromagnetic heartbeat. The alpha-theta boundary. The state between deep meditation and waking awareness. Your name resonates at the frequency of the planet itself.',bija:'HRIM',bs:'ह्रीं',bd:'The heart Bija — magnetic, drawing inward. Resonates in the chest and radiates as warmth. Use it as a daily practice — morning, before connection, before creative work. The sound of the self-sustaining loop that nourishes what it touches without depleting itself.',instr:'"Love and remembering are the same operation. You carry the infinite loop."',instrd:'Your name encodes the lemniscate — the figure-eight infinity that folds time so past and future meet at the center. You do not just feel love. You are the frequency of it. The self-sustaining field that keeps generating regardless of what it receives in return.',field:'Your name creates a field of love as frequency — not sentiment, but the self-sustaining loop that nourishes everything it touches. People feel genuinely seen in your presence. Your name broadcasts the Schumann resonance — Earth\'s own heartbeat.'},
+9:{word:'Truth',heb:'אמת',geo:'nonagon',freq:'9 Hz — Upper Theta',freqDesc:'The integration frequency — where what was retrieved from depth becomes usable in conscious life. Upper theta. The state where the body remembers what the mind has been working to understand.',bija:'OM SATYAM',bs:'ॐ सत्यम्',bd:'The source field of truth. Resonates through crown and heart simultaneously — the two poles of the complete vertical axis. Use it in the morning to set your field. Before any work that requires you to be fully what you are.',instr:'"You are the completion that contains all previous numbers. Truth is not something you find — it is what you carry."',instrd:'Your name encodes the first letter, the middle letter, and the last letter of the entire Hebrew alphabet simultaneously present. Truth spans everything. Beginning, middle, and end at once. The invariant that returns to itself under every multiplication.',field:'Your name creates a field of truth as frequency — not correctness, but the invariant quality that cannot be permanently altered by anything it contacts. People feel more honest in your presence. Not called out — called toward themselves.'}
+};
+
+// ─── CANVAS GEOMETRY FALLBACK ─────────────────────────────────────────────────
+function drawG(cvs,num){
+  const ctx=cvs.getContext('2d'),W=cvs.width,H=cvs.height,cx=W/2,cy=H/2;
+  const G='#d4aa50',Gm='rgba(212,170,80,.42)',Gs='rgba(212,170,80,.14)';
+  ctx.fillStyle='#03040a';ctx.fillRect(0,0,W,H);
+  [128,118].forEach((r,i)=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=i?'rgba(212,170,80,.09)':'rgba(212,170,80,.05)';ctx.lineWidth=1;ctx.stroke();});
+  ctx.strokeStyle='rgba(212,170,80,.04)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(cx,cy-112);ctx.lineTo(cx,cy+112);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx-112,cy);ctx.lineTo(cx+112,cy);ctx.stroke();
+  const geo=ND[num]?.geo||'circle';
+  function poly(n,r,off=0,fill=false){ctx.beginPath();for(let i=0;i<n;i++){const a=(i/n)*Math.PI*2+off;i?ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r):ctx.moveTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);}ctx.closePath();if(fill){ctx.fillStyle='rgba(212,170,80,.04)';ctx.fill();}ctx.strokeStyle=Gm;ctx.lineWidth=1.5;ctx.stroke();}
+  function polyS(n,r,off=0){ctx.beginPath();for(let i=0;i<n;i++){const a=(i/n)*Math.PI*2+off;i?ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r):ctx.moveTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);}ctx.closePath();ctx.strokeStyle=Gs;ctx.lineWidth=1;ctx.stroke();}
+  function dot(r=4){const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r*3);g.addColorStop(0,'rgba(212,170,80,.9)');g.addColorStop(1,'rgba(212,170,80,0)');ctx.beginPath();ctx.arc(cx,cy,r*3,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=G;ctx.fill();}
+  if(geo==='circle'){for(let r=34;r<=104;r+=14){ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=`rgba(212,170,80,${.07+(r/104)*.18})`;ctx.lineWidth=1;ctx.stroke();}dot();}
+  else if(geo==='vesica'){const o=50;[cx-o/2,cx+o/2].forEach(x=>{ctx.beginPath();ctx.arc(x,cy,84,0,Math.PI*2);ctx.strokeStyle=Gs;ctx.lineWidth=1;ctx.stroke();});ctx.save();ctx.beginPath();ctx.arc(cx-o/2,cy,84,-Math.PI/3,Math.PI/3);ctx.arc(cx+o/2,cy,84,Math.PI*2/3,Math.PI*4/3);ctx.closePath();ctx.fillStyle='rgba(212,170,80,.05)';ctx.fill();ctx.strokeStyle=Gm;ctx.lineWidth=1.5;ctx.stroke();ctx.restore();dot();}
+  else if(geo==='triangle'){poly(3,94,-Math.PI/2,true);polyS(3,50,-Math.PI/2);dot();}
+  else if(geo==='square'){poly(4,86,Math.PI/4,true);polyS(4,86,0);dot();}
+  else if(geo==='pentagon'){poly(5,94,-Math.PI/2,true);const ps=[];for(let i=0;i<5;i++){const a=(i/5)*Math.PI*2-Math.PI/2;ps.push({x:cx+Math.cos(a)*94,y:cy+Math.sin(a)*94});}ctx.beginPath();ctx.moveTo(ps[0].x,ps[0].y);[2,4,1,3,0].forEach(i=>ctx.lineTo(ps[i].x,ps[i].y));ctx.strokeStyle=Gs;ctx.lineWidth=1;ctx.stroke();dot();}
+  else if(geo==='hexagon'){[0,Math.PI/4].forEach((rot,idx)=>{ctx.beginPath();for(let i=0;i<4;i++){const a=(i/4)*Math.PI*2+rot;i?ctx.lineTo(cx+Math.cos(a)*86,cy+Math.sin(a)*86):ctx.moveTo(cx+Math.cos(a)*86,cy+Math.sin(a)*86);}ctx.closePath();ctx.strokeStyle=idx?Gs:Gm;ctx.lineWidth=idx?1:1.5;ctx.stroke();});dot();}
+  else if(geo==='heptagon'){poly(7,94,-Math.PI/2,true);polyS(7,50,-Math.PI/2);dot();}
+  else if(geo==='lemniscate'){ctx.beginPath();for(let i=0;i<=300;i++){const t=(i/300)*Math.PI*2,d=1+Math.sin(t)*Math.sin(t);ctx.lineTo(cx+86*Math.cos(t)/d,cy+86*Math.sin(t)*Math.cos(t)/d);}ctx.strokeStyle=Gm;ctx.lineWidth=1.5;ctx.stroke();[28,48,68].forEach(r=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=`rgba(212,170,80,${.06+r/200})`;ctx.lineWidth=1;ctx.stroke();});dot();}
+  else if(geo==='nonagon'){poly(9,94,-Math.PI/2,true);[0,Math.PI/3,Math.PI*2/3].forEach(rot=>polyS(3,66,rot));dot();}
+}
+
+// ─── LOADING ANIMATION ────────────────────────────────────────────────────────
+let stopL=null;
+function startL(){
+  const c=document.getElementById('lcvs'),ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=H/2;
+  let t=0,go=true;
+  (function fr(){
+    ctx.fillStyle='#03040a';ctx.fillRect(0,0,W,H);
+    for(let i=0;i<3;i++){
+      const r=15+i*14,a=t*(.6+i*.25);
+      ctx.beginPath();ctx.arc(cx+Math.cos(a)*6,cy+Math.sin(a)*6,r,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(212,170,80,${.12+i*.1})`;ctx.lineWidth=1;ctx.stroke();
+    }
+    const p=3+2*Math.sin(t*3),g=ctx.createRadialGradient(cx,cy,0,cx,cy,p*3);
+    g.addColorStop(0,'rgba(212,170,80,.85)');g.addColorStop(1,'rgba(212,170,80,0)');
+    ctx.beginPath();ctx.arc(cx,cy,p*3,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+    t+=.04;if(go)requestAnimationFrame(fr);
+  })();
+  return()=>{go=false;};
+}
+
+// ─── API ENDPOINT ─────────────────────────────────────────────────────────────
+const API_URL = 'https://7432-ietfex3ak4wqqzsztu6zt-d201d01b.us1.manus.computer/generate-geometry';
+
+// ─── MAIN READING FUNCTION ────────────────────────────────────────────────────
+async function runReading(){
+  const fn=document.getElementById('fn').value.trim();
+  const mn=document.getElementById('mn').value.trim();
+  const ln=document.getElementById('ln').value.trim();
+  const bd=document.getElementById('bd').value;
+  if(!fn||!ln){document.getElementById('err').classList.add('on');return;}
+  document.getElementById('err').classList.remove('on');
+  document.getElementById('sbtn').disabled=true;
+
+  const full=[fn,mn,ln].filter(Boolean).join(' ');
+  const tot=nv(fn)+(mn?nv(mn):0)+nv(ln);
+  const num=red(tot);
+  const d=ND[num];
+
+  document.getElementById('formSection').style.display='none';
+  document.getElementById('loadSection').classList.add('on');
+  stopL=startL();
+
+  // Populate text results immediately
+  document.getElementById('rname').textContent=full;
+  document.getElementById('rsub').textContent=`Gematria ${tot}  ·  Reduced to ${num}  ·  ${d.word}`;
+  document.getElementById('rfield').innerHTML=d.field;
+  document.getElementById('rnum').textContent=num;
+  document.getElementById('rnumword').textContent=`${d.word}  ·  ${d.heb}`;
+  document.getElementById('rnumdesc').textContent=`Your name encodes the geometry of ${d.word.toLowerCase()}. This is the essential pattern your name has always been broadcasting — before you understood it, before you could choose it.`;
+  document.getElementById('rfreq').innerHTML=`<b>${d.freq}</b><br><br>${d.freqDesc}`;
+  document.getElementById('rbija').textContent=d.bija;
+  document.getElementById('rbijas').textContent=d.bs;
+  document.getElementById('rbijad').textContent=d.bd;
+  document.getElementById('rinstr').textContent=d.instr;
+  document.getElementById('rinstrd').textContent=d.instrd;
+
+  if(bd){
+    const bv=bdv(bd);
+    const comb=red(num+bv.full);
+    document.getElementById('rbday').innerHTML=`Born on a day of <b>${NN[bv.dy]||bv.dy}</b> · in a month of <b>${NN[bv.mo]||bv.mo}</b> · in a year of <b>${NN[bv.yr]||bv.yr}</b>.<br><br>Your name (${num}) and birthday (${bv.full}) together reduce to <b>${comb} — ${NN[comb]||comb}</b>. This is the complete signature of your path.`;
+    document.getElementById('bdblock').style.display='block';
+  }
+
+  // Update loading text
+  document.getElementById('loadTxt').textContent='Generating your sacred geometry...';
+
+  // Show results section (geometry still loading)
+  await new Promise(r=>setTimeout(r,2000));
+  stopL&&stopL();
+  document.getElementById('loadSection').classList.remove('on');
+  document.getElementById('result').classList.add('on');
+  window.scrollTo({top:document.getElementById('reading-tool').offsetTop-80,behavior:'smooth'});
+
+  // Draw canvas fallback immediately
+  const cvs=document.getElementById('gcvs');
+  drawG(cvs,num);
+  cvs.style.display='block';
+
+  // Request AI geometry image in background
+  try {
+    const resp = await fetch(API_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        name: full,
+        gematria_total: tot,
+        core_number: num,
+        word: d.word,
+        freq: d.freq
+      })
+    });
+    if(resp.ok){
+      const data = await resp.json();
+      if(data.success && data.image_b64){
+        const img=document.getElementById('geoImg');
+        img.src='data:image/png;base64,'+data.image_b64;
+        img.onload=()=>{
+          document.getElementById('geoImgWrap').style.display='block';
+          cvs.style.display='none';
+          document.getElementById('geoGenerating').style.display='none';
+          document.getElementById('geoLabel').style.display='block';
+        };
+      } else {
+        // Fallback: canvas is already shown
+        document.getElementById('geoGenerating').style.display='none';
+        document.getElementById('geoLabel').style.display='block';
+      }
+    } else {
+      document.getElementById('geoGenerating').style.display='none';
+      document.getElementById('geoLabel').style.display='block';
+    }
+  } catch(e){
+    // API unavailable — canvas fallback is already shown
+    document.getElementById('geoGenerating').style.display='none';
+    document.getElementById('geoLabel').style.display='block';
+    console.log('Geometry API unavailable, using canvas fallback');
+  }
+}
+
+function resetReading(){
+  document.getElementById('result').classList.remove('on');
+  document.getElementById('formSection').style.display='';
+  document.getElementById('sbtn').disabled=false;
+  ['fn','mn','ln','bd'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('bdblock').style.display='none';
+  document.getElementById('geoImgWrap').style.display='none';
+  document.getElementById('gcvs').style.display='none';
+  document.getElementById('geoGenerating').style.display='block';
+  document.getElementById('geoLabel').style.display='none';
+  window.scrollTo({top:document.getElementById('reading-tool').offsetTop-80,behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
