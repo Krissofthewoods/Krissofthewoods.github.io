@@ -99,6 +99,14 @@
       text-transform: uppercase;
       margin: 3rem 0 1.2rem;
     }
+    h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: rgba(212,170,80,0.8);
+      text-transform: uppercase;
+      margin: 2rem 0 0.8rem;
+    }
     .number-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -169,6 +177,234 @@
       margin: 0;
       line-height: 1.7;
     }
+
+    /* ── AUDIO PLAYER ── */
+    .audio-section {
+      background: linear-gradient(135deg, rgba(212,170,80,0.06) 0%, rgba(74,158,221,0.04) 100%);
+      border: 1px solid rgba(212,170,80,0.3);
+      border-radius: 10px;
+      padding: 2.5rem 2rem;
+      margin: 3rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .audio-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.5;
+    }
+    .audio-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      color: rgba(212,170,80,0.6);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .audio-title {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+    .audio-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: rgba(212,170,80,0.55);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .audio-desc {
+      font-size: 0.9rem;
+      color: var(--ivory-dim);
+      line-height: 1.75;
+      margin-bottom: 1.8rem;
+    }
+    .audio-player-wrap {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(212,170,80,0.2);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .audio-player-wrap audio {
+      width: 100%;
+      height: 40px;
+      outline: none;
+    }
+    /* Style the native audio player */
+    audio::-webkit-media-controls-panel {
+      background: rgba(7,10,20,0.95);
+    }
+    audio::-webkit-media-controls-play-button,
+    audio::-webkit-media-controls-mute-button {
+      filter: invert(0.8) sepia(1) saturate(3) hue-rotate(10deg);
+    }
+    .audio-specs {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .audio-spec {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .audio-spec-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.25em;
+      color: rgba(212,170,80,0.5);
+      text-transform: uppercase;
+    }
+    .audio-spec-value {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      color: var(--gold);
+    }
+    .audio-note {
+      font-size: 0.78rem;
+      color: rgba(248,244,238,0.45);
+      font-style: italic;
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+
+    /* ── PETAL GRID ── */
+    .petal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .petal-card {
+      background: rgba(212,170,80,0.03);
+      border: 1px solid rgba(212,170,80,0.15);
+      border-radius: 6px;
+      padding: 0.9rem 0.75rem;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .petal-card:hover {
+      border-color: rgba(212,170,80,0.35);
+      background: rgba(212,170,80,0.06);
+    }
+    .petal-num {
+      font-family: 'Cinzel', serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      color: rgba(212,170,80,0.45);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .petal-hz {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .petal-note {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      color: rgba(212,170,80,0.7);
+      margin-bottom: 0.3rem;
+    }
+    .petal-vol {
+      font-size: 0.68rem;
+      color: rgba(248,244,238,0.4);
+    }
+    .petal-vol-bar {
+      height: 3px;
+      background: rgba(212,170,80,0.15);
+      border-radius: 2px;
+      margin-top: 0.4rem;
+      overflow: hidden;
+    }
+    .petal-vol-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), rgba(212,170,80,0.4));
+      border-radius: 2px;
+    }
+
+    /* ── COMING SOON ── */
+    .coming-soon-section {
+      border: 1px solid rgba(212,170,80,0.2);
+      border-radius: 10px;
+      padding: 2.5rem 2rem;
+      margin: 3rem 0;
+      text-align: center;
+      background: rgba(212,170,80,0.02);
+    }
+    .coming-soon-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      color: rgba(212,170,80,0.5);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .coming-soon-title {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      color: var(--gold);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .coming-soon-desc {
+      font-size: 0.9rem;
+      color: var(--ivory-dim);
+      line-height: 1.75;
+      max-width: 540px;
+      margin: 0 auto 1.8rem;
+    }
+    .chakra-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .chakra-card {
+      border: 1px solid rgba(212,170,80,0.12);
+      border-radius: 6px;
+      padding: 1rem 0.75rem;
+      text-align: center;
+      background: rgba(255,255,255,0.02);
+    }
+    .chakra-card.active {
+      border-color: rgba(212,170,80,0.35);
+      background: rgba(212,170,80,0.05);
+    }
+    .chakra-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin: 0 auto 0.5rem;
+    }
+    .chakra-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ivory-dim);
+      margin-bottom: 0.2rem;
+    }
+    .chakra-status {
+      font-size: 0.62rem;
+      color: rgba(248,244,238,0.35);
+      font-style: italic;
+    }
+    .chakra-card.active .chakra-status {
+      color: rgba(212,170,80,0.7);
+      font-style: normal;
+    }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -274,6 +510,226 @@
     </tbody>
   </table>
 
+  <!-- ── AUDIO PLAYER SECTION ── -->
+  <div class="audio-section" id="listen">
+    <div class="audio-label">The 192 System &middot; Audio</div>
+    <div class="audio-title">The 192 Living Superconductor</div>
+    <div class="audio-subtitle">16-Petal Harmonic Chord &middot; Mastered &middot; 44.1 kHz Stereo</div>
+
+    <p class="audio-desc">This is the 192 System rendered as sound. All 16 harmonics of the 192 Hz fundamental are present simultaneously &mdash; each one scaled in amplitude so that the higher frequencies shimmer above the grounding foundation rather than competing with it. A 7.83 Hz Schumann pulse is embedded in the mix as a binaural grounding element. The result is a single, mathematically precise chord that contains the entire harmonic architecture of the system in one listening experience.</p>
+
+    <div class="audio-player-wrap">
+      <audio controls preload="metadata">
+        <source src="192-living-superconductor.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="audio-specs">
+      <div class="audio-spec">
+        <span class="audio-spec-label">Fundamental</span>
+        <span class="audio-spec-value">192 Hz (G3)</span>
+      </div>
+      <div class="audio-spec">
+        <span class="audio-spec-label">Harmonics</span>
+        <span class="audio-spec-value">16 Petals</span>
+      </div>
+      <div class="audio-spec">
+        <span class="audio-spec-label">Grounding Pulse</span>
+        <span class="audio-spec-value">7.83 Hz Schumann</span>
+      </div>
+      <div class="audio-spec">
+        <span class="audio-spec-label">Duration</span>
+        <span class="audio-spec-value">~60 seconds</span>
+      </div>
+      <div class="audio-spec">
+        <span class="audio-spec-label">Format</span>
+        <span class="audio-spec-value">320kbps MP3 Stereo</span>
+      </div>
+    </div>
+
+    <p class="audio-note">Use headphones for the full binaural effect. The Schumann pulse is most perceptible with eyes closed in a quiet environment. This is not background music &mdash; it is a structured listening practice.</p>
+  </div>
+
+  <!-- ── 16 PETAL CHORD DOCUMENTATION ── -->
+  <h2>The Sonic Architecture: 16-Petal Harmonic Chord</h2>
+
+  <p>The audio above is not a musical composition in the conventional sense. It is a direct translation of a geometric concept into sound. The 16-petal lotus structure of the 192 Mandala has a precise acoustic equivalent: a harmonic series of 16 frequencies, each one an integer multiple of the 192 Hz fundamental. This document details the technical construction of that chord.</p>
+
+  <h3>Amplitude Scaling</h3>
+
+  <p>If all 16 harmonics were generated at equal volume, the result would be acoustically harsh &mdash; a dense, buzzing tone with no sense of depth or ground. To create a meditative, layered timbre, each harmonic's amplitude is scaled inversely to its position in the series. The formula used is <code style="font-family:monospace;font-size:0.85em;color:var(--gold);background:rgba(212,170,80,0.08);padding:0.1em 0.4em;border-radius:3px;">1.0 / (n ^ 0.6)</code> where <em>n</em> is the harmonic number. This means the fundamental (n=1) plays at full volume, while each successive harmonic is progressively quieter &mdash; present, but receding into the upper registers as shimmer rather than dominance.</p>
+
+  <p>The 7.83 Hz Schumann Resonance pulse is added as a binaural element beneath the harmonic stack. This is the fundamental electromagnetic resonance of the Earth's atmosphere &mdash; the frequency at which the space between the Earth's surface and the ionosphere resonates. Its inclusion is intended to entrain the listener toward the Alpha/Theta brainwave boundary (7&ndash;12 Hz), the state associated with deep relaxation, meditative awareness, and open-field perception.</p>
+
+  <h3>The 16 Petals &mdash; Complete Harmonic Table</h3>
+
+  <p>Each petal corresponds to one harmonic of the 192 Hz fundamental. The volume bar below each frequency shows its relative amplitude in the final mix.</p>
+
+  <div class="petal-grid">
+    <div class="petal-card">
+      <div class="petal-num">Petal 01</div>
+      <div class="petal-hz">192 Hz</div>
+      <div class="petal-note">G3</div>
+      <div class="petal-vol">Vol 1.00</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:100%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 02</div>
+      <div class="petal-hz">384 Hz</div>
+      <div class="petal-note">G4</div>
+      <div class="petal-vol">Vol 0.66</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:66%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 03</div>
+      <div class="petal-hz">576 Hz</div>
+      <div class="petal-note">D5</div>
+      <div class="petal-vol">Vol 0.52</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:52%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 04</div>
+      <div class="petal-hz">768 Hz</div>
+      <div class="petal-note">G5</div>
+      <div class="petal-vol">Vol 0.44</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:44%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 05</div>
+      <div class="petal-hz">960 Hz</div>
+      <div class="petal-note">B5</div>
+      <div class="petal-vol">Vol 0.38</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:38%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 06</div>
+      <div class="petal-hz">1152 Hz</div>
+      <div class="petal-note">D6</div>
+      <div class="petal-vol">Vol 0.34</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:34%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 07</div>
+      <div class="petal-hz">1344 Hz</div>
+      <div class="petal-note">F6</div>
+      <div class="petal-vol">Vol 0.31</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:31%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 08</div>
+      <div class="petal-hz">1536 Hz</div>
+      <div class="petal-note">G6</div>
+      <div class="petal-vol">Vol 0.29</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:29%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 09</div>
+      <div class="petal-hz">1728 Hz</div>
+      <div class="petal-note">A6</div>
+      <div class="petal-vol">Vol 0.27</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:27%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 10</div>
+      <div class="petal-hz">1920 Hz</div>
+      <div class="petal-note">B6</div>
+      <div class="petal-vol">Vol 0.25</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:25%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 11</div>
+      <div class="petal-hz">2112 Hz</div>
+      <div class="petal-note">C#7</div>
+      <div class="petal-vol">Vol 0.24</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:24%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 12</div>
+      <div class="petal-hz">2304 Hz</div>
+      <div class="petal-note">D7</div>
+      <div class="petal-vol">Vol 0.23</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:23%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 13</div>
+      <div class="petal-hz">2496 Hz</div>
+      <div class="petal-note">E7</div>
+      <div class="petal-vol">Vol 0.21</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:21%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 14</div>
+      <div class="petal-hz">2688 Hz</div>
+      <div class="petal-note">F7</div>
+      <div class="petal-vol">Vol 0.21</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:21%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 15</div>
+      <div class="petal-hz">2880 Hz</div>
+      <div class="petal-note">F#7</div>
+      <div class="petal-vol">Vol 0.20</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:20%"></div></div>
+    </div>
+    <div class="petal-card">
+      <div class="petal-num">Petal 16</div>
+      <div class="petal-hz">3072 Hz</div>
+      <div class="petal-note">G7</div>
+      <div class="petal-vol">Vol 0.19</div>
+      <div class="petal-vol-bar"><div class="petal-vol-fill" style="width:19%"></div></div>
+    </div>
+  </div>
+
+  <p>The chord spans five octaves &mdash; from G3 (192 Hz) to G7 (3072 Hz) &mdash; and contains all twelve pitch classes of the chromatic scale within its harmonic structure. This is the acoustic equivalent of the mandala: a single unified form that contains the entire tonal universe derived from one fundamental.</p>
+
+  <!-- ── COMING SOON ── -->
+  <div class="coming-soon-section">
+    <div class="coming-soon-label">In Development &middot; Taylored Harmony</div>
+    <div class="coming-soon-title">A Harmonic System for Each Chakra</div>
+    <p class="coming-soon-desc">The 192 Living Superconductor is the first in a series of chakra-specific harmonic systems. Each system will have its own fundamental frequency, its own 16-petal harmonic chord, its own geometric mandala, and its own audio. The Crown system above is complete. The remaining seven are in development.</p>
+
+    <div class="chakra-preview-grid">
+      <div class="chakra-card active">
+        <div class="chakra-dot" style="background:radial-gradient(circle,#d4aa50,rgba(212,170,80,0.3));box-shadow:0 0 8px rgba(212,170,80,0.5);"></div>
+        <div class="chakra-name">Crown</div>
+        <div class="chakra-status">Live &mdash; 192 Hz</div>
+      </div>
+      <div class="chakra-card">
+        <div class="chakra-dot" style="background:radial-gradient(circle,#9b6fd4,rgba(155,111,212,0.2));"></div>
+        <div class="chakra-name">Third Eye</div>
+        <div class="chakra-status">Coming soon</div>
+      </div>
+      <div class="chakra-card">
+        <div class="chakra-dot" style="background:radial-gradient(circle,#4a9edd,rgba(74,158,221,0.2));"></div>
+        <div class="chakra-name">Throat</div>
+        <div class="chakra-status">Coming soon</div>
+      </div>
+      <div class="chakra-card">
+        <div class="chakra-dot" style="background:radial-gradient(circle,#5dba7d,rgba(93,186,125,0.2));"></div>
+        <div class="chakra-name">Heart</div>
+        <div class="chakra-status">Coming soon</div>
+      </div>
+      <div class="chakra-card">
+        <div class="chakra-dot" style="background:radial-gradient(circle,#f0d080,rgba(240,208,128,0.2));"></div>
+        <div class="chakra-name">Solar</div>
+        <div class="chakra-status">Coming soon</div>
+      </div>
+      <div class="chakra-card">
+        <div class="chakra-dot" style="background:radial-gradient(circle,#e07840,rgba(224,120,64,0.2));"></div>
+        <div class="chakra-name">Sacral</div>
+        <div class="chakra-status">Coming soon</div>
+      </div>
+      <div class="chakra-card">
+        <div class="chakra-dot" style="background:radial-gradient(circle,#e05c5c,rgba(224,92,92,0.2));"></div>
+        <div class="chakra-name">Root</div>
+        <div class="chakra-status">Coming soon</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.78rem;color:rgba(248,244,238,0.4);font-style:italic;margin-top:1rem;">Each system will be added to this page as it is completed. No timeline is given because this work is done when it is done.</p>
+  </div>
+
   <div class="disclaimer">
     <p><strong style="color:rgba(212,170,80,0.8);">A note on claims:</strong> The 192 System is a personal synthesis framework developed through lived experience and pattern observation. It is not a medical system, a scientific theory, or a clinical protocol. The frequency associations described here draw on published research in cymatics, bioacoustics, and neuroscience, but the specific mapping to body regions and emotional patterns is my own synthesis. I am not a doctor, therapist, or scientist. Nothing on this page should be used in place of professional medical or mental health care.</p>
   </div>
@@ -282,6 +738,8 @@
 
 <footer>
   <a href="index.html">&#8592; Return to Taylored Harmony</a>
+  &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+  <a href="mandala.html">The 192 Mandala</a>
   &nbsp;&nbsp;&middot;&nbsp;&nbsp;
   <a href="sources.html">Sources &amp; Citations</a>
 </footer>
