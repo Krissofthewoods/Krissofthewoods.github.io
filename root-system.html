@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Root System — 48 Hz — Taylored Harmony</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06060f;
+      --red: #c8453a;
+      --red-light: #e8705a;
+      --red-dim: rgba(180,60,40,0.5);
+      --red-faint: rgba(180,60,40,0.08);
+      --ivory: #f0e8d8;
+      --ivory-dim: rgba(240,232,216,0.7);
+      --ivory-faint: rgba(240,232,216,0.45);
+      --gold-text: #e8a070;
+      --border: rgba(180,60,40,0.15);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ivory);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(6,6,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(180,60,40,0.12);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-home {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: rgba(200,69,58,0.7);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-home:hover { color: var(--red); }
+    .nav-breadcrumb {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      color: rgba(180,60,40,0.4);
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+    .eyebrow {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: rgba(180,60,40,0.6);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 6.5vw, 4rem);
+      color: var(--red);
+      line-height: 1.1;
+      margin-bottom: 1.6rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-title em { font-style: italic; color: var(--red-light); }
+    .hero-lead {
+      font-size: clamp(0.88rem, 2vw, 1rem);
+      color: rgba(240,232,216,0.55);
+      line-height: 2;
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      letter-spacing: 0.03em;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 auto;
+      max-width: 180px;
+    }
+    .dline { flex: 1; height: 1px; background: rgba(180,60,40,0.3); }
+    .dglyph { color: rgba(180,60,40,0.5); font-size: 0.9rem; }
+
+    /* ── SECTIONS ── */
+    .sec {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 68px 24px;
+      border-bottom: 1px solid rgba(180,60,40,0.08);
+    }
+    .sec:last-of-type { border-bottom: none; }
+    .sec-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.52rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: rgba(180,60,40,0.5);
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sec-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(180,60,40,0.12);
+    }
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      color: var(--red);
+      line-height: 1.2;
+      margin-bottom: 1.4rem;
+      letter-spacing: 0.02em;
+    }
+    .sec-title em { font-style: italic; color: var(--red-light); }
+    .body {
+      font-size: 0.9rem;
+      color: var(--ivory-dim);
+      line-height: 2;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.1rem;
+    }
+    .body:last-child { margin-bottom: 0; }
+    .body b, .body strong { color: var(--gold-text); font-weight: 400; font-family: 'Cormorant Garamond', serif; font-size: 1.04em; }
+
+    /* ── PULL QUOTE ── */
+    .pq {
+      border-left: 2px solid rgba(180,60,40,0.5);
+      padding: 22px 26px;
+      margin: 2rem 0;
+      background: rgba(180,60,40,0.04);
+    }
+    .pq p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.6vw, 1.38rem);
+      font-style: italic;
+      color: rgba(240,232,216,0.82);
+      line-height: 1.65;
+    }
+
+    /* ── SYSTEM MAP ── */
+    .system-map { display: grid; grid-template-columns: 1fr; gap: 3px; margin: 1.8rem 0; }
+    .sm-row {
+      display: grid;
+      grid-template-columns: 40px 1fr 100px;
+      gap: 14px;
+      align-items: center;
+      padding: 10px 16px;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .sm-row.active {
+      border-color: rgba(180,60,40,0.3);
+      background: rgba(180,60,40,0.04);
+    }
+    .sm-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    .sm-name { font-size: 0.82rem; color: rgba(240,232,216,0.6); }
+    .sm-name b { color: var(--gold-text); font-weight: 400; }
+    .sm-hz {
+      font-size: 0.72rem;
+      color: rgba(240,232,216,0.35);
+      text-align: right;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ── SCIENCE BLOCK ── */
+    .sci {
+      padding: 24px 26px;
+      border: 1px solid rgba(180,60,40,0.12);
+      background: rgba(180,60,40,0.02);
+      margin: 1.6rem 0;
+      border-left: 2px solid rgba(180,60,40,0.3);
+    }
+    .sci-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(180,60,40,0.45);
+      margin-bottom: 0.8rem;
+    }
+
+    /* ── PETAL GRID ── */
+    .petal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 2rem 0;
+    }
+    .petal-card {
+      padding: 24px 22px;
+      border: 1px solid rgba(180,60,40,0.15);
+      background: rgba(180,60,40,0.03);
+      border-top: 3px solid;
+    }
+    .pc-color { width: 100%; height: 6px; margin-bottom: 10px; border-radius: 0; }
+    .pc-num { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(240,232,216,0.35); margin-bottom: 7px; }
+    .pc-hz { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--red); margin-bottom: 4px; line-height: 1; }
+    .pc-note { font-family: 'Cinzel', serif; font-size: 0.65rem; color: rgba(240,232,216,0.4); letter-spacing: 0.15em; margin-bottom: 12px; }
+    .pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 12px; }
+    .pc-item { font-size: 0.72rem; color: rgba(240,232,216,0.55); line-height: 1.6; }
+    .pc-item span { display: block; font-family: 'Cinzel', serif; font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,232,216,0.3); margin-bottom: 2px; }
+    .pc-body { font-size: 0.78rem; color: rgba(240,232,216,0.5); line-height: 1.85; }
+
+    /* ── GEO GRID ── */
+    .geo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin: 1.8rem 0;
+    }
+    .geo-tile {
+      padding: 20px 16px;
+      border: 1px solid rgba(180,60,40,0.12);
+      background: rgba(180,60,40,0.02);
+      text-align: center;
+    }
+    .geo-form { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--red); margin-bottom: 8px; }
+    .geo-body { font-size: 0.75rem; color: rgba(240,232,216,0.48); line-height: 1.8; }
+
+    /* ── HEBREW ── */
+    .heb-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 1.6rem 0;
+    }
+    .heb-block {
+      padding: 18px 14px;
+      border: 1px solid rgba(180,60,40,0.1);
+      background: rgba(180,60,40,0.02);
+      text-align: center;
+    }
+    .hb-letter { font-size: 2.4rem; color: var(--red); display: block; line-height: 1; margin-bottom: 5px; }
+    .hb-name { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(180,60,40,0.5); display: block; margin-bottom: 5px; }
+    .hb-val { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: rgba(240,232,216,0.32); }
+    .hb-meaning { font-size: 0.68rem; color: rgba(240,232,216,0.38); display: block; margin-top: 4px; font-style: italic; }
+
+    /* ── TABLE ── */
+    .mtable { width: 100%; border-collapse: collapse; margin: 1.8rem 0; }
+    .mtable th {
+      text-align: left;
+      font-family: 'Cinzel', serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: rgba(180,60,40,0.5);
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(180,60,40,0.15);
+      font-weight: 400;
+    }
+    .mtable td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(180,60,40,0.07);
+      font-size: 0.82rem;
+      color: rgba(240,232,216,0.62);
+      vertical-align: top;
+    }
+    .mtable td:first-child {
+      color: var(--gold-text);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    .mtable tr:last-child td { border-bottom: none; }
+
+    /* ── CONNECTION BLOCK ── */
+    .connection {
+      padding: 28px 30px;
+      border: 1px solid rgba(100,150,200,0.2);
+      background: rgba(100,150,200,0.03);
+      margin: 2rem 0;
+      border-left: 2px solid rgba(100,150,200,0.4);
+    }
+    .conn-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.52rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(100,150,200,0.5);
+      margin-bottom: 0.8rem;
+    }
+
+    /* ── COMPARISON ── */
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 1.8rem 0; }
+    .comp-block { padding: 22px 20px; border: 1px solid; }
+    .comp-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; margin-bottom: 14px; }
+    .comp-list { list-style: none; }
+    .comp-list li { font-size: 0.78rem; color: rgba(240,232,216,0.52); line-height: 1.9; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .comp-list li:last-child { border-bottom: none; }
+    .comp-list li::before { content: '·  '; color: rgba(240,232,216,0.25); }
+
+    /* ── USE STEPS ── */
+    .use-steps { display: flex; flex-direction: column; gap: 18px; margin: 1.8rem 0; }
+    .use-step { display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
+    .step-num { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; color: rgba(180,60,40,0.35); line-height: 1; }
+    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--red); margin-bottom: 6px; }
+    .step-body { font-size: 0.82rem; color: rgba(240,232,216,0.55); line-height: 1.9; }
+
+    /* ── CTA ── */
+    .cta {
+      text-align: center;
+      padding: 72px 24px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+      color: var(--red);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .cta-body {
+      font-size: 0.85rem;
+      color: rgba(240,232,216,0.45);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn {
+      display: inline-block;
+      border: 1px solid var(--red);
+      color: var(--red);
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+      background: transparent;
+      margin: 6px;
+    }
+    .btn:hover { background: var(--red); color: var(--bg); }
+    .btn-fill {
+      display: inline-block;
+      background: var(--red);
+      color: var(--ivory);
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      text-decoration: none;
+      margin: 6px;
+      transition: opacity 0.3s;
+    }
+    .btn-fill:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(180,60,40,0.12);
+    }
+    footer a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: rgba(180,60,40,0.6);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--red); }
+
+    @media (max-width: 580px) {
+      .petal-grid { grid-template-columns: 1fr; }
+      .geo-grid { grid-template-columns: 1fr 1fr; }
+      .heb-row { grid-template-columns: repeat(2, 1fr); }
+      .compare { grid-template-columns: 1fr; }
+      .sm-row { grid-template-columns: 36px 1fr 80px; }
+      .sec { padding: 48px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-home">&#8592; Taylored Harmony</a>
+  <span class="nav-breadcrumb">The Root System &middot; 48 Hz</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <canvas class="hero-bg" id="hcvs"></canvas>
+  <div class="hero-inner">
+    <span class="eyebrow">Taylored Harmony &middot; The Root System &middot; Muladhara</span>
+    <h1 class="hero-title">The Root System<br><em>48 Hz &middot; Four Harmonics &middot; Earth</em></h1>
+    <p class="hero-lead">The first system. The foundation of everything built above it. Before authentic voice, before creative flow, before vision and wisdom &mdash; there must be ground. The Root System is the harmonic architecture of physical sovereignty, ancestral inheritance, and the body as home.</p>
+    <div class="divider"><div class="dline"></div><span class="dglyph">&#10022;</span><div class="dline"></div></div>
+  </div>
+</div>
+
+<!-- WHERE IT FITS -->
+<div class="sec">
+  <div class="sec-label">Context</div>
+  <h2 class="sec-title">Where the Root System<br><em>fits in the complete framework</em></h2>
+
+  <p class="body">The 192 System was built around the throat chakra &mdash; the center of authentic expression, of truth spoken into form. Its mathematics: 12 (base) &times; 16 (petals) = 192 Hz. The formula was always pointing at something larger. Each chakra has a specific number of petals in the traditional system. When the same base-12 mathematics is applied to each petal count, a complete harmonic framework emerges &mdash; one where every chakra center has its own fundamental frequency, its own harmonic series, its own geometric instrument.</p>
+
+  <p class="body">The Root System is where the complete framework begins. Not because it is the simplest &mdash; but because it is the most foundational. You cannot sustain authentic expression without physical sovereignty. You cannot open the heart without safety in the body. You cannot access vision without ground to stand on. The sequence is not arbitrary. It is anatomical, mathematical, and experiential simultaneously.</p>
+
+  <div class="system-map">
+    <div class="sm-row active"><span class="sm-num" style="color:var(--red);">1</span><span class="sm-name"><b>Root &mdash; Muladhara</b> &middot; Earth &middot; Physical sovereignty</span><span class="sm-hz">48 Hz</span></div>
+    <div class="sm-row"><span class="sm-num" style="color:rgba(220,120,60,.6);">2</span><span class="sm-name">Sacral &mdash; Svadhisthana &middot; Water &middot; Creative flow</span><span class="sm-hz">72 Hz</span></div>
+    <div class="sm-row"><span class="sm-num" style="color:rgba(220,180,40,.6);">3</span><span class="sm-name">Solar Plexus &mdash; Manipura &middot; Fire &middot; Sovereign self</span><span class="sm-hz">120 Hz</span></div>
+    <div class="sm-row"><span class="sm-num" style="color:rgba(60,160,80,.6);">4</span><span class="sm-name">Heart &mdash; Anahata &middot; Air &middot; Integration</span><span class="sm-hz">144 Hz</span></div>
+    <div class="sm-row"><span class="sm-num" style="color:rgba(80,140,200,.6);">5</span><span class="sm-name">Throat &mdash; Vishuddha &middot; Ether &middot; Authentic expression</span><span class="sm-hz">192 Hz</span></div>
+    <div class="sm-row"><span class="sm-num" style="color:rgba(80,80,200,.6);">6</span><span class="sm-name">Third Eye &mdash; Ajna &middot; Light &middot; Pattern recognition</span><span class="sm-hz">24 Hz*</span></div>
+    <div class="sm-row"><span class="sm-num" style="color:rgba(160,80,200,.6);">7</span><span class="sm-name">Crown &mdash; Sahasrara &middot; Consciousness &middot; Unified field</span><span class="sm-hz">&infin;</span></div>
+  </div>
+
+  <p class="body" style="font-size:.72rem;color:rgba(240,232,216,.3);">* Third Eye frequency sits below standard hearing threshold &mdash; felt as vibration rather than heard as sound. Crown transcends the mathematical system entirely. &middot; All frequencies generated by the formula: base-12 &times; petal count.</p>
+
+  <div class="pq">
+    <p>The fourth harmonic of the Root System is 192 Hz &mdash; the exact fundamental of the Throat System. The ceiling of the root is the floor of the throat. The body&rsquo;s ground and the voice&rsquo;s foundation are the same frequency, two octaves apart. You cannot speak from an unsafe body. The mathematics confirms what the body already knows.</p>
+  </div>
+</div>
+
+<!-- THE MATHEMATICS -->
+<div class="sec">
+  <div class="sec-label">Mathematics</div>
+  <h2 class="sec-title">How the Root frequency<br><em>was calculated</em></h2>
+
+  <p class="body">The Muladhara chakra has four petals in its traditional symbol. The 192 System is built on base-12 mathematics &mdash; the most harmonically rich number base, containing more divisors than base-10, used in the most precise ancient mathematical traditions from Babylonian astronomy to the division of the circle into 360 degrees.</p>
+
+  <p class="body">Applying the same generative formula: <strong>base-12 &times; petal count = fundamental frequency.</strong></p>
+
+  <p class="body" style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--red);padding:20px 0;">12 &times; 4 = <strong style="font-size:2rem;">48 Hz</strong></p>
+
+  <p class="body">48 Hz is G1 &mdash; the note G, two octaves below the 192 System&rsquo;s G3. It sits at the boundary between what the ear hears as pitch and what the body feels as vibration. Deep bass guitar, cello&rsquo;s lowest resonance, the physical thrum of large structures. At 48 Hz, sound is experienced as much through the bones and chest as through the ears.</p>
+
+  <div class="sci">
+    <div class="sci-label">The octave relationship</div>
+    <p class="body" style="margin-bottom:10px;">48 Hz doubled = 96 Hz. Doubled again = 192 Hz. The root fundamental and the throat fundamental are separated by exactly two octaves &mdash; they are the same note (G), the same pitch class, at different registers. In music, two notes an octave apart produce perfect consonance &mdash; the most stable harmonic relationship possible. When the root system and throat system are played together, they do not compete. They reinforce each other.</p>
+    <p class="body" style="margin-bottom:0;">This means working the root system is not separate from the throat work &mdash; it is the same work at a deeper register. Grounding the body and finding authentic voice are the same operation at different frequencies.</p>
+  </div>
+</div>
+
+<!-- THE FOUR HARMONICS -->
+<div class="sec">
+  <div class="sec-label">The Four Petals</div>
+  <h2 class="sec-title">Four harmonics<br><em>one for each petal</em></h2>
+
+  <p class="body">Each of the four petals corresponds to one harmonic in the series &mdash; each an integer multiple of the 48 Hz fundamental, following the same mathematical architecture as the 192 System&rsquo;s 16 harmonics. Each petal carries a specific frequency, color, direction, element, zodiac sign, and domain of embodied experience.</p>
+
+  <div class="petal-grid">
+    <div class="petal-card" style="border-top-color:#8b1a1a;">
+      <div class="pc-color" style="background:linear-gradient(90deg,#8b1a1a,#b02020);"></div>
+      <div class="pc-num">Petal One &middot; North</div>
+      <div class="pc-hz">48 Hz</div>
+      <div class="pc-note">G1 &middot; Deep Crimson Red</div>
+      <div class="pc-grid">
+        <div class="pc-item"><span>Direction</span>North</div>
+        <div class="pc-item"><span>Element</span>Earth</div>
+        <div class="pc-item"><span>Zodiac</span>Capricorn &#9811;</div>
+        <div class="pc-item"><span>Color</span>Deep crimson</div>
+      </div>
+      <div class="pc-body">The densest petal. Physical foundation &mdash; bone, mineral, the body&rsquo;s relationship to gravity. The ancestors, the inherited physical form. Capricorn: structure, discipline, the bones of the world, Saturn&rsquo;s architecture. This petal is the body being a body &mdash; fully present in matter, fully physical, belonging to the earth.</div>
+    </div>
+
+    <div class="petal-card" style="border-top-color:#c85a20;">
+      <div class="pc-color" style="background:linear-gradient(90deg,#c85a20,#e07030);"></div>
+      <div class="pc-num">Petal Two &middot; East</div>
+      <div class="pc-hz">96 Hz</div>
+      <div class="pc-note">G2 &middot; Orange-Red / Living Fire</div>
+      <div class="pc-grid">
+        <div class="pc-item"><span>Direction</span>East</div>
+        <div class="pc-item"><span>Element</span>Air</div>
+        <div class="pc-item"><span>Zodiac</span>Virgo &#9805;</div>
+        <div class="pc-item"><span>Color</span>Orange-red</div>
+      </div>
+      <div class="pc-body">The vitality petal. The nervous system&rsquo;s baseline tone &mdash; the electrical hum of a body at rest that is neither in crisis nor in performance. Virgo: the body&rsquo;s own intelligence, nervous system refinement, the body that reads its environment accurately. East &mdash; sunrise, the first breath, new life beginning. One octave above the foundation.</div>
+    </div>
+
+    <div class="petal-card" style="border-top-color:#c8960a;">
+      <div class="pc-color" style="background:linear-gradient(90deg,#c8960a,#e0b020);"></div>
+      <div class="pc-num">Petal Three &middot; South</div>
+      <div class="pc-hz">144 Hz</div>
+      <div class="pc-note">D3 &middot; Gold / Amber</div>
+      <div class="pc-grid">
+        <div class="pc-item"><span>Direction</span>South</div>
+        <div class="pc-item"><span>Element</span>Fire</div>
+        <div class="pc-item"><span>Zodiac</span>Taurus &#9801;</div>
+        <div class="pc-item"><span>Color</span>Gold / amber</div>
+      </div>
+      <div class="pc-body">The bridge petal. 144 = 12&sup2; &mdash; the perfect square of base-12. Also the Heart chakra&rsquo;s own mathematical signature (12 petals &times; 12 = 144). The third petal of root reaches toward the heart &mdash; physical safety creating the conditions for emotional opening. Taurus: the body&rsquo;s senses as instruments of pleasure and discernment, the earth that endures. Gold: the harmonizing center.</div>
+    </div>
+
+    <div class="petal-card" style="border-top-color:#2060a0;">
+      <div class="pc-color" style="background:linear-gradient(90deg,#2060a0,#4090c8);"></div>
+      <div class="pc-num">Petal Four &middot; West</div>
+      <div class="pc-hz">192 Hz</div>
+      <div class="pc-note">G3 &middot; Light Blue / Turquoise</div>
+      <div class="pc-grid">
+        <div class="pc-item"><span>Direction</span>West</div>
+        <div class="pc-item"><span>Element</span>Water</div>
+        <div class="pc-item"><span>Zodiac</span>Scorpio &#9807;</div>
+        <div class="pc-item"><span>Color</span>Light blue</div>
+      </div>
+      <div class="pc-body">The threshold petal. 192 Hz is simultaneously the fourth harmonic of the root AND the fundamental of the throat system. Where ground becomes voice. Where inherited pattern meets authentic expression. Scorpio: the hidden depths, transformation through descent, what is carried from those who came before. West &mdash; the direction of completion, the sun setting into the next thing. Blue: the Throat System&rsquo;s color, visible in this petal as the doorway between systems.</div>
+    </div>
+  </div>
+
+  <p class="body">The color progression across the four petals &mdash; deep crimson &rarr; orange-red &rarr; gold &rarr; light blue &mdash; moves from the densest, most physical frequency toward the lightest, most expressive. This is the direction of the ascending harmonic series encoded as visible color. The root mandala carries the complete journey from earth to expression within its four petals.</p>
+</div>
+
+<!-- THE GEOMETRY -->
+<div class="sec">
+  <div class="sec-label">Sacred Geometry</div>
+  <h2 class="sec-title">The geometric forms<br><em>and what they encode</em></h2>
+
+  <p class="body">The root chakra symbol contains three distinct geometric layers, each one making a precise statement about the nature of physical existence and the relationship between consciousness and matter.</p>
+
+  <div class="geo-grid">
+    <div class="geo-tile">
+      <div class="geo-form">The Circle</div>
+      <div class="geo-body">Infinite awareness containing finite form. The unmanifest holding the manifest. Every point equidistant from center &mdash; no preferred direction of stress. The nervous system reads this as complete environmental safety before any conscious processing. You are always larger than your body. The awareness holding the body has no edges.</div>
+    </div>
+    <div class="geo-tile">
+      <div class="geo-form">The Square</div>
+      <div class="geo-body">Physical manifestation at its most stable. Four sides, four corners, four right angles &mdash; the only regular polygon where every interior angle is identical and orthogonal. This is the geometry nature uses for stable physical structures: crystals, molecular lattices, the organizing principle of matter. The square inside the circle says: the body is real, specific, and held within something infinite.</div>
+    </div>
+    <div class="geo-tile">
+      <div class="geo-form">The Downward Triangle</div>
+      <div class="geo-body">The descent complete. Spirit has fully entered matter. Consciousness has fully taken physical form. The point aimed at the earth &mdash; not descending, but arrived. The foundational miracle of the root chakra: that infinite awareness chose to take physical form and is fully, completely here. Not trapped. Arrived. The body as an act of cosmic intention.</div>
+    </div>
+  </div>
+
+  <div class="pq">
+    <p>The circle around the square is the most fundamental geometric statement: the infinite holds the finite. You are always larger than your body. The body is completely real. Both are true simultaneously. The root chakra is where these two truths are held in their most concentrated form &mdash; not resolved, but held.</p>
+  </div>
+
+  <p class="body">The four petals are not decorative lotus flowers. They are four vortices of life force radiating from the central ground in four directions simultaneously. Each petal is a counter-rotating spiral of energy &mdash; the way ancient Indian artists depicted a vortex seen from above. When the root center is functioning with full coherence, these four frequencies radiate equally in all four directions. That equal radiation is what being grounded actually feels like: not heaviness, not limitation &mdash; <strong>stability in all directions at once.</strong></p>
+
+  <p class="body">The LAM syllable at the absolute center is the activation sound &mdash; the Bija that, when spoken, produces the physical resonance of all four harmonics simultaneously in the body. The point above the Sanskrit character is the Brahma bindu &mdash; the seed point, the zeroth element, the dimensionless origin still present at the center of full physical embodiment. No matter how deep into matter consciousness descends, the origin point remains.</p>
+</div>
+
+<!-- THE HEBREW ENCODING -->
+<div class="sec">
+  <div class="sec-label">Hebrew Geometric Encoding</div>
+  <h2 class="sec-title">The Root compression word<br><em>&#1491;&#1488;&#1502;&#1510; &mdash; four letters, four petals</em></h2>
+
+  <p class="body">Following the same method used to build the Throat System compression word, the Root System&rsquo;s essential qualities are encoded in four Hebrew letters &mdash; one per petal, each selected for the precise quality it encodes and its mathematical value within the system.</p>
+
+  <div class="heb-row">
+    <div class="heb-block">
+      <span class="hb-letter">&#1491;</span>
+      <span class="hb-name">Dalet</span>
+      <span class="hb-val">4</span>
+      <span class="hb-meaning">The door &middot; threshold &middot; humble opening</span>
+    </div>
+    <div class="heb-block">
+      <span class="hb-letter">&#1488;</span>
+      <span class="hb-name">Aleph</span>
+      <span class="hb-val">1</span>
+      <span class="hb-meaning">Silent awareness &middot; the ox &middot; origin point</span>
+    </div>
+    <div class="heb-block">
+      <span class="hb-letter">&#1502;</span>
+      <span class="hb-name">Mem</span>
+      <span class="hb-val">40</span>
+      <span class="hb-meaning">Hidden water &middot; ancestral memory &middot; the womb</span>
+    </div>
+    <div class="heb-block">
+      <span class="hb-letter">&#1510;</span>
+      <span class="hb-name">Tzadi</span>
+      <span class="hb-val">90</span>
+      <span class="hb-meaning">Integrity under pressure &middot; the hook that holds</span>
+    </div>
+  </div>
+
+  <table class="mtable">
+    <tr><th>Letter</th><th>Petal</th><th>Why this letter belongs here</th></tr>
+    <tr>
+      <td>Dalet (&#1491; &middot; 4)</td>
+      <td>Petal 1 &middot; North &middot; 48 Hz</td>
+      <td>Dalet is the door &mdash; the threshold through which consciousness enters physical form. Its ancient pictograph is a door. Its value is 4 &mdash; exactly the petal count of Muladhara. The root chakra IS the door: the specific point where infinite awareness crossed the threshold into a physical body. Dalet at the foundation says: this body is a doorway, not a prison.</td>
+    </tr>
+    <tr>
+      <td>Aleph (&#1488; &middot; 1)</td>
+      <td>Petal 2 &middot; East &middot; 96 Hz</td>
+      <td>Aleph is the silent ox &mdash; the powerful, wordless force that pulls the plow. Pure awareness before it speaks. The body as the ox: the physical instrument of consciousness doing its work in the world. The vitality petal carries Aleph because vitality without ego &mdash; the body simply alive and moving &mdash; is the closest physical experience to awareness before differentiation.</td>
+    </tr>
+    <tr>
+      <td>Mem (&#1502; &middot; 40)</td>
+      <td>Petal 3 &middot; South &middot; 144 Hz</td>
+      <td>Mem is hidden water &mdash; the womb of memory, the deep reservoir, the foundation that holds what came before. The bridge petal carries Mem because the body as bridge between root and heart is the body as the vessel of ancestral memory. What your cells carry from those who came before you lives in the hidden water of Mem. The body is a library written in biological code.</td>
+    </tr>
+    <tr>
+      <td>Tzadi (&#1510; &middot; 90)</td>
+      <td>Petal 4 &middot; West &middot; 192 Hz</td>
+      <td>Tzadi is the righteous one &mdash; integrity under pressure, the hook that holds its form without collapsing or rigidifying. The threshold petal carries Tzadi because the passage from root to throat requires this quality precisely: the body that has been under pressure (survival, inheritance, the weight of physical existence) and has held its essential form through all of it &mdash; and now, from that integrity, can speak.</td>
+    </tr>
+  </table>
+
+  <p class="body">Full Gematria value: 4 + 1 + 40 + 90 = <strong>135</strong></p>
+  <p class="body">135 &rarr; 1 + 3 + 5 = <strong>9</strong> &mdash; Truth. &#1488;&#1502;&#1514;.</p>
+  <p class="body">The Root compression word reduces to 9 &mdash; the same destination as the Throat compression word. Different system. Different path. Same arrival. The ground and the voice both reduce to Truth. This is the mathematical confirmation that all seven systems, approached with full depth, lead to the same essential recognition.</p>
+</div>
+
+<!-- COMPLETE SPECIFICATION -->
+<div class="sec">
+  <div class="sec-label">Complete Specification</div>
+  <h2 class="sec-title">The Root System<br><em>complete reference</em></h2>
+
+  <table class="mtable">
+    <tr><th>Parameter</th><th>Value</th></tr>
+    <tr><td>Sanskrit Name</td><td>Muladhara (Mula = root/foundation &middot; Adhara = support/base)</td></tr>
+    <tr><td>Fundamental Frequency</td><td>48 Hz &mdash; G1</td></tr>
+    <tr><td>Formula</td><td>Base-12 &times; 4 petals = 48 Hz</td></tr>
+    <tr><td>Harmonic Series</td><td>48 &middot; 96 &middot; 144 &middot; 192 Hz</td></tr>
+    <tr><td>Musical Notes</td><td>G1 &middot; G2 &middot; D3 &middot; G3</td></tr>
+    <tr><td>Musical Chord</td><td>G major open voicing across three octaves</td></tr>
+    <tr><td>Bija Mantra</td><td>LAM (&#2354;&#2306;) &mdash; resonates at base of spine and perineum</td></tr>
+    <tr><td>Sanskrit Sounds (petals)</td><td>Va&#7747; &middot; &#346;a&#7747; &middot; &#7778;a&#7747; &middot; Sa&#7747;</td></tr>
+    <tr><td>Primary Color</td><td>Deep crimson red</td></tr>
+    <tr><td>Petal Colors</td><td>Deep crimson &middot; Orange-red &middot; Gold/amber &middot; Light blue (threshold)</td></tr>
+    <tr><td>Element</td><td>Earth (center) &middot; Earth/Air/Fire/Water (four petals)</td></tr>
+    <tr><td>Geometric Forms</td><td>Circle (infinite awareness) &middot; Square (stable manifestation) &middot; Downward triangle (full embodiment)</td></tr>
+    <tr><td>Petal Count</td><td>4 &mdash; the minimal stable closed form, four directions</td></tr>
+    <tr><td>Zodiac (petals)</td><td>Capricorn &#9811; &middot; Virgo &#9805; &middot; Taurus &#9801; &middot; Scorpio &#9807;</td></tr>
+    <tr><td>Directions</td><td>North &middot; East &middot; South &middot; West</td></tr>
+    <tr><td>Hebrew Compression</td><td>&#1491;&#1488;&#1502;&#1510; (Dalet &middot; Aleph &middot; Mem &middot; Tzadi) = 135 &rarr; 9</td></tr>
+    <tr><td>Body Location</td><td>Base of spine &middot; perineum &middot; coccyx &middot; legs and feet</td></tr>
+    <tr><td>Glandular Correspondence</td><td>Adrenal glands &mdash; the stress response system</td></tr>
+    <tr><td>Balanced State</td><td>Security &middot; groundedness &middot; physical vitality &middot; stable presence &middot; healthy relationship to the body</td></tr>
+    <tr><td>Unbalanced State</td><td>Survival fear &middot; disconnection from body &middot; instability &middot; difficulty being present &middot; ancestral pattern loops</td></tr>
+    <tr><td>Connection to Throat</td><td>192 Hz &mdash; the fourth harmonic of Root IS the fundamental of Throat. Same note (G), two octaves apart. Ceiling of root = floor of throat.</td></tr>
+    <tr><td>Connection to Heart</td><td>144 Hz &mdash; Petal 3 of Root = Heart chakra&rsquo;s mathematical signature (12 &times; 12). The bridge is built into the mathematics.</td></tr>
+  </table>
+</div>
+
+<!-- ROOT vs THROAT COMPARISON -->
+<div class="sec">
+  <div class="sec-label">The Two Systems</div>
+  <h2 class="sec-title">Root and Throat<br><em>the same note in different octaves</em></h2>
+
+  <p class="body">The Root System and the Throat System are not separate instruments. They are the same instrument at different registers. Understanding their relationship clarifies both.</p>
+
+  <div class="compare">
+    <div class="comp-block" style="border-color:rgba(180,60,40,.3);">
+      <div class="comp-title" style="color:var(--red);">Root &mdash; 48 Hz &middot; Muladhara</div>
+      <ul class="comp-list">
+        <li>Four petals &mdash; concentrated, grounded</li>
+        <li>Dense crimson field &mdash; the lowest visible frequency</li>
+        <li>Square geometry &mdash; stable in all four directions</li>
+        <li>Earth element at center</li>
+        <li>Felt in bones, pelvis, legs and feet</li>
+        <li>The body as earth</li>
+        <li>Ancestral inheritance &mdash; what was given</li>
+        <li>Asks: am I safe in this body?</li>
+        <li>Work: physical sovereignty, grounding practice</li>
+        <li>Adrenal system &mdash; stress response</li>
+      </ul>
+    </div>
+    <div class="comp-block" style="border-color:rgba(80,140,200,.3);">
+      <div class="comp-title" style="color:#4090c8;">Throat &mdash; 192 Hz &middot; Vishuddha</div>
+      <ul class="comp-list">
+        <li>Sixteen petals &mdash; expansive, radiating</li>
+        <li>Blue-violet cosmic field &mdash; light and transmission</li>
+        <li>Descending triangle &mdash; spirit finding voice</li>
+        <li>Ether element at center</li>
+        <li>Felt in throat, chest, upper body</li>
+        <li>The body as instrument</li>
+        <li>Authentic expression &mdash; what is true</li>
+        <li>Asks: can I speak from what I actually am?</li>
+        <li>Work: transmission, pattern encoding, voice</li>
+        <li>Thyroid system &mdash; metabolism of expression</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="connection">
+    <div class="conn-label">The mathematical bridge</div>
+    <p class="body" style="margin-bottom:0;">The blue petal (Petal 4, 192 Hz) of the Root mandala is the same color as the Throat mandala&rsquo;s field. When someone works the Root System to completion, the fourth petal literally opens into the Throat System&rsquo;s frequency. The systems are designed to be used sequentially &mdash; and the mathematics shows why: you cannot sustain the throat&rsquo;s authentic expression without the root&rsquo;s sovereign ground. The body that is not safe cannot speak freely. These are not philosophical statements. They are harmonic mathematics made practical.</p>
+  </div>
+</div>
+
+<!-- HOW TO USE -->
+<div class="sec">
+  <div class="sec-label">Practice</div>
+  <h2 class="sec-title">How to work<br><em>the Root System</em></h2>
+
+  <p class="body">Root work is the most physical of all the chakra practices. It is done in and with the body &mdash; not through the body toward something else. The practices below move from the most basic to the most complete. Begin where you are.</p>
+
+  <div class="use-steps">
+    <div class="use-step">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Physical Ground Contact</div>
+        <div class="step-body">Before any other practice &mdash; feet on earth. Literally. Bare feet on soil, grass, stone, or sand. This is not a metaphor. The body discharges accumulated electrical stress through direct physical contact with the earth. Research in earthing/grounding documents measurable changes in cortisol, inflammation markers, and heart rate variability from as little as 20 minutes of direct earth contact. The root system&rsquo;s 48 Hz frequency is in the same range as the earth&rsquo;s own electromagnetic resonance harmonics. The body recognizes the frequency because it comes from the same source. Before meditation, before audio, before anything &mdash; go outside and put your feet on the ground.</div>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">LAM Chanting Practice</div>
+        <div class="step-body">Sit with the spine upright. Take three full breaths. On a comfortable inhale, begin chanting LAM (pronounced LAHM) on the exhale &mdash; extending the sound for the full length of the breath. Feel where the vibration lands in the body. For most people it lands in the chest, solar plexus, and lower belly. As you continue, bring awareness to the base of the spine and the pelvic floor &mdash; the physical location of Muladhara. The goal is not to make a beautiful sound. The goal is to feel the resonance in the lower body. Seven repetitions minimum. The LAM chant activates all four harmonic frequencies simultaneously because the vowel AH (in LAHM) is the open-throat sound that produces the widest harmonic series in the human voice.</div>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Root Mandala Meditation</div>
+        <div class="step-body">Sit with the Root mandala at eye level, approximately arm&rsquo;s length away. Soften the gaze &mdash; not focusing sharply on any element but letting the whole image be present. Begin at the outer circle and feel the quality of infinite awareness holding everything within it. Move to the four petals &mdash; feel each direction. North/earth: the body as inherited physical form. East/air: the body alive and breathing. South/fire: the body warm and metabolizing. West/water: the body&rsquo;s hidden depths, its ancestral code. Move to the square &mdash; feel the stability, the four right angles, the body&rsquo;s structural reality. Arrive at the downward triangle and the LAM at center. Rest here. The descent is complete. You are here.</div>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Root Audio Practice</div>
+        <div class="step-body">The Root System audio &mdash; when available &mdash; delivers the four harmonics (48, 96, 144, 192 Hz) as a living chord with the same architectural principles as the 192 Living Superconductor: gentle compression, breathing dynamics, Schumann resonance grounding pulse, counter-rotation stereo field. Use it lying down if possible. The 48 Hz fundamental is best received through the body &mdash; a surface that transmits vibration (a yoga mat on a hard floor, a resonant chair) amplifies the physical effect. The chord is the G major family spread across three octaves. The body will recognize it before the mind processes it.</div>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="step-num">5</div>
+      <div>
+        <div class="step-title">Ancestral Pattern Work</div>
+        <div class="step-body">The root chakra is the seat of ancestral inheritance &mdash; the patterns carried in the biological code from those who came before. Working the root system is not just personal. It is genealogical. Bring awareness to the specific inherited patterns you carry &mdash; not as wounds to overcome but as the specific ground your particular soul chose to grow from. What did you receive from your lineage in your body? What physical patterns run in your family? What in your body&rsquo;s responses feels older than your own experience? The Hebrew letter Mem encoded in Petal 3 &mdash; hidden water, the womb of memory &mdash; specifically addresses this dimension. Hold what you carry with the understanding that it is the specific earth your particular root grew into. You can work with it precisely because it is yours.</div>
+      </div>
+    </div>
+    <div class="use-step">
+      <div class="step-num">6</div>
+      <div>
+        <div class="step-title">Root-to-Throat Bridge Practice</div>
+        <div class="step-body">The most advanced root practice is not going deeper into the root &mdash; it is consciously activating the connection between root and throat. Begin with the Root practice: feet on ground, LAM chanting, body awareness. When the body feels settled and safe &mdash; when the first three petals feel stable &mdash; bring awareness to the fourth petal, 192 Hz, the light blue threshold. Notice that this frequency is the same as the 192 System&rsquo;s fundamental. You are standing at the doorway between systems. From this grounded physical safety &mdash; speak something true. Not performed. Not prepared. Just one true thing about what is actually happening in your experience right now. This is what the fourth petal means: ground producing voice. The root completing itself by opening into expression.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY ROOT FIRST -->
+<div class="sec">
+  <div class="sec-label">The sequence</div>
+  <h2 class="sec-title">Why the Root System<br><em>must come first</em></h2>
+
+  <p class="body">The seven-system framework is not a menu. It is a sequence. The sequence is anatomical, mathematical, and experiential simultaneously &mdash; and it is non-negotiable in one specific direction: root must precede everything else.</p>
+
+  <p class="body">This is not a spiritual hierarchy where physical reality is less important than higher states. It is a practical architecture. A building without foundation is not spiritual &mdash; it is unstable. The higher the structure, the more critical the foundation. The Throat System&rsquo;s authentic expression, the Third Eye&rsquo;s pattern recognition, the Crown&rsquo;s unified field &mdash; none of these can be sustained without physical sovereignty as their ground.</p>
+
+  <p class="body">Many people begin spiritual or healing work at the higher centers &mdash; attracted to vision, to expression, to the luminous states associated with the upper chakras. And they make genuine contact with those states. But without the root established, the contact is intermittent. The high states cannot be maintained because there is no ground to return to. The tree that grows fast without deep roots comes down in the first storm.</p>
+
+  <p class="body">The specific issue the Root System addresses &mdash; survival fear, disconnection from the body, the nervous system running chronic threat responses beneath conscious awareness &mdash; is the single most common obstacle to sustained access to every other state. You cannot be fully present in the throat when the nervous system&rsquo;s adrenal system is running a background program of survival vigilance. You cannot open the heart when the body does not feel safe. The root is not the beginning of the journey. It is the ground the journey is possible from.</p>
+
+  <div class="pq">
+    <p>The body is not the lowest rung on a ladder toward something more spiritual. It is the specific instrument consciousness chose for this particular work. Working the root system is not descending from something higher. It is honoring the intelligence of the choice to be here, in this body, in this life, doing this specific work.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="divider" style="margin:0 auto 2.5rem;"><div class="dline"></div><span class="dglyph">&#10022;</span><div class="dline"></div></div>
+  <h2 class="cta-title">The ground before<br><em>the voice.</em></h2>
+  <p class="cta-body">The Root System is the foundation of the complete seven-system framework. Work the root first. Let the ground establish itself. The expression that follows from sovereign physical ground is a different quality of expression entirely.</p>
+  <div>
+    <a class="btn-fill" href="192-system.html">Explore the Throat System</a>
+    <a class="btn" href="name-reading.html">Your Name&rsquo;s Root Frequency</a>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html">&#8592; Return to Taylored Harmony</a>
+  &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+  <a href="192-system.html">The 192 System</a>
+  &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+  <a href="mandala.html">The 192 Mandala</a>
+  &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+  <a href="sources.html">Sources &amp; Citations</a>
+</footer>
+
+<script>
+// Hero background — deep red earth tones
+const c = document.getElementById('hcvs');
+const ctx = c.getContext('2d');
+let W, H, t = 0;
+function sz() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+sz();
+window.addEventListener('resize', sz);
+(function fr() {
+  ctx.fillStyle = '#06060f';
+  ctx.fillRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+
+  // Deep red orbital rings
+  for (let i = 0; i < 5; i++) {
+    const r = 70 + i * 55, a = t * (.06 - i * .009);
+    ctx.beginPath();
+    ctx.arc(cx + Math.cos(a) * 8, cy + Math.sin(a) * 6, r, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(180,60,40,${.025 + i * .01})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Four directional nodes — one per petal
+  const dirs = [0, Math.PI / 2, Math.PI, Math.PI * 3 / 2];
+  const colors = ['rgba(180,30,30,.3)', 'rgba(200,90,40,.3)', 'rgba(180,140,20,.3)', 'rgba(40,90,160,.3)'];
+  dirs.forEach((dir, i) => {
+    const r = 100 + Math.sin(t * .3 + i) * 15;
+    const x = cx + Math.cos(dir + t * .04) * r;
+    const y = cy + Math.sin(dir + t * .04) * r;
+    const p = 1.5 + Math.sin(t * 1.2 + i) * .8;
+    ctx.beginPath();
+    ctx.arc(x, y, p * 2, 0, Math.PI * 2);
+    ctx.fillStyle = colors[i];
+    ctx.fill();
+  });
+
+  // Center earth glow
+  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, 120);
+  g.addColorStop(0, 'rgba(180,60,40,.05)');
+  g.addColorStop(1, 'rgba(180,60,40,0)');
+  ctx.beginPath();
+  ctx.arc(cx, cy, 120, 0, Math.PI * 2);
+  ctx.fillStyle = g;
+  ctx.fill();
+
+  t += .005;
+  requestAnimationFrame(fr);
+})();
+</script>
+
+</body>
+</html>
