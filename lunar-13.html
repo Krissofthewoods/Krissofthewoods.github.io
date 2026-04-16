@@ -94,11 +94,7 @@
   }
 
   .back-nav a:hover { color: var(--gold); }
-
-  .back-nav span {
-    color: rgba(201,168,76,0.2);
-    font-size: 0.7rem;
-  }
+  .back-nav span { color: rgba(201,168,76,0.2); font-size: 0.7rem; }
 
   .container {
     position: relative;
@@ -176,6 +172,155 @@
     font-size: 14px;
   }
 
+  /* Intro framing */
+  .intro {
+    text-align: center;
+    margin-bottom: 48px;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .intro-lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(19px, 4vw, 24px);
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--white);
+    margin-bottom: 18px;
+  }
+
+  .intro-lead em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .intro-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--silver-dim);
+  }
+
+  /* Explanation section */
+  .explanation {
+    margin-top: 56px;
+  }
+
+  .explanation-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .explanation-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(13px, 3vw, 16px);
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .explanation-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--silver-dim);
+  }
+
+  /* Accordion panels */
+  .panel {
+    border: 1px solid rgba(201,168,76,0.12);
+    margin-bottom: 2px;
+    background: rgba(13,21,38,0.6);
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .panel:hover {
+    background: rgba(20,31,53,0.7);
+  }
+
+  .panel-trigger {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+    gap: 16px;
+  }
+
+  .panel-trigger-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .panel-number {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    color: var(--gold-dim);
+    min-width: 24px;
+    line-height: 1;
+  }
+
+  .panel-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(10px, 2.5vw, 12px);
+    letter-spacing: 0.2em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+
+  .panel-arrow {
+    font-size: 12px;
+    color: var(--gold-dim);
+    transition: transform 0.4s ease;
+    flex-shrink: 0;
+  }
+
+  .panel.open .panel-arrow {
+    transform: rotate(180deg);
+  }
+
+  .panel-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+  }
+
+  .panel.open .panel-body {
+    max-height: 1200px;
+  }
+
+  .panel-content {
+    padding: 0 28px 32px 70px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--silver);
+  }
+
+  .panel-content p { margin-bottom: 16px; }
+  .panel-content p:last-child { margin-bottom: 0; }
+  .panel-content strong { color: var(--gold-light); font-weight: 600; }
+  .panel-content em { color: var(--silver); font-style: italic; }
+
+  .panel-pull {
+    border-left: 2px solid var(--gold-dim);
+    padding-left: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
   /* Input section */
   .input-section {
     background: linear-gradient(135deg, rgba(20,31,53,0.8), rgba(13,21,38,0.9));
@@ -196,9 +341,7 @@
     margin-bottom: 10px;
   }
 
-  .input-group {
-    margin-bottom: 28px;
-  }
+  .input-group { margin-bottom: 28px; }
 
   input[type="date"] {
     width: 100%;
@@ -245,11 +388,7 @@
     transition: opacity 0.3s;
   }
 
-  .calculate-btn:hover {
-    color: var(--white);
-    box-shadow: 0 0 30px rgba(201,168,76,0.2);
-  }
-
+  .calculate-btn:hover { color: var(--white); box-shadow: 0 0 30px rgba(201,168,76,0.2); }
   .calculate-btn:hover::before { opacity: 1; }
 
   /* Results */
@@ -437,7 +576,7 @@
 
   .arc-svg { overflow: visible; }
 
-  /* 13th gate message */
+  /* Gate message */
   .gate-message {
     background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(13,21,38,0.8));
     border: 1px solid rgba(201,168,76,0.2);
@@ -558,6 +697,7 @@
     .comparison     { grid-template-columns: 1fr; }
     .comp-vs        { padding: 12px 0; }
     .gate-message   { padding: 24px 20px; }
+    .panel-content  { padding: 0 20px 28px 20px; }
   }
 </style>
 </head>
@@ -567,7 +707,7 @@
 <nav class="back-nav">
   <a href="index.html">&#8592; Taylored Harmony</a>
   <span>/</span>
-  <a href="index.html" style="color:var(--gold);">Lunar-13 Calculator</a>
+  <a href="lunar-13.html" style="color:var(--gold);">Lunar-13 Calculator</a>
 </nav>
 
 <div class="container">
@@ -577,15 +717,11 @@
 
     <div class="moon-emblem">
       <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer ring -->
         <circle cx="40" cy="40" r="37" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
-        <!-- Crescent -->
         <path d="M40 10 C55 10 68 24 68 40 C68 56 55 70 40 70 C50 62 56 52 56 40 C56 28 50 18 40 10Z" fill="#c9a84c" opacity="0.15"/>
         <path d="M40 12 C54 12 66 25 66 40 C66 55 54 68 40 68 C49 60 54 51 54 40 C54 29 49 20 40 12Z" stroke="#c9a84c" stroke-width="0.8" fill="none" opacity="0.5"/>
-        <!-- Center spark -->
         <circle cx="40" cy="40" r="3" fill="#e8c97a" opacity="0.9"/>
         <circle cx="40" cy="40" r="6" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.5"/>
-        <!-- 13 tick marks -->
         <g stroke="#c9a84c" stroke-width="0.8" opacity="0.5">
           <line x1="40" y1="3" x2="40" y2="9" transform="rotate(0 40 40)"/>
           <line x1="40" y1="3" x2="40" y2="9" transform="rotate(27.69 40 40)"/>
@@ -605,8 +741,16 @@
     </div>
 
     <h1>Lunar-13 Calculator</h1>
-    <p class="subtitle">Step out of the grid. Return to the spiral.</p>
+    <p class="subtitle">Recalibrate your count. Align with your biology.</p>
   </header>
+
+  <div class="divider"><span class="divider-mark">&#9672;</span></div>
+
+  <!-- Intro -->
+  <div class="intro">
+    <p class="intro-lead">You have been counting time on a grid that <em>does not match your biology.</em></p>
+    <p class="intro-body">The Gregorian calendar, standardized in 1582, divides the year into 12 unequal months for administrative and taxation purposes. It was not designed around biological or astronomical rhythm. Your body, however, has always been keeping a different count. Thirteen moons. Twenty-eight days each. A rhythm so consistent it mirrors the average female menstrual cycle, the lunar cycle, and the tidal patterns that governed agriculture and navigation for thousands of years before any civil calendar existed.<br><br>This calculator locates you within that older count. Enter your birth date to find out which Moon you are currently moving through, which day within that Moon you are on, and what orientation that position carries.</p>
+  </div>
 
   <div class="divider"><span class="divider-mark">&#9672;</span></div>
 
@@ -695,12 +839,120 @@
       <div class="gate-text" id="gateText">&#8212;</div>
     </div>
 
-    <div class="footer-note">
-      <p>The 13-Moon calendar follows 13 cycles of 28 days (364 days), with one Day Out of Time — the 365th day — as the zero point between years. This is not a foreign system. It is the one your body already knows.</p>
-      <a href="index.html">&#8592; Return to Taylored Harmony</a>
+    <div class="footer-note" style="border-top:none;padding-top:0;margin-bottom:48px;">
+      <p>The 13-Moon calendar follows 13 cycles of 28 days (364 days total), with one Day Out of Time as the intercalary point between years. This structure predates the Gregorian system by thousands of years. It is documented in Mayan, Egyptian, and Mesopotamian astronomical records.</p>
     </div>
 
   </div><!-- /results -->
+
+  <!-- Deep Explanation -->
+  <div class="explanation">
+
+    <div class="divider" style="margin-bottom:40px;"><span class="divider-mark">&#9672;</span></div>
+
+    <div class="explanation-header">
+      <h2>Why This Matters</h2>
+      <p>The deeper architecture beneath the number 13</p>
+    </div>
+
+    <div class="panel" id="panel1">
+      <button class="panel-trigger" onclick="togglePanel('panel1')">
+        <div class="panel-trigger-left">
+          <span class="panel-number">I</span>
+          <span class="panel-title">The Mathematics of 12 and 13 &#8212; Why One Closes and One Grows</span>
+        </div>
+        <span class="panel-arrow">&#9660;</span>
+      </button>
+      <div class="panel-body">
+        <div class="panel-content">
+          <p>The number 12 is structurally complete. It divides evenly by 2, 3, 4, and 6, which is precisely why it was adopted to organize civilization: clocks, calendars, zodiac houses, musical octaves, imperial measurement. Twelve creates a <strong>closed system</strong>. It returns to itself without remainder. It is the mathematics of stable, repeatable structure.</p>
+          <p>Thirteen is a prime number. It cannot be divided by anything other than itself and one. This is not a flaw in the number; it is its mathematical function. <strong>Thirteen is the disruptor.</strong> Where 12 produces a closed loop, 13 produces an Archimedean progression: a path that maintains a constant relationship to its center while continuously advancing outward. It does not collapse back on itself. It does not repeat exactly. This is the geometry of growth, not containment.</p>
+          <p>Ancient cultures recognized this distinction long before modern mathematics formalized it. The Egyptians used 13 to represent the principle of transformation in their cosmological texts, specifically in the myth of Osiris, whose body was recovered in 13 pieces before resurrection. The Mayan Long Count calendar integrated 13 as a base unit of cyclical time, not as an arbitrary choice but as a reflection of observed astronomical and biological cycles. The Hermetic tradition, drawing from both Egyptian and Greek sources, placed 13 as the generative center within any 12-fold geometric structure.</p>
+          <div class="panel-pull">&#8220;A 12-base system can complete indefinitely without changing. A 13-base system generates a remainder that forces forward movement.&#8221;</div>
+          <p>Your biological rhythms pulse at 13. The social architecture around you pulses at 12. That tension is not personal disorder. It is a documented mismatch between two different timing systems operating simultaneously.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel2">
+      <button class="panel-trigger" onclick="togglePanel('panel2')">
+        <div class="panel-trigger-left">
+          <span class="panel-number">II</span>
+          <span class="panel-title">The Historical Record &#8212; What the Mayan, Egyptian, and Hermetic Traditions Documented</span>
+        </div>
+        <span class="panel-arrow">&#9660;</span>
+      </button>
+      <div class="panel-body">
+        <div class="panel-content">
+          <p>The 13-Moon count is not a modern invention. It is one of the oldest documented calendrical systems in the archaeological record. The ancient Egyptians used a calendar of 13 months, with 12 months of 30 days and one intercalary period of 5 days (the Epagomenal Days), which they treated as outside ordinary time. The Haab calendar of the ancient Maya divided the year into 18 periods of 20 days plus 5 extra days called Wayeb, but the Sacred Round, or Tzolkin, operated on a 260-day cycle built from a 13-number sequence rotating against 20 named days. Thirteen was not incidental to Mayan timekeeping; it was structural to it.</p>
+          <p>Mathematician and researcher Jos&eacute; Arg&uuml;elles, working from Mayan calendrical scholarship in the late 20th century, mapped what he called the <strong>13:20 timing frequency</strong>: 13 moon cycles paired with 20, the number of fingers and toes comprising the human biological unit. His central argument was that the Gregorian calendar, by imposing 12 unequal months on a biological organism attuned to 13 equal cycles, creates a chronic desynchronization between social time and biological time. <strong>There are, in measurable fact, approximately 13 lunar cycles in a solar year.</strong> The average female menstrual cycle is 28 days, corresponding precisely to one lunar moon. These are not coincidences of mythology. They are observed biological and astronomical regularities.</p>
+          <p>The Hermetic tradition, which synthesized Egyptian cosmological knowledge through the writings attributed to Hermes Trismegistus, placed 13 as the number of the generative center: the point within any 12-fold structure from which all movement originates. This appears in the geometry of Metatron&#8217;s Cube, which is constructed from 13 circles, and in the Kabbalistic Tree of Life, which contains 12 outer paths with a 13th understood as the hidden path connecting the structure to its source.</p>
+          <div class="panel-pull">&#8220;When the Gregorian calendar was standardized in 1582, the 13th month was not reformed. It was eliminated. The structure that replaced it serves administrative record-keeping. It does not correspond to any astronomical or biological cycle.&#8221;</div>
+          <p>The cumulative effect of living inside a 12-month structure while your body operates on a 13-cycle rhythm is a low-grade but persistent sense of being out of phase with time. Knowing your actual lunar position does not change the calendar. It changes your orientation within it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel3">
+      <button class="panel-trigger" onclick="togglePanel('panel3')">
+        <div class="panel-trigger-left">
+          <span class="panel-number">III</span>
+          <span class="panel-title">The Body&#8217;s 13 &#8212; Joints, the Atlas, and Neuroarchitectural Research</span>
+        </div>
+        <span class="panel-arrow">&#9660;</span>
+      </button>
+      <div class="panel-body">
+        <div class="panel-content">
+          <p>The 13-base pattern appears not only in astronomical time but in human physical structure. Count the major load-bearing joints of the body: <strong>2 ankles, 2 knees, 2 hips, 2 wrists, 2 elbows, 2 shoulders.</strong> That is 12. The 13th is the Atlas joint, the C1 vertebra at the superior end of the spine, where the skull articulates with the column.</p>
+          <p>The Atlas is not simply another joint. Anatomically, its position directly affects the angle of the occiput, the tension of the dura mater (the connective membrane encasing the brain and spinal cord), and the function of the vagus nerve, which is the primary conduit of the parasympathetic nervous system. The vagus nerve governs heart rate, digestion, immune response, and the physiological state of safety or threat. When the Atlas is misaligned, research in upper cervical chiropractic and craniosacral therapy documents a corresponding dysregulation in vagal tone and nervous system baseline. The body remains in a low-grade activated state.</p>
+          <p>This is the physiological basis for the archway work within the Taylored Harmony framework. Neuroarchitecture research, including studies from institutions such as the Academy of Neuroscience for Architecture, documents that curved and arched forms reduce cortisol response and amygdala activation compared to rectilinear environments. When a person moves through a <strong>rounded arch</strong>, the visual cortex registers the absence of sharp angles as a safety cue. The atlas responds by adjusting its position. Vagal tone increases. <strong>This is not metaphor. It is measurable neurological response to environmental geometry.</strong></p>
+          <div class="panel-pull">&#8220;The 13th is the center point where the 12 vectors intersect. You do not find it by looking outside the 12. You find it at the impedance point in the center.&#8221;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel4">
+      <button class="panel-trigger" onclick="togglePanel('panel4')">
+        <div class="panel-trigger-left">
+          <span class="panel-number">IV</span>
+          <span class="panel-title">The Intercalary Day &#8212; What Ancient Calendars Did With the Remainder</span>
+        </div>
+        <span class="panel-arrow">&#9660;</span>
+      </button>
+      <div class="panel-body">
+        <div class="panel-content">
+          <p>Thirteen moons of 28 days yields 364 days. The solar year contains approximately 365.25. Every culture that tracked lunar time had to account for this remainder, and the solutions they developed are remarkably consistent across unconnected civilizations.</p>
+          <p>The ancient Egyptians called the 5 extra days the <strong>Epagomenal Days</strong>, from the Greek meaning &#8220;days added on.&#8221; According to Egyptian cosmological texts including the Pyramid Texts and the Book of the Dead, these days existed outside ordinary time. They were the birthdays of the Neteru (Osiris, Horus, Set, Isis, and Nephthys), and no regular work or legal transactions were conducted during them. The Egyptians understood the remainder not as an administrative inconvenience but as a structural threshold between one cycle and the next.</p>
+          <p>The Mayan calendar system handled the equivalent period through the Wayeb, 5 nameless days at the end of the Haab year, which were considered dangerous and spiritually charged precisely because they fell outside the ordered structure of time. Fasting, minimal activity, and ritual observance were prescribed. The Maya were not being superstitious. They were acknowledging that the boundary between cycles carries a different quality than time inside a cycle.</p>
+          <p>In the 13-Moon system as formalized by Arg&uuml;elles, the equivalent is the <strong>Day Out of Time</strong>, falling on July 25th in the fixed calendar. It is the intercalary point between the end of one 13-moon year and the beginning of the next. In the 192 System framework, this corresponds to the <strong>13th position</strong>: the center point implied by the 12 surrounding positions, which has no fixed coordinate of its own but makes the coordinates of the others legible.</p>
+          <div class="panel-pull">&#8220;Every complete cycle requires an intercalary point. Without it, the new pattern begins before the old one has fully resolved.&#8221;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel5">
+      <button class="panel-trigger" onclick="togglePanel('panel5')">
+        <div class="panel-trigger-left">
+          <span class="panel-number">V</span>
+          <span class="panel-title">How This Connects to the 192 System and Root Pattern Mapping</span>
+        </div>
+        <span class="panel-arrow">&#9660;</span>
+      </button>
+      <div class="panel-body">
+        <div class="panel-content">
+          <p>The Lunar-13 Calculator is one entry point into a larger framework. The 192 System is built on a <strong>16-petal outer geometry containing a 12-pointed star</strong>: 16 &times; 12 = 192 positions, anchored to a base frequency of 192 Hz. The relationship between 12 as structural scaffold and the implied 13th center point is the same mathematical relationship this calculator maps in time. The 12 positions organize the field. The 13th is the point from which the field becomes active.</p>
+          <p>In Root Pattern Mapping, clients typically present with what appear to be 12 recurring patterns: genetic, behavioral, relational. The work is not to address all 12 in sequence. The work is to locate the <strong>Still Point</strong>: the one area of a person&#8217;s life that does not shift regardless of how much the other 12 change. That stability is not absence of growth. It is the anchor. It is the 13th position from which the surrounding pattern can be understood and, when ready, reorganized.</p>
+          <p>When you know which Moon you are in, you are not receiving a forecast. You are receiving a <strong>positional reading</strong>: a map of where you are in your own biological and temporal cycle. The question each Moon carries is not &#8220;what will happen?&#8221; It is: &#8220;given where I am in the cycle, what does this period require of me?&#8221;</p>
+          <p style="color:var(--gold-dim);font-size:15px;margin-top:24px;font-style:italic;">To explore Root Pattern Mapping or the full 192 System, visit <strong style="color:var(--gold);">tayloredharmony.com</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(201,168,76,0.1);">
+      <a href="index.html" style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(201,168,76,0.3);padding:0.6rem 1.6rem;border-radius:2px;transition:all 0.3s;display:inline-block;">&#8592; Return to Taylored Harmony</a>
+    </div>
+
+  </div><!-- /explanation -->
 
 </div><!-- /container -->
 
@@ -709,35 +961,35 @@
   document.getElementById('today').value = new Date().toISOString().split('T')[0];
 
   const MOON_NAMES = [
-    { name: "Magnetic Moon",      arch: "The Tone of Purpose — attract what you are",         tone: "Attract"   },
-    { name: "Lunar Moon",         arch: "The Tone of Challenge — stabilize what you hold",     tone: "Stabilize" },
-    { name: "Electric Moon",      arch: "The Tone of Service — activate what you carry",       tone: "Activate"  },
-    { name: "Self-Existing Moon", arch: "The Tone of Form — define what you are building",     tone: "Define"    },
-    { name: "Overtone Moon",      arch: "The Tone of Radiance — empower the center",           tone: "Empower"   },
-    { name: "Rhythmic Moon",      arch: "The Tone of Equality — organize the field",           tone: "Organize"  },
-    { name: "Resonant Moon",      arch: "The Tone of Attunement — channel the signal",         tone: "Attune"    },
-    { name: "Galactic Moon",      arch: "The Tone of Integrity — harmonize what remains",      tone: "Harmonize" },
-    { name: "Solar Moon",         arch: "The Tone of Intention — pulse with full purpose",     tone: "Pulse"     },
-    { name: "Planetary Moon",     arch: "The Tone of Manifestation — perfect the form",        tone: "Manifest"  },
-    { name: "Spectral Moon",      arch: "The Tone of Liberation — dissolve what is complete",  tone: "Release"   },
-    { name: "Crystal Moon",       arch: "The Tone of Cooperation — dedicate to the whole",     tone: "Dedicate"  },
-    { name: "Cosmic Moon",        arch: "The 13th Gate — transcend, endure, and return",       tone: "Transcend" },
+    { name: "Magnetic Moon",      arch: "The Tone of Purpose: attract what you are",         tone: "Attract"   },
+    { name: "Lunar Moon",         arch: "The Tone of Challenge: stabilize what you hold",     tone: "Stabilize" },
+    { name: "Electric Moon",      arch: "The Tone of Service: activate what you carry",       tone: "Activate"  },
+    { name: "Self-Existing Moon", arch: "The Tone of Form: define what you are building",     tone: "Define"    },
+    { name: "Overtone Moon",      arch: "The Tone of Radiance: empower the center",           tone: "Empower"   },
+    { name: "Rhythmic Moon",      arch: "The Tone of Equality: organize the field",           tone: "Organize"  },
+    { name: "Resonant Moon",      arch: "The Tone of Attunement: channel the signal",         tone: "Attune"    },
+    { name: "Galactic Moon",      arch: "The Tone of Integrity: harmonize what remains",      tone: "Harmonize" },
+    { name: "Solar Moon",         arch: "The Tone of Intention: pulse with full purpose",     tone: "Pulse"     },
+    { name: "Planetary Moon",     arch: "The Tone of Manifestation: perfect the form",        tone: "Manifest"  },
+    { name: "Spectral Moon",      arch: "The Tone of Liberation: dissolve what is complete",  tone: "Release"   },
+    { name: "Crystal Moon",       arch: "The Tone of Cooperation: dedicate to the whole",     tone: "Dedicate"  },
+    { name: "Cosmic Moon",        arch: "The 13th Gate: transcend, endure, and begin again",  tone: "Transcend" },
   ];
 
   const GATE_MESSAGES = [
-    "You are in the opening breath of a new cycle. The grid has not yet fixed around you. Move now — not from urgency, but from pure magnetic alignment.",
-    "The challenge of this moon is to hold your ground without gripping. Stability is not stillness; it is the deep root that allows the tree to move.",
-    "Service is not sacrifice. You are activated to give what only you carry — the specific frequency of your particular experience.",
-    "This moon asks you to build in form what you have already built in vision. Define the edges. The container creates the current.",
-    "You are at the center of your own radiance. The 13th point is not above the 12 — it is the spark at the intersection. You are it.",
-    "Organization is a frequency practice. When you order your days, your field becomes legible to itself.",
-    "The Resonant Moon is the attunement moon — the one where the channel is most open. What are you receiving? Do not analyze. Receive.",
-    "Integrity means the inside matches the outside. This moon asks you to harmonize what you say you are with what you actually do.",
-    "Intention without action is a frequency with no carrier wave. This moon: choose the one thing and send it into form.",
-    "Manifestation is not forcing the signal through. It is removing the impedance. What still blocks the 13th gate?",
-    "The Spectral Moon dissolves. This is not failure — it is successful completion. Release what was never yours to carry forward.",
-    "Cooperation is the technology of the 13. You cannot hold the center point alone. Who holds it with you?",
-    "You have completed a full revolution. The Cosmic Moon does not ask you to transcend away — it asks you to return, spiral higher, and begin again from a new octave."
+    "You are in the opening phase of a new cycle. The pattern has not yet fixed around you. This is the time to move from alignment, not urgency.",
+    "The work of this moon is to hold your position without gripping. Stability is not the absence of movement. It is the root system that allows movement to occur.",
+    "Service is not sacrifice. You are activated to contribute what only you carry: the specific frequency of your particular experience.",
+    "This moon asks you to build in form what you have already built in vision. Define the edges. The container is what makes the current flow.",
+    "You are at the center of your own field. The 13th point is not above the 12. It is the intersection point where all 12 meet. You are locating that point in yourself.",
+    "Organization is a biological practice. When you order your environment and your days, your nervous system can allocate resources to growth rather than scanning for threat.",
+    "The Resonant Moon is the attunement phase: the period where reception is highest. What signal is present that you have not yet acknowledged? Do not analyze it yet. Simply notice it.",
+    "Integrity is structural coherence. This moon asks whether the inside matches the outside: whether your stated values are reflected in your actual behavior.",
+    "Intention without a carrier is a signal that goes nowhere. This moon: choose the one commitment and put it into action.",
+    "Manifestation is not force. It is the removal of impedance. What in your current pattern is blocking the signal from completing its path?",
+    "The Spectral Moon dissolves structure. This is not failure. It is the completion of a form that has served its function. Release what you have been carrying that was never yours to take forward.",
+    "Cooperation is the technology of the 13th position. You cannot anchor the center point in isolation. Who holds it with you?",
+    "You have completed a full cycle. The Cosmic Moon does not ask you to transcend away from your life. It asks you to integrate what you have learned and begin the next cycle from a more informed position."
   ];
 
   function calculate() {
@@ -763,13 +1015,12 @@
     const YEAR_DAYS = 364; // 13 × 28
 
     const dayInYear  = totalDays % YEAR_DAYS;
-    const moonIndex  = Math.floor(dayInYear / MOON_DAYS); // 0–12
-    const dayOfMoon  = (dayInYear % MOON_DAYS) + 1;       // 1–28
+    const moonIndex  = Math.floor(dayInYear / MOON_DAYS);
+    const dayOfMoon  = (dayInYear % MOON_DAYS) + 1;
 
     const moon    = MOON_NAMES[moonIndex];
     const moonNum = moonIndex + 1;
 
-    // Update display
     document.getElementById('moonNum').textContent   = moonNum;
     document.getElementById('moonName').textContent  = moon.name;
     document.getElementById('moonArch').textContent  = moon.arch;
@@ -777,27 +1028,23 @@
     document.getElementById('totalDays').textContent = totalDays.toLocaleString();
     document.getElementById('arcText').textContent   = dayOfMoon;
 
-    // Gregorian vs Lunar
     const gregOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('gregDate').textContent = today.toLocaleDateString('en-US', gregOptions);
     document.getElementById('lunarPos').textContent = `Moon ${moonNum} \u00b7 Day ${dayOfMoon}`;
 
-    // Gate message
     document.getElementById('gateText').textContent = GATE_MESSAGES[moonIndex];
 
-    // Moon strip
     const strip = document.getElementById('moonStrip');
     strip.innerHTML = '';
     for (let i = 0; i < 13; i++) {
       const pip = document.createElement('div');
       pip.className = 'moon-pip';
-      if (i === 12)       pip.classList.add('thirteenth');
-      if (i < moonIndex)  pip.classList.add('past');
+      if (i === 12)        pip.classList.add('thirteenth');
+      if (i < moonIndex)   pip.classList.add('past');
       if (i === moonIndex) pip.classList.add('active');
       strip.appendChild(pip);
     }
 
-    // Arc animation
     const arcFg    = document.getElementById('arcFg');
     const arcDot   = document.getElementById('arcDot');
     const totalArc = 376.99;
@@ -813,16 +1060,21 @@
       arcDot.setAttribute('cy', cy);
     }, 100);
 
-    // Reveal results
     const results = document.getElementById('results');
     results.classList.add('visible');
     results.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // Allow Enter key to trigger calculation
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') calculate();
   });
+
+  function togglePanel(id) {
+    const panel = document.getElementById(id);
+    const isOpen = panel.classList.contains('open');
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
+    if (!isOpen) panel.classList.add('open');
+  }
 </script>
 
 </body>
