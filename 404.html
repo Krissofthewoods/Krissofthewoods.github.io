@@ -4,13 +4,9 @@
 <meta charset="utf-8">
 <title>Taylored Harmony</title>
 <script>
-  var seg = window.location.pathname.split('/').slice(1);
-  var query = seg.join('/');
-  if (query) {
-    window.location.replace('/?/' + query + window.location.search + window.location.hash);
-  } else {
-    window.location.replace('/');
-  }
+  var l = window.location;
+  var path = l.pathname.slice(1);
+  l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/?p=' + encodeURIComponent(path) + (l.search ? '&q=' + encodeURIComponent(l.search.slice(1)) : '') + l.hash);
 </script>
 </head>
 <body></body>
