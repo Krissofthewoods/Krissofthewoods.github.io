@@ -1,13 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Taylored Harmony</title>
-<script>
-  var l = window.location;
-  var path = l.pathname.slice(1);
-  l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/?p=' + encodeURIComponent(path) + (l.search ? '&q=' + encodeURIComponent(l.search.slice(1)) : '') + l.hash);
-</script>
-</head>
-<body></body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>The Dissection Journal | Taylored Harmony</title>
+    <meta name="description" content="The Dissection Journal: a 31-day protocol for dismantling old patterns and rebuilding yourself through shape and spoken word." />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+    <script>
+      (function () {
+        var journalPath = "/journal";
+        if (window.location.pathname !== journalPath || window.location.search || window.location.hash) {
+          window.history.replaceState(null, "", journalPath);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-CKeowdz0.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CcrnmmmR.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
